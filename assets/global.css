@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Puritan&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+:root{
+    --title-font: 'Puritan', sans-serif;
+    --main-orange: #FE9900;
+    --side-orange: #EA4D22;
+    --food-red: #710000;
+}
+body {
+    background-color: #ffffff;
+    color: hsl(0, 0%, 20%);
+}
