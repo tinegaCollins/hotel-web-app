@@ -1,15 +1,19 @@
 <template>
-   <div class="home-wrapper">
+    <div class="everything">
         <nav-bar/>
-   </div>
+        <div class="navigations">
+            <NuxtLink to="/menu/bevarages">bevarages</NuxtLink>
+        </div>
+        <NuxtPage>
+            <h5>fyythg</h5>
+        </NuxtPage>
+    </div>
 </template>
 
 <script setup>
 
-import '../assets/global.css'
-
 useHead({
-  title: 'hotel web app',
+  title: 'hotel menu',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   charset: 'utf-8',
   meta: [
@@ -20,9 +24,4 @@ useHead({
   ]
 })
 
-
 </script>
-
-<style>
-
-</style>

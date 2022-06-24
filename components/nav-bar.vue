@@ -9,8 +9,9 @@
             <a href="/menu">menu</a>
             <a href="/menu">gallery</a>
             <a href="/menu">contact us</a>
-            <a href="/menu">Sign up/log in</a>
+            <a href="/menu" class="sign-up">Sign up/log in</a>
         </div>
+        <img src="../assets/icons/cart-svgrepo-com.svg">
     </nav>
 </template>
 
@@ -39,7 +40,21 @@ function slideShow() {
         column-gap: 20px;
         font-family: var(--title-font);
     }
-    nav:before{
+    nav > img {
+        height: 20px;
+        position: absolute;
+        right: 20px;
+    }
+    nav > img::before {
+           content: '';
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, .3);
+        z-index: -1;
+        transform: translateY(1%);
+        filter: blur(7px) brightness(1.5);
+    }
+    nav::before{
         content: '';
         position: absolute;
         inset: 0;
@@ -81,6 +96,26 @@ function slideShow() {
         font-family: var(--title-font);
         font-weight: bold;
     }
+    nav .links .sign-up {
+        background-color: var(--side-orange);
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        font-family: var(--title-font);
+        font-weight: bold;
+        width: max-content;
+    }
+    @media screen and (max-width: 768px) {
+        nav .links:before{
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, .3);
+            z-index: -1;
+            transform: translateY(3%);
+            filter: blur(7px) brightness(1.5);
+        }
+    }
     @media screen and (min-width: 768px) {
         nav {
             height: 80px;
@@ -90,21 +125,34 @@ function slideShow() {
         }
         nav h3{
             column-gap: 20px;
+            margin-left: 40px;
         }
         nav h3 img {
             width: 70px;
             height: 70px;
         }
         nav .links {
-            left: 70%;
+            left: 50%;
             top: 0;
             width: max-content;
             height: 100%;
             padding-left: 0;
             flex-direction: row;
-            background-color: red;
             align-items: center;
+            column-gap: 30px;
+            background: transparent;
+        }
+        nav .links .sign-up  {
+            background-color: var(--main-orange);
+            transition: background-color .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        nav .links .sign-up:hover {
+            background-color: var(--side-orange);
         }
     }
-        
+    @media screen and (min-width: 1024px) {
+        nav .links {
+            left: 60%;
+        }
+    }   
 </style>
