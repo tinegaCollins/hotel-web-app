@@ -9,6 +9,7 @@
                     <p>By Chef Ali</p>
                     <p> 800 ksh + delivery fee</p>
                 </div>
+                <img class="plus-sign" src="../assets/icons/plus-svgrepo-com.svg" alt="" srcset="">
             </div>
             <div class="single-card">
                 <img src="../assets/temp/food1.png" alt="food" srcset="">
@@ -17,6 +18,7 @@
                     <p>By Chef Ali</p>
                     <p> 800 ksh + delivery fee</p>
                 </div>
+                <img class="plus-sign" src="../assets/icons/plus-svgrepo-com.svg" alt="" srcset="">
             </div>
             <div class="single-card">
                 <img src="../assets/temp/food1.png" alt="food" srcset="">
@@ -25,6 +27,7 @@
                     <p>By Chef Ali</p>
                     <p> 800 ksh + delivery fee</p>
                 </div>
+                <img class="plus-sign" src="../assets/icons/plus-svgrepo-com.svg" alt="" srcset="">
             </div>
             <div class="single-card">
                 <img src="../assets/temp/food1.png" alt="food" srcset="">
@@ -70,7 +73,6 @@
     </div>
 </template>
 
-
 <style>
 .specials-wrapper {
     margin-top: 30px;
@@ -102,11 +104,18 @@
     flex-wrap: nowrap;
     border-radius: 5px;
     padding: 8px;
+    position: relative;
     width: 100%;
     border: 1px solid var(--side-orange);
     transition: border 200ms cubic-bezier(0.23, 1, 0.320, 1);
 }
-
+.single-card .plus-sign {
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
 .single-card img {
     height: 120px;
     width: 120px;
