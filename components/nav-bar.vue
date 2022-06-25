@@ -11,7 +11,9 @@
             <a href="/menu">contact us</a>
             <a href="/menu" class="sign-up">Sign up/log in</a>
         </div>
-        <img src="../assets/icons/cart-svgrepo-com.svg">
+        <div class="cart">
+            <img src="../assets/icons/cart-svgrepo-com.svg">
+        </div>
     </nav>
 </template>
 
@@ -40,19 +42,28 @@ function slideShow() {
         column-gap: 20px;
         font-family: var(--title-font);
     }
-    nav > img {
-        height: 20px;
+    .cart {
         position: absolute;
-        right: 20px;
+        right: 5%;
     }
-    nav > img::before {
-           content: '';
+    .cart img{
+        height: 30px;
+        width: 30px;
+        transform: rotateY(180deg);
+    }
+    .cart1::before {
+        content: '1';
         position: absolute;
-        inset: 0;
-        background-color: rgba(0, 0, 0, .3);
-        z-index: -1;
-        transform: translateY(1%);
-        filter: blur(7px) brightness(1.5);
+        left: 5px;
+        top: 7px;
+        height: 12px;
+        color: #fff;
+        width: 12px;
+        border-radius: 50%;
+        background-color: var(--main-orange);
+        font-size: .8rem;
+        display: grid;
+        place-items: center;
     }
     nav::before{
         content: '';
@@ -85,6 +96,7 @@ function slideShow() {
         left: -100%;
         padding-left: 40px;
         transition: left .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 1;
     }
     .show {
         left: 0 !important;
@@ -105,18 +117,7 @@ function slideShow() {
         font-weight: bold;
         width: max-content;
     }
-    @media screen and (max-width: 768px) {
-        nav .links:before{
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-color: rgba(0, 0, 0, .3);
-            z-index: -1;
-            transform: translateY(3%);
-            filter: blur(7px) brightness(1.5);
-        }
-    }
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 968px) {
         nav {
             height: 80px;
         }
@@ -149,10 +150,11 @@ function slideShow() {
         nav .links .sign-up:hover {
             background-color: var(--side-orange);
         }
-    }
-    @media screen and (min-width: 1024px) {
         nav .links {
-            left: 60%;
+            left: 55%;
         }
+    }
+    @media screen and (min-width: 1054px) {
+    
     }   
 </style>

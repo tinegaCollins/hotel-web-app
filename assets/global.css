@@ -12,6 +12,8 @@
     --main-orange: #FE9900;
     --side-orange: #EA4D22;
     --food-red: #710000;
+    --light-blue: rgb(198, 255, 255);
+    --main-yellow: yellow;
 }
 body {
     background-color: #ffffff;

@@ -9,6 +9,7 @@
           <div class="mains">
             <landing-page />
             <specials-today/>
+            <other-meals/>
           </div>
           <div class="right">
             <img src="../../assets/icons/photo1.png" alt="random photo " srcset="">
@@ -52,7 +53,7 @@ useHead({
 }
 .left img, .right img {
   height: calc(100vh-80px);
-  width: 240px;
+  width: 200px;
   object-fit: cover;
   display: none;
   position: relative;
@@ -63,7 +64,7 @@ useHead({
   position: absolute;
   top: 0;
   left: 0;
-  width: 240px;
+  width: 200px;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 1;
@@ -74,7 +75,7 @@ useHead({
   position: absolute;
   top: 0;
   left: 0;
-  width: 240px;
+  width: 200px;
   height: 100%;
   z-index: 1;
 
