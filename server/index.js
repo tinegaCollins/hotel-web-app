@@ -6,7 +6,9 @@ mongoose.connect(
     { useNewUrlParser: true }
 ).then(()=>{
     const app = express()
-    app.post('/create-account', loginsControllers.createNewUser)
+    app.use(express.json())
+    app.post('/create-account', loginsControllers.createNewUser);
+    app.get('/login', loginsControllers.login);
     app.listen(8000, ()=>{
         console.log("server on port 8000");
     })
