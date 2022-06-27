@@ -12,7 +12,7 @@
             <a href="/menu" class="sign-up">Sign up/log in</a>
         </div>
         <div class="cart">
-            <img src="../assets/icons/cart-svgrepo-com.svg">
+            <nuxt-link to="/menu/cart"><img src="../assets/icons/cart-svgrepo-com.svg"></nuxt-link>
         </div>
     </nav>
 </template>
