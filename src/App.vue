@@ -1,60 +1,43 @@
+<script setup lang="ts">
+import navBar from './components/nav-bar.vue'
+import landingPageVue from './components/landing-page.vue';
+import SpecialsToday from './components/specials-today.vue';
+import otherMeals from './components/other-meals.vue';
+
+</script>
+
 <template>
-   <div class="home-wrapper">
-        <nav-bar />
+    <div class="home-wrapper">
+        <navBar/>
         <main class="all-wrapper">
           <div class="left">
-            <img src="../../assets/icons/photo2.png" alt="random photo" srcset="">
+            <img src="./assets/icons/photo2.png" alt="random photo" srcset="">
             <h2>Cooked for kenyans</h2>
           </div>
           <div class="mains">
-            <landing-page />
-            <specials-today/>
-            <other-meals/>
+            <landingPageVue />
+            <SpecialsToday/>
+            <otherMeals/>
           </div>
           <div class="right">
-            <img src="../../assets/icons/photo1.png" alt="random photo " srcset="">
+            <img src="./assets/icons/photo1.png" alt="random photo " srcset="">
             <h2> by kenyans</h2>
           </div>
         </main>
-
-   </div>
+    </div>
 </template>
-
-<script setup>
-
-import '../../assets/global.css'
-
-useHead({
-  title: 'hotel web app',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  charset: 'utf-8',
-  meta: [
-    { name: 'description', content: 'My amazing site.' }
-  ],
-  link: [
-    { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
-  ]
-})
-
-</script>
 
 <style>
 .all-wrapper {
   display: grid;
   grid-template-columns: auto auto auto;
-  place-items: center;
   position: relative;
 }
-.left {
+.left, .right {
   position: sticky;
-}
-.right{
-  position: sticky;
+  display: none;
 }
 .left img, .right img {
-  height: calc(100vh-80px);
-  width: 200px;
-  object-fit: cover;
   display: none;
   position: relative;
   z-index: -1;
@@ -64,7 +47,7 @@ useHead({
   position: absolute;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 250px;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 1;
@@ -75,7 +58,7 @@ useHead({
   position: absolute;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 250px;
   height: 100%;
   z-index: 1;
 
@@ -104,16 +87,33 @@ useHead({
   z-index: 2;
   width: 100%;
 }
-
+.mains {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 @media screen and (min-width: 1024px) {
-  .left img, .right img {
-    display: block;
-  }
-  .left h2 {
-    display: block;
-  }
-  .right h2 {
-    display: block;
-  }
+    .left , .right {
+        display: block;
+        z-index: -1;
+        position: sticky;
+        top: 0;
+        height: calc(100vh - 80px);
+    }
+    .left {
+        grid-column-start: 1;
+    }
+    .left img, .right img {
+        height: calc(100vh - 80px);
+        display: block;
+        width: 250px;
+        object-fit: cover;
+    }
+    .left h2 {
+        display: block;
+    }
+    .right h2 {
+        display: block;
+    }
 }
 </style>

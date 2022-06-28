@@ -12,12 +12,13 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
+import '../assets/styles/global.css'
+import { ref } from 'vue';
 const locationSelected = ref(false);
-const arrow = ref(null);
+const arrow = ref();
 const classSelected = ref('hide');
 function toggleSearch(){
-    //toggle between show and hide
     classSelected.value = classSelected.value === 'show' ? 'hide' : 'show';
     arrow.value.classList.toggle('up');
 }
@@ -32,6 +33,7 @@ function toggleSearch(){
     display: flex;
     column-gap: 20px;
     align-items: center;
+    font-family: var(--title-font);
 }
 .location p {
     display: flex;

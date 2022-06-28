@@ -29,46 +29,6 @@
                 </div>
                 <img class="plus-sign" src="../assets/icons/plus-svgrepo-com.svg" alt="" srcset="">
             </div>
-            <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
-                <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
-                </div>
-            </div>
-            <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
-                <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
-                </div>
-            </div>
-            <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
-                <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
-                </div>
-            </div>
-            <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
-                <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
-                </div>
-            </div>
-            <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
-                <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
-                </div>
-            </div>
         </div>
     </div>
 </template>
@@ -135,7 +95,7 @@
         padding: 20px;
     }
     .single-card {
-        width: 30%;
+        width: 40%;
     }
     .single-card {
         border: 1px solid transparent;

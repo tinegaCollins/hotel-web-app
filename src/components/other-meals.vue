@@ -41,8 +41,7 @@
 
 <style scoped>
 .other-meals {
-    width: 100vw;
-    position: absolute;
+    /* width: 100vw; */
     left: 0;
     height: 100vh;
     font-family: var(--title-font);
