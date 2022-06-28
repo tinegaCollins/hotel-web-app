@@ -2953,70 +2953,60 @@ const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/nuxt/dist
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-
-const _sfc_main = {
-  __name: 'nav-bar',
-  setup(__props, { expose }) {
-  expose();
-
-const barsPath = "M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM64 256C64 238.3 78.33 224 96 224H480C497.7 224 512 238.3 512 256C512 273.7 497.7 288 480 288H96C78.33 288 64 273.7 64 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z";
-const xPath =  "M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z";
-const path = __vite_ssr_import_1__.ref(barsPath);
-const sideMenu = __vite_ssr_import_1__.ref(false);
-const links = __vite_ssr_import_1__.ref(null);
-function slideShow() {
-    links.value.classList.toggle('show');
-    path.value = path.value === barsPath ? xPath : barsPath;
-}
-
-const __returned__ = { barsPath, xPath, path, sideMenu, links, slideShow, ref: __vite_ssr_import_1__.ref }
-Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
-return __returned__
-}
-
-}
 const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const _sfc_main = /* @__PURE__ */ __vite_ssr_import_2__.defineComponent({
+  __name: "nav-bar",
+  setup(__props, { expose }) {
+    expose();
+    const barsPath = "M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM64 256C64 238.3 78.33 224 96 224H480C497.7 224 512 238.3 512 256C512 273.7 497.7 288 480 288H96C78.33 288 64 273.7 64 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z";
+    const xPath = "M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z";
+    const path = __vite_ssr_import_1__.ref(barsPath);
+    const links = __vite_ssr_import_1__.ref(null);
+    function slideShow() {
+      links.value.classList.toggle("show");
+      path.value = path.value === barsPath ? xPath : barsPath;
+    }
+    const __returned__ = { barsPath, xPath, path, links, slideShow };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  const _component_nuxt_link = __vite_ssr_import_0__.default
-
-  _push(`<nav${
-    __vite_ssr_import_3__.ssrRenderAttrs(_attrs)
-  } data-v-bc67b704><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-v-bc67b704><path${
-    __vite_ssr_import_3__.ssrRenderAttr("d", $setup.path)
-  } data-v-bc67b704></path></svg><h3 data-v-bc67b704> hotel app <img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt="icon" srcset="" data-v-bc67b704></h3><div class="links" data-v-bc67b704><a href="/menu" data-v-bc67b704>menu</a><a href="/menu" data-v-bc67b704>gallery</a><a href="/menu" data-v-bc67b704>contact us</a><a href="/menu" class="sign-up" data-v-bc67b704>Sign up/log in</a></div><div class="cart" data-v-bc67b704>`)
-  _push(__vite_ssr_import_3__.ssrRenderComponent(_component_nuxt_link, { to: "/cart" }, {
-    default: __vite_ssr_import_2__.withCtx((_, _push, _parent, _scopeId) => {
-      if (_push) {
-        _push(`<img src="/_nuxt/assets/icons/cart-svgrepo-com.svg" data-v-bc67b704${_scopeId}>`)
+  const _component_nuxt_link = __vite_ssr_import_0__.default;
+  _push(`<nav${__vite_ssr_import_4__.ssrRenderAttrs(_attrs)} data-v-bc67b704><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-v-bc67b704><path${__vite_ssr_import_4__.ssrRenderAttr("d", $setup.path)} data-v-bc67b704></path></svg><h3 data-v-bc67b704> hotel app <img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt="icon" srcset="" data-v-bc67b704></h3><div class="links" data-v-bc67b704><a href="/menu" data-v-bc67b704>menu</a><a href="/menu" data-v-bc67b704>gallery</a><a href="/menu" data-v-bc67b704>contact us</a><a href="/login" data-v-bc67b704>login</a><a href="/signup" data-v-bc67b704>Sign up</a></div><div class="cart" data-v-bc67b704>`);
+  _push(__vite_ssr_import_4__.ssrRenderComponent(_component_nuxt_link, { to: "/cart" }, {
+    default: __vite_ssr_import_3__.withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`<img src="/_nuxt/assets/icons/cart-svgrepo-com.svg" data-v-bc67b704${_scopeId}>`);
       } else {
         return [
-          __vite_ssr_import_2__.createVNode("img", { src: "/_nuxt/assets/icons/cart-svgrepo-com.svg" })
-        ]
+          __vite_ssr_import_3__.createVNode("img", { src: "/_nuxt/assets/icons/cart-svgrepo-com.svg" })
+        ];
       }
     }),
-    _: 1 /* STABLE */
-  }, _parent))
-  _push(`</div></nav>`)
+    _: 1
+  }, _parent));
+  _push(`</div></nav>`);
 }
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/components/nav-bar.vue?vue&type=style&index=0&scoped=true&lang.css");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/components/nav-bar.vue?vue&type=style&index=0&scoped=true&lang.css");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
-
-const _sfc_setup = _sfc_main.setup
+const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_5__.useSSRContext()
-  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("components/nav-bar.vue")
-  return _sfc_setup ? _sfc_setup(props, ctx) : undefined
-}
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+  const ssrContext = __vite_ssr_import_6__.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/nav-bar.vue");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_6__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__scopeId',"data-v-bc67b704"],['__file',"/home/tinega/Desktop/dont/hotel-web-app/components/nav-bar.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_7__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__scopeId", "data-v-bc67b704"], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/components/nav-bar.vue"]]);
+;
 }
 
 
@@ -3517,48 +3507,109 @@ const __vite_ssr_import_0__ = await __vite_ssr_import__("/components/nav-bar.vue
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/nuxt/dist/app/components/nuxt-link.mjs");
 
-const _sfc_main = {}
 const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
+const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
+  __name: "login",
+  setup(__props, { expose }) {
+    expose();
+    const phone = __vite_ssr_import_2__.ref();
+    const userResponse = __vite_ssr_import_2__.ref();
+    const checkPhone = async () => {
+      const phoneToSend = {
+        phone: phone.value
+      };
+      const response = await fetch("http://localhost:8000/check-number", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(phoneToSend)
+      });
+      const data = await response.json();
+      if (data != true) {
+        userResponse.value = "invalid phone number";
+      } else {
+        userResponse.value = null;
+      }
+    };
+    const password = __vite_ssr_import_2__.ref();
+    const ifCorrectData = __vite_ssr_import_2__.ref(true);
+    const checkPassword = () => {
+      wrongPassword.value = null;
+      if (password.value != "" || userResponse == null) {
+        ifCorrectData.value = false;
+      }
+    };
+    const wrongPassword = __vite_ssr_import_2__.ref();
+    const userID = __vite_ssr_import_2__.ref();
+    const ifKeepLogged = __vite_ssr_import_2__.ref();
+    const login = async () => {
+      const dataToSend = {
+        phone: phone.value,
+        password: password.value
+      };
+      const response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataToSend)
+      });
+      const data = await response.json();
+      if (data === false) {
+        wrongPassword.value = "wrong password";
+      } else {
+        wrongPassword.value = "log in sucessful";
+        userID.value = data._id;
+        if (ifKeepLogged.value == true) {
+          localStorage.setItem("userID", userID.value);
+        } else {
+          sessionStorage.setItem("userID", userID.value);
+        }
+      }
+    };
+    const __returned__ = { phone, userResponse, checkPhone, password, ifCorrectData, checkPassword, wrongPassword, userID, ifKeepLogged, login };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  const _component_navBar = __vite_ssr_import_0__.default
-  const _component_nuxt_link = __vite_ssr_import_1__.default
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
-  _push(`<main${__vite_ssr_import_3__.ssrRenderAttrs(__vite_ssr_import_2__.mergeProps({ class: "login-wrapper" }, _attrs))}>`)
-  _push(__vite_ssr_import_3__.ssrRenderComponent(_component_navBar, null, null, _parent))
-  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><div class="form"><input type="text" placeholder="phone number"><input type="password" name="" id="" placeholder="password"><button>login</button><div class="other"><a href="#">forgot your password</a>`)
-  _push(__vite_ssr_import_3__.ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
-    default: __vite_ssr_import_2__.withCtx((_, _push, _parent, _scopeId) => {
-      if (_push) {
-        _push(`sign up`)
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  const _component_navBar = __vite_ssr_import_0__.default;
+  const _component_nuxt_link = __vite_ssr_import_1__.default;
+  _push(`<main${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({ class: "login-wrapper" }, _attrs))}>`);
+  _push(__vite_ssr_import_5__.ssrRenderComponent(_component_navBar, null, null, _parent));
+  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><div class="form"><p>${__vite_ssr_import_5__.ssrInterpolate($setup.userResponse)}</p><p>${__vite_ssr_import_5__.ssrInterpolate($setup.wrongPassword)}</p><input type="text" placeholder="phone number"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" id="" placeholder="password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.password)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${__vite_ssr_import_5__.ssrIncludeBooleanAttr(Array.isArray($setup.ifKeepLogged) ? __vite_ssr_import_5__.ssrLooseContain($setup.ifKeepLogged, null) : $setup.ifKeepLogged) ? " checked" : ""}></div><button${__vite_ssr_import_5__.ssrIncludeBooleanAttr($setup.ifCorrectData) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
+  _push(__vite_ssr_import_5__.ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
+    default: __vite_ssr_import_4__.withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`sign up`);
       } else {
         return [
-          __vite_ssr_import_2__.createTextVNode("sign up")
-        ]
+          __vite_ssr_import_4__.createTextVNode("sign up")
+        ];
       }
     }),
-    _: 1 /* STABLE */
-  }, _parent))
-  _push(`</div></div></main>`)
+    _: 1
+  }, _parent));
+  _push(`</div></div></main>`);
 }
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/pages/login.vue?vue&type=style&index=0&lang.css");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/pages/login.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
-
-const _sfc_setup = _sfc_main.setup
+const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_5__.useSSRContext()
-  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("pages/login.vue")
-  return _sfc_setup ? _sfc_setup(props, ctx) : undefined
-}
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+  const ssrContext = __vite_ssr_import_7__.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/login.vue");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_6__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app/pages/login.vue"]])
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_8__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/pages/login.vue"]]);
+
 const meta = undefined
 Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
 }
@@ -3573,7 +3624,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 
 // --------------------
 const $id_af77e8ef = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".login-wrapper,.signup-wrapper{font-family:var(--title-font);text-align:center}.login-wrapper>img,.signup-wrapper>img{height:90px;margin-top:10px;width:90px}.form{display:grid;margin-top:20px;place-items:center;row-gap:30px}.form input{border:none;border:1px solid var(--main-orange);border-radius:33px;color:#000;font-size:1rem;height:44px;outline:none;padding:0 10px;width:80%}.form input:focus{border:1px solid var(--carolina-blue)}.form button{background-color:var(--main-orange);border:none;border-radius:30px;font-size:1.2rem;outline:none;padding:13px 25px}.form .other{display:flex;flex-direction:column;row-gap:10px}.form .other a{color:#000}";
+__vite_ssr_exports__.default = ".login-wrapper,.signup-wrapper{font-family:var(--title-font);text-align:center}.login-wrapper>img,.signup-wrapper>img{height:90px;margin-top:10px;width:90px}.form{display:grid;margin-top:20px;place-items:center;row-gap:30px}.form input{border:none;border:1px solid var(--main-orange);border-radius:33px;color:#000;font-size:1rem;height:44px;outline:none;padding:0 10px;width:80%}.form input:focus{border:1px solid var(--carolina-blue)}.form button{background-color:var(--main-orange);border:none;border-radius:30px;font-size:1.2rem;outline:none;padding:13px 25px}.form .other{display:flex;flex-direction:column;row-gap:10px}.form .other a{color:#000}.keep-logged{bottom:15px;display:flex;height:30px;position:relative;width:100%}.keep-logged label{width:100%}.keep-logged input{height:20px}.login-wrapper button{bottom:20px;position:relative}";
 }
 
 
@@ -4289,18 +4340,67 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
     const phone = __vite_ssr_import_2__.ref();
     const password = __vite_ssr_import_2__.ref();
     const passwordRepeat = __vite_ssr_import_2__.ref();
+    const checkPhoneResponse = __vite_ssr_import_2__.ref();
+    const checkPhone = () => {
+      if (phone.value.length < 10) {
+        checkPhoneResponse.value = "invalid phone number";
+      } else {
+        checkPasswordsResponse.value = null;
+        const checkIfNumberUsed = async () => {
+          const phoneToSend = {
+            phone: phone.value
+          };
+          const response = await fetch("http://localhost:8000/check-number", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(phoneToSend)
+          });
+          const data = await response.json();
+          if (data == true) {
+            checkPasswordsResponse.value = "This phone number is linked to an account";
+          } else {
+            dataToSend.phone = phone.value;
+            if (dataToSend.password != null) {
+              isButtonActive.value = false;
+            }
+          }
+        };
+        checkIfNumberUsed();
+      }
+    };
     const checkPasswordsResponse = __vite_ssr_import_2__.ref();
     const checkTwoPasswords = () => {
       if (password.value != passwordRepeat.value) {
         checkPasswordsResponse.value = "passwords do not match";
       } else {
         checkPasswordsResponse.value = "";
+        dataToSend.password = password.value;
+        if (dataToSend.phone != null) {
+          isButtonActive.value = false;
+        }
       }
     };
-    const login = async () => {
-      fetch("");
+    const dataToSend = {
+      phone: null,
+      password: null
     };
-    const __returned__ = { phone, password, passwordRepeat, checkPasswordsResponse, checkTwoPasswords, login };
+    const userID = __vite_ssr_import_2__.ref();
+    const isButtonActive = __vite_ssr_import_2__.ref(true);
+    const signUp = async () => {
+      const response = await fetch("http://localhost:8000/create-account", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataToSend)
+      });
+      const data = await response.json();
+      if (data != false) {
+        isButtonActive.value = true;
+        userID.value = data._id;
+      }
+    };
+    const __returned__ = { phone, password, passwordRepeat, checkPhoneResponse, checkPhone, checkPasswordsResponse, checkTwoPasswords, dataToSend, userID, isButtonActive, signUp };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -4314,7 +4414,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_nuxt_link = __vite_ssr_import_1__.default;
   _push(`<main${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({ class: "signup-wrapper" }, _attrs))}>`);
   _push(__vite_ssr_import_5__.ssrRenderComponent(_component_navBar, null, null, _parent));
-  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><p class="checkPasswordResponse">${__vite_ssr_import_5__.ssrInterpolate($setup.checkPasswordsResponse)}</p><div class="form"><input type="text" placeholder="phone number"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" placeholder="password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.password)}><input type="password" name="" placeholder="repeat password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.passwordRepeat)}><button>Sign up</button><div class="other">`);
+  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>Sign Up</h1><p class="checkPasswordResponse">${__vite_ssr_import_5__.ssrInterpolate($setup.checkPasswordsResponse)}</p><p>${__vite_ssr_import_5__.ssrInterpolate($setup.checkPhoneResponse)}</p><div class="form"><input type="text" placeholder="phone number"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" placeholder="password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.password)}><input type="password" name="" placeholder="repeat password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.passwordRepeat)}><!-- disabled on check  --><button${__vite_ssr_import_5__.ssrIncludeBooleanAttr($setup.isButtonActive) ? " disabled" : ""}>Sign up </button><div class="other">`);
   _push(__vite_ssr_import_5__.ssrRenderComponent(_component_nuxt_link, { to: "/login" }, {
     default: __vite_ssr_import_4__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
@@ -4357,7 +4457,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 
 // --------------------
 const $id_f2a1f585 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".checkPasswordResponse{color:red}";
+__vite_ssr_exports__.default = ".checkPasswordResponse{color:red}.login-wrapper button:disabled,.signup-wrapper button:disabled{background-color:grey}";
 }
 
 
@@ -4531,48 +4631,109 @@ const __vite_ssr_import_0__ = await __vite_ssr_import__("/components/nav-bar.vue
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/nuxt/dist/app/components/nuxt-link.mjs");
 
-const _sfc_main = {}
 const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
+const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
+  __name: "login",
+  setup(__props, { expose }) {
+    expose();
+    const phone = __vite_ssr_import_2__.ref();
+    const userResponse = __vite_ssr_import_2__.ref();
+    const checkPhone = async () => {
+      const phoneToSend = {
+        phone: phone.value
+      };
+      const response = await fetch("http://localhost:8000/check-number", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(phoneToSend)
+      });
+      const data = await response.json();
+      if (data != true) {
+        userResponse.value = "invalid phone number";
+      } else {
+        userResponse.value = null;
+      }
+    };
+    const password = __vite_ssr_import_2__.ref();
+    const ifCorrectData = __vite_ssr_import_2__.ref(true);
+    const checkPassword = () => {
+      wrongPassword.value = null;
+      if (password.value != "" || userResponse == null) {
+        ifCorrectData.value = false;
+      }
+    };
+    const wrongPassword = __vite_ssr_import_2__.ref();
+    const userID = __vite_ssr_import_2__.ref();
+    const ifKeepLogged = __vite_ssr_import_2__.ref();
+    const login = async () => {
+      const dataToSend = {
+        phone: phone.value,
+        password: password.value
+      };
+      const response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataToSend)
+      });
+      const data = await response.json();
+      if (data === false) {
+        wrongPassword.value = "wrong password";
+      } else {
+        wrongPassword.value = "log in sucessful";
+        userID.value = data._id;
+        if (ifKeepLogged.value == true) {
+          localStorage.setItem("userID", userID.value);
+        } else {
+          sessionStorage.setItem("userID", userID.value);
+        }
+      }
+    };
+    const __returned__ = { phone, userResponse, checkPhone, password, ifCorrectData, checkPassword, wrongPassword, userID, ifKeepLogged, login };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  const _component_navBar = __vite_ssr_import_0__.default
-  const _component_nuxt_link = __vite_ssr_import_1__.default
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
-  _push(`<main${__vite_ssr_import_3__.ssrRenderAttrs(__vite_ssr_import_2__.mergeProps({ class: "login-wrapper" }, _attrs))}>`)
-  _push(__vite_ssr_import_3__.ssrRenderComponent(_component_navBar, null, null, _parent))
-  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><div class="form"><input type="text" placeholder="phone number"><input type="password" name="" id="" placeholder="password"><button>login</button><div class="other"><a href="#">forgot your password</a>`)
-  _push(__vite_ssr_import_3__.ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
-    default: __vite_ssr_import_2__.withCtx((_, _push, _parent, _scopeId) => {
-      if (_push) {
-        _push(`sign up`)
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  const _component_navBar = __vite_ssr_import_0__.default;
+  const _component_nuxt_link = __vite_ssr_import_1__.default;
+  _push(`<main${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({ class: "login-wrapper" }, _attrs))}>`);
+  _push(__vite_ssr_import_5__.ssrRenderComponent(_component_navBar, null, null, _parent));
+  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><div class="form"><p>${__vite_ssr_import_5__.ssrInterpolate($setup.userResponse)}</p><p>${__vite_ssr_import_5__.ssrInterpolate($setup.wrongPassword)}</p><input type="text" placeholder="phone number"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" id="" placeholder="password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.password)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${__vite_ssr_import_5__.ssrIncludeBooleanAttr(Array.isArray($setup.ifKeepLogged) ? __vite_ssr_import_5__.ssrLooseContain($setup.ifKeepLogged, null) : $setup.ifKeepLogged) ? " checked" : ""}></div><button${__vite_ssr_import_5__.ssrIncludeBooleanAttr($setup.ifCorrectData) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
+  _push(__vite_ssr_import_5__.ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
+    default: __vite_ssr_import_4__.withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`sign up`);
       } else {
         return [
-          __vite_ssr_import_2__.createTextVNode("sign up")
-        ]
+          __vite_ssr_import_4__.createTextVNode("sign up")
+        ];
       }
     }),
-    _: 1 /* STABLE */
-  }, _parent))
-  _push(`</div></div></main>`)
+    _: 1
+  }, _parent));
+  _push(`</div></div></main>`);
 }
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/pages/login.vue?vue&type=style&index=0&lang.css");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/pages/login.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
-
-const _sfc_setup = _sfc_main.setup
+const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_5__.useSSRContext()
-  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("pages/login.vue")
-  return _sfc_setup ? _sfc_setup(props, ctx) : undefined
-}
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+  const ssrContext = __vite_ssr_import_7__.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/login.vue");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_6__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app/pages/login.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_8__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/pages/login.vue"]]);
+;
 }
 
 
@@ -5246,18 +5407,67 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
     const phone = __vite_ssr_import_2__.ref();
     const password = __vite_ssr_import_2__.ref();
     const passwordRepeat = __vite_ssr_import_2__.ref();
+    const checkPhoneResponse = __vite_ssr_import_2__.ref();
+    const checkPhone = () => {
+      if (phone.value.length < 10) {
+        checkPhoneResponse.value = "invalid phone number";
+      } else {
+        checkPasswordsResponse.value = null;
+        const checkIfNumberUsed = async () => {
+          const phoneToSend = {
+            phone: phone.value
+          };
+          const response = await fetch("http://localhost:8000/check-number", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(phoneToSend)
+          });
+          const data = await response.json();
+          if (data == true) {
+            checkPasswordsResponse.value = "This phone number is linked to an account";
+          } else {
+            dataToSend.phone = phone.value;
+            if (dataToSend.password != null) {
+              isButtonActive.value = false;
+            }
+          }
+        };
+        checkIfNumberUsed();
+      }
+    };
     const checkPasswordsResponse = __vite_ssr_import_2__.ref();
     const checkTwoPasswords = () => {
       if (password.value != passwordRepeat.value) {
         checkPasswordsResponse.value = "passwords do not match";
       } else {
         checkPasswordsResponse.value = "";
+        dataToSend.password = password.value;
+        if (dataToSend.phone != null) {
+          isButtonActive.value = false;
+        }
       }
     };
-    const login = async () => {
-      fetch("");
+    const dataToSend = {
+      phone: null,
+      password: null
     };
-    const __returned__ = { phone, password, passwordRepeat, checkPasswordsResponse, checkTwoPasswords, login };
+    const userID = __vite_ssr_import_2__.ref();
+    const isButtonActive = __vite_ssr_import_2__.ref(true);
+    const signUp = async () => {
+      const response = await fetch("http://localhost:8000/create-account", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataToSend)
+      });
+      const data = await response.json();
+      if (data != false) {
+        isButtonActive.value = true;
+        userID.value = data._id;
+      }
+    };
+    const __returned__ = { phone, password, passwordRepeat, checkPhoneResponse, checkPhone, checkPasswordsResponse, checkTwoPasswords, dataToSend, userID, isButtonActive, signUp };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -5271,7 +5481,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_nuxt_link = __vite_ssr_import_1__.default;
   _push(`<main${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({ class: "signup-wrapper" }, _attrs))}>`);
   _push(__vite_ssr_import_5__.ssrRenderComponent(_component_navBar, null, null, _parent));
-  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><p class="checkPasswordResponse">${__vite_ssr_import_5__.ssrInterpolate($setup.checkPasswordsResponse)}</p><div class="form"><input type="text" placeholder="phone number"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" placeholder="password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.password)}><input type="password" name="" placeholder="repeat password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.passwordRepeat)}><button>Sign up</button><div class="other">`);
+  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>Sign Up</h1><p class="checkPasswordResponse">${__vite_ssr_import_5__.ssrInterpolate($setup.checkPasswordsResponse)}</p><p>${__vite_ssr_import_5__.ssrInterpolate($setup.checkPhoneResponse)}</p><div class="form"><input type="text" placeholder="phone number"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" placeholder="password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.password)}><input type="password" name="" placeholder="repeat password"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.passwordRepeat)}><!-- disabled on check  --><button${__vite_ssr_import_5__.ssrIncludeBooleanAttr($setup.isButtonActive) ? " disabled" : ""}>Sign up </button><div class="other">`);
   _push(__vite_ssr_import_5__.ssrRenderComponent(_component_nuxt_link, { to: "/login" }, {
     default: __vite_ssr_import_4__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {

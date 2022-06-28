@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 
 
+
 exports.createNewUser = async (req, res)=> {
     try {
         const salt = await bcrypt.genSalt();
@@ -30,7 +31,16 @@ exports.login = async (req,res)=>{
             res.send(user)
         }
         else {
-            res.send("wrong password")
+            res.send(false)
         }
+    }
+}
+
+exports.checkNumber = async (req,res)=>{
+    const user = await customers.findOne({ phone: req.body.phone})
+    if(user != null){
+        res.send(true)
+    }else {
+        res.send(false)
     }
 }
