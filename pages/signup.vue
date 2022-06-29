@@ -1,7 +1,8 @@
 <template>
-    <main class="signup-wrapper">
+    <main>
         <navBar/>
-        <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
+        <div class="signup-wrapper">
+            <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
         <h1>Sign Up</h1>
         <p class="checkPasswordResponse">{{checkPasswordsResponse}}</p>
         <p>{{checkPhoneResponse}}</p>
@@ -15,10 +16,25 @@
                  <nuxt-link to="/login">log in</nuxt-link>
             </div>
         </div>
+        </div>
     </main>
 </template>
 
 <script setup lang="ts">
+
+
+useHead({
+  title: 'sign up',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  charset: 'utf-8',
+  meta: [
+    { name: 'description', content: 'My amazing site.' }
+  ],
+  link: [
+    { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
+  ]
+})
+
 
 const phone = ref<string>();
 const password = ref<string>();
@@ -88,6 +104,8 @@ const signUp = async ()=>{
         isButtonActive.value = true;
         userID.value = data._id;
         //send to pinia for state management
+        const route = useRouter();
+        route.push('/');
     }
 }
 </script>

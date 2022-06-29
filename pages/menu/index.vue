@@ -2,6 +2,7 @@
     <div class="everything">
         <nav-bar/>
         <img @click="toggleMenu" src="../../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
+        <p></p>
         <div class="navigations" ref="nav">
           <NuxtLink to="/menu/"  @click="toggleMenu">Main Meals</NuxtLink>
           <NuxtLink to="/menu/bevarages"  @click="toggleMenu">Bevarages</NuxtLink>
@@ -12,7 +13,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 useHead({
   title: 'hotel menu',

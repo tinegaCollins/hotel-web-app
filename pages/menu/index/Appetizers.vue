@@ -29,7 +29,10 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '../../../assets/styles/meals.css'
-
+onMounted(()=>{
+    const route = useRoute();
+    console.log(route.params);
+})
 </script>

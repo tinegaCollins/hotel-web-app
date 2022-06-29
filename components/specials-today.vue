@@ -97,11 +97,18 @@
     transition: border 200ms cubic-bezier(0.23, 1, 0.320, 1);
 }
 .single-card .add-to-cart {
-    height: 25px;
-    width: 25px;
     position: absolute;
     right: 10px;
     top: 10px;
+    font-size: .7rem;
+    background-color: var(--alice-blue);
+    padding: 7px;
+    border-radius: 10px;
+    transition: background-color 100ms ease-out;
+}
+.single-card .add-to-cart:hover {
+    background-color: var(--carolina-blue);
+    cursor: pointer;
 }
 .single-card img {
     height: 120px;

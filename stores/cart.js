@@ -6,6 +6,9 @@ export const useCartStore = defineStore('cart',{
             cart : []
         }
     },
+    getters: {
+
+    },
     actions: {
         addToCart(item){
             this.cart.push(item)

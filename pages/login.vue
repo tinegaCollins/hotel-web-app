@@ -1,7 +1,8 @@
 <template>
-    <main class="login-wrapper">
+    <main>
         <navBar/>
-        <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
+        <div class="login-wrapper">
+            <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
         <h1>log in</h1>
         <div class="form">
             <p>{{ userResponse}}</p>
@@ -18,11 +19,24 @@
                  <nuxt-link to="/signup">sign up</nuxt-link>
             </div>
         </div>
+        </div>
     </main>
 </template>
 
 
 <script setup lang="ts">
+
+useHead({
+  title: 'log in',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  charset: 'utf-8',
+  meta: [
+    { name: 'description', content: 'My amazing site.' }
+  ],
+  link: [
+    { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
+  ]
+})
     const phone = ref<string>();
     const userResponse = ref<string>();
     const checkPhone = async ()=>{
@@ -76,6 +90,8 @@
             }else {
                 sessionStorage.setItem('userID', userID.value)
             }
+            const route = useRouter();
+            route.push('/');
         }
     }
 </script>
@@ -88,8 +104,8 @@
     text-align: center;
 }
 .login-wrapper  > img, .signup-wrapper > img {
-    height: 90px;
-    width: 90px;
+    height: 60px;
+    width: 60px;
     margin-top: 10px;
 }
 .form {
@@ -108,6 +124,15 @@
     padding: 0 10px;
     color: black;
     font-size: 1rem;
+}
+@media screen and (min-width: 600px) {
+    .form {
+        width: 40%;
+    }
+    .login-wrapper, .signup-wrapper {
+        display: grid;
+        place-items: center;
+    }
 }
 .form input:focus{
     border: 1px solid var(--carolina-blue);

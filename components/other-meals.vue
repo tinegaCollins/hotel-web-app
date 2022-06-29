@@ -12,10 +12,11 @@
                     <li>briani</li>
                     <img id="chefs-pic" src="../assets/temp/me.jpeg" alt="" srcset="">
                 </ul>
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
             <div class="chefs-special">
-                <h3>chef Lorem's chicken tariaki</h3>
-                <img src="../assets/temp/food1.png" alt="" srcset="">
+                <h3>chef Lorem's peperoni pizza </h3>
+                <img src="../assets/temp/pizza.jpeg" alt="" srcset="">
                 <ul>
                     <h3>ingredients</h3>
                     <li>chicken</li>
@@ -23,10 +24,11 @@
                     <li>briani</li>
                     <img id="chefs-pic" src="../assets/temp/me.jpeg" alt="" srcset="">
                 </ul>
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
             <div class="chefs-special">
-                <h3>chef Lorem's chicken tariaki</h3>
-                <img src="../assets/temp/food1.png" alt="" srcset="">
+                <h3>chef Lorem's chin chin</h3>
+                <img src="../assets/temp/chin-chin.jpeg" alt="" srcset="">
                 <ul>
                     <h3>ingredients</h3>
                     <li>chicken</li>
@@ -34,6 +36,7 @@
                     <li>briani</li>
                     <img id="chefs-pic" src="../assets/temp/me.jpeg" alt="" srcset="">
                 </ul>
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
         </main>
     </div>
@@ -41,7 +44,7 @@
 
 <style scoped>
 .other-meals {
-    width: 100vw;
+    width: 95vw;
     position: absolute;
     left: 0;
     height: 100vh;
@@ -63,6 +66,15 @@
     gap: 20px;
     align-items: center;
     width: 100%;
+    position: relative;
+}
+.chefs-special .add-to-cart {
+    padding: 7px;
+    background-color: var(--main-orange);
+    border-radius: 7px;
+}
+.chefs-special .add-to-cart:hover {
+    cursor: pointer;
 }
 @media screen and  (min-width: 520px){
     .other-meals main{
@@ -71,7 +83,6 @@
     }
     .chefs-special {
         width: 300px;
-        
     }
 }
 .chefs-special img{

@@ -106,8 +106,13 @@ useHead({
 }
 .mains {
   padding-top: 20px;
+  width: 100%;
 }
 @media screen and (min-width: 1024px) {
+  .all-wrapper{
+    padding: 0 0px 0 45px;
+    /* left: 30px; */
+  }
   .left , .right{
      display: block;
   }

@@ -1,7 +1,7 @@
 <template>
     <main class="main-wrapper">
         <h1>
-            You want food, we deliver it to your doorstep
+            Hungry?  We deliver it to your doorstep
         </h1>
         <location/>
     </main>
