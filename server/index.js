@@ -14,7 +14,8 @@ mongoose.connect(
     }))
     app.post('/create-account', loginsControllers.createNewUser);
     app.post('/login', loginsControllers.login);
-    app.post('/check-number', loginsControllers.checkNumber)
+    app.post('/check-number', loginsControllers.checkNumber);
+    app.post('/get-user-data', loginsControllers.loginById);
     app.listen(8000, ()=>{
         console.log("server on port 8000");
     })

@@ -44,3 +44,13 @@ exports.checkNumber = async (req,res)=>{
         res.send(false)
     }
 }
+
+exports.loginById = async (req,res)=>{
+    try {
+        const user = await customers.findById(req.body.userID);
+        res.send(user);
+    }
+    catch {
+        res.send(false)
+    }
+}

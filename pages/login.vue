@@ -6,7 +6,7 @@
         <div class="form">
             <p>{{ userResponse}}</p>
             <p>{{ wrongPassword }}</p>
-            <input type="text" placeholder="phone number" v-model="phone" @mouseleave="checkPhone">
+            <input type="text" placeholder="phone number" v-model="phone" @mouseout="checkPhone">
             <input type="password" name="" id="" placeholder="password" v-model="password" @keyup="checkPassword">
             <div class="keep-logged">
                 <label for="checkbox"> keep me logged in</label>
@@ -68,6 +68,7 @@
         if(data === false){
             wrongPassword.value = "wrong password"
         }else {
+            //redirect to other page
             wrongPassword.value = "log in sucessful"
             userID.value = data._id
             if (ifKeepLogged.value == true){

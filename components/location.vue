@@ -2,18 +2,18 @@
     <div class="location">
         <img src="../assets/icons/location-svgrepo-com.svg" alt="location" srcset="">
         <p @click="toggleSearch"> 
-            add a location
+            <p>{{ locationSelected }}</p>
             <img ref="arrow" src="../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
         </p>
-        <p v-if="locationSelected" >elivering to kenya</p>
     </div>
-    <input :class="classSelected" type="text" placeholder="search location">
+    <input :class="classSelected" type="text" placeholder="delivering to ...">
 
 </template>
 
 
-<script setup>
-const locationSelected = ref(false);
+<script setup lang="ts">
+const locationSelected = ref<string>("add a location");
+const ifLocationAvailable = ref<boolean>();
 const arrow = ref(null);
 const classSelected = ref('hide');
 function toggleSearch(){
@@ -21,7 +21,6 @@ function toggleSearch(){
     classSelected.value = classSelected.value === 'show' ? 'hide' : 'show';
     arrow.value.classList.toggle('up');
 }
-
 
 </script>
 
