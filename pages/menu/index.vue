@@ -2,11 +2,11 @@
     <div class="everything">
         <nav-bar/>
         <img @click="toggleMenu" src="../../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
-        <div class="navigations" ref="nav" @click="toggleMenu">
-          <NuxtLink to="/menu/">Main Meals</NuxtLink>
-          <NuxtLink to="/menu/bevarages">Bevarages</NuxtLink>
-          <NuxtLink to="/menu/Appetizers">Appetizers</NuxtLink>
-          <NuxtLink to="/menu/Salads">Salads</NuxtLink>
+        <div class="navigations" ref="nav">
+          <NuxtLink to="/menu/"  @click="toggleMenu">Main Meals</NuxtLink>
+          <NuxtLink to="/menu/bevarages"  @click="toggleMenu">Bevarages</NuxtLink>
+          <NuxtLink to="/menu/Appetizers"  @click="toggleMenu">Appetizers</NuxtLink>
+          <NuxtLink to="/menu/Salads"  @click="toggleMenu">Salads</NuxtLink>
         </div>
         <NuxtPage></NuxtPage>
     </div>
@@ -56,5 +56,8 @@ function toggleMenu(){
   text-decoration: none;
   font-size: 1.2rem;
   font-family: var(--title-font);
+}
+.navigations a:active {
+  color: var(--carolina-blue);
 }
 </style>

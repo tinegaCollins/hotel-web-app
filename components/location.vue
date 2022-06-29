@@ -1,10 +1,10 @@
 <template>
     <div class="location">
         <img src="../assets/icons/location-svgrepo-com.svg" alt="location" srcset="">
-        <p @click="toggleSearch"> 
-            <p>{{ locationSelected }}</p>
+        <div class="toggle" @click="toggleSearch"> 
+            <h5>{{ locationSelected }}</h5>
             <img ref="arrow" src="../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
-        </p>
+        </div>
     </div>
     <input :class="classSelected" type="text" placeholder="delivering to ...">
 
@@ -12,7 +12,7 @@
 
 
 <script setup lang="ts">
-const locationSelected = ref<string>("add a location");
+const locationSelected = ref<string>();
 const ifLocationAvailable = ref<boolean>();
 const arrow = ref(null);
 const classSelected = ref('hide');
@@ -21,7 +21,9 @@ function toggleSearch(){
     classSelected.value = classSelected.value === 'show' ? 'hide' : 'show';
     arrow.value.classList.toggle('up');
 }
-
+onMounted(()=>{
+    locationSelected.value = "add a location";
+})
 </script>
 
 <style scoped>
@@ -32,7 +34,7 @@ function toggleSearch(){
     column-gap: 20px;
     align-items: center;
 }
-.location p {
+.location .toggle {
     display: flex;
     align-items: center;
     column-gap: 10px;

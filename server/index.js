@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const loginsControllers = require('./controllers/logins.js')
 const cors = require('cors');
+const multer = require('multer');
 mongoose.connect(
     "mongodb://localhost:27017/hotelini",
     { useNewUrlParser: true }

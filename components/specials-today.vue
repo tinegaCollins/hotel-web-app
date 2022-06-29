@@ -9,65 +9,52 @@
                     <p>By Chef Ali</p>
                     <p> 800 ksh + delivery fee</p>
                 </div>
-                <img class="plus-sign" src="../assets/icons/plus-svgrepo-com.svg" alt="" srcset="">
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
             <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
+                <img src="../assets/temp/fish.jpg" alt="food" srcset="">
                 <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
+                    <h3>fish dry fry</h3>
+                    <p>By ipsum dolor</p>
+                    <p> 600 ksh + delivery fee</p>
                 </div>
-                <img class="plus-sign" src="../assets/icons/plus-svgrepo-com.svg" alt="" srcset="">
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
             <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
+                <img src="../assets/temp/Githeri-1.jpg" alt="food" srcset="">
                 <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
+                    <h3>Githeri</h3>
+                    <p>By ipsum dolor</p>
+                    <p> 300 ksh + delivery fee</p>
                 </div>
-                <img class="plus-sign" src="../assets/icons/plus-svgrepo-com.svg" alt="" srcset="">
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
             <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
+                <img src="../assets/temp/samosa.jpg" alt="food" srcset="">
                 <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
+                    <h3>samosas</h3>
+                    <p>By ipsum dolor</p>
+                    <p> 40 ksh + delivery fee</p>
                 </div>
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
             <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
+                <img src="../assets/temp/chapati.jpg" alt="food" srcset="">
                 <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
+                    <h3>chapati </h3>
+                    <p>By chef 999</p>
+                    <p> 20 ksh + delivery fee</p>
                 </div>
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
             <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
+                <img src="../assets/temp/chicken.jpeg" alt="food" srcset="">
                 <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
+                    <h3>fried chicken</h3>
+                    <p>By Chef Thugger</p>
+                    <p> 330 ksh + delivery fee</p>
                 </div>
-            </div>
-            <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
-                <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
-                </div>
-            </div>
-            <div class="single-card">
-                <img src="../assets/temp/food1.png" alt="food" srcset="">
-                <div class="details">
-                    <h3>chicken pilau</h3>
-                    <p>By Chef Ali</p>
-                    <p> 800 ksh + delivery fee</p>
-                </div>
+                <div class="add-to-cart"><p>add to cart</p></div>
             </div>
         </div>
     </div>
@@ -77,7 +64,7 @@
 .specials-wrapper {
     margin-top: 30px;
     font-family: var(--title-font);
-    padding: 20px 10px;
+    padding: 20px 20px;
 }
 .specials-wrapper h2{
     position: relative;
@@ -96,7 +83,7 @@
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    row-gap: 20px;
+    gap: 30px;
 }
 .single-card {
     display: flex;
@@ -109,7 +96,7 @@
     border: 1px solid var(--side-orange);
     transition: border 200ms cubic-bezier(0.23, 1, 0.320, 1);
 }
-.single-card .plus-sign {
+.single-card .add-to-cart {
     height: 25px;
     width: 25px;
     position: absolute;
@@ -125,19 +112,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     row-gap: 5px;
 }
 @media screen and (min-width: 768px) {
     .specials-cards{
-        flex-direction: row;
-        justify-content: space-around;
+        display: grid;
+        grid-template-columns: auto auto;
         padding: 20px;
     }
     .single-card {
-        width: 30%;
-    }
-    .single-card {
+        /* width: 95%; */
         border: 1px solid transparent;
     }
     .single-card:hover{

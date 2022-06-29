@@ -3,8 +3,8 @@
         <nav-bar />
         <main class="all-wrapper">
           <div class="left">
-            <img src="../../assets/icons/photo2.png" alt="random photo" srcset="">
-            <h2>Cooked for kenyans</h2>
+            <img src="../../assets/icons/photo1.png" alt="random photo" srcset="">
+            <h2>Cooked by kenyans</h2>
           </div>
           <div class="mains">
             <landing-page />
@@ -12,11 +12,10 @@
             <other-meals/>
           </div>
           <div class="right">
-            <img src="../../assets/icons/photo1.png" alt="random photo " srcset="">
-            <h2> by kenyans</h2>
+            <img src="../../assets/icons/photo2.png" alt="random photo " srcset="">
+            <h2> for kenyans</h2>
           </div>
         </main>
-
    </div>
 </template>
 
@@ -42,17 +41,18 @@ useHead({
 .all-wrapper {
   display: grid;
   grid-template-columns: auto auto auto;
-  place-items: center;
   position: relative;
 }
 .left {
   position: sticky;
+  display: none;
 }
 .right{
+  display: none;
   position: sticky;
 }
 .left img, .right img {
-  height: calc(100vh-80px);
+  height: calc(100vh - 80px );
   width: 200px;
   object-fit: cover;
   display: none;
@@ -65,47 +65,52 @@ useHead({
   top: 0;
   left: 0;
   width: 200px;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
+  height: calc(100vh - 80px );
+  background-color: rgba(0,0,0,0.7);
   z-index: 1;
 }
 .left::before{
-  background-color: rgba(0,0,0,0.7);
   content: '';
   position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
   top: 0;
   left: 0;
   width: 200px;
-  height: 100%;
+  height: calc(100vh - 80px );
   z-index: 1;
 
+}
+.right h2 {
+  display: none;
+  position: absolute;
+  font-family: var(--title-font);
+  font-size: 2rem;
+  color: var(--main-orange);
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 100%;
 }
 .left h2 {
   display: none;
   position: absolute;
   font-family: var(--title-font);
   font-size: 2.5rem;
-  color: var(--main-orange);
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 100%;
-}
-.right h2 {
-  display: none;
-  position: absolute;
-  font-family: var(--title-font);
-  font-size: 2.5rem;
   color: #333;
-  top: 60%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   width: 100%;
 }
-
+.mains {
+  padding-top: 20px;
+}
 @media screen and (min-width: 1024px) {
+  .left , .right{
+     display: block;
+  }
   .left img, .right img {
     display: block;
   }
