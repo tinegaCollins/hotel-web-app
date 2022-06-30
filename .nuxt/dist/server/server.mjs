@@ -3500,7 +3500,7 @@ const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/serve
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
   const _component_location = __vite_ssr_import_0__.default
 
-  _push(`<main${__vite_ssr_import_2__.ssrRenderAttrs(__vite_ssr_import_1__.mergeProps({ class: "main-wrapper" }, _attrs))} data-v-7919a0c0><h1 data-v-7919a0c0> Hungry? We deliver it to your doorstep </h1>`)
+  _push(`<main${__vite_ssr_import_2__.ssrRenderAttrs(__vite_ssr_import_1__.mergeProps({ class: "main-wrapper" }, _attrs))} data-v-7919a0c0><h1 data-v-7919a0c0> Hungry? We&#39;ll deliver it to your doorstep </h1>`)
   _push(__vite_ssr_import_2__.ssrRenderComponent(_component_location, null, null, _parent))
   _push(`</main>`)
 }
@@ -3549,10 +3549,32 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
       classSelected.value = classSelected.value === "show" ? "hide" : "show";
       arrow.value.classList.toggle("up");
     }
+    const getLocation = async (id) => {
+      const data = {
+        id
+      };
+      const response = await fetch("http://localhost:8000/get-location", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      console.log(await response.json());
+    };
+    let userID;
     __vite_ssr_import_0__.onMounted(() => {
-      locationSelected.value = "add a location";
+      if (localStorage.getItem("userID") === null) {
+        if (sessionStorage.getItem("userID") === null) {
+          locationSelected.value = "add a location";
+        } else {
+          userID = sessionStorage.getItem("userID");
+          getLocation(userID);
+        }
+      } else {
+        userID = localStorage.getItem("userID");
+        getLocation(userID);
+      }
     });
-    const __returned__ = { locationSelected, ifLocationAvailable, arrow, classSelected, toggleSearch };
+    const __returned__ = { locationSelected, ifLocationAvailable, arrow, classSelected, toggleSearch, getLocation, userID };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3615,30 +3637,41 @@ __vite_ssr_exports__.default = ".main-wrapper[data-v-7919a0c0]{display:grid;font
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
 const $id_8de6d258 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-const _sfc_main = {}
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
+const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
+  __name: "specials-today",
+  setup(__props, { expose }) {
+    expose();
+    const data = __vite_ssr_import_0__.ref();
+    const __returned__ = { data };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  _push(`<div${__vite_ssr_import_1__.ssrRenderAttrs(__vite_ssr_import_0__.mergeProps({ class: "specials-wrapper" }, _attrs))}><h2> specials today</h2><div class="specials-cards"><div class="single-card"><img src="/_nuxt/assets/temp/food1.png" alt="food" srcset=""><div class="details"><h3>chicken pilau</h3><p>By Chef Ali</p><p> 800 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/fish.jpg" alt="food" srcset=""><div class="details"><h3>fish dry fry</h3><p>By ipsum dolor</p><p> 600 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/Githeri-1.jpg" alt="food" srcset=""><div class="details"><h3>Githeri</h3><p>By ipsum dolor</p><p> 300 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/samosa.jpg" alt="food" srcset=""><div class="details"><h3>samosas</h3><p>By ipsum dolor</p><p> 40 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/chapati.jpg" alt="food" srcset=""><div class="details"><h3>chapati </h3><p>By chef 999</p><p> 20 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/chicken.jpeg" alt="food" srcset=""><div class="details"><h3>fried chicken</h3><p>By Chef Thugger</p><p> 330 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div></div></div>`)
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<div${__vite_ssr_import_3__.ssrRenderAttrs(__vite_ssr_import_2__.mergeProps({ class: "specials-wrapper" }, _attrs))}><h2> specials today</h2><div class="specials-cards"><div class="single-card"><img src="/_nuxt/assets/temp/food1.png" alt="food" srcset=""><div class="details"><h3>chicken pilau</h3><p>By Chef Ali</p><p> 800 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/fish.jpg" alt="food" srcset=""><div class="details"><h3>fish dry fry</h3><p>By ipsum dolor</p><p> 600 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/Githeri-1.jpg" alt="food" srcset=""><div class="details"><h3>Githeri</h3><p>By ipsum dolor</p><p> 300 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/samosa.jpg" alt="food" srcset=""><div class="details"><h3>samosas</h3><p>By ipsum dolor</p><p> 40 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/chapati.jpg" alt="food" srcset=""><div class="details"><h3>chapati </h3><p>By chef 999</p><p> 20 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div><div class="single-card"><img src="/_nuxt/assets/temp/chicken.jpeg" alt="food" srcset=""><div class="details"><h3>fried chicken</h3><p>By Chef Thugger</p><p> 330 ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div></div></div>`);
 }
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/components/specials-today.vue?vue&type=style&index=0&lang.css");
 
-const __vite_ssr_import_2__ = await __vite_ssr_import__("/components/specials-today.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
-
-const _sfc_setup = _sfc_main.setup
+const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_3__.useSSRContext()
-  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("components/specials-today.vue")
-  return _sfc_setup ? _sfc_setup(props, ctx) : undefined
-}
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+  const ssrContext = __vite_ssr_import_5__.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/specials-today.vue");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_4__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app/components/specials-today.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_6__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/components/specials-today.vue"]]);
+;
 }
 
 

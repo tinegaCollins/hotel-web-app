@@ -44,7 +44,24 @@ exports.checkNumber = async (req,res)=>{
         res.send(false)
     }
 }
+exports.getLocation = async (req, res)=>{
+    try{
+        const user = await customers.findById(req.body.id);
+        const location = user.location
+        if(location != null){
+            res.send(location)
+        }else {
+            res.send(false)
+        }
+    }
+    catch {
+        res.send(false)
+    }
+}
+exports.searchLocation = async (req,res)=>{
+    const locations = ['nakuru','nairobi','naivasha','london','new york'];
 
+}
 exports.loginById = async (req,res)=>{
     try {
         const user = await customers.findById(req.body.userID);
@@ -62,7 +79,7 @@ exports.getCart = async (req, res)=>{
         const onlyId = cart.map((id)=>{
             return id.itemID
         })
-        res.send(cart)
+        res.send(onlyId)
     }
     else {
         res.send("not found")

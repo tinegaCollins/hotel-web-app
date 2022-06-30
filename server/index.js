@@ -23,6 +23,7 @@ mongoose.connect(
     app.post('/login', loginsControllers.login);
     app.post('/check-number', loginsControllers.checkNumber);
     app.post('/get-user-data', loginsControllers.loginById);
+    app.post('/get-location', loginsControllers.getLocation);
     //multer storage ingine
     const storage = multer.diskStorage({
         destination: (req,file,cb)=>{

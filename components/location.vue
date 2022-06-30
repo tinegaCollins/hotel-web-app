@@ -12,6 +12,8 @@
 
 
 <script setup lang="ts">
+import { json } from 'stream/consumers';
+
 const locationSelected = ref<string>();
 const ifLocationAvailable = ref<boolean>();
 const arrow = ref(null);
@@ -21,8 +23,33 @@ function toggleSearch(){
     classSelected.value = classSelected.value === 'show' ? 'hide' : 'show';
     arrow.value.classList.toggle('up');
 }
+const getLocation = async (id:string)=>{
+    const data:object = {
+        id: id
+    }
+    const response = await fetch('http://localhost:8000/get-location', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    console.log(await response.json());
+    
+    
+}
+let userID:string;
 onMounted(()=>{
-    locationSelected.value = "add a location";
+    if(localStorage.getItem("userID") === null){
+        if(sessionStorage.getItem("userID") === null){
+            locationSelected.value = "add a location"
+        }
+        else {
+            userID = sessionStorage.getItem("userID")
+            getLocation(userID);
+        }
+    }else{
+        userID = localStorage.getItem("userID");
+        getLocation(userID);
+    }
 })
 </script>
 

@@ -63,18 +63,18 @@
 
 <script setup lang="ts">
 const data = ref();
-onMounted(async ()=>{
-   try{
-     const resonse = await fetch('http://localhost:8000/get-special-meal',{
-        method: 'GET'
-    })
-    data.value = resonse.json();
-   }
-   catch {
-    console.log("couldnt get the dat");
+// onMounted(async ()=>{
+//    try{
+//      const resonse = await fetch('http://localhost:8000/get-special-meal',{
+//         method: 'GET'
+//     })
+//     data.value = resonse.json();
+//    }
+//    catch {
+//     console.log("couldnt get the dat");
     
-   }
-})
+//    }
+// })
 </script>
 
 <style>
