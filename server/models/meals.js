@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const schema = new mongoose({
+const schema = new mongoose.Schema({
     name: String,
     image: {
         data: Buffer,
@@ -11,4 +11,4 @@ const schema = new mongoose({
     availability: Boolean
 })
 
-module.exports = mongoose.Model('meal', schema);
+module.exports = mongoose.model('meal', schema);

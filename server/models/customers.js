@@ -8,4 +8,4 @@ const schema = new mongoose.Schema({
     cart: [String]
 })
 
-module.exports = mongoose.model('customer', schema)
+module.exports = mongoose.model('customer', schema);

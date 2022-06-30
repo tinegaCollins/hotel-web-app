@@ -54,3 +54,60 @@ exports.loginById = async (req,res)=>{
         res.send(false)
     }
 }
+
+exports.getCart = async (req, res)=>{
+    const user = await customers.findById(req.body.id)
+    if( user != null){
+        const cart = user.cart;
+        const onlyId = cart.map((id)=>{
+            return id.itemID
+        })
+        res.send(cart)
+    }
+    else {
+        res.send("not found")
+    }
+}
+exports.removeFromCart = async(req,res)=>{
+    try{
+        const item = req.body.item;
+        const user = await customers.findById(req.body);
+        const cart = user.cart;
+        const indexOfItem = cart.indexOf(item)
+        cart.splice(indexOfItem, 1)
+        res.send(true)
+    }
+    catch{
+        res.send(false)
+    }
+}
+
+exports.addToCart = async (req,res)=> {
+    try {
+        const item = req.body.item;
+        const user = await customers.findById(req.body);
+        const cart = user.cart;
+        cart.push(item);
+        res.send(true)
+    }
+    catch {
+        res.send(false)
+    }
+}
+const temp = {
+    itemID: "eyfhreiufherg",
+    quantity: 2,
+    price: 444,
+    total: 888
+}
+exports.checkOut = async (req,res)=>{
+    try{
+        const user = customers.findById(req.body.id);
+        const cart = (await user).cart;
+        const balance = req.body.balance;
+        //use the balance and cart to get the api from mpesa
+    }
+    catch {
+        console.log("didnt work");
+    }
+}

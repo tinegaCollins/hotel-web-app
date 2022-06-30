@@ -127,6 +127,7 @@ __vite_ssr_exports__.default = (ctx) => entry(ctx);
 // - /pages/menu/index/bevarages.vue?macro=true ($id_65f40735)
 // - /pages/menu/index/index.vue?macro=true ($id_3b510a93)
 // - /pages/signup.vue?macro=true ($id_ae8d024a)
+// - /pages/upload.vue?macro=true ($id_a37c7b63)
 // - /pages/account.vue ($id_ce2c396d)
 // - /pages/cart.vue ($id_9f2043ab)
 // - /pages/index/index.vue ($id_a200782a)
@@ -137,6 +138,7 @@ __vite_ssr_exports__.default = (ctx) => entry(ctx);
 // - /pages/menu/index/index.vue ($id_29b61ff5)
 // - /pages/menu/index.vue ($id_30db1f12)
 // - /pages/signup.vue ($id_31eb92be)
+// - /pages/upload.vue ($id_6e0e396b)
 // - /@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/dist.plugin.67651f8e.mjs ($id_559fb9d0)
 // - /node_modules/nuxt/dist/app/compat/capi.mjs ($id_0c5717a4)
 // - /node_modules/nuxt/dist/app/components/nuxt-root.vue ($id_e9bfada3)
@@ -2771,6 +2773,7 @@ Object.defineProperty(__vite_ssr_exports__, "_wrapIf", { enumerable: true, confi
 // - /pages/menu/index/bevarages.vue?macro=true ($id_65f40735)
 // - /pages/menu/index/index.vue?macro=true ($id_3b510a93)
 // - /pages/signup.vue?macro=true ($id_ae8d024a)
+// - /pages/upload.vue?macro=true ($id_a37c7b63)
 // - /pages/account.vue ($id_ce2c396d)
 // - /pages/cart.vue ($id_9f2043ab)
 // - /pages/index/index.vue ($id_a200782a)
@@ -2781,6 +2784,7 @@ Object.defineProperty(__vite_ssr_exports__, "_wrapIf", { enumerable: true, confi
 // - /pages/menu/index/index.vue ($id_29b61ff5)
 // - /pages/menu/index.vue ($id_30db1f12)
 // - /pages/signup.vue ($id_31eb92be)
+// - /pages/upload.vue ($id_6e0e396b)
 // --------------------
 const $id_00807a13 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/pages/account.vue?macro=true");
@@ -2802,6 +2806,8 @@ const __vite_ssr_import_7__ = await __vite_ssr_import__("/pages/menu/index/bevar
 const __vite_ssr_import_8__ = await __vite_ssr_import__("/pages/menu/index/index.vue?macro=true");
 
 const __vite_ssr_import_9__ = await __vite_ssr_import__("/pages/signup.vue?macro=true");
+
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/pages/upload.vue?macro=true");
 
 __vite_ssr_exports__.default = [
   {
@@ -2893,6 +2899,15 @@ __vite_ssr_exports__.default = [
     meta: __vite_ssr_import_9__.meta,
     alias: __vite_ssr_import_9__.meta?.alias || [],
     component: () => __vite_ssr_dynamic_import__('/pages/signup.vue')
+  },
+  {
+    name: "upload",
+    path: "/upload",
+    file: "/home/tinega/Desktop/dont/hotel-web-app/pages/upload.vue",
+    children: [],
+    meta: __vite_ssr_import_10__.meta,
+    alias: __vite_ssr_import_10__.meta?.alias || [],
+    component: () => __vite_ssr_dynamic_import__('/pages/upload.vue')
   }
 ];
 }
@@ -2998,6 +3013,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 // - /pages/menu/index/bevarages.vue?macro=true ($id_65f40735)
 // - /pages/menu/index/index.vue?macro=true ($id_3b510a93)
 // - /pages/signup.vue?macro=true ($id_ae8d024a)
+// - /pages/upload.vue?macro=true ($id_a37c7b63)
 // - /pages/account.vue ($id_ce2c396d)
 // - /pages/cart.vue ($id_9f2043ab)
 // - /pages/index/index.vue ($id_a200782a)
@@ -3008,6 +3024,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 // - /pages/menu/index/index.vue ($id_29b61ff5)
 // - /pages/menu/index.vue ($id_30db1f12)
 // - /pages/signup.vue ($id_31eb92be)
+// - /pages/upload.vue ($id_6e0e396b)
 // - /node_modules/@nuxt/ui-templates/dist/templates/error-404.vue ($id_b90d4d0f)
 // - /node_modules/@nuxt/ui-templates/dist/templates/error-500.vue ($id_14c8b574)
 // - /node_modules/@nuxt/ui-templates/dist/templates/error-dev.vue ($id_bc2d74a1)
@@ -3049,6 +3066,7 @@ import("file:///home/tinega/Desktop/dont/hotel-web-app/node_modules/vue/server-r
 // - /pages/menu/index/bevarages.vue?macro=true ($id_65f40735)
 // - /pages/menu/index/index.vue?macro=true ($id_3b510a93)
 // - /pages/signup.vue?macro=true ($id_ae8d024a)
+// - /pages/upload.vue?macro=true ($id_a37c7b63)
 // - /pages/account.vue ($id_ce2c396d)
 // - /pages/cart.vue ($id_9f2043ab)
 // - /pages/index/index.vue ($id_a200782a)
@@ -3059,6 +3077,7 @@ import("file:///home/tinega/Desktop/dont/hotel-web-app/node_modules/vue/server-r
 // - /pages/menu/index/index.vue ($id_29b61ff5)
 // - /pages/menu/index.vue ($id_30db1f12)
 // - /pages/signup.vue ($id_31eb92be)
+// - /pages/upload.vue ($id_6e0e396b)
 // - /node_modules/@nuxt/ui-templates/dist/templates/error-404.vue ($id_b90d4d0f)
 // - /node_modules/@nuxt/ui-templates/dist/templates/error-500.vue ($id_14c8b574)
 // - /node_modules/@nuxt/ui-templates/dist/templates/error-dev.vue ($id_bc2d74a1)
@@ -4716,6 +4735,93 @@ __vite_ssr_exports__.default = ".checkPasswordResponse{color:red}.login-wrapper 
 
 
 // --------------------
+// Request: /pages/upload.vue?macro=true
+// Parents: 
+// - /@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/routes.mjs ($id_00807a13)
+// Dependencies: 
+// - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
+// - /node_modules/axios/index.js ($id_9a0dac16)
+// - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /@id/plugin-vue:export-helper ($id_bbb863c1)
+// --------------------
+const $id_a37c7b63 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/axios/index.js");
+
+const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
+  __name: "upload",
+  setup(__props, { expose }) {
+    expose();
+    const images = __vite_ssr_import_0__.ref();
+    const src = __vite_ssr_import_0__.ref();
+    __vite_ssr_import_0__.onMounted(() => {
+      let dataFromServer;
+      __vite_ssr_import_2__.default.get("http://localhost:8000/get-meals").then((res) => {
+        dataFromServer = res.data;
+        images.value = dataFromServer;
+      }).then(() => {
+        const returnedB64 = Buffer.from(dataFromServer[1].image.data).toString("base64");
+        src.value = returnedB64;
+        console.log(returnedB64);
+      }).catch((err) => console.log(err));
+    });
+    const __returned__ = { images, src };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<!--[--><h3>upload page</h3><!--[-->`);
+  __vite_ssr_import_3__.ssrRenderList($setup.images, (image) => {
+    _push(`<div><p>${__vite_ssr_import_3__.ssrInterpolate(image.name)}</p><p>${__vite_ssr_import_3__.ssrInterpolate(image.type)}</p><img${__vite_ssr_import_3__.ssrRenderAttr("src", $setup.src)} alt="" srcset=""></div>`);
+  });
+  _push(`<!--]--><!--]-->`);
+}
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = __vite_ssr_import_4__.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/upload.vue");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_5__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/pages/upload.vue"]]);
+
+const meta = undefined
+Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
+}
+
+
+// --------------------
+// Request: /node_modules/axios/index.js
+// Parents: 
+// - /pages/upload.vue?macro=true ($id_a37c7b63)
+// - /pages/upload.vue ($id_6e0e396b)
+// Dependencies: 
+
+// --------------------
+const $id_9a0dac16 = (global, module, _, exports, importMeta, ssrImport, ssrDynamicImport, ssrExportAll) =>
+import("file:///home/tinega/Desktop/dont/hotel-web-app/node_modules/axios/index.js")
+  .then(r => {
+    if (r.default && r.default.__esModule)
+      r = r.default
+    exports.default = r.default
+    ssrExportAll(r)
+  })
+  .catch(e => {
+    console.error(e)
+    throw new Error("[vite dev] Error loading external \"/home/tinega/Desktop/dont/hotel-web-app/node_modules/axios/index.js\".")
+  })
+
+
+// --------------------
 // Request: /pages/account.vue
 // Parents: 
 // - /@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/routes.mjs ($id_00807a13)
@@ -5880,6 +5986,69 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_10__.default(_s
 
 
 // --------------------
+// Request: /pages/upload.vue
+// Parents: 
+// - /@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/routes.mjs ($id_00807a13)
+// Dependencies: 
+// - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
+// - /node_modules/axios/index.js ($id_9a0dac16)
+// - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /@id/plugin-vue:export-helper ($id_bbb863c1)
+// --------------------
+const $id_6e0e396b = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/axios/index.js");
+
+const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
+  __name: "upload",
+  setup(__props, { expose }) {
+    expose();
+    const images = __vite_ssr_import_0__.ref();
+    const src = __vite_ssr_import_0__.ref();
+    __vite_ssr_import_0__.onMounted(() => {
+      let dataFromServer;
+      __vite_ssr_import_2__.default.get("http://localhost:8000/get-meals").then((res) => {
+        dataFromServer = res.data;
+        images.value = dataFromServer;
+      }).then(() => {
+        const returnedB64 = Buffer.from(dataFromServer[1].image.data).toString("base64");
+        src.value = returnedB64;
+        console.log(returnedB64);
+      }).catch((err) => console.log(err));
+    });
+    const __returned__ = { images, src };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<!--[--><h3>upload page</h3><!--[-->`);
+  __vite_ssr_import_3__.ssrRenderList($setup.images, (image) => {
+    _push(`<div><p>${__vite_ssr_import_3__.ssrInterpolate(image.name)}</p><p>${__vite_ssr_import_3__.ssrInterpolate(image.type)}</p><img${__vite_ssr_import_3__.ssrRenderAttr("src", $setup.src)} alt="" srcset=""></div>`);
+  });
+  _push(`<!--]--><!--]-->`);
+}
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = __vite_ssr_import_4__.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/upload.vue");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_5__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/pages/upload.vue"]]);
+;
+}
+
+
+// --------------------
 // Request: /@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/router.options.mjs
 // Parents: 
 // - /node_modules/nuxt/dist/pages/runtime/router.mjs ($id_a090977b)
@@ -6914,6 +7083,8 @@ const __modules__ = {
   "/pages/menu/index/index.vue?macro=true": $id_3b510a93,
   "/pages/signup.vue?macro=true": $id_ae8d024a,
   "/pages/signup.vue?vue&type=style&index=0&lang.css": $id_f2a1f585,
+  "/pages/upload.vue?macro=true": $id_a37c7b63,
+  "/node_modules/axios/index.js": $id_9a0dac16,
   "/pages/account.vue": $id_ce2c396d,
   "/pages/cart.vue": $id_9f2043ab,
   "/pages/index/index.vue": $id_a200782a,
@@ -6924,6 +7095,7 @@ const __modules__ = {
   "/pages/menu/index/index.vue": $id_29b61ff5,
   "/pages/menu/index.vue": $id_30db1f12,
   "/pages/signup.vue": $id_31eb92be,
+  "/pages/upload.vue": $id_6e0e396b,
   "/@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/router.options.mjs": $id_ded4f918,
   "/@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/middleware.mjs": $id_4069fffb,
   "/@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/dist.plugin.67651f8e.mjs": $id_559fb9d0,
