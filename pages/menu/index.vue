@@ -6,7 +6,7 @@
         <div class="navigations" ref="nav">
           <NuxtLink to="/menu/"  @click="toggleMenu">Main Meals</NuxtLink>
           <NuxtLink to="/menu/bevarages"  @click="toggleMenu">Bevarages</NuxtLink>
-          <NuxtLink to="/menu/Appetizers"  @click="toggleMenu">Appetizers</NuxtLink>
+          <NuxtLink to="/menu/snacks"  @click="toggleMenu">snacks</NuxtLink>
           <NuxtLink to="/menu/Salads"  @click="toggleMenu">Salads</NuxtLink>
         </div>
         <NuxtPage></NuxtPage>

@@ -11,7 +11,9 @@ exports.createNewUser = async (req, res)=> {
         const newUser = new customers({
             userName : req.body.name,
             phone: req.body.phone,
-            password : hashPassword
+            password : hashPassword,
+            cart: [],
+            location: 'nakuru'
         })
 
         await newUser.save()

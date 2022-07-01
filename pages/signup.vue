@@ -2,10 +2,10 @@
     <main>
         <navBar/>
         <div class="signup-wrapper">
+            <p ref="res" class="alert" v-if="messageResponse">{{messageResponse}}</p>
             <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
         <h1>Sign Up</h1>
         <p class="checkPasswordResponse">{{checkPasswordsResponse}}</p>
-        <p>{{checkPhoneResponse}}</p>
         <div class="form">
             <input type="text" placeholder="phone number" v-model="phone" @mouseout="checkPhone">
             <input type="password" name=""  placeholder="password" v-model="password">
@@ -22,13 +22,12 @@
 
 <script setup lang="ts">
 
-
 useHead({
   title: 'sign up',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   charset: 'utf-8',
   meta: [
-    { name: 'description', content: 'My amazing site.' }
+    { name: 'description', content: 'sign up page' }
   ],
   link: [
     { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
@@ -39,10 +38,18 @@ useHead({
 const phone = ref<string>();
 const password = ref<string>();
 const passwordRepeat = ref<string>();
+const messageResponse = ref<string>(null);
 const checkPhoneResponse = ref<string>();
+const isButtonActive = ref<boolean>(true);
+const res = ref();
 const checkPhone = ()=>{
     if(phone.value.length < 10){
-        checkPhoneResponse.value = "invalid phone number"
+        messageResponse.value = "enter a valid phone number"
+        res.value.classList.add('drop');
+        setTimeout(() => {
+            messageResponse.value = null;
+            res.value.classList.remove('drop')
+        }, 3000);
     }
     else {
         checkPasswordsResponse.value = null;
@@ -87,7 +94,6 @@ const dataToSend = {
     password: null
 }
 const userID = ref<string>();
-const isButtonActive = ref<boolean>(true);
 const signUp = async ()=>{
     const response = await fetch('http://localhost:8000/create-account', {
         method: 'POST',
@@ -117,5 +123,17 @@ const signUp = async ()=>{
 }
 .signup-wrapper button:disabled, .login-wrapper button:disabled {
     background-color: hsl(0, 0%, 50%);
+}
+.alert{
+    transform: translateY(300px);
+    background-color: var(--carolina-blue);
+    width: max-content;
+    position: absolute;
+    top: 0;
+    padding: 4px 7px;
+    border-radius: 10px;
+}
+.drop {
+    transform: translateY(100px);
 }
 </style>

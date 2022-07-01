@@ -102,6 +102,8 @@ useHead({
 .login-wrapper, .signup-wrapper {
     font-family: var(--title-font);
     text-align: center;
+    display: grid;
+    place-items: center;
 }
 .login-wrapper  > img, .signup-wrapper > img {
     height: 60px;
@@ -113,6 +115,7 @@ useHead({
     display: grid;
     place-items: center;
     row-gap: 30px;
+    width: 100%;
 }
 .form input {
     height: 44px;

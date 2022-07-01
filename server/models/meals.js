@@ -6,9 +6,12 @@ const schema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
+    tempImage: String,
     type: String,
     orders: Number,
-    availability: Boolean
+    availability: Boolean,
+    price: Number,
+    special: Boolean
 })
 
-module.exports = mongoose.model('meal', schema);
+module.exports = mongoose.model('food', schema);

@@ -1,6 +1,6 @@
 <template>
     <div class="all-meals">
-        <p>salads</p>
+        <p>snacks</p>
         <div class="content-wrapper" v-for="item in data" :key="item._id">
             <img :src="item.tempImage" alt="" srcset="">
             <div class="content">
@@ -17,7 +17,7 @@
 import '../../../assets/styles/meals.css'
 const data = ref();
 onMounted( async ()=>{
-    const response = await fetch('http://localhost:8000/filter/salad')
+    const response = await fetch('http://localhost:8000/filter/snack')
     data.value =await response.json();
 })
 </script>

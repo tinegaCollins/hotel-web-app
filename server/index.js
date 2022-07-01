@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const loginsControllers = require('./controllers/logins.js');
 const meals = require('./models/meals.js');
+const mealsControllers = require('./controllers/meals.js')
 const cors = require('cors');
 const multer = require('multer');
 const fs = require('fs');
@@ -24,6 +25,9 @@ mongoose.connect(
     app.post('/check-number', loginsControllers.checkNumber);
     app.post('/get-user-data', loginsControllers.loginById);
     app.post('/get-location', loginsControllers.getLocation);
+    app.post('/add-meal', mealsControllers.addFood )
+    app.get('/specials', mealsControllers.getSpecials);
+    app.get('/filter/:type', mealsControllers.filterByType)
     //multer storage ingine
     const storage = multer.diskStorage({
         destination: (req,file,cb)=>{
