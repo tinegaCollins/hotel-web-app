@@ -1,15 +1,16 @@
 <template>
     <div class="specials-wrapper">
         <h2> specials today</h2>
+        <p>{{cart}}</p>
         <div class="specials-cards">
             <div class="single-card" v-for="item in data" :key="item._id">
                 <img :src="item.tempImage" alt="food" srcset="">
                 <div class="details">
                     <h3>{{ item.name}}</h3>
-                    <p>By Chef Ali</p>
+                    <p @click="remove(item._id)">By Chef Ali</p>
                     <p> {{item.price}} ksh + delivery fee</p>
                 </div>
-                <div class="add-to-cart"><p>add to cart</p></div>
+                <div class="add-to-cart" @click="addToCart(item._id)"><p>add to cart</p></div>
             </div>
         </div>
     </div>
@@ -17,6 +18,10 @@
 
 
 <script setup lang="ts">
+import { useCartStore } from "../stores/useCart";
+import { storeToRefs } from "pinia";
+const main = useCartStore();
+const { cart } = storeToRefs(main);
 const data = ref();
 onMounted(async ()=>{
    try{
@@ -26,10 +31,37 @@ onMounted(async ()=>{
     data.value =await resonse.json()
    }
    catch {
-    console.log("couldnt get the dat");
+    console.log("couldnt get the data");
     
    }
 })
+const stateChange = ()=>{
+    main.$subscribe( async (mutation,state)=>{
+         const dataToSend = {
+            id : '62bb610f1bb16a0f875f7781',
+            newCart: cart.value
+         }
+         const response = await fetch('http://localhost:8000/update-cart',{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataToSend)
+         })
+         const ress = await response.json();
+         console.log(ress);
+         
+    })
+}
+const addToCart = (id:string) => {
+    const itemToAdd = {
+        itemID: id,
+        quantity: 0
+    }
+    main.addtoCart(itemToAdd);
+    stateChange()
+}
+const remove = (id:string) => {
+    main.removeFromCart(id)
+}
 </script>
 
 <style>

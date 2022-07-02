@@ -3176,7 +3176,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 // Dependencies: 
 // - /node_modules/nuxt/dist/app/components/nuxt-link.mjs ($id_ffac87b5)
 // - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
-// - /stores/cart.js ($id_76578355)
+// - /stores/useCart.ts ($id_1a94a962)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
 // - /components/nav-bar.vue?vue&type=style&index=0&scoped=true&lang.css ($id_711c814c)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
@@ -3188,13 +3188,13 @@ const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/dist/
 
 const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/stores/cart.js");
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/stores/useCart.ts");
 
 const _sfc_main = /* @__PURE__ */ __vite_ssr_import_2__.defineComponent({
   __name: "nav-bar",
   setup(__props, { expose }) {
     expose();
-    const cart = __vite_ssr_import_3__.useCartStore();
+    const main = __vite_ssr_import_3__.useCartStore();
     const barsPath = "M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM64 256C64 238.3 78.33 224 96 224H480C497.7 224 512 238.3 512 256C512 273.7 497.7 288 480 288H96C78.33 288 64 273.7 64 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z";
     const xPath = "M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z";
     const path = __vite_ssr_import_1__.ref(barsPath);
@@ -3206,8 +3206,8 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_2__.defineComponent({
     let userID;
     const ifNotLoggedIn = __vite_ssr_import_1__.ref();
     const ifLoggedIn = __vite_ssr_import_1__.ref(false);
-    const isUserDataAvailable = __vite_ssr_import_1__.ref();
-    __vite_ssr_import_1__.onMounted(async () => {
+    const cartNumber = __vite_ssr_import_1__.ref();
+    __vite_ssr_import_1__.onMounted(() => {
       userID = localStorage.getItem("userID");
       if (userID === null) {
         userID = sessionStorage.getItem("userID");
@@ -3217,27 +3217,31 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_2__.defineComponent({
       } else {
         ifNotLoggedIn.value = false;
         ifLoggedIn.value = true;
-        if (sessionStorage.getItem("ifdataAvailable") != "true") {
-          try {
-            const dataToSend = {
-              userID
-            };
-            const response = await fetch("http://localhost:8000/get-user-data", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(dataToSend)
-            });
+        try {
+          const getCartNumber = async () => {
+            const response = await fetch(`http://localhost:8000/get-cart-number/${userID}`);
+            let data = await response.json();
+            cartNumber.value = data.length;
+          };
+          getCartNumber();
+        } catch {
+          console.log("catch");
+        }
+        try {
+          const getCart = async () => {
+            const response = await fetch(`http://localhost:8000/get-cart/${userID}`);
             const data = await response.json();
-            sessionStorage.setItem("ifdataAvailable", "true");
-            sessionStorage.setItem("location", data.location);
-            cart.$state.cart = data.cart;
-          } catch {
-            console.log("catch");
-          }
+            for (let i = 0; i < data.length; i++) {
+              main.addtoCart(data[i]);
+            }
+          };
+          getCart();
+        } catch {
+          console.log("couldnt get da data");
         }
       }
     });
-    const __returned__ = { cart, barsPath, xPath, path, links, slideShow, userID, ifNotLoggedIn, ifLoggedIn, isUserDataAvailable };
+    const __returned__ = { main, barsPath, xPath, path, links, slideShow, userID, ifNotLoggedIn, ifLoggedIn, cartNumber };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3264,7 +3268,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><div class="cart" data-v-bc67b704>`);
+  _push(`</div><p data-v-bc67b704>${__vite_ssr_import_5__.ssrInterpolate($setup.cartNumber)}</p><div class="cart" data-v-bc67b704>`);
   _push(__vite_ssr_import_5__.ssrRenderComponent(_component_nuxt_link, { to: "/cart" }, {
     default: __vite_ssr_import_4__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
@@ -3297,45 +3301,49 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_8__.default(_sf
 
 
 // --------------------
-// Request: /stores/cart.js
+// Request: /stores/useCart.ts
 // Parents: 
 // - /components/nav-bar.vue ($id_12afc13c)
+// - /components/specials-today.vue ($id_8de6d258)
 // Dependencies: 
 // - /node_modules/pinia/dist/pinia.mjs ($id_b1920624)
 // --------------------
-const $id_76578355 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_1a94a962 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/pinia/dist/pinia.mjs");
 
-
-const useCartStore = __vite_ssr_import_0__.defineStore('cart',{
-    state: () => {
-        return {
-            cart : []
-        }
+const useCartStore = __vite_ssr_import_0__.defineStore("cart1", {
+  state: () => ({
+    cart: []
+  }),
+  getters: {},
+  actions: {
+    addtoCart(item) {
+      const ifHas = this.cart.includes(item);
+      if (ifHas === false) {
+        this.cart.push(item);
+      }
     },
-    getters: {
-
+    removeFromCart(item) {
+      const index = this.cart.indexOf(item);
+      if (index != -1) {
+        this.cart.splice(index, 1);
+      }
     },
-    actions: {
-        addToCart(item){
-            this.cart.push(item)
-        },
-        removeFromCart(item){
-            const index = this.cart.indexOf(item);
-            if(index != -10){
-                this.cart.splice(index,1)
-            }
-        }
+    clearCart() {
+      this.cart = [];
     }
-})
-Object.defineProperty(__vite_ssr_exports__, "useCartStore", { enumerable: true, configurable: true, get(){ return useCartStore }});;
+  }
+});
+Object.defineProperty(__vite_ssr_exports__, "useCartStore", { enumerable: true, configurable: true, get(){ return useCartStore }});
+;
 }
 
 
 // --------------------
 // Request: /node_modules/pinia/dist/pinia.mjs
 // Parents: 
-// - /stores/cart.js ($id_76578355)
+// - /stores/useCart.ts ($id_1a94a962)
+// - /components/specials-today.vue ($id_8de6d258)
 // - /@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/dist.plugin.67651f8e.mjs ($id_559fb9d0)
 // Dependencies: 
 
@@ -3548,15 +3556,9 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
       arrow.value.classList.toggle("up");
     }
     const getLocation = async (id) => {
-      const data = {
-        id
-      };
-      const response = await fetch("http://localhost:8000/get-location", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-      console.log(await response.json());
+      const response = await fetch(`http://localhost:8000/get-location/${id}`);
+      const locationData = await response.json();
+      locationSelected.value = locationData.location;
     };
     let userID;
     __vite_ssr_import_0__.onMounted(() => {
@@ -3630,6 +3632,8 @@ __vite_ssr_exports__.default = ".main-wrapper[data-v-7919a0c0]{display:grid;font
 // - /pages/index/index.vue ($id_a200782a)
 // Dependencies: 
 // - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
+// - /stores/useCart.ts ($id_1a94a962)
+// - /node_modules/pinia/dist/pinia.mjs ($id_b1920624)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
 // - /components/specials-today.vue?vue&type=style&index=0&lang.css ($id_b62ff068)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
@@ -3639,10 +3643,16 @@ const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/dist/
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/stores/useCart.ts");
+
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/pinia/dist/pinia.mjs");
+
 const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
   __name: "specials-today",
   setup(__props, { expose }) {
     expose();
+    const main = __vite_ssr_import_2__.useCartStore();
+    const { cart } = __vite_ssr_import_3__.storeToRefs(main);
     const data = __vite_ssr_import_0__.ref();
     __vite_ssr_import_0__.onMounted(async () => {
       try {
@@ -3651,38 +3661,64 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
         });
         data.value = await resonse.json();
       } catch {
-        console.log("couldnt get the dat");
+        console.log("couldnt get the data");
       }
     });
-    const __returned__ = { data };
+    const stateChange = () => {
+      main.$subscribe(async (mutation, state) => {
+        const dataToSend = {
+          id: "62bb610f1bb16a0f875f7781",
+          newCart: cart.value
+        };
+        const response = await fetch("http://localhost:8000/update-cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dataToSend)
+        });
+        const ress = await response.json();
+        console.log(ress);
+      });
+    };
+    const addToCart = (id) => {
+      const itemToAdd = {
+        itemID: id,
+        quantity: 0
+      };
+      main.addtoCart(itemToAdd);
+      stateChange();
+    };
+    const remove = (id) => {
+      main.removeFromCart(id);
+    };
+    const __returned__ = { main, cart, data, stateChange, addToCart, remove };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<div${__vite_ssr_import_3__.ssrRenderAttrs(__vite_ssr_import_2__.mergeProps({ class: "specials-wrapper" }, _attrs))}><h2> specials today</h2><div class="specials-cards"><!--[-->`);
-  __vite_ssr_import_3__.ssrRenderList($setup.data, (item) => {
-    _push(`<div class="single-card"><img${__vite_ssr_import_3__.ssrRenderAttr("src", item.tempImage)} alt="food" srcset=""><div class="details"><h3>${__vite_ssr_import_3__.ssrInterpolate(item.name)}</h3><p>By Chef Ali</p><p>${__vite_ssr_import_3__.ssrInterpolate(item.price)} ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
+  _push(`<div${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({ class: "specials-wrapper" }, _attrs))}><h2> specials today</h2><p>${__vite_ssr_import_5__.ssrInterpolate($setup.cart)}</p><div class="specials-cards"><!--[-->`);
+  __vite_ssr_import_5__.ssrRenderList($setup.data, (item) => {
+    _push(`<div class="single-card"><img${__vite_ssr_import_5__.ssrRenderAttr("src", item.tempImage)} alt="food" srcset=""><div class="details"><h3>${__vite_ssr_import_5__.ssrInterpolate(item.name)}</h3><p>By Chef Ali</p><p>${__vite_ssr_import_5__.ssrInterpolate(item.price)} ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
   });
   _push(`<!--]--></div></div>`);
 }
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/components/specials-today.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/components/specials-today.vue?vue&type=style&index=0&lang.css");
 
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_5__.useSSRContext();
+  const ssrContext = __vite_ssr_import_7__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/specials-today.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_6__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/components/specials-today.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_8__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/components/specials-today.vue"]]);
 ;
 }
 
@@ -3820,6 +3856,8 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
     });
     const phone = __vite_ssr_import_3__.ref();
     const userResponse = __vite_ssr_import_3__.ref();
+    const messageResponse = __vite_ssr_import_3__.ref();
+    const res = __vite_ssr_import_3__.ref();
     const checkPhone = async () => {
       const phoneToSend = {
         phone: phone.value
@@ -3831,7 +3869,12 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       });
       const data = await response.json();
       if (data != true) {
-        userResponse.value = "invalid phone number";
+        res.value.classList.add("drop");
+        messageResponse.value = "invalid phone number";
+        setTimeout(() => {
+          messageResponse.value = null;
+          res.value.classList.remove("drop");
+        }, 700);
       } else {
         userResponse.value = null;
       }
@@ -3859,9 +3902,19 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       });
       const data = await response.json();
       if (data === false) {
-        wrongPassword.value = "wrong password";
+        res.value.classList.add("drop");
+        messageResponse.value = "wrong password";
+        setTimeout(() => {
+          messageResponse.value = null;
+          res.value.classList.remove("drop");
+        }, 1500);
       } else {
-        wrongPassword.value = "log in sucessful";
+        res.value.classList.add("drop");
+        messageResponse.value = "log in succesfull";
+        setTimeout(() => {
+          messageResponse.value = null;
+          res.value.classList.remove("drop");
+        }, 1500);
         userID.value = data._id;
         if (ifKeepLogged.value == true) {
           localStorage.setItem("userID", userID.value);
@@ -3872,7 +3925,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
         route.push("/");
       }
     };
-    const __returned__ = { phone, userResponse, checkPhone, password, ifCorrectData, checkPassword, wrongPassword, userID, ifKeepLogged, login };
+    const __returned__ = { phone, userResponse, messageResponse, res, checkPhone, password, ifCorrectData, checkPassword, wrongPassword, userID, ifKeepLogged, login };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3886,7 +3939,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_nuxt_link = __vite_ssr_import_1__.default;
   _push(`<main${__vite_ssr_import_7__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_7__.ssrRenderComponent(_component_navBar, null, null, _parent));
-  _push(`<div class="login-wrapper"><img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><div class="form"><p>${__vite_ssr_import_7__.ssrInterpolate($setup.userResponse)}</p><p>${__vite_ssr_import_7__.ssrInterpolate($setup.wrongPassword)}</p><input type="text" placeholder="phone number"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" id="" placeholder="password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.password)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${__vite_ssr_import_7__.ssrIncludeBooleanAttr(Array.isArray($setup.ifKeepLogged) ? __vite_ssr_import_7__.ssrLooseContain($setup.ifKeepLogged, null) : $setup.ifKeepLogged) ? " checked" : ""}></div><button${__vite_ssr_import_7__.ssrIncludeBooleanAttr($setup.ifCorrectData) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
+  _push(`<div class="login-wrapper"><p class="alert">${__vite_ssr_import_7__.ssrInterpolate($setup.messageResponse)}</p><img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><div class="form"><p>${__vite_ssr_import_7__.ssrInterpolate($setup.userResponse)}</p><p>${__vite_ssr_import_7__.ssrInterpolate($setup.wrongPassword)}</p><input type="text" placeholder="phone number"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" id="" placeholder="password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.password)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${__vite_ssr_import_7__.ssrIncludeBooleanAttr(Array.isArray($setup.ifKeepLogged) ? __vite_ssr_import_7__.ssrLooseContain($setup.ifKeepLogged, null) : $setup.ifKeepLogged) ? " checked" : ""}></div><button${__vite_ssr_import_7__.ssrIncludeBooleanAttr($setup.ifCorrectData) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
   _push(__vite_ssr_import_7__.ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
     default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
@@ -4456,20 +4509,18 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
     const phone = __vite_ssr_import_3__.ref();
     const password = __vite_ssr_import_3__.ref();
     const passwordRepeat = __vite_ssr_import_3__.ref();
-    const messageResponse = __vite_ssr_import_3__.ref(null);
-    const checkPhoneResponse = __vite_ssr_import_3__.ref();
+    const messageResponse = __vite_ssr_import_3__.ref();
     const isButtonActive = __vite_ssr_import_3__.ref(true);
     const res = __vite_ssr_import_3__.ref();
     const checkPhone = () => {
       if (phone.value.length < 10) {
-        messageResponse.value = "enter a valid phone number";
         res.value.classList.add("drop");
+        messageResponse.value = "enter a valid phone number";
         setTimeout(() => {
           messageResponse.value = null;
           res.value.classList.remove("drop");
-        }, 3e3);
+        }, 2e3);
       } else {
-        checkPasswordsResponse.value = null;
         const checkIfNumberUsed = async () => {
           const phoneToSend = {
             phone: phone.value
@@ -4481,7 +4532,12 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
           });
           const data = await response.json();
           if (data == true) {
-            checkPasswordsResponse.value = "This phone number is linked to an account";
+            res.value.classList.add("drop");
+            messageResponse.value = "phone number in use";
+            setTimeout(() => {
+              messageResponse.value = null;
+              res.value.classList.remove("drop");
+            }, 2e3);
           } else {
             dataToSend.phone = phone.value;
             if (dataToSend.password != null) {
@@ -4492,12 +4548,15 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
         checkIfNumberUsed();
       }
     };
-    const checkPasswordsResponse = __vite_ssr_import_3__.ref();
     const checkTwoPasswords = () => {
       if (password.value != passwordRepeat.value) {
-        checkPasswordsResponse.value = "passwords do not match";
+        res.value.classList.add("drop");
+        messageResponse.value = "passwords do not match";
+        setTimeout(() => {
+          messageResponse.value = null;
+          res.value.classList.remove("drop");
+        }, 700);
       } else {
-        checkPasswordsResponse.value = "";
         dataToSend.password = password.value;
         if (dataToSend.phone != null) {
           isButtonActive.value = false;
@@ -4508,7 +4567,6 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       phone: null,
       password: null
     };
-    const userID = __vite_ssr_import_3__.ref();
     const signUp = async () => {
       const response = await fetch("http://localhost:8000/create-account", {
         method: "POST",
@@ -4520,12 +4578,18 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       const data = await response.json();
       if (data != false) {
         isButtonActive.value = true;
-        userID.value = data._id;
-        const route = __vite_ssr_import_4__.useRouter();
-        route.push("/");
+        const userID = data._id;
+        res.value.classList.add("drop");
+        messageResponse.value = "sucessfully sign up";
+        sessionStorage.setItem("userID", userID);
+        console.log(sessionStorage.getItem("userID"));
+        setTimeout(() => {
+          const route = __vite_ssr_import_4__.useRouter();
+          route.push("/");
+        }, 1500);
       }
     };
-    const __returned__ = { phone, password, passwordRepeat, messageResponse, checkPhoneResponse, isButtonActive, res, checkPhone, checkPasswordsResponse, checkTwoPasswords, dataToSend, userID, signUp };
+    const __returned__ = { phone, password, passwordRepeat, messageResponse, isButtonActive, res, checkPhone, checkTwoPasswords, dataToSend, signUp };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -4539,13 +4603,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_nuxt_link = __vite_ssr_import_1__.default;
   _push(`<main${__vite_ssr_import_7__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_7__.ssrRenderComponent(_component_navBar, null, null, _parent));
-  _push(`<div class="signup-wrapper">`);
-  if ($setup.messageResponse) {
-    _push(`<p class="alert">${__vite_ssr_import_7__.ssrInterpolate($setup.messageResponse)}</p>`);
-  } else {
-    _push(`<!---->`);
-  }
-  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>Sign Up</h1><p class="checkPasswordResponse">${__vite_ssr_import_7__.ssrInterpolate($setup.checkPasswordsResponse)}</p><div class="form"><input type="text" placeholder="phone number"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" placeholder="password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.password)}><input type="password" name="" placeholder="repeat password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.passwordRepeat)}><!-- disabled on check  --><button${__vite_ssr_import_7__.ssrIncludeBooleanAttr($setup.isButtonActive) ? " disabled" : ""}>Sign up </button><div class="other">`);
+  _push(`<div class="signup-wrapper"><p class="alert">${__vite_ssr_import_7__.ssrInterpolate($setup.messageResponse)}</p><img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>Sign Up</h1><div class="form"><input type="text" placeholder="phone number"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" placeholder="password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.password)}><input type="password" name="" placeholder="repeat password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.passwordRepeat)}><!-- disabled on check  --><button${__vite_ssr_import_7__.ssrIncludeBooleanAttr($setup.isButtonActive) ? " disabled" : ""}>Sign up </button><div class="other">`);
   _push(__vite_ssr_import_7__.ssrRenderComponent(_component_nuxt_link, { to: "/login" }, {
     default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
@@ -4588,7 +4646,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 
 // --------------------
 const $id_f2a1f585 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".checkPasswordResponse{color:red}.login-wrapper button:disabled,.signup-wrapper button:disabled{background-color:grey}.alert{background-color:var(--carolina-blue);border-radius:10px;padding:4px 7px;position:absolute;top:0;transform:translateY(300px);width:-webkit-max-content;width:-moz-max-content;width:max-content}.drop{transform:translateY(100px)}";
+__vite_ssr_exports__.default = ".checkPasswordResponse{color:red}.login-wrapper button:disabled,.signup-wrapper button:disabled{background-color:grey}.alert{background-color:var(--orange-web);padding:4px 7px;position:absolute;top:0;transform:translateY(-100px);transition:all .1s cubic-bezier(.19,1,.22,1);width:-webkit-max-content;width:-moz-max-content;width:max-content}.alert,.drop{border-radius:10px}.drop{transform:translateY(100px)}";
 }
 
 
@@ -4597,86 +4655,34 @@ __vite_ssr_exports__.default = ".checkPasswordResponse{color:red}.login-wrapper 
 // Parents: 
 // - /@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/routes.mjs ($id_00807a13)
 // Dependencies: 
-// - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
-// - /node_modules/axios/index.js ($id_9a0dac16)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
 const $id_a37c7b63 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const _sfc_main = {}
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+
+
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
+  _push(`<h3${__vite_ssr_import_0__.ssrRenderAttrs(_attrs)}>upload page</h3>`)
+}
+
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/axios/index.js");
-
-const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
-  __name: "upload",
-  setup(__props, { expose }) {
-    expose();
-    const images = __vite_ssr_import_0__.ref();
-    const src = __vite_ssr_import_0__.ref();
-    __vite_ssr_import_0__.onMounted(() => {
-      let dataFromServer;
-      __vite_ssr_import_2__.default.get("http://localhost:8000/get-meals").then((res) => {
-        dataFromServer = res.data;
-        images.value = dataFromServer;
-      }).then(() => {
-        const returnedB64 = Buffer.from(dataFromServer[1].image.data).toString("base64");
-        src.value = returnedB64;
-        console.log(returnedB64);
-      }).catch((err) => console.log(err));
-    });
-    const __returned__ = { images, src };
-    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
-    return __returned__;
-  }
-});
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
-
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[--><h3>upload page</h3><!--[-->`);
-  __vite_ssr_import_3__.ssrRenderList($setup.images, (image) => {
-    _push(`<div><p>${__vite_ssr_import_3__.ssrInterpolate(image.name)}</p><p>${__vite_ssr_import_3__.ssrInterpolate(image.type)}</p><img${__vite_ssr_import_3__.ssrRenderAttr("src", $setup.src)} alt="" srcset=""></div>`);
-  });
-  _push(`<!--]--><!--]-->`);
-}
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
-
-const _sfc_setup = _sfc_main.setup;
+const _sfc_setup = _sfc_main.setup
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_4__.useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/upload.vue");
-  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
-};
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+  const ssrContext = __vite_ssr_import_1__.useSSRContext()
+  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("pages/upload.vue")
+  return _sfc_setup ? _sfc_setup(props, ctx) : undefined
+}
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_5__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/pages/upload.vue"]]);
-
+__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_2__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app/pages/upload.vue"]])
 const meta = undefined
 Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
 }
-
-
-// --------------------
-// Request: /node_modules/axios/index.js
-// Parents: 
-// - /pages/upload.vue?macro=true ($id_a37c7b63)
-// - /pages/upload.vue ($id_6e0e396b)
-// Dependencies: 
-
-// --------------------
-const $id_9a0dac16 = (global, module, _, exports, importMeta, ssrImport, ssrDynamicImport, ssrExportAll) =>
-import("file:///home/tinega/Desktop/dont/hotel-web-app/node_modules/axios/index.js")
-  .then(r => {
-    if (r.default && r.default.__esModule)
-      r = r.default
-    exports.default = r.default
-    ssrExportAll(r)
-  })
-  .catch(e => {
-    console.error(e)
-    throw new Error("[vite dev] Error loading external \"/home/tinega/Desktop/dont/hotel-web-app/node_modules/axios/index.js\".")
-  })
 
 
 // --------------------
@@ -4956,6 +4962,8 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
     });
     const phone = __vite_ssr_import_3__.ref();
     const userResponse = __vite_ssr_import_3__.ref();
+    const messageResponse = __vite_ssr_import_3__.ref();
+    const res = __vite_ssr_import_3__.ref();
     const checkPhone = async () => {
       const phoneToSend = {
         phone: phone.value
@@ -4967,7 +4975,12 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       });
       const data = await response.json();
       if (data != true) {
-        userResponse.value = "invalid phone number";
+        res.value.classList.add("drop");
+        messageResponse.value = "invalid phone number";
+        setTimeout(() => {
+          messageResponse.value = null;
+          res.value.classList.remove("drop");
+        }, 700);
       } else {
         userResponse.value = null;
       }
@@ -4995,9 +5008,19 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       });
       const data = await response.json();
       if (data === false) {
-        wrongPassword.value = "wrong password";
+        res.value.classList.add("drop");
+        messageResponse.value = "wrong password";
+        setTimeout(() => {
+          messageResponse.value = null;
+          res.value.classList.remove("drop");
+        }, 1500);
       } else {
-        wrongPassword.value = "log in sucessful";
+        res.value.classList.add("drop");
+        messageResponse.value = "log in succesfull";
+        setTimeout(() => {
+          messageResponse.value = null;
+          res.value.classList.remove("drop");
+        }, 1500);
         userID.value = data._id;
         if (ifKeepLogged.value == true) {
           localStorage.setItem("userID", userID.value);
@@ -5008,7 +5031,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
         route.push("/");
       }
     };
-    const __returned__ = { phone, userResponse, checkPhone, password, ifCorrectData, checkPassword, wrongPassword, userID, ifKeepLogged, login };
+    const __returned__ = { phone, userResponse, messageResponse, res, checkPhone, password, ifCorrectData, checkPassword, wrongPassword, userID, ifKeepLogged, login };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -5022,7 +5045,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_nuxt_link = __vite_ssr_import_1__.default;
   _push(`<main${__vite_ssr_import_7__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_7__.ssrRenderComponent(_component_navBar, null, null, _parent));
-  _push(`<div class="login-wrapper"><img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><div class="form"><p>${__vite_ssr_import_7__.ssrInterpolate($setup.userResponse)}</p><p>${__vite_ssr_import_7__.ssrInterpolate($setup.wrongPassword)}</p><input type="text" placeholder="phone number"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" id="" placeholder="password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.password)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${__vite_ssr_import_7__.ssrIncludeBooleanAttr(Array.isArray($setup.ifKeepLogged) ? __vite_ssr_import_7__.ssrLooseContain($setup.ifKeepLogged, null) : $setup.ifKeepLogged) ? " checked" : ""}></div><button${__vite_ssr_import_7__.ssrIncludeBooleanAttr($setup.ifCorrectData) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
+  _push(`<div class="login-wrapper"><p class="alert">${__vite_ssr_import_7__.ssrInterpolate($setup.messageResponse)}</p><img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>log in</h1><div class="form"><p>${__vite_ssr_import_7__.ssrInterpolate($setup.userResponse)}</p><p>${__vite_ssr_import_7__.ssrInterpolate($setup.wrongPassword)}</p><input type="text" placeholder="phone number"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" id="" placeholder="password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.password)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${__vite_ssr_import_7__.ssrIncludeBooleanAttr(Array.isArray($setup.ifKeepLogged) ? __vite_ssr_import_7__.ssrLooseContain($setup.ifKeepLogged, null) : $setup.ifKeepLogged) ? " checked" : ""}></div><button${__vite_ssr_import_7__.ssrIncludeBooleanAttr($setup.ifCorrectData) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
   _push(__vite_ssr_import_7__.ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
     default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
@@ -5535,20 +5558,18 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
     const phone = __vite_ssr_import_3__.ref();
     const password = __vite_ssr_import_3__.ref();
     const passwordRepeat = __vite_ssr_import_3__.ref();
-    const messageResponse = __vite_ssr_import_3__.ref(null);
-    const checkPhoneResponse = __vite_ssr_import_3__.ref();
+    const messageResponse = __vite_ssr_import_3__.ref();
     const isButtonActive = __vite_ssr_import_3__.ref(true);
     const res = __vite_ssr_import_3__.ref();
     const checkPhone = () => {
       if (phone.value.length < 10) {
-        messageResponse.value = "enter a valid phone number";
         res.value.classList.add("drop");
+        messageResponse.value = "enter a valid phone number";
         setTimeout(() => {
           messageResponse.value = null;
           res.value.classList.remove("drop");
-        }, 3e3);
+        }, 2e3);
       } else {
-        checkPasswordsResponse.value = null;
         const checkIfNumberUsed = async () => {
           const phoneToSend = {
             phone: phone.value
@@ -5560,7 +5581,12 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
           });
           const data = await response.json();
           if (data == true) {
-            checkPasswordsResponse.value = "This phone number is linked to an account";
+            res.value.classList.add("drop");
+            messageResponse.value = "phone number in use";
+            setTimeout(() => {
+              messageResponse.value = null;
+              res.value.classList.remove("drop");
+            }, 2e3);
           } else {
             dataToSend.phone = phone.value;
             if (dataToSend.password != null) {
@@ -5571,12 +5597,15 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
         checkIfNumberUsed();
       }
     };
-    const checkPasswordsResponse = __vite_ssr_import_3__.ref();
     const checkTwoPasswords = () => {
       if (password.value != passwordRepeat.value) {
-        checkPasswordsResponse.value = "passwords do not match";
+        res.value.classList.add("drop");
+        messageResponse.value = "passwords do not match";
+        setTimeout(() => {
+          messageResponse.value = null;
+          res.value.classList.remove("drop");
+        }, 700);
       } else {
-        checkPasswordsResponse.value = "";
         dataToSend.password = password.value;
         if (dataToSend.phone != null) {
           isButtonActive.value = false;
@@ -5587,7 +5616,6 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       phone: null,
       password: null
     };
-    const userID = __vite_ssr_import_3__.ref();
     const signUp = async () => {
       const response = await fetch("http://localhost:8000/create-account", {
         method: "POST",
@@ -5599,12 +5627,18 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       const data = await response.json();
       if (data != false) {
         isButtonActive.value = true;
-        userID.value = data._id;
-        const route = __vite_ssr_import_4__.useRouter();
-        route.push("/");
+        const userID = data._id;
+        res.value.classList.add("drop");
+        messageResponse.value = "sucessfully sign up";
+        sessionStorage.setItem("userID", userID);
+        console.log(sessionStorage.getItem("userID"));
+        setTimeout(() => {
+          const route = __vite_ssr_import_4__.useRouter();
+          route.push("/");
+        }, 1500);
       }
     };
-    const __returned__ = { phone, password, passwordRepeat, messageResponse, checkPhoneResponse, isButtonActive, res, checkPhone, checkPasswordsResponse, checkTwoPasswords, dataToSend, userID, signUp };
+    const __returned__ = { phone, password, passwordRepeat, messageResponse, isButtonActive, res, checkPhone, checkTwoPasswords, dataToSend, signUp };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -5618,13 +5652,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_nuxt_link = __vite_ssr_import_1__.default;
   _push(`<main${__vite_ssr_import_7__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_7__.ssrRenderComponent(_component_navBar, null, null, _parent));
-  _push(`<div class="signup-wrapper">`);
-  if ($setup.messageResponse) {
-    _push(`<p class="alert">${__vite_ssr_import_7__.ssrInterpolate($setup.messageResponse)}</p>`);
-  } else {
-    _push(`<!---->`);
-  }
-  _push(`<img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>Sign Up</h1><p class="checkPasswordResponse">${__vite_ssr_import_7__.ssrInterpolate($setup.checkPasswordsResponse)}</p><div class="form"><input type="text" placeholder="phone number"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" placeholder="password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.password)}><input type="password" name="" placeholder="repeat password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.passwordRepeat)}><!-- disabled on check  --><button${__vite_ssr_import_7__.ssrIncludeBooleanAttr($setup.isButtonActive) ? " disabled" : ""}>Sign up </button><div class="other">`);
+  _push(`<div class="signup-wrapper"><p class="alert">${__vite_ssr_import_7__.ssrInterpolate($setup.messageResponse)}</p><img src="/_nuxt/assets/icons/undraw_breakfast_psiw.svg" alt=""><h1>Sign Up</h1><div class="form"><input type="text" placeholder="phone number"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}><input type="password" name="" placeholder="password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.password)}><input type="password" name="" placeholder="repeat password"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.passwordRepeat)}><!-- disabled on check  --><button${__vite_ssr_import_7__.ssrIncludeBooleanAttr($setup.isButtonActive) ? " disabled" : ""}>Sign up </button><div class="other">`);
   _push(__vite_ssr_import_7__.ssrRenderComponent(_component_nuxt_link, { to: "/login" }, {
     default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
@@ -5661,61 +5689,31 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_10__.default(_s
 // Parents: 
 // - /@id/virtual:nuxt:/home/tinega/Desktop/dont/hotel-web-app/.nuxt/routes.mjs ($id_00807a13)
 // Dependencies: 
-// - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
-// - /node_modules/axios/index.js ($id_9a0dac16)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
 const $id_6e0e396b = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const _sfc_main = {}
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+
+
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
+  _push(`<h3${__vite_ssr_import_0__.ssrRenderAttrs(_attrs)}>upload page</h3>`)
+}
+
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/axios/index.js");
-
-const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
-  __name: "upload",
-  setup(__props, { expose }) {
-    expose();
-    const images = __vite_ssr_import_0__.ref();
-    const src = __vite_ssr_import_0__.ref();
-    __vite_ssr_import_0__.onMounted(() => {
-      let dataFromServer;
-      __vite_ssr_import_2__.default.get("http://localhost:8000/get-meals").then((res) => {
-        dataFromServer = res.data;
-        images.value = dataFromServer;
-      }).then(() => {
-        const returnedB64 = Buffer.from(dataFromServer[1].image.data).toString("base64");
-        src.value = returnedB64;
-        console.log(returnedB64);
-      }).catch((err) => console.log(err));
-    });
-    const __returned__ = { images, src };
-    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
-    return __returned__;
-  }
-});
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
-
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[--><h3>upload page</h3><!--[-->`);
-  __vite_ssr_import_3__.ssrRenderList($setup.images, (image) => {
-    _push(`<div><p>${__vite_ssr_import_3__.ssrInterpolate(image.name)}</p><p>${__vite_ssr_import_3__.ssrInterpolate(image.type)}</p><img${__vite_ssr_import_3__.ssrRenderAttr("src", $setup.src)} alt="" srcset=""></div>`);
-  });
-  _push(`<!--]--><!--]-->`);
-}
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
-
-const _sfc_setup = _sfc_main.setup;
+const _sfc_setup = _sfc_main.setup
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_4__.useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/upload.vue");
-  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
-};
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+  const ssrContext = __vite_ssr_import_1__.useSSRContext()
+  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("pages/upload.vue")
+  return _sfc_setup ? _sfc_setup(props, ctx) : undefined
+}
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_5__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app/pages/upload.vue"]]);
-;
+__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_2__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app/pages/upload.vue"]]);
 }
 
 
@@ -6728,7 +6726,7 @@ const __modules__ = {
   "/@id/plugin-vue:export-helper": $id_bbb863c1,
   "/pages/cart.vue?macro=true": $id_5a4a1498,
   "/components/nav-bar.vue": $id_12afc13c,
-  "/stores/cart.js": $id_76578355,
+  "/stores/useCart.ts": $id_1a94a962,
   "/node_modules/pinia/dist/pinia.mjs": $id_b1920624,
   "/components/nav-bar.vue?vue&type=style&index=0&scoped=true&lang.css": $id_711c814c,
   "/pages/cart.vue?vue&type=style&index=0&lang.css": $id_83d0027e,
@@ -6755,7 +6753,6 @@ const __modules__ = {
   "/pages/signup.vue?macro=true": $id_ae8d024a,
   "/pages/signup.vue?vue&type=style&index=0&lang.css": $id_f2a1f585,
   "/pages/upload.vue?macro=true": $id_a37c7b63,
-  "/node_modules/axios/index.js": $id_9a0dac16,
   "/pages/account.vue": $id_ce2c396d,
   "/pages/cart.vue": $id_9f2043ab,
   "/pages/index/index.vue": $id_a200782a,

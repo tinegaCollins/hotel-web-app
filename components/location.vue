@@ -24,17 +24,9 @@ function toggleSearch(){
     arrow.value.classList.toggle('up');
 }
 const getLocation = async (id:string)=>{
-    const data:object = {
-        id: id
-    }
-    const response = await fetch('http://localhost:8000/get-location', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
-    console.log(await response.json());
-    
-    
+    const response = await fetch(`http://localhost:8000/get-location/${id}`)
+    const locationData = await response.json();
+    locationSelected.value = locationData.location
 }
 let userID:string;
 onMounted(()=>{

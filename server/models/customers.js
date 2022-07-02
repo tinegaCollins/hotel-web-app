@@ -5,7 +5,10 @@ const schema = new mongoose.Schema({
     phone : String,
     password: String,
     location: String,
-    cart: [String]
+    cart: [{
+        itemID: String,
+        quantity: Number
+    }]
 })
 
 module.exports = mongoose.model('customer', schema);

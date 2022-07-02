@@ -48,13 +48,12 @@ exports.checkNumber = async (req,res)=>{
 }
 exports.getLocation = async (req, res)=>{
     try{
-        const user = await customers.findById(req.body.id);
+        const user = await customers.findById(req.params.id);
         const location = user.location
-        if(location != null){
-            res.send(location)
-        }else {
-            res.send(false)
+        const data = {
+            location : location
         }
+        res.send(data)
     }
     catch {
         res.send(false)
@@ -75,16 +74,26 @@ exports.loginById = async (req,res)=>{
 }
 
 exports.getCart = async (req, res)=>{
-    const user = await customers.findById(req.body.id)
+    const user = await customers.findById(req.params.id)
     if( user != null){
         const cart = user.cart;
-        const onlyId = cart.map((id)=>{
-            return id.itemID
-        })
-        res.send(onlyId)
+        res.send(cart)
     }
     else {
         res.send("not found")
+    }
+}
+exports.getCartNumber = async (req, res)=>{
+    try {
+        const user = await customers.findById(req.params.id);
+        const cart = user.cart;
+        const data = {
+            length : cart.length
+        }
+        res.send(data)
+    }
+    catch {
+        res.send(false)
     }
 }
 exports.removeFromCart = async(req,res)=>{
@@ -129,4 +138,11 @@ exports.checkOut = async (req,res)=>{
     catch {
         console.log("didnt work");
     }
+}
+
+exports.updateCart = async (req,res)=>{
+    const user = await customers.findById(req.body.id);
+    user.cart = req.body.newCart
+    user.save()
+    res.send(true)
 }

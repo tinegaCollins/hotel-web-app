@@ -2,6 +2,7 @@
     <main>
         <navBar/>
         <div class="login-wrapper">
+            <p ref="res" class="alert">{{messageResponse}}</p>
             <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
         <h1>log in</h1>
         <div class="form">
@@ -39,6 +40,8 @@ useHead({
 })
     const phone = ref<string>();
     const userResponse = ref<string>();
+    const messageResponse = ref<string>();
+    const res = ref();
     const checkPhone = async ()=>{
         const phoneToSend = {
             phone : phone.value
@@ -50,7 +53,12 @@ useHead({
         })
         const data = await response.json();
         if(data != true){
-            userResponse.value = "invalid phone number"
+            res.value.classList.add('drop');
+            messageResponse.value = "invalid phone number";
+            setTimeout(() => {
+                messageResponse.value = null;
+                res.value.classList.remove('drop')
+            }, 700);
         }
         else {
             userResponse.value = null;
@@ -80,16 +88,27 @@ useHead({
 
         const data = await response.json();
         if(data === false){
-            wrongPassword.value = "wrong password"
+            res.value.classList.add('drop');
+            messageResponse.value = "wrong password";
+            setTimeout(() => {
+                messageResponse.value = null;
+                res.value.classList.remove('drop')
+            }, 1500);
         }else {
             //redirect to other page
-            wrongPassword.value = "log in sucessful"
+            res.value.classList.add('drop');
+            messageResponse.value = "log in succesfull";
+            setTimeout(() => {
+                messageResponse.value = null;
+                res.value.classList.remove('drop')
+            }, 1500);
             userID.value = data._id
             if (ifKeepLogged.value == true){
                 localStorage.setItem('userID', userID.value)
             }else {
                 sessionStorage.setItem('userID', userID.value)
             }
+            //back to page it was beforee
             const route = useRouter();
             route.push('/');
         }

@@ -2,12 +2,11 @@
     <main>
         <navBar/>
         <div class="signup-wrapper">
-            <p ref="res" class="alert" v-if="messageResponse">{{messageResponse}}</p>
+            <p ref="res" class="alert">{{messageResponse}}</p>
             <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
         <h1>Sign Up</h1>
-        <p class="checkPasswordResponse">{{checkPasswordsResponse}}</p>
         <div class="form">
-            <input type="text" placeholder="phone number" v-model="phone" @mouseout="checkPhone">
+            <input type="text" placeholder="phone number" v-model="phone" @focusout="checkPhone">
             <input type="password" name=""  placeholder="password" v-model="password">
             <input type="password" name=""  placeholder="repeat password" v-model="passwordRepeat" @keyup="checkTwoPasswords" ref="input" >
             <!-- disabled on check  -->
@@ -38,21 +37,19 @@ useHead({
 const phone = ref<string>();
 const password = ref<string>();
 const passwordRepeat = ref<string>();
-const messageResponse = ref<string>(null);
-const checkPhoneResponse = ref<string>();
+const messageResponse = ref<string>();
 const isButtonActive = ref<boolean>(true);
 const res = ref();
 const checkPhone = ()=>{
     if(phone.value.length < 10){
-        messageResponse.value = "enter a valid phone number"
         res.value.classList.add('drop');
+        messageResponse.value = "enter a valid phone number";
         setTimeout(() => {
             messageResponse.value = null;
             res.value.classList.remove('drop')
-        }, 3000);
+        }, 2000);
     }
     else {
-        checkPasswordsResponse.value = null;
         const checkIfNumberUsed = async ()=>{
             const phoneToSend = {
                 phone: phone.value
@@ -64,7 +61,12 @@ const checkPhone = ()=>{
             })
             const data = await response.json();
             if(data == true){
-                checkPasswordsResponse.value = "This phone number is linked to an account"
+                res.value.classList.add('drop');
+                messageResponse.value = "phone number in use";
+                setTimeout(() => {
+                    messageResponse.value = null;
+                    res.value.classList.remove('drop')
+                }, 2000);
             }
             else {
                 dataToSend.phone = phone.value
@@ -76,12 +78,15 @@ const checkPhone = ()=>{
         checkIfNumberUsed()
     }
 }
-const checkPasswordsResponse = ref<string>();
 const checkTwoPasswords = ()=>{
     if(password.value != passwordRepeat.value){
-        checkPasswordsResponse.value = "passwords do not match";
+        res.value.classList.add('drop');
+        messageResponse.value = "passwords do not match";
+        setTimeout(() => {
+            messageResponse.value = null;
+            res.value.classList.remove('drop')
+        }, 700);
     }else {
-        checkPasswordsResponse.value = "";
         dataToSend.password = password.value;
          if(dataToSend.phone != null){
             isButtonActive.value = false;
@@ -93,7 +98,6 @@ const dataToSend = {
     phone: null,
     password: null
 }
-const userID = ref<string>();
 const signUp = async ()=>{
     const response = await fetch('http://localhost:8000/create-account', {
         method: 'POST',
@@ -108,10 +112,15 @@ const signUp = async ()=>{
 
      if(data != false){
         isButtonActive.value = true;
-        userID.value = data._id;
-        //send to pinia for state management
-        const route = useRouter();
-        route.push('/');
+        const userID = data._id;
+        res.value.classList.add('drop');
+        messageResponse.value = "sucessfully sign up"; 
+        sessionStorage.setItem("userID", userID)
+        console.log(sessionStorage.getItem('userID'));
+        setTimeout(() => {
+            const route = useRouter();
+            route.push('/');
+        }, 1500);
     }
 }
 </script>
@@ -125,15 +134,17 @@ const signUp = async ()=>{
     background-color: hsl(0, 0%, 50%);
 }
 .alert{
-    transform: translateY(300px);
-    background-color: var(--carolina-blue);
+    transform: translateY(-100px);
+    background-color: var(--orange-web);
     width: max-content;
     position: absolute;
     top: 0;
-    padding: 4px 7px;
     border-radius: 10px;
+    padding: 4px 7px;
+    transition: all 100ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 .drop {
     transform: translateY(100px);
+    border-radius: 10px;
 }
 </style>

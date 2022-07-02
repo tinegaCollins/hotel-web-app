@@ -13,6 +13,7 @@
             <a href="/signup" v-if="ifNotLoggedIn">Sign up</a>
             <a href="/account" v-if="ifLoggedIn">Your Account</a>
         </div>
+            <p>{{cartNumber }}</p>
         <div class="cart">
             <nuxt-link to="/cart"><img src="../assets/icons/cart-svgrepo-com.svg"></nuxt-link>
         </div>
@@ -20,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { useCartStore } from '~~/stores/cart';
-const cart = useCartStore();
+import { useCartStore } from '~~/stores/useCart';
+const main = useCartStore();
 
 const barsPath = "M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM64 256C64 238.3 78.33 224 96 224H480C497.7 224 512 238.3 512 256C512 273.7 497.7 288 480 288H96C78.33 288 64 273.7 64 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z";
 const xPath =  "M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z";
@@ -34,8 +35,8 @@ function slideShow() {
 let userID:string;
 const ifNotLoggedIn = ref<boolean>();
 const ifLoggedIn = ref<boolean>(false);
-const isUserDataAvailable = ref<boolean>();
-onMounted( async ()=>{
+const cartNumber = ref<string | number>(); 
+onMounted(()=>{
    userID = localStorage.getItem("userID");
    if(userID === null){
         userID = sessionStorage.getItem("userID")
@@ -45,24 +46,29 @@ onMounted( async ()=>{
    }else {
         ifNotLoggedIn.value = false;
         ifLoggedIn.value = true;
-        if (sessionStorage.getItem("ifdataAvailable") != "true"){
-            try{
-                const dataToSend = {
-                    userID : userID
-                }
-                const response = await fetch('http://localhost:8000/get-user-data',{
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dataToSend)
-                });
+        try{
+            const getCartNumber = async ()=>{
+                const response = await fetch(`http://localhost:8000/get-cart-number/${userID}`)
+                let data = await response.json();
+                cartNumber.value = data.length
+            }
+            getCartNumber()
+            }
+        catch {
+            console.log("catch")
+        }
+        try {
+            const getCart = async ()=>{
+                const response = await fetch(`http://localhost:8000/get-cart/${userID}`)
                 const data = await response.json();
-                sessionStorage.setItem('ifdataAvailable', 'true');
-                sessionStorage.setItem('location', data.location);
-                cart.$state.cart = data.cart;
+                for (let i = 0; i < data.length; i++) {
+                    main.addtoCart(data[i])
+                }
             }
-            catch {
-                console.log("catch")
-            }
+            getCart()
+        }
+        catch {
+            console.log('couldnt get da data')
         }
    }
 })
