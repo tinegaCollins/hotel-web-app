@@ -3318,9 +3318,12 @@ const useCartStore = __vite_ssr_import_0__.defineStore("cart1", {
   getters: {},
   actions: {
     addtoCart(item) {
-      const ifHas = this.cart.includes(item);
-      if (ifHas === false) {
+      const ifItemInCart = this.cart.some((element) => {
+        return element.itemID = item.id;
+      });
+      if (ifItemInCart === false) {
         this.cart.push(item);
+        console.log(this.cart);
       }
     },
     removeFromCart(item) {

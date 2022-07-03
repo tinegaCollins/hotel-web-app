@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const loginsControllers = require('./controllers/logins.js');
-const meals = require('./models/meals.js');
 const mealsControllers = require('./controllers/meals.js')
 const cors = require('cors');
-const multer = require('multer');
-const fs = require('fs');
 
 
 

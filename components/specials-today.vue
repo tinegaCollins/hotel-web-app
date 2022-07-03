@@ -38,7 +38,7 @@ onMounted(async ()=>{
 const stateChange = ()=>{
     main.$subscribe( async (mutation,state)=>{
          const dataToSend = {
-            id : '62bb610f1bb16a0f875f7781',
+            id : "62bb610f1bb16a0f875f7781",
             newCart: cart.value
          }
          const response = await fetch('http://localhost:8000/update-cart',{

@@ -8,10 +8,14 @@ export const useCartStore = defineStore('cart1',{
         
     },
     actions: {
-        addtoCart(item:object){
-            const ifHas:boolean = this.cart.includes(item);
-            if(ifHas === false){
+        addtoCart(item){
+            const ifItemInCart = this.cart.some((element)=>{
+                return element.itemID = item.id;
+            })
+            if(ifItemInCart === false){
                 this.cart.push(item)
+                console.log(this.cart);
+                
             }
         },
         removeFromCart(item:string){
