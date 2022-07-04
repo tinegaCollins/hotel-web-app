@@ -26,9 +26,10 @@ mongoose.connect(
     app.get('/specials', mealsControllers.getSpecials);
     app.get('/filter/:type', mealsControllers.filterByType);
     app.get('/get-cart/:id', loginsControllers.getCart);
-    app.post('/update-cart', loginsControllers.updateCart)
-    app.get('/get-cart-number/:id', loginsControllers.getCartNumber)
-    app.get('/get-three-random', mealsControllers.getThreeRandom)
+    app.post('/update-cart', loginsControllers.updateCart);
+    app.get('/get-cart-number/:id', loginsControllers.getCartNumber);
+    app.get('/get-three-random', mealsControllers.getThreeRandom);
+    app.get('/get-one/:id', mealsControllers.findOne);
     app.listen(8000, ()=>{
         console.log("server on port 8000");
     })

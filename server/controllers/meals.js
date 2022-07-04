@@ -12,7 +12,7 @@ exports.getSpecials = async (req,res)=>{
 }
 
 exports.findOne = async (req,res)=>{
-    const one = await meals.findById( req.body.id)
+    const one = await meals.findById(req.params.id)
     if(one != null){
         res.send(one)
     }

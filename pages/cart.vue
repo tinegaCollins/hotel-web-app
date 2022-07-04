@@ -4,16 +4,16 @@
     <div class="top-cart-bar">
         <h2>
             cart 
-            (<strong>{{ NumberOfItemsInCart }}</strong>)
+            (<strong>{{ cartNumber}}</strong>)
         </h2>
         <p>checkout KSH {{totalToPay}}</p>
     </div>
     <div class="cart">
-        <div class="single-item">
-            <img src="../../../assets/temp/Mandazis.jpg" alt="" srcset="">
+        <div class="single-item" v-for="item in cartItemsDisplayed" :key="item._id">
+            <img :src="item.tempImage" alt="" srcset="">
             <div class="details">
                 <h4>KSH 40</h4>
-                <p>mandazis</p>
+                <p>{{item.name}}</p>
             </div>
             <div class="indicators">
                 <div class="delete">
@@ -22,25 +22,7 @@
                 </div>
                 <div class="quantity">
                     <p class="add">+</p>
-                    <h5>1</h5>
-                    <p class="minus">-</p>
-                </div>
-            </div>
-        </div>
-        <div class="single-item">
-            <img src="../../../assets/temp/chicken.jpeg" alt="" srcset="">
-            <div class="details">
-                <h4> KSH {{ foodItem.price}}</h4>
-                <p>{{ foodItem.name}}</p>
-            </div>
-            <div class="indicators">
-                <div class="delete">
-                    <img src="../../../assets/icons/trash-can-svgrepo-com.svg" alt="" srcset="">
-                    <p>remove</p>
-                </div>
-                <div class="quantity">
-                    <p class="add">+</p>
-                    <h5>1</h5>
+                    <h5>5</h5>
                     <p class="minus">-</p>
                 </div>
             </div>
@@ -52,18 +34,35 @@
 
 
 <script setup lang="ts">
-
+import { useCartStore } from '../stores/useCart'
+const cart = useCartStore();
+const cartNumber = ref(cart.cart.length);
 useHead({
   title: 'cart',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  charset: 'utf-8',
-  meta: [
-    { name: 'description', content: 'My amazing site.' }
-  ],
   link: [
     { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
   ]
 })
+const cartItemsDisplayed = ref([]);
+onMounted(()=>{
+    let cartItems = cart.cart;
+    cartItems.forEach( async (item)=>{
+        const response = await fetch(`http://localhost:8000/get-one/${item.itemID}`)
+        let data = await response.json()
+        cartItemsDisplayed.value.push(data);
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -6,7 +6,7 @@
             <a href="/"><img src="../assets/icons/undraw_breakfast_psiw.svg" alt="icon" srcset=""></a>
         </h3>
         <div class="links" ref="links">
-            <a href="/menu">menu</a>
+            <a href="/menu/main-meals">menu</a>
             <a href="/menu">gallery</a>
             <a href="/menu">contact us</a>
             <a href="/login" v-if="ifNotLoggedIn">login</a>
