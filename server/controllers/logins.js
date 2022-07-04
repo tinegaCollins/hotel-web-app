@@ -141,8 +141,13 @@ exports.checkOut = async (req,res)=>{
 }
 
 exports.updateCart = async (req,res)=>{
-    const user = await customers.findById(req.body.id);
-    user.cart = req.body.newCart
-    user.save()
-    res.send(true)
+    try{
+        const user = await customers.findOne({_id: req.body.id});
+        user.cart = req.body.newCart;
+        user.save()
+        res.send(true)
+    }
+    catch {
+        res.send(false)
+    }
 }

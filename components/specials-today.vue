@@ -1,7 +1,6 @@
 <template>
-    <div class="specials-wrapper">
+    <div class="specials-wrapper" v-if="data">
         <h2> specials today</h2>
-        <p>{{cart}}</p>
         <div class="specials-cards">
             <div class="single-card" v-for="item in data" :key="item._id">
                 <img :src="item.tempImage" alt="food" srcset="">
@@ -19,10 +18,11 @@
 
 <script setup lang="ts">
 import { useCartStore } from "../stores/useCart";
-import { storeToRefs } from "pinia";
+import { useLoginStore } from "~~/stores/useLoginStore";
+const logins = useLoginStore();
 const main = useCartStore();
-const { cart } = storeToRefs(main);
 const data = ref();
+let userID:string;
 onMounted(async ()=>{
    try{
      const resonse = await fetch('http://localhost:8000/specials',{
@@ -32,23 +32,22 @@ onMounted(async ()=>{
    }
    catch {
     console.log("couldnt get the data");
-    
    }
+   userID = logins.getID;
 })
 const stateChange = ()=>{
     main.$subscribe( async (mutation,state)=>{
          const dataToSend = {
-            id : "62bb610f1bb16a0f875f7781",
-            newCart: cart.value
+            id: userID,
+            newCart: main.cart
          }
-         const response = await fetch('http://localhost:8000/update-cart',{
+         const response = await fetch(`http://localhost:8000/update-cart`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataToSend)
          })
          const ress = await response.json();
          console.log(ress);
-         
     })
 }
 const addToCart = (id:string) => {
@@ -105,13 +104,13 @@ const remove = (id:string) => {
     right: 10px;
     top: 10px;
     font-size: .7rem;
-    background-color: var(--alice-blue);
     padding: 7px;
-    border-radius: 10px;
-    transition: background-color 100ms ease-out;
+    border: 1px solid var(--side-orange);
+    transition: all 300ms ease-out;
 }
 .single-card .add-to-cart:hover {
-    background-color: var(--carolina-blue);
+    background-color: var(--side-orange);
+    color: #fff;
     cursor: pointer;
 }
 .single-card img {

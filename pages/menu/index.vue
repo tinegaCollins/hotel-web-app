@@ -4,10 +4,10 @@
         <img @click="toggleMenu" src="../../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
         <p></p>
         <div class="navigations" ref="nav">
-          <NuxtLink to="/menu/"  @click="toggleMenu">Main Meals</NuxtLink>
-          <NuxtLink to="/menu/bevarages"  @click="toggleMenu">Bevarages</NuxtLink>
-          <NuxtLink to="/menu/snacks"  @click="toggleMenu">snacks</NuxtLink>
-          <NuxtLink to="/menu/Salads"  @click="toggleMenu">Salads</NuxtLink>
+          <NuxtLink to="/menu/main-meals"  @click="toggleMenu">Main Meals</NuxtLink>
+          <NuxtLink to="/menu/beverage"  @click="toggleMenu">Bevarages</NuxtLink>
+          <NuxtLink to="/menu/snack"  @click="toggleMenu">snacks</NuxtLink>
+          <NuxtLink to="/menu/salad"  @click="toggleMenu">Salads</NuxtLink>
         </div>
         <NuxtPage></NuxtPage>
     </div>

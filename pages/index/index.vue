@@ -39,9 +39,9 @@ useHead({
 
 <style>
 .all-wrapper {
-  display: grid;
-  grid-template-columns: auto auto auto;
   position: relative;
+  width: 100%;
+  display: flex;
 }
 .left {
   position: sticky;
@@ -66,7 +66,7 @@ useHead({
   left: 0;
   width: 200px;
   height: calc(100vh - 80px );
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.8);
   z-index: 1;
 }
 .left::before{
@@ -109,10 +109,6 @@ useHead({
   width: 100%;
 }
 @media screen and (min-width: 1024px) {
-  .all-wrapper{
-    padding: 0 0px 0 45px;
-    /* left: 30px; */
-  }
   .left , .right{
      display: block;
   }

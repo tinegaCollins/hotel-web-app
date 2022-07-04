@@ -2,6 +2,7 @@
 .all-meals {
     padding: 15px;
     font-family: var(--title-font);
+    position: relative;
 }
 .all-meals .content-wrapper {
     margin: 8px 0;
@@ -32,13 +33,23 @@
     column-gap: 20px;
     font-size: 1rem;
 }
-.all-meals button {
-    padding: 10px 15px;
-    background-color: var(--main-orange);
-    outline: none;
-    border: none;
-    border-radius: 30px;
-}
 .all-meals > p {
     color:var(--carolina-blue);
+}
+.content-wrapper {
+    position: relative;
+}
+.all-meals .add-to-cart {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: .7rem;
+    padding: 7px;
+    border: 1px solid var(--side-orange);
+    transition: all 300ms ease-out;
+}
+.all-meals .add-to-cart:hover {
+    background-color: var(--side-orange);
+    color: #fff;
+    cursor: pointer;
 }

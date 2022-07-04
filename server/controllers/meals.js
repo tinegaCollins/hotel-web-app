@@ -40,6 +40,19 @@ exports.addFood = async (req,res)=>{
 }
 
 exports.filterByType = async (req, res)=>{
-    const filter = await meals.find({type: req.params.type});
-    res.send(filter)
+    try {
+        const filter = await meals.find({type: req.params.type});
+        res.send(filter)
+    }
+    catch {
+        res.send("could not find the requested items")
+    }
+}
+
+exports.getThreeRandom = async (req,res)=>{
+    const all = await meals.find({})
+    const random = Math.floor(Math.random() * all.length)
+    const random2 = Math.floor(Math.random() * all.length)
+    const random3 = Math.floor(Math.random() * all.length)
+    res.send([all[random], all[random2], all[random3]])
 }

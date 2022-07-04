@@ -1,10 +1,10 @@
 <template>
-    <div class="other-meals">
+    <div class="other-meals" v-if="items">
         <h2>chef specials</h2>
         <main>
-            <div class="chefs-special">
-                <h3>chef Lorem's chicken tariaki</h3>
-                <img src="../assets/temp/food1.png" alt="" srcset="">
+            <div class="chefs-special" v-for="item in items" :key="item._id">
+                <h3>chef Lorem's {{ item.name }}</h3>
+                <img :src="item.tempImage" alt="" srcset="">
                 <ul>
                     <h3>ingredients</h3>
                     <li>chicken</li>
@@ -12,35 +12,55 @@
                     <li>briani</li>
                     <img id="chefs-pic" src="../assets/temp/me.jpeg" alt="" srcset="">
                 </ul>
-                <div class="add-to-cart"><p>add to cart</p></div>
-            </div>
-            <div class="chefs-special">
-                <h3>chef Lorem's peperoni pizza </h3>
-                <img src="../assets/temp/pizza.jpeg" alt="" srcset="">
-                <ul>
-                    <h3>ingredients</h3>
-                    <li>chicken</li>
-                    <li>tomatoes</li>
-                    <li>briani</li>
-                    <img id="chefs-pic" src="../assets/temp/me.jpeg" alt="" srcset="">
-                </ul>
-                <div class="add-to-cart"><p>add to cart</p></div>
-            </div>
-            <div class="chefs-special">
-                <h3>chef Lorem's chin chin</h3>
-                <img src="../assets/temp/chin-chin.jpeg" alt="" srcset="">
-                <ul>
-                    <h3>ingredients</h3>
-                    <li>chicken</li>
-                    <li>tomatoes</li>
-                    <li>briani</li>
-                    <img id="chefs-pic" src="../assets/temp/me.jpeg" alt="" srcset="">
-                </ul>
-                <div class="add-to-cart"><p>add to cart</p></div>
+                <div class="add-to-cart" @click="addToCart(item._id)"><p>add to cart</p></div>
             </div>
         </main>
     </div>
 </template>
+
+
+<script setup lang="ts">
+import { useCartStore } from '~~/stores/useCart';
+import { useLoginStore } from "~~/stores/useLoginStore";
+const logins = useLoginStore();
+const cart = useCartStore()
+
+let userID:string;
+const items = ref();
+onMounted( async ()=>{
+    userID = logins.getID;
+    const response = await fetch('http://localhost:8000/get-three-random');
+    const data = await response.json();
+    items.value = data;
+})
+
+
+const stateChange = ()=>{
+    cart.$subscribe( async (mutation,state)=>{
+         const dataToSend = {
+            id: logins.getID,
+            newCart: cart.cart
+         }
+         const response = await fetch(`http://localhost:8000/update-cart`,{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataToSend)
+         })
+         const ress = await response.json();
+         console.log(ress);
+    })
+}
+
+const addToCart = async (id:string)=>{
+    const newItem = {
+        itemID : id,
+        quantity: 0
+    }
+    cart.addtoCart(newItem);
+    stateChange()
+}
+</script>
+
 
 <style scoped>
 .other-meals {
@@ -69,11 +89,14 @@
     position: relative;
 }
 .chefs-special .add-to-cart {
-    padding: 7px;
-    background-color: var(--main-orange);
-    border-radius: 7px;
+    font-size: .7rem;
+    padding: 10px;
+    border: 1px solid var(--side-orange);
+    transition: all 300ms ease-out;
 }
 .chefs-special .add-to-cart:hover {
+    background-color: var(--side-orange);
+    color: #fff;
     cursor: pointer;
 }
 @media screen and  (min-width: 520px){

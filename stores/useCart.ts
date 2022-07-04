@@ -5,17 +5,15 @@ export const useCartStore = defineStore('cart1',{
         cart: []
     }),
     getters: {
-        
+        getCartNumber: (state)=> state.cart.length
     },
     actions: {
         addtoCart(item){
-            const ifItemInCart = this.cart.some((element)=>{
-                return element.itemID = item.id;
+            const newElement = this.cart.some((element:any)=>{
+                return element.itemID == item.itemID
             })
-            if(ifItemInCart === false){
+            if(newElement === false){
                 this.cart.push(item)
-                console.log(this.cart);
-                
             }
         },
         removeFromCart(item:string){

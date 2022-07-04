@@ -11,10 +11,9 @@
             <a href="/menu">contact us</a>
             <a href="/login" v-if="ifNotLoggedIn">login</a>
             <a href="/signup" v-if="ifNotLoggedIn">Sign up</a>
-            <a href="/account" v-if="ifLoggedIn">Your Account</a>
+            <a href="/account" v-else>Your Account</a>
         </div>
-            <p>{{cartNumber }}</p>
-        <div class="cart">
+        <div ref="cartClass" class="cart" :data-count="cartNumber">
             <nuxt-link to="/cart"><img src="../assets/icons/cart-svgrepo-com.svg"></nuxt-link>
         </div>
     </nav>
@@ -22,7 +21,9 @@
 
 <script setup lang="ts">
 import { useCartStore } from '~~/stores/useCart';
+import { useLoginStore } from '~~/stores/useLoginStore';
 const main = useCartStore();
+const logins = useLoginStore();
 
 const barsPath = "M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM64 256C64 238.3 78.33 224 96 224H480C497.7 224 512 238.3 512 256C512 273.7 497.7 288 480 288H96C78.33 288 64 273.7 64 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z";
 const xPath =  "M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z";
@@ -33,30 +34,16 @@ function slideShow() {
     path.value = path.value === barsPath ? xPath : barsPath;
 }
 let userID:string;
-const ifNotLoggedIn = ref<boolean>();
-const ifLoggedIn = ref<boolean>(false);
-const cartNumber = ref<string | number>(); 
+const ifNotLoggedIn = ref<boolean>(false);
 onMounted(()=>{
    userID = localStorage.getItem("userID");
    if(userID === null){
         userID = sessionStorage.getItem("userID")
    }
    if(userID === null){
-        ifNotLoggedIn.value = true;
+        ifNotLoggedIn.value = true;   
    }else {
-        ifNotLoggedIn.value = false;
-        ifLoggedIn.value = true;
-        try{
-            const getCartNumber = async ()=>{
-                const response = await fetch(`http://localhost:8000/get-cart-number/${userID}`)
-                let data = await response.json();
-                cartNumber.value = data.length
-            }
-            getCartNumber()
-            }
-        catch {
-            console.log("catch")
-        }
+        logins.setId(userID)
         try {
             const getCart = async ()=>{
                 const response = await fetch(`http://localhost:8000/get-cart/${userID}`)
@@ -66,14 +53,28 @@ onMounted(()=>{
                 }
             }
             getCart()
+            .then(()=>{
+                cartNumber.value = main.cart.length;
+            })
         }
         catch {
             console.log('couldnt get da data')
         }
+        
    }
 })
-
-
+const cartNumber = ref<number>();
+const cartClass = ref();
+main.$subscribe ((state)=>{
+    let cartLength:number = main.cart.length
+    if(cartLength > 0){
+        cartClass.value.classList.add("cart1");
+        cartNumber.value = cartLength;
+    }
+    else {
+        cartClass.value.classList.remove("cart1")
+    }
+})
 </script>
 <style scoped>
     nav svg {
@@ -82,13 +83,16 @@ onMounted(()=>{
     nav {
         display: flex;
         align-items: center;
-        position: relative;
-        background-color: #ffff;
+        position: sticky;
+        z-index: 1;
+        top: 0;
+        background-color: #fff;
         height: 60px;
         padding: 0 20px;
         column-gap: 20px;
         font-family: var(--title-font);
-        text-align: left !important;
+        text-align: left;
+        box-shadow:  5px 5px 5px 3px rgba(0, 0, 0, .2);
     }
     .cart {
         position: absolute;
@@ -99,29 +103,22 @@ onMounted(()=>{
         width: 30px;
         transform: rotateY(180deg);
     }
-    .cart::before {
-        content: '1';
+    .cart1::before {
+        content: attr(data-count);
         position: absolute;
         left: 5px;
         top: 7px;
-        height: 12px;
-        color: #fff;
-        width: 12px;
+        height: 15px;
+        color: #333;
+        width: 15px;
         border-radius: 50%;
         background-color: var(--main-orange);
-        font-size: .8rem;
+        z-index: 1;
+        font-size: .7rem;
         display: grid;
         place-items: center;
     }
-    nav::before{
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-color: rgba(0, 0, 0, .3);
-        z-index: -1;
-        transform: translateY(1%);
-        filter: blur(7px) brightness(1.5);
-    }
+
     nav h3 {
         display: flex;
         align-items: center;
@@ -201,8 +198,5 @@ onMounted(()=>{
         nav .links {
             left: 55%;
         }
-    }
-    @media screen and (min-width: 1054px) {
-    
-    }   
+    }  
 </style>
