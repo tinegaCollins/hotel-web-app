@@ -14,7 +14,7 @@
             <a href="/account" v-else>Your Account</a>
         </div>
         <div ref="cartClass" class="cart" :data-count="cartNumber">
-            <a href="/cart"><img src="../assets/icons/cart-svgrepo-com.svg"></a>
+            <Nuxt-link  to="/cart"><img src="../assets/icons/cart-svgrepo-com.svg"></Nuxt-link>
         </div>
     </nav>
 </template>

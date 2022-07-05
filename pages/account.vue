@@ -54,6 +54,7 @@ const logOut = ()=>{
     const router = useRouter();
     router.push('/');
 }
+
 </script>
 
 <style>
