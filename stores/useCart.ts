@@ -5,7 +5,7 @@ export const useCartStore = defineStore('cart1',{
         cart: []
     }),
     getters: {
-        getCartNumber: (state)=> state.cart.length
+        getCartNumber: (state)=> state.cart.length,
     },
     actions: {
         addtoCart(item){

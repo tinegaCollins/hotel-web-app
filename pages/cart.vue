@@ -4,7 +4,7 @@
     <div class="top-cart-bar">
         <h2>
             cart 
-            (<strong>{{ cartNumber}}</strong>)
+            (<strong>{{ cartNumber }}</strong>)
         </h2>
         <p>checkout KSH {{totalToPay}}</p>
     </div>
@@ -43,27 +43,10 @@ useHead({
     { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
   ]
 })
-const cartItemsDisplayed = ref([]);
+const cartItemsDisplayed =[];
+
 onMounted(()=>{
-    let cartItems = cart.cart;
-    cartItems.forEach( async (item)=>{
-        const response = await fetch(`http://localhost:8000/get-one/${item.itemID}`)
-        let data = await response.json()
-        cartItemsDisplayed.value.push(data);
-    })
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const foodItem = ref({

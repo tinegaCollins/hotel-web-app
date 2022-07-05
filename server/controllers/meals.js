@@ -56,3 +56,9 @@ exports.getThreeRandom = async (req,res)=>{
     const random3 = Math.floor(Math.random() * all.length)
     res.send([all[random], all[random2], all[random3]])
 }
+
+exports.getSpecificIds = async (req,res)=>{
+    const ids = req.body.ids;
+    const tosend = await meals.find({_id: {$in: ids}})
+    res.send(tosend)
+}
