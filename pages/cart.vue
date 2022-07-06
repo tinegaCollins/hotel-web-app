@@ -4,29 +4,32 @@
     <div class="top-cart-bar">
         <h2>
             cart 
-            (<strong>{{ cartNumber }}</strong>)
+            (<strong>{{cartNumber}}</strong>)
         </h2>
-        <p>checkout KSH {{totalToPay}}</p>
+        <p>checkout KSH 77</p>
     </div>
-    <div class="cart">
-        <div class="single-item" v-for="item in cartItemsDisplayed" :key="item._id">
-            <img :src="item.tempImage" alt="" srcset="">
+    <div class="cart" v-if="cartItemsDisplay">
+        <div class="single-item" v-for="item in cartItemsDisplay" :key="item._id">
+            <img :src="item.image" alt="" srcset="">
             <div class="details">
-                <h4>KSH 40</h4>
+                <h4>KSH {{item.price}}</h4>
                 <p>{{item.name}}</p>
             </div>
             <div class="indicators">
                 <div class="delete">
-                    <img src="../../../assets/icons/trash-can-svgrepo-com.svg" alt="" srcset="">
+                    <img src="../../../assets/icons/dustbin-bin-trush-svgrepo-com.svg" alt="" srcset="">
                     <p>remove</p>
                 </div>
                 <div class="quantity">
                     <p class="add">+</p>
-                    <h5>5</h5>
+                    <h5>{{item.quantity}}</h5>
                     <p class="minus">-</p>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="empty-cart" v-if="emptyCart">
+        <p>empty</p>
     </div>
     </main>
 </template>
@@ -43,19 +46,25 @@ useHead({
     { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
   ]
 })
-const cartItemsDisplayed =[];
 
-onMounted(()=>{
+const cartItemsDisplay = ref();
+const emptyCart = ref<boolean>(false);
+onMounted( async ()=>{
+    const messageToSend = {
+        ids : cart.cart
+    }
+    const response = await fetch('http://localhost:8000/get-specific-ids',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(messageToSend)
+    })
+    const data = await response.json();
+    if(data == []){
+        emptyCart.value = true;
+    }else {
+        cartItemsDisplay.value = data;
+    }
 })
-
-
-const foodItem = ref({
-    name: "fried chicken",
-    price: 700,
-})
-const NumberOfItemsInCart = ref<number>(4);
-const totalToPay = ref<number>(77);
-
 </script>
 
 

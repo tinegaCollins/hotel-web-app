@@ -6,7 +6,7 @@
             <a href="/"><img src="../assets/icons/undraw_breakfast_psiw.svg" alt="icon" srcset=""></a>
         </h3>
         <div class="links" ref="links">
-            <a href="/menu/main-meals">menu</a>
+            <a href="/menu/main-meal">menu</a>
             <a href="/menu">gallery</a>
             <a href="/menu">contact us</a>
             <a href="/login" v-if="ifNotLoggedIn">login</a>
@@ -54,7 +54,14 @@ onMounted(()=>{
             }
             getCart()
             .then(()=>{
-                cartNumber.value = main.cart.length;
+                let cartLength = main.cart.length;
+                if(cartLength > 0){
+                    cartClass.value.classList.add("cart1");
+                    cartNumber.value = cartLength;
+                }
+                else {
+                    cartClass.value.classList.remove("cart1")
+                }
             })
         }
         catch {

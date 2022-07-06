@@ -4,13 +4,12 @@
         <main>
             <div class="chefs-special" v-for="item in items" :key="item._id">
                 <h3>chef Lorem's {{ item.name }}</h3>
-                <img :src="item.tempImage" alt="" srcset="">
+                <img :src="item.image" alt="" srcset="">
                 <ul>
                     <h3>ingredients</h3>
                     <li>chicken</li>
                     <li>tomatoes</li>
                     <li>briani</li>
-                    <img id="chefs-pic" src="../assets/temp/me.jpeg" alt="" srcset="">
                 </ul>
                 <div class="add-to-cart" @click="addToCart(item._id)"><p>add to cart</p></div>
             </div>
@@ -52,11 +51,7 @@ const stateChange = ()=>{
 }
 
 const addToCart = async (id:string)=>{
-    const newItem = {
-        itemID : id,
-        quantity: 0
-    }
-    cart.addtoCart(newItem);
+    cart.addtoCart(id);
     stateChange()
 }
 </script>

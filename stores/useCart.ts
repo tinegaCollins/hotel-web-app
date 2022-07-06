@@ -8,11 +8,9 @@ export const useCartStore = defineStore('cart1',{
         getCartNumber: (state)=> state.cart.length,
     },
     actions: {
-        addtoCart(item){
-            const newElement = this.cart.some((element:any)=>{
-                return element.itemID == item.itemID
-            })
-            if(newElement === false){
+        addtoCart(item:string){
+            const ifItemInCart:number = this.cart.indexOf(item);
+            if(ifItemInCart === -1){
                 this.cart.push(item)
             }
         },

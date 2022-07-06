@@ -4,7 +4,7 @@
         <img @click="toggleMenu" src="../../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
         <p></p>
         <div class="navigations" ref="nav">
-          <NuxtLink to="/menu/main-meals"  @click="toggleMenu">Main Meals</NuxtLink>
+          <NuxtLink to="/menu/main-meal"  @click="toggleMenu">Main Meals</NuxtLink>
           <NuxtLink to="/menu/beverage"  @click="toggleMenu">Bevarages</NuxtLink>
           <NuxtLink to="/menu/snack"  @click="toggleMenu">snacks</NuxtLink>
           <NuxtLink to="/menu/salad"  @click="toggleMenu">Salads</NuxtLink>

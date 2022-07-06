@@ -3,10 +3,10 @@
         <h2> specials today</h2>
         <div class="specials-cards">
             <div class="single-card" v-for="item in data" :key="item._id">
-                <img :src="item.tempImage" alt="food" srcset="">
+                <img :src="item.image" alt="food" srcset="">
                 <div class="details">
                     <h3>{{ item.name}}</h3>
-                    <p @click="remove(item._id)">By Chef Ali</p>
+                    <p>By Chef Ali</p>
                     <p> {{item.price}} ksh + delivery fee</p>
                 </div>
                 <div class="add-to-cart" @click="addToCart(item._id)"><p>add to cart</p></div>
@@ -51,15 +51,8 @@ const stateChange = ()=>{
     })
 }
 const addToCart = (id:string) => {
-    const itemToAdd = {
-        itemID: id,
-        quantity: 0
-    }
-    main.addtoCart(itemToAdd);
+    main.addtoCart(id);
     stateChange()
-}
-const remove = (id:string) => {
-    main.removeFromCart(id)
 }
 </script>
 

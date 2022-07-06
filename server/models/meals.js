@@ -2,16 +2,11 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
     name: String,
-    image: {
-        data: Buffer,
-        contentType: String
-    },
-    tempImage: String,
+    image: String,
     type: String,
-    orders: Number,
-    availability: Boolean,
     price: Number,
-    special: Boolean
+    special: Boolean,
+    quantity: Number
 })
 
 module.exports = mongoose.model('food', schema);

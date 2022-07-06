@@ -35,7 +35,7 @@ useHead({
 
 
 const phone = ref<string>();
-const password = ref<string>();
+const password = ref<string | number>();
 const passwordRepeat = ref<string>();
 const messageResponse = ref<string>();
 const isButtonActive = ref<boolean>(true);

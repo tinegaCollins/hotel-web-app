@@ -1,7 +1,7 @@
 <template>
     <div class="all-meals">
         <div class="content-wrapper" v-for="item in data" :key="item._id">
-            <img :src="item.tempImage" alt="" srcset="">
+            <img :src="item.image" alt="" srcset="">
             <div class="content">
                 <p>{{ item.name }}</p>
                 <p>ksh {{item.price}}</p>
@@ -53,11 +53,7 @@ const stateChange = ()=> {
     })
 }
 const addToCart =async (id:string) => {
-    const itemToAdd = {
-        itemID : id,
-        quantity: 0
-    }
-    cart.addtoCart(itemToAdd);
+    cart.addtoCart(id);
     stateChange()
 }
 </script>

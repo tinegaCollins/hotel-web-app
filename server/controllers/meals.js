@@ -26,10 +26,10 @@ exports.addFood = async (req,res)=>{
     try{
         const newMeal = new meals({
             name: req.body.name,
-            tempImage: req.body.tempImage,
+            image: req.body.image,
             type: req.body.type,
-            orders: 0,
-            availability: req.body.availability
+            price: req.body.price,
+            special: req.body.special
         })
         await newMeal.save();
         res.send(true);
