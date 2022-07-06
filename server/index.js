@@ -31,6 +31,7 @@ mongoose.connect(
     app.get('/get-three-random', mealsControllers.getThreeRandom);
     app.get('/get-one/:id', mealsControllers.findOne);
     app.post('/get-specific-ids', mealsControllers.getSpecificIds);
+    app.get('/get-price/:id', mealsControllers.getPrice)
     app.listen(8000, ()=>{
         console.log("server on port 8000");
     })

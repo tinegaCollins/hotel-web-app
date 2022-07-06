@@ -6,7 +6,7 @@
             cart 
             (<strong>{{cartNumber}}</strong>)
         </h2>
-        <p>checkout KSH 77</p>
+        <p @click="getOrder">checkout KSH {{checkout}}</p>
     </div>
     <div class="cart" v-if="cartItemsDisplay">
         <div class="single-item" v-for="item in cartItemsDisplay" :key="item._id">
@@ -16,14 +16,14 @@
                 <p>{{item.name}}</p>
             </div>
             <div class="indicators">
-                <div class="delete">
+                <div class="delete" @click="removeFromCart(item._id)">
                     <img src="../../../assets/icons/dustbin-bin-trush-svgrepo-com.svg" alt="" srcset="">
                     <p>remove</p>
                 </div>
                 <div class="quantity">
-                    <p class="add">+</p>
+                    <p class="add" @click="changeQuantity(item._id,true)">+</p>
                     <h5>{{item.quantity}}</h5>
-                    <p class="minus">-</p>
+                    <p class="minus" @click="changeQuantity(item._id,false)">-</p>
                 </div>
             </div>
         </div>
@@ -37,7 +37,9 @@
 
 
 <script setup lang="ts">
-import { useCartStore } from '../stores/useCart'
+import { useCartStore } from '~~/stores/useCart';
+import { useLoginStore } from '~~/stores/useLoginStore';
+const logins = useLoginStore()
 const cart = useCartStore();
 const cartNumber = ref(cart.cart.length);
 useHead({
@@ -63,8 +65,82 @@ onMounted( async ()=>{
         emptyCart.value = true;
     }else {
         cartItemsDisplay.value = data;
+        balanceToPay()
     }
 })
+const changeQuantity = async (id:string,b:boolean)=>{
+    let elementToChange = cartItemsDisplay.value.find((element)=>{
+        return element._id === id
+    })
+    const response = await fetch(`http://localhost:8000/get-price/${id}`)
+    const price = await response.json()
+    if(b === true){
+        elementToChange.quantity ++
+        elementToChange.price = elementToChange.price + price.price
+    }
+    else if( b === false){
+        if( elementToChange.quantity > 1){
+            elementToChange.quantity -- 
+            elementToChange.price = elementToChange.price - price.price
+        }
+    }
+    balanceToPay()
+}
+
+const getPrice = async (id:string)=>{
+    const response = await fetch(`http://localhost:8000/get-price/${id}`)
+    const price = await response.json()
+    return price
+}
+const checkout = ref();
+const balanceToPay = ()=>{
+    const totalPaid:number = cartItemsDisplay.value.reduce((accumulator:number,element)=>{
+        let total = accumulator + element.price
+        return total
+    },0)
+    checkout.value = totalPaid;
+}
+
+const stateChange = ()=>{
+    cart.$subscribe( async ()=>{
+         const dataToSend = {
+            id: logins.getID,
+            newCart: cart.cart
+         }
+         const response = await fetch(`http://localhost:8000/update-cart`,{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataToSend)
+         })
+         const ress = await response.json();
+         console.log(ress);
+    })
+}
+
+
+const removeFromCart = (id:string)=>{
+    const itemToRemove = cartItemsDisplay.value.find((element)=>{
+        return element._id == id
+    })
+    let index = cartItemsDisplay.value.indexOf(itemToRemove);
+    cartItemsDisplay.value.splice(index,1)
+    cart.removeFromCart(id);
+    stateChange()
+    balanceToPay()
+}
+
+const getOrder = ()=>{
+    const order = cartItemsDisplay.value.map((element)=>{
+        return {
+            item: element._id,
+            price: element.price,
+            quantity: element.quantity
+        }
+    })
+    cart.updateOrder(order);
+    const router = useRouter();
+    router.push('/cart/checkout')
+}
 </script>
 
 

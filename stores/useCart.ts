@@ -2,7 +2,8 @@ import { defineStore } from 'pinia';
 
 export const useCartStore = defineStore('cart1',{
     state: ()=> ({
-        cart: []
+        cart: [],
+        order: []
     }),
     getters: {
         getCartNumber: (state)=> state.cart.length,
@@ -22,6 +23,9 @@ export const useCartStore = defineStore('cart1',{
         },
         clearCart(){
             this.cart = []
+        },
+        updateOrder(order:Array<object>){
+            this.order = order
         }
     }
 });

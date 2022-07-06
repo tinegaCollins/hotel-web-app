@@ -62,3 +62,16 @@ exports.getSpecificIds = async (req,res)=>{
     const tosend = await meals.find({_id: {$in: ids}})
     res.send(tosend)
 }
+
+exports.getPrice = async(req,res)=>{
+    try{
+        const item = await meals.findById(req.params.id);
+        const priceToSend = {
+            price : item.price
+        }
+        res.send(priceToSend)
+    }
+    catch {
+        res.send('error')
+    }
+}
