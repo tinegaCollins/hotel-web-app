@@ -3490,9 +3490,13 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         balanceToPay();
       }
       cartNumber.value = cart.cart.length;
-      const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`);
-      const phoneData = await phoneResponse.json();
-      phone = phoneData.phone;
+      try {
+        const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`);
+        const phoneData = await phoneResponse.json();
+        phone = phoneData.phone;
+      } catch {
+        console.log("could get number");
+      }
     });
     const changeQuantity = async (id, b) => {
       let elementToChange = cartItemsDisplay.value.find((element) => {
@@ -4318,7 +4322,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
     });
     const nav = __vite_ssr_import_3__.ref(null);
     function toggleMenu() {
-      nav.value.classList.toggle("showMenu");
+      nav.value.classList.toggle("height");
     }
     function watchTitle() {
       title.value = route.params.filter;
@@ -4433,7 +4437,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 
 // --------------------
 const $id_f88acd87 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".everything{position:relative}.navigations{background-color:var(--main-orange);display:none;flex-direction:column;height:0;padding:20px 10px;row-gap:35px;transition:all .3s ease-in-out}.showMenu{display:flex;height:100%}.navigations a{color:#333;font-family:var(--title-font);font-size:1.2rem;text-decoration:none}.navigations a:active{color:var(--carolina-blue)}.arrow-down{align-items:center;cursor:pointer;display:flex;font-family:var(--title-font);gap:10px;margin-top:20px}.arrow-down img{height:30px;margin-left:10px}";
+__vite_ssr_exports__.default = ".everything{position:relative}.navigations{background-color:var(--main-orange);display:none;flex-direction:column;height:0;overflow-y:hidden;padding:20px 10px;row-gap:35px;transition:height .5s ease}.height{display:flex;height:100%}.navigations a{color:#333;font-family:var(--title-font);font-size:1.2rem;text-decoration:none}.navigations a:active{color:var(--carolina-blue)}.arrow-down{align-items:center;cursor:pointer;display:flex;font-family:var(--title-font);gap:10px;justify-content:center;margin-top:20px}.arrow-down img{height:30px;margin-left:10px}";
 }
 
 
@@ -4976,9 +4980,13 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         balanceToPay();
       }
       cartNumber.value = cart.cart.length;
-      const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`);
-      const phoneData = await phoneResponse.json();
-      phone = phoneData.phone;
+      try {
+        const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`);
+        const phoneData = await phoneResponse.json();
+        phone = phoneData.phone;
+      } catch {
+        console.log("could get number");
+      }
     });
     const changeQuantity = async (id, b) => {
       let elementToChange = cartItemsDisplay.value.find((element) => {
@@ -5496,7 +5504,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
     });
     const nav = __vite_ssr_import_3__.ref(null);
     function toggleMenu() {
-      nav.value.classList.toggle("showMenu");
+      nav.value.classList.toggle("height");
     }
     function watchTitle() {
       title.value = route.params.filter;

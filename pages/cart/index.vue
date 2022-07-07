@@ -87,9 +87,13 @@ onMounted( async ()=>{
     }
     cartNumber.value = cart.cart.length
 
-    const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`)
-    const phoneData = await phoneResponse.json()
-    phone = phoneData.phone;
+    try{
+        const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`)
+        const phoneData = await phoneResponse.json()
+        phone = phoneData.phone;
+    }catch {
+        console.log('could get number')
+    }
 })
 const changeQuantity = async (id:string,b:boolean)=>{
     let elementToChange = cartItemsDisplay.value.find((element)=>{

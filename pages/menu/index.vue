@@ -31,7 +31,7 @@ useHead({
 })
 const nav = ref(null);
 function toggleMenu(){
-  nav.value.classList.toggle("showMenu");
+  nav.value.classList.toggle("height");
 }
 function watchTitle(){
   title.value  = route.params.filter;
@@ -49,15 +49,16 @@ const title  = ref(route.params.filter);
 .navigations {
   flex-direction: column;
   background-color: var(--main-orange);
-  padding: 20px 10px;
   row-gap: 35px;
   display: none;
+  padding: 20px 10px;
   height: 0%;
-  transition: all 300ms ease-in-out;
+  overflow-y: hidden;
+  transition: height 500ms ease;
 }
-.showMenu{
-  display: flex;
+.height{
   height: 100%;
+  display: flex;
 }
 .navigations a {
   color: #333;
@@ -72,6 +73,7 @@ const title  = ref(route.params.filter);
   font-family: var(--title-font);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   cursor: pointer;
   margin-top: 20px;

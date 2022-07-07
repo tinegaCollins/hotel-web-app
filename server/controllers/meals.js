@@ -75,3 +75,41 @@ exports.getPrice = async(req,res)=>{
         res.send('error')
     }
 }
+
+
+const randomSixNumbers  = (a,b)=>{
+    let numbers = [];
+    while(numbers.length < 6){
+        let curNumber = newNumber(a,b);
+        let index = numbers.indexOf(curNumber);
+        if(index === -1){
+            numbers.push(curNumber);
+        }
+        numbers.length + 1
+    }
+    return numbers
+}
+
+function newNumber(a, b) {
+    return Math.floor(Math.random(a, b) * b);
+}
+const switchSpecials = async ()=>{
+    const specials = await meals.find({ special : true})
+    for (let j = 0; j < specials.length; j++) {
+        specials[j].special = false;
+        await specials[j].save()
+    }
+    const all = await meals.find();
+    const randomNumbers = randomSixNumbers(0,all.length);
+    let i = 0;
+    while(i < randomNumbers.length){
+        all[randomNumbers[i]].special = true;
+        await all[randomNumbers[i]].save()
+        i ++;
+    }
+}
+setInterval(() => {
+    switchSpecials()
+},86400000);
+
+
