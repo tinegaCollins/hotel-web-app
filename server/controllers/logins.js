@@ -59,10 +59,6 @@ exports.getLocation = async (req, res)=>{
         res.send(false)
     }
 }
-exports.searchLocation = async (req,res)=>{
-    const locations = ['nakuru','nairobi','naivasha','london','new york'];
-
-}
 exports.loginById = async (req,res)=>{
     try {
         const user = await customers.findById(req.body.userID);
@@ -99,9 +95,7 @@ exports.getCartNumber = async (req, res)=>{
 
 exports.updateCart = async (req,res)=>{
     try{
-        const user = await customers.findById(req.body.id)
-        user.cart = req.body.newCart;
-        user.save()
+        const user = await customers.findOneAndUpdate({_id: req.body.id}, {$set: {cart: req.body.newCart}});
         res.send(true)
     }
     catch {

@@ -6,31 +6,43 @@
             cart 
             (<strong>{{cartNumber}}</strong>)
         </h2>
-        <p @click="getOrder">checkout KSH {{checkout}}</p>
+        <p @click="getOrder">sub total KSH {{checkout}}</p>
     </div>
     <div class="cart" v-if="cartItemsDisplay">
-        <div class="single-item" v-for="item in cartItemsDisplay" :key="item._id">
-            <img :src="item.image" alt="" srcset="">
-            <div class="details">
-                <h4>KSH {{item.price}}</h4>
-                <p>{{item.name}}</p>
-            </div>
-            <div class="indicators">
-                <div class="delete" @click="removeFromCart(item._id)">
-                    <img src="../../../assets/icons/dustbin-bin-trush-svgrepo-com.svg" alt="" srcset="">
-                    <p>remove</p>
+        <div class="items">
+            <div class="single-item" v-for="item in cartItemsDisplay" :key="item._id">
+                <img :src="item.image" alt="" srcset="">
+                <div class="details">
+                    <h4>KSH {{item.price}}</h4>
+                    <p>{{item.name}}</p>
+                    <div class="quantity">
+                        <p class="add" @click="changeQuantity(item._id,true)">+</p>
+                        <h5>{{item.quantity}}</h5>
+                        <p class="minus" @click="changeQuantity(item._id,false)">-</p>
+                    </div>
                 </div>
-                <div class="quantity">
-                    <p class="add" @click="changeQuantity(item._id,true)">+</p>
-                    <h5>{{item.quantity}}</h5>
-                    <p class="minus" @click="changeQuantity(item._id,false)">-</p>
+                <div class="delete" @click="removeFromCart(item._id)">
+                    <img src="../../../assets/icons/x-svgrepo-com.svg" alt="" srcset="">
                 </div>
             </div>
         </div>
+        <div class="checkout">
+            <div class="sub">
+                <p>sub total</p>
+                <h4>Ksh {{checkout}}</h4>
+            </div>
+            <div class="delivery-fee">
+                <p>delivery</p>
+                <h4>KSH 300</h4>
+            </div>
+            <div class="total">
+                <p>total</p>
+                <h4>{{total}}</h4>
+            </div>
+            <button>proceed to pay</button>
+        </div>
     </div>
-    <div class="empty-cart" v-if="emptyCart">
-        <p>empty</p>
-    </div>
+
     </main>
 </template>
 
@@ -41,7 +53,12 @@ import { useCartStore } from '~~/stores/useCart';
 import { useLoginStore } from '~~/stores/useLoginStore';
 const logins = useLoginStore()
 const cart = useCartStore();
-const cartNumber = ref(cart.cart.length);
+
+
+const cartNumber = ref<number | string>();
+cart.$subscribe ((state)=>{
+    cartNumber.value = cart.cart.length
+})
 useHead({
   title: 'cart',
   link: [
@@ -67,6 +84,7 @@ onMounted( async ()=>{
         cartItemsDisplay.value = data;
         balanceToPay()
     }
+    cartNumber.value = cart.cart.length
 })
 const changeQuantity = async (id:string,b:boolean)=>{
     let elementToChange = cartItemsDisplay.value.find((element)=>{
@@ -87,18 +105,15 @@ const changeQuantity = async (id:string,b:boolean)=>{
     balanceToPay()
 }
 
-const getPrice = async (id:string)=>{
-    const response = await fetch(`http://localhost:8000/get-price/${id}`)
-    const price = await response.json()
-    return price
-}
-const checkout = ref();
+const total = ref<number>();
+const checkout = ref<string | number>();
 const balanceToPay = ()=>{
     const totalPaid:number = cartItemsDisplay.value.reduce((accumulator:number,element)=>{
         let total = accumulator + element.price
         return total
     },0)
     checkout.value = totalPaid;
+    total.value = totalPaid + 300;
 }
 
 const stateChange = ()=>{
@@ -143,10 +158,6 @@ const getOrder = ()=>{
 }
 </script>
 
-
-
-
-
 <style>
 .top-cart-bar {
     font-family: var(--title-font);
@@ -154,6 +165,7 @@ const getOrder = ()=>{
     justify-content: space-between;
     align-items: center;
     padding:  0 15px;
+    margin-top: 10px;
 }
 .top-cart-bar p {
     background-color: var(--carolina-blue);
@@ -170,74 +182,70 @@ const getOrder = ()=>{
     font-family: var(--title-font);
     padding: 10px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     row-gap: 20px;
 }
-.single-item {
-    border: 1px solid #333;
-    height: 250px;
+.cart .items {
     width: 100%;
-    border-radius: 10px;
-    display: flex;
-    position: relative;
-    padding: 10px;
-}
-.single-item .details {
-    width: 100%;
-}
-.single-item > img {
-    height: 160px;
-    width: 160px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-.single-item .details h4 {
-    font-size: 1.5rem;
-    position: absolute;
-    right: 20px;
-    top: 10px;
-}
-.single-item .details p {
-    margin: 30px 10px;
-    font-size: 1.3rem;
-    color: var(--main-orange);
-    font-weight: 1000;
 }
 
-.indicators {
-    position: absolute;
-    bottom: 0;
+.cart .single-item {
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: .5em;
+    position: relative;
+    display: flex;
+}
+.cart .single-item > img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+}
+.cart .single-item .details {
+    margin-left: 10px;
+}
+.cart .single-item .details .quantity {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    width: max-content;
+    font-size: 1.5rem;
+}
+.cart .single-item .delete {
+    margin-left: auto;
+}
+.add:hover, .minus:hover , .delete:hover {
+    cursor: pointer;
+}
+.checkout {
+    border-top: 3px solid var(--main-orange);
     width: 100%;
+    padding: 5px;
+    display: grid;
+}
+.checkout > * {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px 5px 20px;
+    padding: 10px;
 }
-.indicators img {
-    height: 30px;
-    width: 30px;
-}
-.quantity {
-    display: flex;
-    column-gap: 5px;
-    font-size: 2rem;
-    align-items: center;
-    height: min-content;
-}
-.quantity p {
-    padding: 0 11px;
-    height: 60%;
-}
-.add {
-    background-color: var(--carolina-blue);
-}
-.minus {
-    background-color: var(--raisin-blue);
+.checkout button {
+    background-color: var(--main-orange);
     color: #fff;
+    border: none;
+    padding: .7em;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: auto;
 }
-.delete {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+@media screen and (min-width: 768px) {
+    .cart{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .checkout {
+        border-top: none;
+    }
 }
 </style>

@@ -3454,7 +3454,10 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
     expose();
     const logins = __vite_ssr_import_6__.useLoginStore();
     const cart = __vite_ssr_import_5__.useCartStore();
-    const cartNumber = __vite_ssr_import_1__.ref(cart.cart.length);
+    const cartNumber = __vite_ssr_import_1__.ref();
+    cart.$subscribe((state) => {
+      cartNumber.value = cart.cart.length;
+    });
     __vite_ssr_import_2__.useHead({
       title: "cart",
       link: [
@@ -3479,6 +3482,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         cartItemsDisplay.value = data;
         balanceToPay();
       }
+      cartNumber.value = cart.cart.length;
     });
     const changeQuantity = async (id, b) => {
       let elementToChange = cartItemsDisplay.value.find((element) => {
@@ -3497,18 +3501,15 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       }
       balanceToPay();
     };
-    const getPrice = async (id) => {
-      const response = await fetch(`http://localhost:8000/get-price/${id}`);
-      const price = await response.json();
-      return price;
-    };
+    const total = __vite_ssr_import_1__.ref();
     const checkout = __vite_ssr_import_1__.ref();
     const balanceToPay = () => {
       const totalPaid = cartItemsDisplay.value.reduce((accumulator, element) => {
-        let total = accumulator + element.price;
-        return total;
+        let total2 = accumulator + element.price;
+        return total2;
       }, 0);
       checkout.value = totalPaid;
+      total.value = totalPaid + 300;
     };
     const stateChange = () => {
       cart.$subscribe(async () => {
@@ -3547,7 +3548,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       const router = __vite_ssr_import_3__.useRouter();
       router.push("/cart/checkout");
     };
-    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, emptyCart, changeQuantity, getPrice, checkout, balanceToPay, stateChange, removeFromCart, getOrder };
+    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, emptyCart, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, getOrder };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3560,18 +3561,13 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_nav_bar = __vite_ssr_import_0__.default;
   _push(`<main${__vite_ssr_import_8__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
-  _push(`<div class="top-cart-bar"><h2> cart (<strong>${__vite_ssr_import_8__.ssrInterpolate($setup.cartNumber)}</strong>) </h2><p>checkout KSH ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</p></div>`);
+  _push(`<div class="top-cart-bar"><h2> cart (<strong>${__vite_ssr_import_8__.ssrInterpolate($setup.cartNumber)}</strong>) </h2><p>sub total KSH ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</p></div>`);
   if ($setup.cartItemsDisplay) {
-    _push(`<div class="cart"><!--[-->`);
+    _push(`<div class="cart"><div class="items"><!--[-->`);
     __vite_ssr_import_8__.ssrRenderList($setup.cartItemsDisplay, (item) => {
-      _push(`<div class="single-item"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</h4><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p></div><div class="indicators"><div class="delete"><img src="/assets/icons/dustbin-bin-trush-svgrepo-com.svg" alt="" srcset=""><p>remove</p></div><div class="quantity"><p class="add">+</p><h5>${__vite_ssr_import_8__.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div></div>`);
+      _push(`<div class="single-item"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</h4><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${__vite_ssr_import_8__.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img src="/assets/icons/x-svgrepo-com.svg" alt="" srcset=""></div></div>`);
     });
-    _push(`<!--]--></div>`);
-  } else {
-    _push(`<!---->`);
-  }
-  if ($setup.emptyCart) {
-    _push(`<div class="empty-cart"><p>empty</p></div>`);
+    _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${__vite_ssr_import_8__.ssrInterpolate($setup.total)}</h4></div><button>proceed to pay</button></div></div>`);
   } else {
     _push(`<!---->`);
   }
@@ -3605,7 +3601,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 
 // --------------------
 const $id_b6616365 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".top-cart-bar{align-items:center;display:flex;font-family:var(--title-font);justify-content:space-between;padding:0 15px}.top-cart-bar p{background-color:var(--carolina-blue);padding:8px}.top-cart-bar h2{margin:15px 0 10px;padding:0 10px}.top-cart-bar h2 strong{color:var(--carolina-blue)}.cart{flex-direction:column;font-family:var(--title-font);row-gap:20px}.cart,.single-item{display:flex;padding:10px}.single-item{border:1px solid #333;border-radius:10px;height:250px;position:relative;width:100%}.single-item .details{width:100%}.single-item>img{border-radius:5px;height:160px;-o-object-fit:cover;object-fit:cover;width:160px}.single-item .details h4{font-size:1.5rem;position:absolute;right:20px;top:10px}.single-item .details p{color:var(--main-orange);font-size:1.3rem;font-weight:1000;margin:30px 10px}.indicators{align-items:center;bottom:0;display:flex;justify-content:space-between;padding:0 20px 5px;position:absolute;width:100%}.indicators img{height:30px;width:30px}.quantity{align-items:center;-moz-column-gap:5px;column-gap:5px;display:flex;font-size:2rem;height:-webkit-min-content;height:-moz-min-content;height:min-content}.quantity p{height:60%;padding:0 11px}.add{background-color:var(--carolina-blue)}.minus{background-color:var(--raisin-blue);color:#fff}.delete{align-items:center;display:flex;flex-direction:row}";
+__vite_ssr_exports__.default = ".top-cart-bar{align-items:center;display:flex;font-family:var(--title-font);justify-content:space-between;margin-top:10px;padding:0 15px}.top-cart-bar p{background-color:var(--carolina-blue);padding:8px}.top-cart-bar h2{margin:15px 0 10px;padding:0 10px}.top-cart-bar h2 strong{color:var(--carolina-blue)}.cart{display:flex;flex-wrap:wrap;font-family:var(--title-font);padding:10px;row-gap:20px}.cart .items{width:100%}.cart .single-item{border:1px solid #000;display:flex;margin-top:10px;padding:.5em;position:relative}.cart .single-item>img{height:80px;-o-object-fit:cover;object-fit:cover;width:80px}.cart .single-item .details{margin-left:10px}.cart .single-item .details .quantity{align-items:center;-moz-column-gap:10px;column-gap:10px;display:flex;font-size:1.5rem;margin-top:15px;width:-webkit-max-content;width:-moz-max-content;width:max-content}.cart .single-item .delete{margin-left:auto}.add:hover,.delete:hover,.minus:hover{cursor:pointer}.checkout{border-top:3px solid var(--main-orange);display:grid;padding:5px;width:100%}.checkout>*{align-items:center;display:flex;justify-content:space-between;padding:10px}.checkout button{background-color:var(--main-orange);border:none;border-radius:5px;color:#fff;margin-left:auto;margin-top:10px;padding:.7em}@media screen and (min-width:768px){.cart{display:grid;grid-template-columns:1fr 1fr}.checkout{border-top:none}}";
 }
 
 
@@ -3887,6 +3883,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
         console.log("couldnt get the data");
       }
       userID = logins.getID;
+      stateChange();
     });
     const stateChange = () => {
       main.$subscribe(async (mutation, state) => {
@@ -3900,7 +3897,6 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
           body: JSON.stringify(dataToSend)
         });
         const ress = await response.json();
-        console.log(ress);
       });
     };
     const addToCart = (id) => {
@@ -3991,6 +3987,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
       const response = await fetch("http://localhost:8000/get-three-random");
       const data = await response.json();
       items.value = data;
+      stateChange();
     });
     const stateChange = () => {
       cart.$subscribe(async (mutation, state) => {
@@ -4004,7 +4001,6 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
           body: JSON.stringify(dataToSend)
         });
         const ress = await response.json();
-        console.log(ress);
       });
     };
     const addToCart = async (id) => {
@@ -4468,6 +4464,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
       userID = logins.getID;
       const response = await fetch(`http://localhost:8000/filter/${route.params.filter}`);
       data.value = await response.json();
+      stateChange();
     });
     const stateChange = () => {
       cart.$subscribe(async (mutation, state) => {
@@ -4481,7 +4478,6 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
           body: JSON.stringify(dataToSend)
         });
         const ress = await response.json();
-        console.log(ress);
       });
     };
     const addToCart = async (id) => {
@@ -4920,7 +4916,10 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
     expose();
     const logins = __vite_ssr_import_6__.useLoginStore();
     const cart = __vite_ssr_import_5__.useCartStore();
-    const cartNumber = __vite_ssr_import_1__.ref(cart.cart.length);
+    const cartNumber = __vite_ssr_import_1__.ref();
+    cart.$subscribe((state) => {
+      cartNumber.value = cart.cart.length;
+    });
     __vite_ssr_import_2__.useHead({
       title: "cart",
       link: [
@@ -4945,6 +4944,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         cartItemsDisplay.value = data;
         balanceToPay();
       }
+      cartNumber.value = cart.cart.length;
     });
     const changeQuantity = async (id, b) => {
       let elementToChange = cartItemsDisplay.value.find((element) => {
@@ -4963,18 +4963,15 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       }
       balanceToPay();
     };
-    const getPrice = async (id) => {
-      const response = await fetch(`http://localhost:8000/get-price/${id}`);
-      const price = await response.json();
-      return price;
-    };
+    const total = __vite_ssr_import_1__.ref();
     const checkout = __vite_ssr_import_1__.ref();
     const balanceToPay = () => {
       const totalPaid = cartItemsDisplay.value.reduce((accumulator, element) => {
-        let total = accumulator + element.price;
-        return total;
+        let total2 = accumulator + element.price;
+        return total2;
       }, 0);
       checkout.value = totalPaid;
+      total.value = totalPaid + 300;
     };
     const stateChange = () => {
       cart.$subscribe(async () => {
@@ -5013,7 +5010,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       const router = __vite_ssr_import_3__.useRouter();
       router.push("/cart/checkout");
     };
-    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, emptyCart, changeQuantity, getPrice, checkout, balanceToPay, stateChange, removeFromCart, getOrder };
+    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, emptyCart, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, getOrder };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -5026,18 +5023,13 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_nav_bar = __vite_ssr_import_0__.default;
   _push(`<main${__vite_ssr_import_8__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
-  _push(`<div class="top-cart-bar"><h2> cart (<strong>${__vite_ssr_import_8__.ssrInterpolate($setup.cartNumber)}</strong>) </h2><p>checkout KSH ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</p></div>`);
+  _push(`<div class="top-cart-bar"><h2> cart (<strong>${__vite_ssr_import_8__.ssrInterpolate($setup.cartNumber)}</strong>) </h2><p>sub total KSH ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</p></div>`);
   if ($setup.cartItemsDisplay) {
-    _push(`<div class="cart"><!--[-->`);
+    _push(`<div class="cart"><div class="items"><!--[-->`);
     __vite_ssr_import_8__.ssrRenderList($setup.cartItemsDisplay, (item) => {
-      _push(`<div class="single-item"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</h4><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p></div><div class="indicators"><div class="delete"><img src="/assets/icons/dustbin-bin-trush-svgrepo-com.svg" alt="" srcset=""><p>remove</p></div><div class="quantity"><p class="add">+</p><h5>${__vite_ssr_import_8__.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div></div>`);
+      _push(`<div class="single-item"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</h4><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${__vite_ssr_import_8__.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img src="/assets/icons/x-svgrepo-com.svg" alt="" srcset=""></div></div>`);
     });
-    _push(`<!--]--></div>`);
-  } else {
-    _push(`<!---->`);
-  }
-  if ($setup.emptyCart) {
-    _push(`<div class="empty-cart"><p>empty</p></div>`);
+    _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${__vite_ssr_import_8__.ssrInterpolate($setup.total)}</h4></div><button>proceed to pay</button></div></div>`);
   } else {
     _push(`<!---->`);
   }
@@ -5365,6 +5357,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
       userID = logins.getID;
       const response = await fetch(`http://localhost:8000/filter/${route.params.filter}`);
       data.value = await response.json();
+      stateChange();
     });
     const stateChange = () => {
       cart.$subscribe(async (mutation, state) => {
@@ -5378,7 +5371,6 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
           body: JSON.stringify(dataToSend)
         });
         const ress = await response.json();
-        console.log(ress);
       });
     };
     const addToCart = async (id) => {

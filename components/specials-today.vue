@@ -34,6 +34,7 @@ onMounted(async ()=>{
     console.log("couldnt get the data");
    }
    userID = logins.getID;
+   stateChange()
 })
 const stateChange = ()=>{
     main.$subscribe( async (mutation,state)=>{
@@ -47,7 +48,6 @@ const stateChange = ()=>{
             body: JSON.stringify(dataToSend)
          })
          const ress = await response.json();
-         console.log(ress);
     })
 }
 const addToCart = (id:string) => {
@@ -124,7 +124,6 @@ const addToCart = (id:string) => {
         padding: 20px;
     }
     .single-card {
-        /* width: 95%; */
         border: 1px solid transparent;
     }
     .single-card:hover{

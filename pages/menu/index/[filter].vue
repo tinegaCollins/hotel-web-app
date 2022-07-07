@@ -35,6 +35,7 @@ onMounted( async ()=>{
     userID = logins.getID
     const response = await fetch(`http://localhost:8000/filter/${route.params.filter}`)
     data.value =await response.json();
+    stateChange()
 })
 
 const stateChange = ()=> {
@@ -49,7 +50,6 @@ const stateChange = ()=> {
             body: JSON.stringify(dataToSend)
          })
          const ress = await response.json();
-         console.log(ress);
     })
 }
 const addToCart =async (id:string) => {

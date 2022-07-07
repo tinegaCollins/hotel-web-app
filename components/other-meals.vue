@@ -31,6 +31,7 @@ onMounted( async ()=>{
     const response = await fetch('http://localhost:8000/get-three-random');
     const data = await response.json();
     items.value = data;
+    stateChange()
 })
 
 
@@ -46,7 +47,6 @@ const stateChange = ()=>{
             body: JSON.stringify(dataToSend)
          })
          const ress = await response.json();
-         console.log(ress);
     })
 }
 
