@@ -52,7 +52,6 @@ const stateChange = ()=>{
 }
 const addToCart = (id:string) => {
     main.addtoCart(id);
-    stateChange()
 }
 </script>
 

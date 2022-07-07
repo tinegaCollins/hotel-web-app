@@ -1,9 +1,11 @@
 <template>
     <div class="everything">
         <nav-bar/>
-        <img @click="toggleMenu" src="../../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
-        <p></p>
-        <div class="navigations" ref="nav">
+        <div class="arrow-down" @click="toggleMenu">
+          <img src="../../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
+          <p>{{title}}s</p>
+        </div>
+        <div class="navigations" ref="nav" @click="watchTitle">
           <NuxtLink to="/menu/main-meal"  @click="toggleMenu">Main Meals</NuxtLink>
           <NuxtLink to="/menu/beverage"  @click="toggleMenu">Bevarages</NuxtLink>
           <NuxtLink to="/menu/snack"  @click="toggleMenu">snacks</NuxtLink>
@@ -14,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue';
 
 useHead({
   title: 'hotel menu',
@@ -30,14 +33,18 @@ const nav = ref(null);
 function toggleMenu(){
   nav.value.classList.toggle("showMenu");
 }
+function watchTitle(){
+  title.value  = route.params.filter;
+}
+const route = useRoute();
+
+const title  = ref(route.params.filter);
+
 </script>
 
 <style>
 .everything {
   position: relative;
-}
-.everything > img {
-  height: 30px;
 }
 .navigations {
   flex-direction: column;
@@ -60,5 +67,17 @@ function toggleMenu(){
 }
 .navigations a:active {
   color: var(--carolina-blue);
+}
+.arrow-down {
+  font-family: var(--title-font);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.arrow-down img {
+  height: 30px;
+  margin-left: 10px;
 }
 </style>

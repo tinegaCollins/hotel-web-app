@@ -52,7 +52,6 @@ const stateChange = ()=>{
 
 const addToCart = async (id:string)=>{
     cart.addtoCart(id);
-    stateChange()
 }
 </script>
 

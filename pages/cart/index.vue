@@ -6,7 +6,7 @@
             cart 
             (<strong>{{cartNumber}}</strong>)
         </h2>
-        <p @click="getOrder">sub total KSH {{checkout}}</p>
+        <p>sub total KSH {{checkout}}</p>
     </div>
     <div class="cart" v-if="cartItemsDisplay">
         <div class="items">
@@ -39,7 +39,7 @@
                 <p>total</p>
                 <h4>{{total}}</h4>
             </div>
-            <button>proceed to pay</button>
+            <button @click="pay">proceed to pay</button>
         </div>
     </div>
 
@@ -68,6 +68,7 @@ useHead({
 
 const cartItemsDisplay = ref();
 const emptyCart = ref<boolean>(false);
+let phone:string;
 onMounted( async ()=>{
     const messageToSend = {
         ids : cart.cart
@@ -85,6 +86,10 @@ onMounted( async ()=>{
         balanceToPay()
     }
     cartNumber.value = cart.cart.length
+
+    const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`)
+    const phoneData = await phoneResponse.json()
+    phone = phoneData.phone;
 })
 const changeQuantity = async (id:string,b:boolean)=>{
     let elementToChange = cartItemsDisplay.value.find((element)=>{
@@ -128,7 +133,6 @@ const stateChange = ()=>{
             body: JSON.stringify(dataToSend)
          })
          const ress = await response.json();
-         console.log(ress);
     })
 }
 
@@ -140,11 +144,10 @@ const removeFromCart = (id:string)=>{
     let index = cartItemsDisplay.value.indexOf(itemToRemove);
     cartItemsDisplay.value.splice(index,1)
     cart.removeFromCart(id);
-    stateChange()
     balanceToPay()
 }
-
-const getOrder = ()=>{
+const router = useRouter();
+const pay = async ()=>{
     const order = cartItemsDisplay.value.map((element)=>{
         return {
             item: element._id,
@@ -153,8 +156,19 @@ const getOrder = ()=>{
         }
     })
     cart.updateOrder(order);
-    const router = useRouter();
-    router.push('/cart/checkout')
+    if(phone == undefined){
+        router.push('/login');
+    }else{
+        const response = await fetch('https://tinypesa.com/api/v1/express/initialize',{
+            method: 'POST',
+            headers: {
+                Apikey: "Me3s8tLM8vW",
+                "Content-Type": "application/x-www-form-urlencoded",   
+            },
+            body: `amount=${total.value}&msisdn=${phone}&account_no=200`,
+    });
+    const data = await response.json();
+    }
 }
 </script>
 

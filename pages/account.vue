@@ -52,7 +52,11 @@ const logOut = ()=>{
     localStorage.clear();
     sessionStorage.clear();
     const router = useRouter();
-    router.push('/');
+    const after = async () => {
+        await router.push('/');
+        await window.location.reload();
+    }
+    after();
 }
 
 </script>

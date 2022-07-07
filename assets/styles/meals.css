@@ -4,6 +4,14 @@
     font-family: var(--title-font);
     position: relative;
 }
+@media screen and (min-width: 768px) {
+    .all-meals {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 30px;
+        gap: 15px;
+    }
+}
 .all-meals .content-wrapper {
     margin: 8px 0;
     border: 2px solid #333;
@@ -24,6 +32,7 @@
     height: 100px;
     width: 100px;
     object-fit: cover;
+    border-radius: 5px;
 }
 .all-meals a {
     color: #333;

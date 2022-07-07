@@ -46,6 +46,21 @@ exports.checkNumber = async (req,res)=>{
         res.send(false)
     }
 }
+
+exports.getPhone = async (req, res)=>{
+    try{
+        const user = await customers.findById(req.params.id)
+        const phone = {
+            phone : user.phone
+        }
+        res.send(phone)
+    }
+    catch {
+        res.send(false)
+    }
+}
+
+
 exports.getLocation = async (req, res)=>{
     try{
         const user = await customers.findById(req.params.id);
