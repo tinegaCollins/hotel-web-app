@@ -25,7 +25,7 @@ const data = ref();
 let userID:string;
 onMounted(async ()=>{
    try{
-     const resonse = await fetch('http://localhost:8000/specials',{
+     const resonse = await fetch('https://hotelini.herokuapp.com/specials',{
         method: 'GET'
     })
     data.value =await resonse.json()
@@ -42,7 +42,7 @@ const stateChange = ()=>{
             id: userID,
             newCart: main.cart
          }
-         const response = await fetch(`http://localhost:8000/update-cart`,{
+         const response = await fetch(`https://hotelini.herokuapp.com/update-cart`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataToSend)

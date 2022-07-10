@@ -24,7 +24,7 @@ onMounted( async ()=>{
         const dataToSend = {
             userID : userID
         }
-        const response = await fetch('http://localhost:8000/get-user-data',{
+        const response = await fetch('https://hotelini.herokuapp.com/get-user-data',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataToSend)

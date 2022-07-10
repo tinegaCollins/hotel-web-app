@@ -46,7 +46,7 @@ onMounted(()=>{
         logins.setId(userID)
         try {
             const getCart = async ()=>{
-                const response = await fetch(`http://localhost:8000/get-cart/${userID}`)
+                const response = await fetch(`https://hotelini.herokuapp.com/get-cart/${userID}`)
                 const data = await response.json();
                 for (let i = 0; i < data.length; i++) {
                     main.addtoCart(data[i])

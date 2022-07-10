@@ -54,7 +54,7 @@ const checkPhone = ()=>{
             const phoneToSend = {
                 phone: phone.value
             }
-            const response = await fetch('http://localhost:8000/check-number',{
+            const response = await fetch('https://hotelini.herokuapp.com/check-number',{
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(phoneToSend)
@@ -99,7 +99,7 @@ const dataToSend = {
     password: null
 }
 const signUp = async ()=>{
-    const response = await fetch('http://localhost:8000/create-account', {
+    const response = await fetch('https://hotelini.herokuapp.com/create-account', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

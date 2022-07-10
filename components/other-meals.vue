@@ -28,7 +28,7 @@ let userID:string;
 const items = ref();
 onMounted( async ()=>{
     userID = logins.getID;
-    const response = await fetch('http://localhost:8000/get-three-random');
+    const response = await fetch('https://hotelini.herokuapp.com/get-three-random');
     const data = await response.json();
     items.value = data;
     stateChange()
@@ -41,7 +41,7 @@ const stateChange = ()=>{
             id: logins.getID,
             newCart: cart.cart
          }
-         const response = await fetch(`http://localhost:8000/update-cart`,{
+         const response = await fetch(`https://hotelini.herokuapp.com/update-cart`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataToSend)

@@ -46,7 +46,7 @@ useHead({
         const phoneToSend = {
             phone : phone.value
         }
-        const response = await fetch('http://localhost:8000/check-number', {
+        const response = await fetch('https://hotelini.herokuapp.com/check-number', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(phoneToSend)
@@ -80,7 +80,7 @@ useHead({
             phone : phone.value,
             password: password.value
         }
-        const response = await fetch('http://localhost:8000/login', {
+        const response = await fetch('https://hotelini.herokuapp.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataToSend)

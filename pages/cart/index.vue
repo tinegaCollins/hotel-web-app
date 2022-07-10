@@ -73,7 +73,7 @@ onMounted( async ()=>{
     const messageToSend = {
         ids : cart.cart
     }
-    const response = await fetch('http://localhost:8000/get-specific-ids',{
+    const response = await fetch('https://hotelini.herokuapp.com/get-specific-ids',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(messageToSend)
@@ -88,7 +88,7 @@ onMounted( async ()=>{
     cartNumber.value = cart.cart.length
 
     try{
-        const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`)
+        const phoneResponse = await fetch(`https://hotelini.herokuapp.com/get-phone/${logins.getID}`)
         const phoneData = await phoneResponse.json()
         phone = phoneData.phone;
     }catch {
@@ -99,7 +99,7 @@ const changeQuantity = async (id:string,b:boolean)=>{
     let elementToChange = cartItemsDisplay.value.find((element)=>{
         return element._id === id
     })
-    const response = await fetch(`http://localhost:8000/get-price/${id}`)
+    const response = await fetch(`https://hotelini.herokuapp.com/get-price/${id}`)
     const price = await response.json()
     if(b === true){
         elementToChange.quantity ++
@@ -131,7 +131,7 @@ const stateChange = ()=>{
             id: logins.getID,
             newCart: cart.cart
          }
-         const response = await fetch(`http://localhost:8000/update-cart`,{
+         const response = await fetch(`https://hotelini.herokuapp.com/update-cart`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataToSend)

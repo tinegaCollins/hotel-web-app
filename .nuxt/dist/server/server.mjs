@@ -2914,7 +2914,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         const dataToSend = {
           userID
         };
-        const response = await fetch("http://localhost:8000/get-user-data", {
+        const response = await fetch("https://hotelini.herokuapp.com/get-user-data", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dataToSend)
@@ -3051,7 +3051,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_2__.defineComponent({
         logins.setId(userID);
         try {
           const getCart = async () => {
-            const response = await fetch(`http://localhost:8000/get-cart/${userID}`);
+            const response = await fetch(`https://hotelini.herokuapp.com/get-cart/${userID}`);
             const data = await response.json();
             for (let i = 0; i < data.length; i++) {
               main.addtoCart(data[i]);
@@ -3516,7 +3516,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       const messageToSend = {
         ids: cart.cart
       };
-      const response = await fetch("http://localhost:8000/get-specific-ids", {
+      const response = await fetch("https://hotelini.herokuapp.com/get-specific-ids", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(messageToSend)
@@ -3530,7 +3530,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       }
       cartNumber.value = cart.cart.length;
       try {
-        const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`);
+        const phoneResponse = await fetch(`https://hotelini.herokuapp.com/get-phone/${logins.getID}`);
         const phoneData = await phoneResponse.json();
         phone = phoneData.phone;
       } catch {
@@ -3541,7 +3541,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       let elementToChange = cartItemsDisplay.value.find((element) => {
         return element._id === id;
       });
-      const response = await fetch(`http://localhost:8000/get-price/${id}`);
+      const response = await fetch(`https://hotelini.herokuapp.com/get-price/${id}`);
       const price = await response.json();
       if (b === true) {
         elementToChange.quantity++;
@@ -3570,7 +3570,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
           id: logins.getID,
           newCart: cart.cart
         };
-        const response = await fetch(`http://localhost:8000/update-cart`, {
+        const response = await fetch(`https://hotelini.herokuapp.com/update-cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dataToSend)
@@ -3994,7 +3994,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
     let userID;
     __vite_ssr_import_0__.onMounted(async () => {
       try {
-        const resonse = await fetch("http://localhost:8000/specials", {
+        const resonse = await fetch("https://hotelini.herokuapp.com/specials", {
           method: "GET"
         });
         data.value = await resonse.json();
@@ -4010,7 +4010,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
           id: userID,
           newCart: main.cart
         };
-        const response = await fetch(`http://localhost:8000/update-cart`, {
+        const response = await fetch(`https://hotelini.herokuapp.com/update-cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dataToSend)
@@ -4102,7 +4102,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
     const items = __vite_ssr_import_0__.ref();
     __vite_ssr_import_0__.onMounted(async () => {
       userID = logins.getID;
-      const response = await fetch("http://localhost:8000/get-three-random");
+      const response = await fetch("https://hotelini.herokuapp.com/get-three-random");
       const data = await response.json();
       items.value = data;
       stateChange();
@@ -4113,7 +4113,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
           id: logins.getID,
           newCart: cart.cart
         };
-        const response = await fetch(`http://localhost:8000/update-cart`, {
+        const response = await fetch(`https://hotelini.herokuapp.com/update-cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dataToSend)
@@ -4278,7 +4278,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       const phoneToSend = {
         phone: phone.value
       };
-      const response = await fetch("http://localhost:8000/check-number", {
+      const response = await fetch("https://hotelini.herokuapp.com/check-number", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(phoneToSend)
@@ -4311,7 +4311,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
         phone: phone.value,
         password: password.value
       };
-      const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch("https://hotelini.herokuapp.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataToSend)
@@ -4756,7 +4756,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
           const phoneToSend = {
             phone: phone.value
           };
-          const response = await fetch("http://localhost:8000/check-number", {
+          const response = await fetch("https://hotelini.herokuapp.com/check-number", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(phoneToSend)
@@ -4799,7 +4799,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       password: null
     };
     const signUp = async () => {
-      const response = await fetch("http://localhost:8000/create-account", {
+      const response = await fetch("https://hotelini.herokuapp.com/create-account", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -4924,7 +4924,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         const dataToSend = {
           userID
         };
-        const response = await fetch("http://localhost:8000/get-user-data", {
+        const response = await fetch("https://hotelini.herokuapp.com/get-user-data", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dataToSend)
@@ -5105,7 +5105,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       const messageToSend = {
         ids: cart.cart
       };
-      const response = await fetch("http://localhost:8000/get-specific-ids", {
+      const response = await fetch("https://hotelini.herokuapp.com/get-specific-ids", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(messageToSend)
@@ -5119,7 +5119,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       }
       cartNumber.value = cart.cart.length;
       try {
-        const phoneResponse = await fetch(`http://localhost:8000/get-phone/${logins.getID}`);
+        const phoneResponse = await fetch(`https://hotelini.herokuapp.com/get-phone/${logins.getID}`);
         const phoneData = await phoneResponse.json();
         phone = phoneData.phone;
       } catch {
@@ -5130,7 +5130,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       let elementToChange = cartItemsDisplay.value.find((element) => {
         return element._id === id;
       });
-      const response = await fetch(`http://localhost:8000/get-price/${id}`);
+      const response = await fetch(`https://hotelini.herokuapp.com/get-price/${id}`);
       const price = await response.json();
       if (b === true) {
         elementToChange.quantity++;
@@ -5159,7 +5159,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
           id: logins.getID,
           newCart: cart.cart
         };
-        const response = await fetch(`http://localhost:8000/update-cart`, {
+        const response = await fetch(`https://hotelini.herokuapp.com/update-cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dataToSend)
@@ -5399,7 +5399,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       const phoneToSend = {
         phone: phone.value
       };
-      const response = await fetch("http://localhost:8000/check-number", {
+      const response = await fetch("https://hotelini.herokuapp.com/check-number", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(phoneToSend)
@@ -5432,7 +5432,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
         phone: phone.value,
         password: password.value
       };
-      const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch("https://hotelini.herokuapp.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataToSend)
@@ -5832,7 +5832,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
           const phoneToSend = {
             phone: phone.value
           };
-          const response = await fetch("http://localhost:8000/check-number", {
+          const response = await fetch("https://hotelini.herokuapp.com/check-number", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(phoneToSend)
@@ -5875,7 +5875,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
       password: null
     };
     const signUp = async () => {
-      const response = await fetch("http://localhost:8000/create-account", {
+      const response = await fetch("https://hotelini.herokuapp.com/create-account", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
