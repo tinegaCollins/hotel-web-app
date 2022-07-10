@@ -3,7 +3,7 @@
         <svg @click="slideShow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path :d="path" /></svg>
         <h3>
             hotel app
-            <a href="/"><img src="../assets/icons/undraw_breakfast_psiw.svg" alt="icon" srcset=""></a>
+            <a href="/"><img src="~/assets/icons/undraw_breakfast_psiw.svg" alt="icon" srcset=""></a>
         </h3>
         <div class="links" ref="links">
             <a href="/menu/main-meal">menu</a>
@@ -14,7 +14,7 @@
             <a href="/account" v-else>Your Account</a>
         </div>
         <div ref="cartClass" class="cart" :data-count="cartNumber">
-            <Nuxt-link  to="/cart"><img src="../assets/icons/cart-svgrepo-com.svg"></Nuxt-link>
+            <Nuxt-link  to="/cart"><img src="~/assets/icons/cart-svgrepo-com.svg"></Nuxt-link>
         </div>
     </nav>
 </template>

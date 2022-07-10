@@ -3,7 +3,7 @@
         <navBar/>
         <div class="login-wrapper">
             <p ref="res" class="alert">{{messageResponse}}</p>
-            <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
+            <img src="~/assets/icons/undraw_breakfast_psiw.svg" alt="">
         <h1>log in</h1>
         <div class="form">
             <p>{{ userResponse}}</p>
@@ -26,7 +26,7 @@
 
 
 <script setup lang="ts">
-
+import icon from '../assets/icons/undraw_breakfast_psiw.svg';
 useHead({
   title: 'log in',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
@@ -35,7 +35,7 @@ useHead({
     { name: 'description', content: 'My amazing site.' }
   ],
   link: [
-    { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
+    { rel: 'icon', href: icon}
   ]
 })
     const phone = ref<string>();

@@ -1,4 +1,4 @@
-export default {
+const client_manifest = {
   "node_modules/nuxt/dist/app/entry.mjs": {
     "file": "entry-f1ebb262.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
@@ -103,4 +103,7 @@ export default {
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   }
-}
+};
+
+export { client_manifest as default };
+//# sourceMappingURL=client.manifest.mjs.map

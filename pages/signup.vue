@@ -3,7 +3,7 @@
         <navBar/>
         <div class="signup-wrapper">
             <p ref="res" class="alert">{{messageResponse}}</p>
-            <img src="../assets/icons/undraw_breakfast_psiw.svg" alt="">
+            <img src="~/assets/icons/undraw_breakfast_psiw.svg" alt="">
         <h1>Sign Up</h1>
         <div class="form">
             <input type="text" placeholder="phone number" v-model="phone" @focusout="checkPhone">
@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-
+import icon from '~/assets/icons/undraw_breakfast_psiw.svg';
 useHead({
   title: 'sign up',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
@@ -29,7 +29,7 @@ useHead({
     { name: 'description', content: 'sign up page' }
   ],
   link: [
-    { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
+    { rel: 'icon', href: icon }
   ]
 })
 

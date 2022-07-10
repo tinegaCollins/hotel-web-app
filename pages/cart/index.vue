@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="delete" @click="removeFromCart(item._id)">
-                    <img src="../../../assets/icons/x-svgrepo-com.svg" alt="" srcset="">
+                    <img src="~/assets/icons/x-svgrepo-com.svg" alt="" srcset="">
                 </div>
             </div>
         </div>

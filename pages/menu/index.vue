@@ -2,7 +2,7 @@
     <div class="everything">
         <nav-bar/>
         <div class="arrow-down" @click="toggleMenu">
-          <img src="../../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
+          <img src="~/assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
           <p>{{title}}s</p>
         </div>
         <div class="navigations" ref="nav" @click="watchTitle">
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue';
+import icon from '../../assets/icons/undraw_breakfast_psiw.svg'
 
 useHead({
   title: 'hotel menu',
@@ -26,7 +26,7 @@ useHead({
     { name: 'description', content: 'My amazing site.' }
   ],
   link: [
-    { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
+    { rel: 'icon', href: icon }
   ]
 })
 const nav = ref(null);

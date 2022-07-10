@@ -1,8 +1,25 @@
-import require$$0, { getCurrentInstance, reactive, toRef, isRef, defineComponent, computed, h, resolveComponent, watchEffect, ref, markRaw, inject, provide, Suspense, Transition, useSSRContext, onMounted, withCtx, createVNode, mergeProps, unref, createTextVNode, shallowRef, toDisplayString as toDisplayString$1, onErrorCaptured, createApp } from "vue";
-import { withBase, withQuery, joinURL, hasProtocol, isEqual } from "ufo";
-import { ssrRenderAttrs, ssrRenderAttr, ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderClass, ssrIncludeBooleanAttr, ssrLooseContain, ssrRenderSuspense } from "vue/server-renderer";
-import { defineStore, createPinia, setActivePinia } from "pinia";
-import { useRuntimeConfig as useRuntimeConfig$1 } from "#internal/nitro";
+import { v as vue_cjs_prod, s as serverRenderer, r as require$$0 } from '../handlers/renderer.mjs';
+import { hasProtocol, joinURL, isEqual, withBase, withQuery } from 'ufo';
+import { defineStore, createPinia, setActivePinia } from 'pinia/dist/pinia.mjs';
+import { u as useRuntimeConfig$1 } from '../nitro/node-server.mjs';
+import 'h3';
+import 'unenv/runtime/mock/proxy';
+import 'stream';
+import 'node-fetch-native/polyfill';
+import 'http';
+import 'https';
+import 'destr';
+import 'ohmyfetch';
+import 'radix3';
+import 'unenv/runtime/fetch/index';
+import 'hookable';
+import 'scule';
+import 'ohash';
+import 'unstorage';
+import 'fs';
+import 'pathe';
+import 'url';
+
 const suspectProtoRx = /"(?:_|\\u005[Ff])(?:_|\\u005[Ff])(?:p|\\u0070)(?:r|\\u0072)(?:o|\\u006[Ff])(?:t|\\u0074)(?:o|\\u006[Ff])(?:_|\\u005[Ff])(?:_|\\u005[Ff])"\s*:/;
 const suspectConstructorRx = /"(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)"\s*:/;
 const JsonSigRx = /^["{[]|^-?[0-9][0-9.]{0,14}$/;
@@ -531,7 +548,7 @@ function createNuxtApp(options) {
   const nuxtApp = {
     provide: void 0,
     globalName: "nuxt",
-    payload: reactive({
+    payload: vue_cjs_prod.reactive({
       data: {},
       state: {},
       _errors: {},
@@ -630,7 +647,7 @@ function callWithNuxt(nuxt, setup, args) {
   }
 }
 function useNuxtApp() {
-  const vm = getCurrentInstance();
+  const vm = vue_cjs_prod.getCurrentInstance();
   if (!vm) {
     const nuxtAppInstance = nuxtAppCtx.use();
     if (!nuxtAppInstance) {
@@ -2353,10 +2370,10 @@ var vueRouter_cjs_prod = {};
 })(vueRouter_cjs_prod);
 const useState = (key, init) => {
   const nuxt = useNuxtApp();
-  const state = toRef(nuxt.payload.state, key);
+  const state = vue_cjs_prod.toRef(nuxt.payload.state, key);
   if (state.value === void 0 && init) {
     const initialValue = init();
-    if (isRef(initialValue)) {
+    if (vue_cjs_prod.isRef(initialValue)) {
       nuxt.payload.state[key] = initialValue;
       return initialValue;
     }
@@ -2458,7 +2475,7 @@ function defineNuxtLink(options) {
   const componentName = options.componentName || "NuxtLink";
   const checkPropConflicts = (props, main, sub) => {
   };
-  return defineComponent({
+  return vue_cjs_prod.defineComponent({
     name: componentName,
     props: {
       to: {
@@ -2519,11 +2536,11 @@ function defineNuxtLink(options) {
     },
     setup(props, { slots }) {
       const router = useRouter();
-      const to = computed(() => {
+      const to = vue_cjs_prod.computed(() => {
         checkPropConflicts();
         return props.to || props.href || "";
       });
-      const isExternal = computed(() => {
+      const isExternal = vue_cjs_prod.computed(() => {
         if (props.external) {
           return true;
         }
@@ -2538,7 +2555,7 @@ function defineNuxtLink(options) {
       return () => {
         var _a, _b, _c;
         if (!isExternal.value) {
-          return h(resolveComponent("RouterLink"), {
+          return vue_cjs_prod.h(vue_cjs_prod.resolveComponent("RouterLink"), {
             to: to.value,
             activeClass: props.activeClass || options.activeClass,
             exactActiveClass: props.exactActiveClass || options.exactActiveClass,
@@ -2550,7 +2567,7 @@ function defineNuxtLink(options) {
         const target = props.target || null;
         checkPropConflicts();
         const rel = props.noRel ? null : firstNonUndefined(props.rel, options.externalRelAttribute, href ? DEFAULT_EXTERNAL_REL_ATTRIBUTE : "") || null;
-        return h("a", { href, rel, target }, (_c = slots.default) == null ? void 0 : _c.call(slots));
+        return vue_cjs_prod.h("a", { href, rel, target }, (_c = slots.default) == null ? void 0 : _c.call(slots));
       };
     }
   });
@@ -2988,7 +3005,7 @@ shared_cjs_prod.toNumber = toNumber;
 shared_cjs_prod.toRawType = toRawType;
 shared_cjs_prod.toTypeString = toTypeString;
 function useHead(meta2) {
-  const resolvedMeta = isFunction_1(meta2) ? computed(meta2) : meta2;
+  const resolvedMeta = isFunction_1(meta2) ? vue_cjs_prod.computed(meta2) : meta2;
   useNuxtApp()._useHead(resolvedMeta);
 }
 const preload = defineNuxtPlugin((nuxtApp) => {
@@ -3336,17 +3353,17 @@ const _47home_47tinega_47Desktop_47dont_47hotel_45web_45app_47node_modules_47nux
   const head = createHead();
   nuxtApp.vueApp.use(head);
   nuxtApp.hooks.hookOnce("app:mounted", () => {
-    watchEffect(() => {
+    vue_cjs_prod.watchEffect(() => {
       head.updateDOM();
     });
   });
-  const titleTemplate = ref();
+  const titleTemplate = vue_cjs_prod.ref();
   nuxtApp._useHead = (_meta) => {
-    const meta2 = ref(_meta);
+    const meta2 = vue_cjs_prod.ref(_meta);
     if ("titleTemplate" in meta2.value) {
       titleTemplate.value = meta2.value.titleTemplate;
     }
-    const headObj = computed(() => {
+    const headObj = vue_cjs_prod.computed(() => {
       const overrides = { meta: [] };
       if (titleTemplate.value && "title" in meta2.value) {
         overrides.title = typeof titleTemplate.value === "function" ? titleTemplate.value(meta2.value.title) : titleTemplate.value.replace(/%s/g, meta2.value.title);
@@ -3421,7 +3438,7 @@ const globalProps = {
   title: String,
   translate: String
 };
-const Script = defineComponent({
+const Script = vue_cjs_prod.defineComponent({
   name: "Script",
   inheritAttrs: false,
   props: {
@@ -3445,7 +3462,7 @@ const Script = defineComponent({
     script: [script]
   }))
 });
-const Link = defineComponent({
+const Link = vue_cjs_prod.defineComponent({
   name: "Link",
   inheritAttrs: false,
   props: {
@@ -3475,7 +3492,7 @@ const Link = defineComponent({
     link: [link]
   }))
 });
-const Base = defineComponent({
+const Base = vue_cjs_prod.defineComponent({
   name: "Base",
   inheritAttrs: false,
   props: {
@@ -3487,7 +3504,7 @@ const Base = defineComponent({
     base
   }))
 });
-const Title = defineComponent({
+const Title = vue_cjs_prod.defineComponent({
   name: "Title",
   inheritAttrs: false,
   setup: setupForUseMeta((_, { slots }) => {
@@ -3498,7 +3515,7 @@ const Title = defineComponent({
     };
   })
 });
-const Meta = defineComponent({
+const Meta = vue_cjs_prod.defineComponent({
   name: "Meta",
   inheritAttrs: false,
   props: {
@@ -3512,7 +3529,7 @@ const Meta = defineComponent({
     meta: [meta2]
   }))
 });
-const Style = defineComponent({
+const Style = vue_cjs_prod.defineComponent({
   name: "Style",
   inheritAttrs: false,
   props: {
@@ -3538,7 +3555,7 @@ const Style = defineComponent({
     };
   })
 });
-const Head = defineComponent({
+const Head = vue_cjs_prod.defineComponent({
   name: "Head",
   inheritAttrs: false,
   setup: (_props, ctx) => () => {
@@ -3546,7 +3563,7 @@ const Head = defineComponent({
     return (_b = (_a = ctx.slots).default) == null ? void 0 : _b.call(_a);
   }
 });
-const Html = defineComponent({
+const Html = vue_cjs_prod.defineComponent({
   name: "Html",
   inheritAttrs: false,
   props: {
@@ -3557,7 +3574,7 @@ const Html = defineComponent({
   },
   setup: setupForUseMeta((htmlAttrs) => ({ htmlAttrs }), true)
 });
-const Body = defineComponent({
+const Body = vue_cjs_prod.defineComponent({
   name: "Body",
   inheritAttrs: false,
   props: globalProps,
@@ -3578,7 +3595,7 @@ const Components = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePr
 const metaConfig = { "globalMeta": { "charset": "utf-8", "viewport": "width=device-width, initial-scale=1", "meta": [], "link": [], "style": [], "script": [] } };
 const metaMixin = {
   created() {
-    const instance = getCurrentInstance();
+    const instance = vue_cjs_prod.getCurrentInstance();
     if (!instance) {
       return;
     }
@@ -3587,12 +3604,12 @@ const metaMixin = {
       return;
     }
     const nuxtApp = useNuxtApp();
-    const source = typeof options.head === "function" ? computed(() => options.head(nuxtApp)) : options.head;
+    const source = typeof options.head === "function" ? vue_cjs_prod.computed(() => options.head(nuxtApp)) : options.head;
     useHead(source);
   }
 };
 const _47home_47tinega_47Desktop_47dont_47hotel_45web_45app_47node_modules_47nuxt_47dist_47head_47runtime_47plugin = defineNuxtPlugin((nuxtApp) => {
-  useHead(markRaw({ title: "", ...metaConfig.globalMeta }));
+  useHead(vue_cjs_prod.markRaw({ title: "", ...metaConfig.globalMeta }));
   nuxtApp.vueApp.mixin(metaMixin);
   for (const name in Components) {
     nuxtApp.vueApp.component(name, Components[name]);
@@ -3622,10 +3639,10 @@ const Fragment = {
   }
 };
 const _wrapIf = (component, props, slots) => {
-  return { default: () => props ? h(component, props === true ? {} : props, slots) : h(Fragment, {}, slots) };
+  return { default: () => props ? vue_cjs_prod.h(component, props === true ? {} : props, slots) : vue_cjs_prod.h(Fragment, {}, slots) };
 };
 const isNestedKey = Symbol("isNested");
-const NuxtPage = defineComponent({
+const NuxtPage = vue_cjs_prod.defineComponent({
   name: "NuxtPage",
   inheritAttrs: false,
   props: {
@@ -3642,16 +3659,16 @@ const NuxtPage = defineComponent({
   },
   setup(props, { attrs }) {
     const nuxtApp = useNuxtApp();
-    const isNested = inject(isNestedKey, false);
-    provide(isNestedKey, true);
+    const isNested = vue_cjs_prod.inject(isNestedKey, false);
+    vue_cjs_prod.provide(isNestedKey, true);
     return () => {
-      return h(vueRouter_cjs_prod.RouterView, { name: props.name, route: props.route, ...attrs }, {
+      return vue_cjs_prod.h(vueRouter_cjs_prod.RouterView, { name: props.name, route: props.route, ...attrs }, {
         default: (routeProps) => {
           var _a;
-          return routeProps.Component && _wrapIf(Transition, (_a = routeProps.route.meta.pageTransition) != null ? _a : defaultPageTransition, wrapInKeepAlive(routeProps.route.meta.keepalive, isNested && nuxtApp.isHydrating ? h(routeProps.Component, { key: generateRouteKey(props.pageKey, routeProps) }) : h(Suspense, {
+          return routeProps.Component && _wrapIf(vue_cjs_prod.Transition, (_a = routeProps.route.meta.pageTransition) != null ? _a : defaultPageTransition, wrapInKeepAlive(routeProps.route.meta.keepalive, isNested && nuxtApp.isHydrating ? vue_cjs_prod.h(routeProps.Component, { key: generateRouteKey(props.pageKey, routeProps) }) : vue_cjs_prod.h(vue_cjs_prod.Suspense, {
             onPending: () => nuxtApp.callHook("page:start", routeProps.Component),
             onResolve: () => nuxtApp.callHook("page:finish", routeProps.Component)
-          }, { default: () => h(routeProps.Component, { key: generateRouteKey(props.pageKey, routeProps) }) }))).default();
+          }, { default: () => vue_cjs_prod.h(routeProps.Component, { key: generateRouteKey(props.pageKey, routeProps) }) }))).default();
         }
       });
     };
@@ -3705,7 +3722,6 @@ const useLoginStore = defineStore("logins", {
     }
   }
 });
-const navBar_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => "\nnav svg[data-v-3f87e7f5] {\n        height: 20px;\n}\nnav[data-v-3f87e7f5] {\n        display: flex;\n        align-items: center;\n        position: -webkit-sticky;\n        position: sticky;\n        z-index: 1;\n        top: 0;\n        background-color: #fff;\n        height: 60px;\n        padding: 0 20px;\n        -moz-column-gap: 20px;\n             column-gap: 20px;\n        font-family: var(--title-font);\n        text-align: left;\n        box-shadow:  5px 5px 5px 3px rgba(0, 0, 0, .2);\n}\n.cart[data-v-3f87e7f5] {\n        position: absolute;\n        right: 5%;\n}\n.cart img[data-v-3f87e7f5]{\n        height: 30px;\n        width: 30px;\n        transform: rotateY(180deg);\n}\n.cart1[data-v-3f87e7f5]::before {\n        content: attr(data-count);\n        position: absolute;\n        left: 5px;\n        top: 7px;\n        height: 15px;\n        color: #333;\n        width: 15px;\n        border-radius: 50%;\n        background-color: var(--main-orange);\n        z-index: 1;\n        font-size: .7rem;\n        display: grid;\n        place-items: center;\n}\nnav h3[data-v-3f87e7f5] {\n        display: flex;\n        align-items: center;\n        -moz-column-gap: 7px;\n             column-gap: 7px;\n}\n    /* change this to import icon directly */\nnav h3 img[data-v-3f87e7f5] {\n        width: 50px;\n        height: 50px;\n}\nnav .links[data-v-3f87e7f5] {\n        display: flex;\n        flex-direction: column;\n        justify-content: space-around;\n        height: 30vh;\n        width: 100%;\n        background-color: var(--main-orange);\n        position: absolute;\n        top: 60px;\n        left: -100%;\n        padding-left: 40px;\n        transition: left .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n        z-index: 1;\n}\n.show[data-v-3f87e7f5] {\n        left: 0 !important;\n}\nnav .links a[data-v-3f87e7f5] {\n        color: #333;\n        text-decoration: none;\n        font-size: 1.2rem;\n        font-family: var(--title-font);\n        font-weight: bold;\n}\nnav .links .sign-up[data-v-3f87e7f5] {\n        background-color: var(--side-orange);\n        padding: 10px;\n        border-radius: 5px;\n        font-size: 1.2rem;\n        font-family: var(--title-font);\n        font-weight: bold;\n        width: -webkit-max-content;\n        width: -moz-max-content;\n        width: max-content;\n}\n@media screen and (min-width: 968px) {\nnav[data-v-3f87e7f5] {\n            height: 80px;\n}\nnav svg[data-v-3f87e7f5] {\n            display: none;\n}\nnav h3[data-v-3f87e7f5]{\n            -moz-column-gap: 20px;\n                 column-gap: 20px;\n            margin-left: 40px;\n}\nnav h3 img[data-v-3f87e7f5] {\n            width: 70px;\n            height: 70px;\n}\nnav .links[data-v-3f87e7f5] {\n            left: 50%;\n            top: 0;\n            width: -webkit-max-content;\n            width: -moz-max-content;\n            width: max-content;\n            height: 100%;\n            padding-left: 0;\n            flex-direction: row;\n            align-items: center;\n            -moz-column-gap: 30px;\n                 column-gap: 30px;\n            background: transparent;\n}\nnav .links .sign-up[data-v-3f87e7f5]  {\n            background-color: var(--main-orange);\n            transition: background-color .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n}\nnav .links .sign-up[data-v-3f87e7f5]:hover {\n            background-color: var(--side-orange);\n}\nnav .links[data-v-3f87e7f5] {\n            left: 55%;\n}\n}  \n")();
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -3713,18 +3729,18 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
+const _sfc_main$p = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "nav-bar",
   __ssrInlineRender: true,
   setup(__props) {
     const main = useCartStore();
     const logins = useLoginStore();
     const barsPath = "M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM64 256C64 238.3 78.33 224 96 224H480C497.7 224 512 238.3 512 256C512 273.7 497.7 288 480 288H96C78.33 288 64 273.7 64 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z";
-    const path = ref(barsPath);
-    ref(null);
+    const path = vue_cjs_prod.ref(barsPath);
+    vue_cjs_prod.ref(null);
     let userID;
-    const ifNotLoggedIn = ref(false);
-    onMounted(() => {
+    const ifNotLoggedIn = vue_cjs_prod.ref(false);
+    vue_cjs_prod.onMounted(() => {
       userID = localStorage.getItem("userID");
       if (userID === null) {
         userID = sessionStorage.getItem("userID");
@@ -3755,8 +3771,8 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
         }
       }
     });
-    const cartNumber = ref();
-    const cartClass = ref();
+    const cartNumber = vue_cjs_prod.ref();
+    const cartClass = vue_cjs_prod.ref();
     main.$subscribe((state) => {
       let cartLength = main.cart.length;
       if (cartLength > 0) {
@@ -3768,7 +3784,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Nuxt_link = __nuxt_component_1$1;
-      _push(`<nav${ssrRenderAttrs(_attrs)} data-v-3f87e7f5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-v-3f87e7f5><path${ssrRenderAttr("d", path.value)} data-v-3f87e7f5></path></svg><h3 data-v-3f87e7f5> hotel app <a href="/" data-v-3f87e7f5><img${ssrRenderAttr("src", _imports_0$4)} alt="icon" srcset="" data-v-3f87e7f5></a></h3><div class="links" data-v-3f87e7f5><a href="/menu/main-meal" data-v-3f87e7f5>menu</a><a href="/menu" data-v-3f87e7f5>gallery</a><a href="/menu" data-v-3f87e7f5>contact us</a>`);
+      _push(`<nav${serverRenderer.exports.ssrRenderAttrs(_attrs)} data-v-3f87e7f5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-v-3f87e7f5><path${serverRenderer.exports.ssrRenderAttr("d", path.value)} data-v-3f87e7f5></path></svg><h3 data-v-3f87e7f5> hotel app <a href="/" data-v-3f87e7f5><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$4)} alt="icon" srcset="" data-v-3f87e7f5></a></h3><div class="links" data-v-3f87e7f5><a href="/menu/main-meal" data-v-3f87e7f5>menu</a><a href="/menu" data-v-3f87e7f5>gallery</a><a href="/menu" data-v-3f87e7f5>contact us</a>`);
       if (ifNotLoggedIn.value) {
         _push(`<a href="/login" data-v-3f87e7f5>login</a>`);
       } else {
@@ -3779,14 +3795,14 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<a href="/account" data-v-3f87e7f5>Your Account</a>`);
       }
-      _push(`</div><div class="cart"${ssrRenderAttr("data-count", cartNumber.value)} data-v-3f87e7f5>`);
-      _push(ssrRenderComponent(_component_Nuxt_link, { to: "/cart" }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(`</div><div class="cart"${serverRenderer.exports.ssrRenderAttr("data-count", cartNumber.value)} data-v-3f87e7f5>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_Nuxt_link, { to: "/cart" }, {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<img${ssrRenderAttr("src", _imports_1$1)} data-v-3f87e7f5${_scopeId}>`);
+            _push2(`<img${serverRenderer.exports.ssrRenderAttr("src", _imports_1$1)} data-v-3f87e7f5${_scopeId}>`);
           } else {
             return [
-              createVNode("img", { src: _imports_1$1 })
+              vue_cjs_prod.createVNode("img", { src: _imports_1$1 })
             ];
           }
         }),
@@ -3798,20 +3814,19 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$p = _sfc_main$p.setup;
 _sfc_main$p.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/nav-bar.vue");
   return _sfc_setup$p ? _sfc_setup$p(props, ctx) : void 0;
 };
 const __nuxt_component_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-3f87e7f5"]]);
-const account_vue_vue_type_style_index_0_lang = /* @__PURE__ */ (() => "\n.account-details {\n    font-family: var(--title-font);\n    text-align: center;\n    padding-top: 40px;\n}\n.account-details > * {\n    margin-top: 10px;\n}\n.account-details button {\n    font-size: .9rem;\n    padding: 9px;\n    border: 1px solid var(--side-orange);\n    transition: all 300ms ease-out;\n    background-color: #fff;\n}\n.account-details button:hover {\n    background-color: var(--side-orange);\n    color: #fff;\n    cursor: pointer;\n}\n")();
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
+const _sfc_main$o = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "account",
   __ssrInlineRender: true,
   setup(__props) {
     const logins = useLoginStore();
     let userID;
-    let userData = ref();
-    onMounted(async () => {
+    let userData = vue_cjs_prod.ref();
+    vue_cjs_prod.onMounted(async () => {
       userID = logins.getID;
       try {
         console.log(userID);
@@ -3841,10 +3856,10 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nav_bar = __nuxt_component_0$2;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "account-wrapper" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
-      if (unref(userData)) {
-        _push(`<div class="account-details"><h3>not much to show here</h3><p>phone: ${ssrInterpolate(unref(userData).phone)}</p><p>location: ${ssrInterpolate(unref(userData).location)}</p><button>log out</button></div>`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "account-wrapper" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      if (vue_cjs_prod.unref(userData)) {
+        _push(`<div class="account-details"><h3>not much to show here</h3><p>phone: ${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(userData).phone)}</p><p>location: ${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(userData).location)}</p><button>log out</button></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -3854,12 +3869,12 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$o = _sfc_main$o.setup;
 _sfc_main$o.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/account.vue");
   return _sfc_setup$o ? _sfc_setup$o(props, ctx) : void 0;
 };
 const meta$7 = void 0;
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
+const _sfc_main$n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "checkout",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3871,28 +3886,27 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nav_bar = __nuxt_component_0$2;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checkout-wrapper" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "checkout-wrapper" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
       _push(`</div>`);
     };
   }
 });
 const _sfc_setup$n = _sfc_main$n.setup;
 _sfc_main$n.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/cart/checkout.vue");
   return _sfc_setup$n ? _sfc_setup$n(props, ctx) : void 0;
 };
 const meta$6 = void 0;
 const _imports_0$3 = buildAssetsURL("x-svgrepo-com.8b02ed4d.svg");
-const index_vue_vue_type_style_index_0_lang$2 = /* @__PURE__ */ (() => "\n.top-cart-bar {\n    font-family: var(--title-font);\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding:  0 15px;\n    margin-top: 10px;\n}\n.top-cart-bar p {\n    background-color: var(--carolina-blue);\n    padding: 8px;\n}\n.top-cart-bar h2{\n    padding: 0 10px;\n    margin: 15px 0 10px 0;\n}\n.top-cart-bar h2 strong {\n    color: var(--carolina-blue);\n}\n.cart {\n    font-family: var(--title-font);\n    padding: 10px;\n    display: flex;\n    flex-wrap: wrap;\n    row-gap: 20px;\n}\n.cart .items {\n    width: 100%;\n}\n.cart .single-item {\n    border: 1px solid black;\n    margin-top: 10px;\n    padding: .5em;\n    position: relative;\n    display: flex;\n}\n.cart .single-item > img {\n    height: 80px;\n    width: 80px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.cart .single-item .details {\n    margin-left: 10px;\n}\n.cart .single-item .details .quantity {\n    margin-top: 15px;\n    display: flex;\n    align-items: center;\n    -moz-column-gap: 10px;\n         column-gap: 10px;\n    width: -webkit-max-content;\n    width: -moz-max-content;\n    width: max-content;\n    font-size: 1.5rem;\n}\n.cart .single-item .delete {\n    margin-left: auto;\n}\n.add:hover, .minus:hover , .delete:hover {\n    cursor: pointer;\n}\n.checkout {\n    border-top: 3px solid var(--main-orange);\n    width: 100%;\n    padding: 5px;\n    display: grid;\n}\n.checkout > * {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 10px;\n}\n.checkout button {\n    background-color: var(--main-orange);\n    color: #fff;\n    border: none;\n    padding: .7em;\n    border-radius: 5px;\n    margin-top: 10px;\n    margin-left: auto;\n}\n@media screen and (min-width: 768px) {\n.cart{\n        display: grid;\n        grid-template-columns: 1fr 1fr;\n}\n.checkout {\n        border-top: none;\n}\n}\n")();
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
+const _sfc_main$m = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "index",
   __ssrInlineRender: true,
   setup(__props) {
     const logins = useLoginStore();
     const cart = useCartStore();
-    const cartNumber = ref();
+    const cartNumber = vue_cjs_prod.ref();
     cart.$subscribe((state) => {
       cartNumber.value = cart.cart.length;
     });
@@ -3902,10 +3916,10 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: "../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
-    const cartItemsDisplay = ref();
-    const emptyCart = ref(false);
+    const cartItemsDisplay = vue_cjs_prod.ref();
+    const emptyCart = vue_cjs_prod.ref(false);
     let phone;
-    onMounted(async () => {
+    vue_cjs_prod.onMounted(async () => {
       const messageToSend = {
         ids: cart.cart
       };
@@ -3930,8 +3944,8 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
         console.log("could get number");
       }
     });
-    const total = ref();
-    const checkout2 = ref();
+    const total = vue_cjs_prod.ref();
+    const checkout2 = vue_cjs_prod.ref();
     const balanceToPay = () => {
       const totalPaid = cartItemsDisplay.value.reduce((accumulator, element) => {
         let total2 = accumulator + element.price;
@@ -3943,15 +3957,15 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     useRouter();
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nav_bar = __nuxt_component_0$2;
-      _push(`<main${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
-      _push(`<div class="top-cart-bar"><h2> cart (<strong>${ssrInterpolate(cartNumber.value)}</strong>) </h2><p>sub total KSH ${ssrInterpolate(checkout2.value)}</p></div>`);
+      _push(`<main${serverRenderer.exports.ssrRenderAttrs(_attrs)}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      _push(`<div class="top-cart-bar"><h2> cart (<strong>${serverRenderer.exports.ssrInterpolate(cartNumber.value)}</strong>) </h2><p>sub total KSH ${serverRenderer.exports.ssrInterpolate(checkout2.value)}</p></div>`);
       if (cartItemsDisplay.value) {
         _push(`<div class="cart"><div class="items"><!--[-->`);
-        ssrRenderList(cartItemsDisplay.value, (item) => {
-          _push(`<div class="single-item"><img${ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${ssrInterpolate(item.price)}</h4><p>${ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img${ssrRenderAttr("src", _imports_0$3)} alt="" srcset=""></div></div>`);
+        serverRenderer.exports.ssrRenderList(cartItemsDisplay.value, (item) => {
+          _push(`<div class="single-item"><img${serverRenderer.exports.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${serverRenderer.exports.ssrInterpolate(item.price)}</h4><p>${serverRenderer.exports.ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${serverRenderer.exports.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$3)} alt="" srcset=""></div></div>`);
         });
-        _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${ssrInterpolate(checkout2.value)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${ssrInterpolate(total.value)}</h4></div><button>proceed to pay</button></div></div>`);
+        _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${serverRenderer.exports.ssrInterpolate(checkout2.value)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${serverRenderer.exports.ssrInterpolate(total.value)}</h4></div><button>proceed to pay</button></div></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -3961,29 +3975,28 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$m = _sfc_main$m.setup;
 _sfc_main$m.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/cart/index.vue");
   return _sfc_setup$m ? _sfc_setup$m(props, ctx) : void 0;
 };
 const meta$5 = void 0;
 const _imports_0$2 = buildAssetsURL("location-svgrepo-com.3bebd6c2.svg");
 const _imports_0$1 = buildAssetsURL("arrow-down-svgrepo-com.16d7934f.svg");
-const location_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => "\n.location[data-v-732b9c62] {\n    margin-top: 30px;\n    display: flex;\n    -moz-column-gap: 20px;\n         column-gap: 20px;\n    align-items: center;\n}\n.location .toggle[data-v-732b9c62] {\n    display: flex;\n    align-items: center;\n    -moz-column-gap: 10px;\n         column-gap: 10px;\n}\n.location[data-v-732b9c62]:hover{\n    cursor: pointer;\n}\n.location img[data-v-732b9c62] {\n    height: 25px;\n    width: 25px;\n    transition: transform 150ms cubic-bezier(0.39, 0.575, 0.565, 1);\n}\n.up[data-v-732b9c62] {\n    transform: rotate(180deg);\n}\ninput[data-v-732b9c62] {\n    margin-top: 20px;\n    width: 70%;\n    border: 1px solid var(--main-orange);\n    border-radius: 5px;\n    padding: 7px;\n    font-size: 1.2rem;\n    font-family: var(--title-font);\n    font-weight: bold;\n}\n@media screen and (max-width: 768px) {\ninput[data-v-732b9c62] {\n        width: 90%;\n}\n}\n.show[data-v-732b9c62] {\n    visibility: visible;\n}\n.hide[data-v-732b9c62]{\n    visibility: hidden;\n}\n")();
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
+const _sfc_main$l = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "location",
   __ssrInlineRender: true,
   setup(__props) {
-    const locationSelected = ref();
-    ref();
-    ref(null);
-    const classSelected = ref("hide");
+    const locationSelected = vue_cjs_prod.ref();
+    vue_cjs_prod.ref();
+    vue_cjs_prod.ref(null);
+    const classSelected = vue_cjs_prod.ref("hide");
     const getLocation = async (id) => {
       const response = await fetch(`http://localhost:8000/get-location/${id}`);
       const locationData = await response.json();
       locationSelected.value = locationData.location;
     };
     let userID;
-    onMounted(() => {
+    vue_cjs_prod.onMounted(() => {
       if (localStorage.getItem("userID") === null) {
         if (sessionStorage.getItem("userID") === null) {
           locationSelected.value = "add a location";
@@ -3997,42 +4010,40 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
       }
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<!--[--><div class="location" data-v-732b9c62><img${ssrRenderAttr("src", _imports_0$2)} alt="location" srcset="" data-v-732b9c62><div class="toggle" data-v-732b9c62><h5 data-v-732b9c62>${ssrInterpolate(locationSelected.value)}</h5><img${ssrRenderAttr("src", _imports_0$1)} alt="" srcset="" data-v-732b9c62></div></div><input class="${ssrRenderClass(classSelected.value)}" type="text" placeholder="delivering to ..." data-v-732b9c62><!--]-->`);
+      _push(`<!--[--><div class="location" data-v-732b9c62><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$2)} alt="location" srcset="" data-v-732b9c62><div class="toggle" data-v-732b9c62><h5 data-v-732b9c62>${serverRenderer.exports.ssrInterpolate(locationSelected.value)}</h5><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$1)} alt="" srcset="" data-v-732b9c62></div></div><input class="${serverRenderer.exports.ssrRenderClass(classSelected.value)}" type="text" placeholder="delivering to ..." data-v-732b9c62><!--]-->`);
     };
   }
 });
 const _sfc_setup$l = _sfc_main$l.setup;
 _sfc_main$l.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/location.vue");
   return _sfc_setup$l ? _sfc_setup$l(props, ctx) : void 0;
 };
 const __nuxt_component_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-732b9c62"]]);
-const landingPage_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => "\n.main-wrapper[data-v-2fcfecae] {\n    font-family: var(--title-font);\n    padding: 50px 20px 0 20px;\n    display: grid;\n    place-items: center;\n}\n.main-wrapper h1[data-v-2fcfecae] {\n    font-size: 2.5rem;\n    font-weight: bold;\n    color: #333;\n    text-align: center;\n}\n\n")();
 const _sfc_main$k = {};
 function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
   const _component_location = __nuxt_component_0$1;
-  _push(`<main${ssrRenderAttrs(mergeProps({ class: "main-wrapper" }, _attrs))} data-v-2fcfecae><h1 data-v-2fcfecae> Hungry? We&#39;ll deliver it to your doorstep </h1>`);
-  _push(ssrRenderComponent(_component_location, null, null, _parent));
+  _push(`<main${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "main-wrapper" }, _attrs))} data-v-2fcfecae><h1 data-v-2fcfecae> Hungry? We&#39;ll deliver it to your doorstep </h1>`);
+  _push(serverRenderer.exports.ssrRenderComponent(_component_location, null, null, _parent));
   _push(`</main>`);
 }
 const _sfc_setup$k = _sfc_main$k.setup;
 _sfc_main$k.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/landing-page.vue");
   return _sfc_setup$k ? _sfc_setup$k(props, ctx) : void 0;
 };
 const __nuxt_component_1 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["ssrRender", _sfc_ssrRender$1], ["__scopeId", "data-v-2fcfecae"]]);
-const specialsToday_vue_vue_type_style_index_0_lang = /* @__PURE__ */ (() => "\n.specials-wrapper {\n    margin-top: 30px;\n    font-family: var(--title-font);\n    padding: 20px 20px;\n}\n.specials-wrapper h2{\n    position: relative;\n}\n.specials-wrapper h2::before{\n    content: '';\n    position: absolute;\n    bottom: -5px;\n    left: 0;\n    width: 10%;\n    height: 3px;\n    background-color: var(--main-orange);\n    transform: translateY(-1px);\n}\n.specials-cards{\n    margin-top: 20px;\n    display: flex;\n    flex-wrap: wrap;\n    gap: 30px;\n}\n.single-card {\n    display: flex;\n    -moz-column-gap: 20px;\n         column-gap: 20px;\n    flex-wrap: nowrap;\n    border-radius: 5px;\n    padding: 8px;\n    position: relative;\n    width: 100%;\n    border: 1px solid var(--side-orange);\n    transition: border 200ms cubic-bezier(0.23, 1, 0.320, 1);\n}\n.single-card .add-to-cart {\n    position: absolute;\n    right: 10px;\n    top: 10px;\n    font-size: .7rem;\n    padding: 7px;\n    border: 1px solid var(--side-orange);\n    transition: all 300ms ease-out;\n}\n.single-card .add-to-cart:hover {\n    background-color: var(--side-orange);\n    color: #fff;\n    cursor: pointer;\n}\n.single-card img {\n    height: 120px;\n    width: 120px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.single-card .details {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    row-gap: 5px;\n}\n@media screen and (min-width: 768px) {\n.specials-cards{\n        display: grid;\n        grid-template-columns: auto auto;\n        padding: 20px;\n}\n.single-card {\n        border: 1px solid transparent;\n}\n.single-card:hover{\n        border: 1px solid var(--side-orange);\n}\n}\n")();
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
+const _sfc_main$j = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "specials-today",
   __ssrInlineRender: true,
   setup(__props) {
     const logins = useLoginStore();
     const main = useCartStore();
-    const data = ref();
+    const data = vue_cjs_prod.ref();
     let userID;
-    onMounted(async () => {
+    vue_cjs_prod.onMounted(async () => {
       try {
         const resonse = await fetch("http://localhost:8000/specials", {
           method: "GET"
@@ -4060,9 +4071,9 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     };
     return (_ctx, _push, _parent, _attrs) => {
       if (data.value) {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "specials-wrapper" }, _attrs))}><h2> specials today</h2><div class="specials-cards"><!--[-->`);
-        ssrRenderList(data.value, (item) => {
-          _push(`<div class="single-card"><img${ssrRenderAttr("src", item.image)} alt="food" srcset=""><div class="details"><h3>${ssrInterpolate(item.name)}</h3><p>By Chef Ali</p><p>${ssrInterpolate(item.price)} ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
+        _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "specials-wrapper" }, _attrs))}><h2> specials today</h2><div class="specials-cards"><!--[-->`);
+        serverRenderer.exports.ssrRenderList(data.value, (item) => {
+          _push(`<div class="single-card"><img${serverRenderer.exports.ssrRenderAttr("src", item.image)} alt="food" srcset=""><div class="details"><h3>${serverRenderer.exports.ssrInterpolate(item.name)}</h3><p>By Chef Ali</p><p>${serverRenderer.exports.ssrInterpolate(item.price)} ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
         });
         _push(`<!--]--></div></div>`);
       } else {
@@ -4073,19 +4084,18 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$j = _sfc_main$j.setup;
 _sfc_main$j.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/specials-today.vue");
   return _sfc_setup$j ? _sfc_setup$j(props, ctx) : void 0;
 };
-const otherMeals_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => "\n.other-meals[data-v-4b3cf1a2] {\n    width: 95vw;\n    position: absolute;\n    left: 0;\n    height: 100vh;\n    font-family: var(--title-font);\n    padding: 20px;\n}\n.other-meals main[data-v-4b3cf1a2]{\n    padding-top: 20px;\n    display: flex;\n    flex-wrap: wrap;\n    row-gap: 20px;\n}\n.chefs-special[data-v-4b3cf1a2] {\n    border: 1px solid #333;\n    padding: 6px;\n    border-radius: 10px;\n    display: flex;\n    flex-direction: column;\n    gap: 20px;\n    align-items: center;\n    width: 100%;\n    position: relative;\n}\n.chefs-special .add-to-cart[data-v-4b3cf1a2] {\n    font-size: .7rem;\n    padding: 10px;\n    border: 1px solid var(--side-orange);\n    transition: all 300ms ease-out;\n}\n.chefs-special .add-to-cart[data-v-4b3cf1a2]:hover {\n    background-color: var(--side-orange);\n    color: #fff;\n    cursor: pointer;\n}\n@media screen and  (min-width: 520px){\n.other-meals main[data-v-4b3cf1a2]{\n        width: 100%;\n        justify-content: space-around;\n}\n.chefs-special[data-v-4b3cf1a2] {\n        width: 300px;\n}\n}\n.chefs-special img[data-v-4b3cf1a2]{\n    height: 200px;\n    width: 200px;\n    border-radius: 10%;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\nul[data-v-4b3cf1a2] {\n    align-self: flex-start;\n    margin-left: 10px;\n    position: relative;\n    width: 100%;\n}\n#chefs-pic[data-v-4b3cf1a2] {\n    height: 40px;\n    width: 40px;\n    border-radius: 50%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    position: absolute;\n    top: 20%;\n    right: 10%;\n}\n")();
-const _sfc_main$i = /* @__PURE__ */ defineComponent({
+const _sfc_main$i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "other-meals",
   __ssrInlineRender: true,
   setup(__props) {
     const logins = useLoginStore();
     const cart = useCartStore();
-    const items = ref();
-    onMounted(async () => {
+    const items = vue_cjs_prod.ref();
+    vue_cjs_prod.onMounted(async () => {
       logins.getID;
       const response = await fetch("http://localhost:8000/get-three-random");
       const data = await response.json();
@@ -4108,9 +4118,9 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     };
     return (_ctx, _push, _parent, _attrs) => {
       if (items.value) {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "other-meals" }, _attrs))} data-v-4b3cf1a2><h2 data-v-4b3cf1a2>chef specials</h2><main data-v-4b3cf1a2><!--[-->`);
-        ssrRenderList(items.value, (item) => {
-          _push(`<div class="chefs-special" data-v-4b3cf1a2><h3 data-v-4b3cf1a2>chef Lorem&#39;s ${ssrInterpolate(item.name)}</h3><img${ssrRenderAttr("src", item.image)} alt="" srcset="" data-v-4b3cf1a2><ul data-v-4b3cf1a2><h3 data-v-4b3cf1a2>ingredients</h3><li data-v-4b3cf1a2>chicken</li><li data-v-4b3cf1a2>tomatoes</li><li data-v-4b3cf1a2>briani</li></ul><div class="add-to-cart" data-v-4b3cf1a2><p data-v-4b3cf1a2>add to cart</p></div></div>`);
+        _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "other-meals" }, _attrs))} data-v-4b3cf1a2><h2 data-v-4b3cf1a2>chef specials</h2><main data-v-4b3cf1a2><!--[-->`);
+        serverRenderer.exports.ssrRenderList(items.value, (item) => {
+          _push(`<div class="chefs-special" data-v-4b3cf1a2><h3 data-v-4b3cf1a2>chef Lorem&#39;s ${serverRenderer.exports.ssrInterpolate(item.name)}</h3><img${serverRenderer.exports.ssrRenderAttr("src", item.image)} alt="" srcset="" data-v-4b3cf1a2><ul data-v-4b3cf1a2><h3 data-v-4b3cf1a2>ingredients</h3><li data-v-4b3cf1a2>chicken</li><li data-v-4b3cf1a2>tomatoes</li><li data-v-4b3cf1a2>briani</li></ul><div class="add-to-cart" data-v-4b3cf1a2><p data-v-4b3cf1a2>add to cart</p></div></div>`);
         });
         _push(`<!--]--></main></div>`);
       } else {
@@ -4121,18 +4131,15 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$i = _sfc_main$i.setup;
 _sfc_main$i.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/other-meals.vue");
   return _sfc_setup$i ? _sfc_setup$i(props, ctx) : void 0;
 };
 const __nuxt_component_3 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-4b3cf1a2"]]);
 const _imports_0 = buildAssetsURL("photo1.8166f706.png");
 const _imports_1 = buildAssetsURL("photo2.693f9a4b.png");
-const global$1 = /* @__PURE__ */ (() => "@import url('https://fonts.googleapis.com/css2?family=Puritan&display=swap');\n\n*{\n    padding: 0;\n    margin: 0;\n    box-sizing: border-box;\n    list-style: none;\n}\n\n:root{\n    --title-font: 'Puritan', sans-serif;\n    --main-orange: #FE9900;\n    --side-orange: #EA4D22;\n    --food-red: #710000;\n    --light-blue: rgb(198, 255, 255);\n    --main-yellow: yellow;\n    --orange-web: #FFA400;\n    --carolina-blue: #009FFD;\n    --patrick-blue: #2A2A72;\n    --raisin-blue: #232528;\n    --alice-blue: #EAF6FF;\n}\n\nbody {\n    background-color: #ffffff;\n    color: hsl(0, 0%, 20%);\n}")();
-const index_vue_vue_type_style_index_0_lang$1 = /* @__PURE__ */ (() => "\n.all-wrapper {\n  position: relative;\n  width: 100%;\n  display: flex;\n}\n.left {\n  position: -webkit-sticky;\n  position: sticky;\n  display: none;\n}\n.right{\n  display: none;\n  position: -webkit-sticky;\n  position: sticky;\n}\n.left img, .right img {\n  height: calc(100vh - 80px );\n  width: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: none;\n  position: relative;\n  z-index: -1;\n}\n.left::before, .right::before{\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 200px;\n  height: calc(100vh - 80px );\n  background-color: rgba(0,0,0,0.8);\n  z-index: 1;\n}\n.left::before{\n  content: '';\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.5);\n  top: 0;\n  left: 0;\n  width: 200px;\n  height: calc(100vh - 80px );\n  z-index: 1;\n}\n.right h2 {\n  display: none;\n  position: absolute;\n  font-family: var(--title-font);\n  font-size: 2rem;\n  color: var(--main-orange);\n  top: 10%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 2;\n  width: 100%;\n}\n.left h2 {\n  display: none;\n  position: absolute;\n  font-family: var(--title-font);\n  font-size: 2.5rem;\n  color: #333;\n  top: 40%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 2;\n  width: 100%;\n}\n.mains {\n  padding-top: 20px;\n  width: 100%;\n}\n@media screen and (min-width: 1024px) {\n.left , .right{\n     display: block;\n}\n.left img, .right img {\n    display: block;\n}\n.left h2 {\n    display: block;\n}\n.right h2 {\n    display: block;\n}\n}\n")();
 const meta$4 = void 0;
-const login_vue_vue_type_style_index_0_lang = /* @__PURE__ */ (() => "\n.login-wrapper, .signup-wrapper {\n    font-family: var(--title-font);\n    text-align: center;\n    display: grid;\n    place-items: center;\n}\n.login-wrapper  > img, .signup-wrapper > img {\n    height: 60px;\n    width: 60px;\n    margin-top: 10px;\n}\n.form {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    row-gap: 30px;\n    width: 100%;\n}\n.form input {\n    height: 44px;\n    width: 80%;\n    outline: none;\n    border: none;\n    border: 1px solid var(--main-orange);\n    border-radius: 33px;\n    padding: 0 10px;\n    color: black;\n    font-size: 1rem;\n}\n@media screen and (min-width: 600px) {\n.form {\n        width: 40%;\n}\n.login-wrapper, .signup-wrapper {\n        display: grid;\n        place-items: center;\n}\n}\n.form input:focus{\n    border: 1px solid var(--carolina-blue);\n}\n.form button {\n    outline: none;\n    border: none;\n    background-color: var(--main-orange);\n    border-radius: 30px;\n    padding: 13px 25px;\n    font-size: 1.2rem;\n}\n.form .other {\n    display: flex;\n    flex-direction: column;\n    row-gap: 10px;\n}\n.form .other a{\n    color: black;\n}\n.keep-logged {\n    display: flex;\n    width: 100%;\n    height: 30px;\n    position: relative;\n    bottom: 15px;\n}\n.keep-logged label {\n    width: 100%;\n}\n.keep-logged input {\n    height: 20px;\n}\n.login-wrapper button {\n    position: relative;\n    bottom: 20px;\n}\n")();
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
+const _sfc_main$h = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "login",
   __ssrInlineRender: true,
   setup(__props) {
@@ -4147,28 +4154,28 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: _imports_0$4 }
       ]
     });
-    const phone = ref();
-    const userResponse = ref();
-    const messageResponse = ref();
-    ref();
-    const password = ref();
-    const ifCorrectData = ref(true);
-    const wrongPassword = ref();
-    ref();
-    const ifKeepLogged = ref();
+    const phone = vue_cjs_prod.ref();
+    const userResponse = vue_cjs_prod.ref();
+    const messageResponse = vue_cjs_prod.ref();
+    vue_cjs_prod.ref();
+    const password = vue_cjs_prod.ref();
+    const ifCorrectData = vue_cjs_prod.ref(true);
+    const wrongPassword = vue_cjs_prod.ref();
+    vue_cjs_prod.ref();
+    const ifKeepLogged = vue_cjs_prod.ref();
     return (_ctx, _push, _parent, _attrs) => {
       const _component_navBar = __nuxt_component_0$2;
       const _component_nuxt_link = __nuxt_component_1$1;
-      _push(`<main${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_component_navBar, null, null, _parent));
-      _push(`<div class="login-wrapper"><p class="alert">${ssrInterpolate(messageResponse.value)}</p><img${ssrRenderAttr("src", _imports_0$4)} alt=""><h1>log in</h1><div class="form"><p>${ssrInterpolate(userResponse.value)}</p><p>${ssrInterpolate(wrongPassword.value)}</p><input type="text" placeholder="phone number"${ssrRenderAttr("value", phone.value)}><input type="password" name="" id="" placeholder="password"${ssrRenderAttr("value", password.value)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${ssrIncludeBooleanAttr(Array.isArray(ifKeepLogged.value) ? ssrLooseContain(ifKeepLogged.value, null) : ifKeepLogged.value) ? " checked" : ""}></div><button${ssrIncludeBooleanAttr(ifCorrectData.value) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
-      _push(ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(`<main${serverRenderer.exports.ssrRenderAttrs(_attrs)}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_navBar, null, null, _parent));
+      _push(`<div class="login-wrapper"><p class="alert">${serverRenderer.exports.ssrInterpolate(messageResponse.value)}</p><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$4)} alt=""><h1>log in</h1><div class="form"><p>${serverRenderer.exports.ssrInterpolate(userResponse.value)}</p><p>${serverRenderer.exports.ssrInterpolate(wrongPassword.value)}</p><input type="text" placeholder="phone number"${serverRenderer.exports.ssrRenderAttr("value", phone.value)}><input type="password" name="" id="" placeholder="password"${serverRenderer.exports.ssrRenderAttr("value", password.value)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${serverRenderer.exports.ssrIncludeBooleanAttr(Array.isArray(ifKeepLogged.value) ? serverRenderer.exports.ssrLooseContain(ifKeepLogged.value, null) : ifKeepLogged.value) ? " checked" : ""}></div><button${serverRenderer.exports.ssrIncludeBooleanAttr(ifCorrectData.value) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`sign up`);
           } else {
             return [
-              createTextVNode("sign up")
+              vue_cjs_prod.createTextVNode("sign up")
             ];
           }
         }),
@@ -4180,13 +4187,12 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$h = _sfc_main$h.setup;
 _sfc_main$h.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/login.vue");
   return _sfc_setup$h ? _sfc_setup$h(props, ctx) : void 0;
 };
 const meta$3 = void 0;
-const index_vue_vue_type_style_index_0_lang = /* @__PURE__ */ (() => "\n.everything {\n  position: relative;\n}\n.navigations {\n  flex-direction: column;\n  background-color: var(--main-orange);\n  row-gap: 35px;\n  display: none;\n  padding: 20px 10px;\n  height: 0%;\n  overflow-y: hidden;\n  transition: height 500ms ease;\n}\n.height{\n  height: 100%;\n  display: flex;\n}\n.navigations a {\n  color: #333;\n  text-decoration: none;\n  font-size: 1.2rem;\n  font-family: var(--title-font);\n}\n.navigations a:active {\n  color: var(--carolina-blue);\n}\n.arrow-down {\n  font-family: var(--title-font);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  cursor: pointer;\n  margin-top: 20px;\n}\n.arrow-down img {\n  height: 30px;\n  margin-left: 10px;\n}\n")();
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+const _sfc_main$g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "index",
   __ssrInlineRender: true,
   setup(__props) {
@@ -4201,94 +4207,93 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: _imports_0$1 }
       ]
     });
-    const nav = ref(null);
+    const nav = vue_cjs_prod.ref(null);
     function toggleMenu() {
       nav.value.classList.toggle("height");
     }
     const route = useRoute();
-    const title = ref(route.params.filter);
+    const title = vue_cjs_prod.ref(route.params.filter);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nav_bar = __nuxt_component_0$2;
       const _component_NuxtLink = __nuxt_component_1$1;
-      const _component_NuxtPage = resolveComponent("NuxtPage");
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "everything" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
-      _push(`<div class="arrow-down"><img${ssrRenderAttr("src", _imports_0$1)} alt="" srcset=""><p>${ssrInterpolate(title.value)}s</p></div><div class="navigations">`);
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      const _component_NuxtPage = vue_cjs_prod.resolveComponent("NuxtPage");
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "everything" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      _push(`<div class="arrow-down"><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$1)} alt="" srcset=""><p>${serverRenderer.exports.ssrInterpolate(title.value)}s</p></div><div class="navigations">`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/menu/main-meal",
         onClick: toggleMenu
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`Main Meals`);
           } else {
             return [
-              createTextVNode("Main Meals")
+              vue_cjs_prod.createTextVNode("Main Meals")
             ];
           }
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/menu/beverage",
         onClick: toggleMenu
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`Bevarages`);
           } else {
             return [
-              createTextVNode("Bevarages")
+              vue_cjs_prod.createTextVNode("Bevarages")
             ];
           }
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/menu/snack",
         onClick: toggleMenu
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`snacks`);
           } else {
             return [
-              createTextVNode("snacks")
+              vue_cjs_prod.createTextVNode("snacks")
             ];
           }
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/menu/salad",
         onClick: toggleMenu
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`Salads`);
           } else {
             return [
-              createTextVNode("Salads")
+              vue_cjs_prod.createTextVNode("Salads")
             ];
           }
         }),
         _: 1
       }, _parent));
       _push(`</div>`);
-      _push(ssrRenderComponent(_component_NuxtPage, null, null, _parent));
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtPage, null, null, _parent));
       _push(`</div>`);
     };
   }
 });
 const _sfc_setup$g = _sfc_main$g.setup;
 _sfc_main$g.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/menu/index.vue");
   return _sfc_setup$g ? _sfc_setup$g(props, ctx) : void 0;
 };
 const meta$2 = void 0;
-const meals = /* @__PURE__ */ (() => "\n.all-meals {\n    padding: 15px;\n    font-family: var(--title-font);\n    position: relative;\n}\n@media screen and (min-width: 768px) {\n    .all-meals {\n        display: grid;\n        grid-template-columns: 1fr 1fr;\n        padding: 30px;\n        gap: 15px;\n    }\n}\n.all-meals .content-wrapper {\n    margin: 8px 0;\n    border: 2px solid #333;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    padding: 5px 15px;\n    row-gap: 20px;\n    border-radius: 10px;\n    font-size: 1.2rem;\n}\n.all-meals .content-wrapper .content {\n    display: grid;\n    gap: 10px;\n    margin: 0 auto 0 10px;\n}\n.all-meals .content-wrapper img {\n    height: 100px;\n    width: 100px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 5px;\n}\n.all-meals a {\n    color: #333;\n    text-decoration: none;\n    display: flex;\n    justify-content: space-between;\n    -moz-column-gap: 20px;\n         column-gap: 20px;\n    font-size: 1rem;\n}\n.all-meals > p {\n    color:var(--carolina-blue);\n}\n.content-wrapper {\n    position: relative;\n}\n.all-meals .add-to-cart {\n    position: absolute;\n    right: 10px;\n    top: 10px;\n    font-size: .7rem;\n    padding: 7px;\n    border: 1px solid var(--side-orange);\n    transition: all 300ms ease-out;\n}\n.all-meals .add-to-cart:hover {\n    background-color: var(--side-orange);\n    color: #fff;\n    cursor: pointer;\n}")();
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const _sfc_main$f = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "[filter]",
   __ssrInlineRender: true,
   setup(__props) {
@@ -4306,9 +4311,9 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: "../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
-    const data = ref();
+    const data = vue_cjs_prod.ref();
     let userID;
-    onMounted(async () => {
+    vue_cjs_prod.onMounted(async () => {
       userID = logins.getID;
       const response = await fetch(`http://localhost:8000/filter/${route.params.filter}`);
       data.value = await response.json();
@@ -4329,9 +4334,9 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "all-meals" }, _attrs))}><!--[-->`);
-      ssrRenderList(data.value, (item) => {
-        _push(`<div class="content-wrapper"><img${ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="content"><p>${ssrInterpolate(item.name)}</p><p>ksh ${ssrInterpolate(item.price)}</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "all-meals" }, _attrs))}><!--[-->`);
+      serverRenderer.exports.ssrRenderList(data.value, (item) => {
+        _push(`<div class="content-wrapper"><img${serverRenderer.exports.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="content"><p>${serverRenderer.exports.ssrInterpolate(item.name)}</p><p>ksh ${serverRenderer.exports.ssrInterpolate(item.price)}</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
       });
       _push(`<!--]--></div>`);
     };
@@ -4339,13 +4344,12 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$f = _sfc_main$f.setup;
 _sfc_main$f.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/menu/index/[filter].vue");
   return _sfc_setup$f ? _sfc_setup$f(props, ctx) : void 0;
 };
 const meta$1 = void 0;
-const signup_vue_vue_type_style_index_0_lang = /* @__PURE__ */ (() => "\n.checkPasswordResponse {\n    color: red;\n}\n.signup-wrapper button:disabled, .login-wrapper button:disabled {\n    background-color: hsl(0, 0%, 50%);\n}\n.alert{\n    transform: translateY(-100px);\n    background-color: var(--orange-web);\n    width: -webkit-max-content;\n    width: -moz-max-content;\n    width: max-content;\n    position: absolute;\n    top: 0;\n    border-radius: 10px;\n    padding: 4px 7px;\n    transition: all 100ms cubic-bezier(0.19, 1, 0.22, 1);\n}\n.drop {\n    transform: translateY(100px);\n    border-radius: 10px;\n}\n")();
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
+const _sfc_main$e = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "signup",
   __ssrInlineRender: true,
   setup(__props) {
@@ -4360,25 +4364,25 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: _imports_0$4 }
       ]
     });
-    const phone = ref();
-    const password = ref();
-    const passwordRepeat = ref();
-    const messageResponse = ref();
-    const isButtonActive = ref(true);
-    ref();
+    const phone = vue_cjs_prod.ref();
+    const password = vue_cjs_prod.ref();
+    const passwordRepeat = vue_cjs_prod.ref();
+    const messageResponse = vue_cjs_prod.ref();
+    const isButtonActive = vue_cjs_prod.ref(true);
+    vue_cjs_prod.ref();
     return (_ctx, _push, _parent, _attrs) => {
       const _component_navBar = __nuxt_component_0$2;
       const _component_nuxt_link = __nuxt_component_1$1;
-      _push(`<main${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_component_navBar, null, null, _parent));
-      _push(`<div class="signup-wrapper"><p class="alert">${ssrInterpolate(messageResponse.value)}</p><img${ssrRenderAttr("src", _imports_0$4)} alt=""><h1>Sign Up</h1><div class="form"><input type="text" placeholder="phone number"${ssrRenderAttr("value", phone.value)}><input type="password" name="" placeholder="password"${ssrRenderAttr("value", password.value)}><input type="password" name="" placeholder="repeat password"${ssrRenderAttr("value", passwordRepeat.value)}><button${ssrIncludeBooleanAttr(isButtonActive.value) ? " disabled" : ""}>Sign up </button><div class="other">`);
-      _push(ssrRenderComponent(_component_nuxt_link, { to: "/login" }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(`<main${serverRenderer.exports.ssrRenderAttrs(_attrs)}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_navBar, null, null, _parent));
+      _push(`<div class="signup-wrapper"><p class="alert">${serverRenderer.exports.ssrInterpolate(messageResponse.value)}</p><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$4)} alt=""><h1>Sign Up</h1><div class="form"><input type="text" placeholder="phone number"${serverRenderer.exports.ssrRenderAttr("value", phone.value)}><input type="password" name="" placeholder="password"${serverRenderer.exports.ssrRenderAttr("value", password.value)}><input type="password" name="" placeholder="repeat password"${serverRenderer.exports.ssrRenderAttr("value", passwordRepeat.value)}><button${serverRenderer.exports.ssrIncludeBooleanAttr(isButtonActive.value) ? " disabled" : ""}>Sign up </button><div class="other">`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nuxt_link, { to: "/login" }, {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`log in`);
           } else {
             return [
-              createTextVNode("log in")
+              vue_cjs_prod.createTextVNode("log in")
             ];
           }
         }),
@@ -4390,7 +4394,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$e = _sfc_main$e.setup;
 _sfc_main$e.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/signup.vue");
   return _sfc_setup$e ? _sfc_setup$e(props, ctx) : void 0;
 };
@@ -4402,7 +4406,7 @@ const routes = [
     file: "/home/tinega/Desktop/dont/hotel-web-app/pages/account.vue",
     children: [],
     meta: meta$7,
-    alias: (meta$7 == null ? void 0 : meta$7.alias) || [],
+    alias: [],
     component: () => Promise.resolve().then(function() {
       return account;
     })
@@ -4413,7 +4417,7 @@ const routes = [
     file: "/home/tinega/Desktop/dont/hotel-web-app/pages/cart/checkout.vue",
     children: [],
     meta: meta$6,
-    alias: (meta$6 == null ? void 0 : meta$6.alias) || [],
+    alias: [],
     component: () => Promise.resolve().then(function() {
       return checkout;
     })
@@ -4424,7 +4428,7 @@ const routes = [
     file: "/home/tinega/Desktop/dont/hotel-web-app/pages/cart/index.vue",
     children: [],
     meta: meta$5,
-    alias: (meta$5 == null ? void 0 : meta$5.alias) || [],
+    alias: [],
     component: () => Promise.resolve().then(function() {
       return index$2;
     })
@@ -4435,7 +4439,7 @@ const routes = [
     file: "/home/tinega/Desktop/dont/hotel-web-app/pages/index/index.vue",
     children: [],
     meta: meta$4,
-    alias: (meta$4 == null ? void 0 : meta$4.alias) || [],
+    alias: [],
     component: () => Promise.resolve().then(function() {
       return index$1;
     })
@@ -4446,7 +4450,7 @@ const routes = [
     file: "/home/tinega/Desktop/dont/hotel-web-app/pages/login.vue",
     children: [],
     meta: meta$3,
-    alias: (meta$3 == null ? void 0 : meta$3.alias) || [],
+    alias: [],
     component: () => Promise.resolve().then(function() {
       return login;
     })
@@ -4462,14 +4466,14 @@ const routes = [
         file: "/home/tinega/Desktop/dont/hotel-web-app/pages/menu/index/[filter].vue",
         children: [],
         meta: meta$1,
-        alias: (meta$1 == null ? void 0 : meta$1.alias) || [],
+        alias: [],
         component: () => Promise.resolve().then(function() {
           return _filter_;
         })
       }
     ],
     meta: meta$2,
-    alias: (meta$2 == null ? void 0 : meta$2.alias) || [],
+    alias: [],
     component: () => Promise.resolve().then(function() {
       return index;
     })
@@ -4480,7 +4484,7 @@ const routes = [
     file: "/home/tinega/Desktop/dont/hotel-web-app/pages/signup.vue",
     children: [],
     meta,
-    alias: (meta == null ? void 0 : meta.alias) || [],
+    alias: [],
     component: () => Promise.resolve().then(function() {
       return signup;
     })
@@ -4505,7 +4509,7 @@ const _47home_47tinega_47Desktop_47dont_47hotel_45web_45app_47node_modules_47nux
     routes
   });
   nuxtApp.vueApp.use(router);
-  const previousRoute = shallowRef(router.currentRoute.value);
+  const previousRoute = vue_cjs_prod.shallowRef(router.currentRoute.value);
   router.afterEach((_to, from) => {
     previousRoute.value = from;
   });
@@ -4514,9 +4518,9 @@ const _47home_47tinega_47Desktop_47dont_47hotel_45web_45app_47node_modules_47nux
   });
   const route = {};
   for (const key in router.currentRoute.value) {
-    route[key] = computed(() => router.currentRoute.value[key]);
+    route[key] = vue_cjs_prod.computed(() => router.currentRoute.value[key]);
   }
-  const _activeRoute = shallowRef(router.resolve(initialURL));
+  const _activeRoute = vue_cjs_prod.shallowRef(router.resolve(initialURL));
   const syncCurrentRoute = () => {
     _activeRoute.value = router.currentRoute.value;
   };
@@ -4529,10 +4533,10 @@ const _47home_47tinega_47Desktop_47dont_47hotel_45web_45app_47node_modules_47nux
   });
   const activeRoute = {};
   for (const key in _activeRoute.value) {
-    activeRoute[key] = computed(() => _activeRoute.value[key]);
+    activeRoute[key] = vue_cjs_prod.computed(() => _activeRoute.value[key]);
   }
-  nuxtApp._route = reactive(route);
-  nuxtApp._activeRoute = reactive(activeRoute);
+  nuxtApp._route = vue_cjs_prod.reactive(route);
+  nuxtApp._activeRoute = vue_cjs_prod.reactive(activeRoute);
   nuxtApp._middleware = nuxtApp._middleware || {
     global: [],
     named: {}
@@ -4548,7 +4552,7 @@ const _47home_47tinega_47Desktop_47dont_47hotel_45web_45app_47node_modules_47nux
   }
   router.beforeEach(async (to, from) => {
     var _a;
-    to.meta = reactive(to.meta);
+    to.meta = vue_cjs_prod.reactive(to.meta);
     nuxtApp._processingMiddleware = true;
     const middlewareEntries = /* @__PURE__ */ new Set([...globalMiddleware, ...nuxtApp._middleware.global]);
     for (const component of to.matched) {
@@ -4637,7 +4641,6 @@ const _plugins = [
   _47home_47tinega_47Desktop_47dont_47hotel_45web_45app_47node_modules_47nuxt_47dist_47pages_47runtime_47router,
   PiniaNuxtPlugin
 ];
-const error404_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => '\n.bg-white[data-v-011aae6d]{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.cursor-pointer[data-v-011aae6d]{cursor:pointer}.flex[data-v-011aae6d]{display:flex}.grid[data-v-011aae6d]{display:grid}.place-content-center[data-v-011aae6d]{place-content:center}.items-center[data-v-011aae6d]{align-items:center}.justify-center[data-v-011aae6d]{justify-content:center}.font-sans[data-v-011aae6d]{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"}.font-medium[data-v-011aae6d]{font-weight:500}.font-light[data-v-011aae6d]{font-weight:300}.text-8xl[data-v-011aae6d]{font-size:6rem;line-height:1}.text-xl[data-v-011aae6d]{font-size:1.25rem;line-height:1.75rem}.leading-tight[data-v-011aae6d]{line-height:1.25}.mb-8[data-v-011aae6d]{margin-bottom:2rem}.mb-16[data-v-011aae6d]{margin-bottom:4rem}.max-w-520px[data-v-011aae6d]{max-width:520px}.min-h-screen[data-v-011aae6d]{min-height:100vh}.overflow-hidden[data-v-011aae6d]{overflow:hidden}.px-8[data-v-011aae6d]{padding-left:2rem;padding-right:2rem}.py-2[data-v-011aae6d]{padding-top:.5rem;padding-bottom:.5rem}.px-4[data-v-011aae6d]{padding-left:1rem;padding-right:1rem}.fixed[data-v-011aae6d]{position:fixed}.left-0[data-v-011aae6d]{left:0px}.right-0[data-v-011aae6d]{right:0px}.text-center[data-v-011aae6d]{text-align:center}.text-black[data-v-011aae6d]{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}.antialiased[data-v-011aae6d]{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-full[data-v-011aae6d]{width:100%}.z-10[data-v-011aae6d]{z-index:10}.z-20[data-v-011aae6d]{z-index:20}@media (min-width: 640px){.sm\\:text-4xl[data-v-011aae6d]{font-size:2.25rem;line-height:2.5rem}.sm\\:text-xl[data-v-011aae6d]{font-size:1.25rem;line-height:1.75rem}.sm\\:text-10xl[data-v-011aae6d]{font-size:10rem;line-height:1}.sm\\:px-0[data-v-011aae6d]{padding-left:0;padding-right:0}.sm\\:py-3[data-v-011aae6d]{padding-top:.75rem;padding-bottom:.75rem}.sm\\:px-6[data-v-011aae6d]{padding-left:1.5rem;padding-right:1.5rem}}@media (prefers-color-scheme: dark){.dark\\:bg-black[data-v-011aae6d]{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.dark\\:text-white[data-v-011aae6d]{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}.spotlight[data-v-011aae6d]{background:linear-gradient(45deg,#00DC82 0%,#36E4DA 50%,#0047E1 100%);filter:blur(20vh);height:40vh;bottom:-30vh}.gradient-border[data-v-011aae6d]{position:relative;border-radius:.5rem;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}@media (prefers-color-scheme: light){.gradient-border[data-v-011aae6d]{background-color:#ffffff4d}.gradient-border[data-v-011aae6d]:before{background:linear-gradient(90deg,#e2e2e2 0%,#e2e2e2 25%,#00DC82 50%,#36E4DA 75%,#0047E1 100%)}}@media (prefers-color-scheme: dark){.gradient-border[data-v-011aae6d]{background-color:#1414144d}.gradient-border[data-v-011aae6d]:before{background:linear-gradient(90deg,#303030 0%,#303030 25%,#00DC82 50%,#36E4DA 75%,#0047E1 100%)}}.gradient-border[data-v-011aae6d]:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;border-radius:.5rem;padding:2px;width:100%;background-size:400% auto;opacity:.5;transition:background-position .3s ease-in-out,opacity .2s ease-in-out;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}.gradient-border[data-v-011aae6d]:hover:before{background-position:-50% 0;opacity:1}\n')();
 const _sfc_main$d = {
   __name: "error-404",
   __ssrInlineRender: true,
@@ -4680,17 +4683,17 @@ const _sfc_main$d = {
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_1$1;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "font-sans antialiased bg-white dark:bg-black text-black dark:text-white grid min-h-screen place-content-center overflow-hidden" }, _attrs))} data-v-011aae6d><div class="fixed left-0 right-0 spotlight z-10" data-v-011aae6d></div><div class="max-w-520px text-center z-20" data-v-011aae6d><h1 class="text-8xl sm:text-10xl font-medium mb-8" data-v-011aae6d>${ssrInterpolate(__props.statusCode)}</h1><p class="text-xl px-8 sm:px-0 sm:text-4xl font-light mb-16 leading-tight" data-v-011aae6d>${ssrInterpolate(__props.description)}</p><div class="w-full flex items-center justify-center" data-v-011aae6d>`);
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "font-sans antialiased bg-white dark:bg-black text-black dark:text-white grid min-h-screen place-content-center overflow-hidden" }, _attrs))} data-v-011aae6d><div class="fixed left-0 right-0 spotlight z-10" data-v-011aae6d></div><div class="max-w-520px text-center z-20" data-v-011aae6d><h1 class="text-8xl sm:text-10xl font-medium mb-8" data-v-011aae6d>${serverRenderer.exports.ssrInterpolate(__props.statusCode)}</h1><p class="text-xl px-8 sm:px-0 sm:text-4xl font-light mb-16 leading-tight" data-v-011aae6d>${serverRenderer.exports.ssrInterpolate(__props.description)}</p><div class="w-full flex items-center justify-center" data-v-011aae6d>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/",
         class: "gradient-border text-md sm:text-xl py-2 px-4 sm:py-3 sm:px-6 cursor-pointer"
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`${ssrInterpolate(__props.backHome)}`);
+            _push2(`${serverRenderer.exports.ssrInterpolate(__props.backHome)}`);
           } else {
             return [
-              createTextVNode(toDisplayString$1(__props.backHome), 1)
+              vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(__props.backHome), 1)
             ];
           }
         }),
@@ -4702,12 +4705,11 @@ const _sfc_main$d = {
 };
 const _sfc_setup$d = _sfc_main$d.setup;
 _sfc_main$d.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/@nuxt/ui-templates/dist/templates/error-404.vue");
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
 const Error404 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-011aae6d"]]);
-const error500_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => '\n.bg-white[data-v-6aee6495]{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.grid[data-v-6aee6495]{display:grid}.place-content-center[data-v-6aee6495]{place-content:center}.font-sans[data-v-6aee6495]{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"}.font-medium[data-v-6aee6495]{font-weight:500}.font-light[data-v-6aee6495]{font-weight:300}.h-1\\/2[data-v-6aee6495]{height:50%}.text-8xl[data-v-6aee6495]{font-size:6rem;line-height:1}.text-xl[data-v-6aee6495]{font-size:1.25rem;line-height:1.75rem}.leading-tight[data-v-6aee6495]{line-height:1.25}.mb-8[data-v-6aee6495]{margin-bottom:2rem}.mb-16[data-v-6aee6495]{margin-bottom:4rem}.max-w-520px[data-v-6aee6495]{max-width:520px}.min-h-screen[data-v-6aee6495]{min-height:100vh}.overflow-hidden[data-v-6aee6495]{overflow:hidden}.px-8[data-v-6aee6495]{padding-left:2rem;padding-right:2rem}.fixed[data-v-6aee6495]{position:fixed}.left-0[data-v-6aee6495]{left:0px}.right-0[data-v-6aee6495]{right:0px}.-bottom-1\\/2[data-v-6aee6495]{bottom:-50%}.text-center[data-v-6aee6495]{text-align:center}.text-black[data-v-6aee6495]{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}.antialiased[data-v-6aee6495]{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media (min-width: 640px){.sm\\:text-4xl[data-v-6aee6495]{font-size:2.25rem;line-height:2.5rem}.sm\\:text-10xl[data-v-6aee6495]{font-size:10rem;line-height:1}.sm\\:px-0[data-v-6aee6495]{padding-left:0;padding-right:0}}@media (prefers-color-scheme: dark){.dark\\:bg-black[data-v-6aee6495]{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.dark\\:text-white[data-v-6aee6495]{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}.spotlight[data-v-6aee6495]{background:linear-gradient(45deg,#00DC82 0%,#36E4DA 50%,#0047E1 100%);filter:blur(20vh)}\n')();
 const _sfc_main$c = {
   __name: "error-500",
   __ssrInlineRender: true,
@@ -4745,69 +4747,17 @@ const _sfc_main$c = {
       ]
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "font-sans antialiased bg-white dark:bg-black text-black dark:text-white grid min-h-screen place-content-center overflow-hidden" }, _attrs))} data-v-6aee6495><div class="fixed -bottom-1/2 left-0 right-0 h-1/2 spotlight" data-v-6aee6495></div><div class="max-w-520px text-center" data-v-6aee6495><h1 class="text-8xl sm:text-10xl font-medium mb-8" data-v-6aee6495>${ssrInterpolate(__props.statusCode)}</h1><p class="text-xl px-8 sm:px-0 sm:text-4xl font-light mb-16 leading-tight" data-v-6aee6495>${ssrInterpolate(__props.description)}</p></div></div>`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "font-sans antialiased bg-white dark:bg-black text-black dark:text-white grid min-h-screen place-content-center overflow-hidden" }, _attrs))} data-v-6aee6495><div class="fixed -bottom-1/2 left-0 right-0 h-1/2 spotlight" data-v-6aee6495></div><div class="max-w-520px text-center" data-v-6aee6495><h1 class="text-8xl sm:text-10xl font-medium mb-8" data-v-6aee6495>${serverRenderer.exports.ssrInterpolate(__props.statusCode)}</h1><p class="text-xl px-8 sm:px-0 sm:text-4xl font-light mb-16 leading-tight" data-v-6aee6495>${serverRenderer.exports.ssrInterpolate(__props.description)}</p></div></div>`);
     };
   }
 };
 const _sfc_setup$c = _sfc_main$c.setup;
 _sfc_main$c.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/@nuxt/ui-templates/dist/templates/error-500.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
 const Error500 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-6aee6495"]]);
-const errorDev_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => '\n.bg-white[data-v-693cabb2]{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.bg-black\\/5[data-v-693cabb2]{--tw-bg-opacity:.05;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.rounded-t-md[data-v-693cabb2]{border-top-left-radius:.375rem;border-top-right-radius:.375rem}.flex[data-v-693cabb2]{display:flex}.flex-col[data-v-693cabb2]{flex-direction:column}.flex-1[data-v-693cabb2]{flex:1 1 0%}.font-sans[data-v-693cabb2]{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"}.font-medium[data-v-693cabb2]{font-weight:500}.font-light[data-v-693cabb2]{font-weight:300}.h-auto[data-v-693cabb2]{height:auto}.text-xl[data-v-693cabb2]{font-size:1.25rem;line-height:1.75rem}.text-6xl[data-v-693cabb2]{font-size:3.75rem;line-height:1}.leading-tight[data-v-693cabb2]{line-height:1.25}.mb-8[data-v-693cabb2]{margin-bottom:2rem}.mb-6[data-v-693cabb2]{margin-bottom:1.5rem}.min-h-screen[data-v-693cabb2]{min-height:100vh}.overflow-y-auto[data-v-693cabb2]{overflow-y:auto}.p-8[data-v-693cabb2]{padding:2rem}.px-10[data-v-693cabb2]{padding-left:2.5rem;padding-right:2.5rem}.pt-14[data-v-693cabb2]{padding-top:3.5rem}.fixed[data-v-693cabb2]{position:fixed}.left-0[data-v-693cabb2]{left:0px}.right-0[data-v-693cabb2]{right:0px}.text-black[data-v-693cabb2]{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}.antialiased[data-v-693cabb2]{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.z-10[data-v-693cabb2]{z-index:10}@media (min-width: 640px){.sm\\:text-8xl[data-v-693cabb2]{font-size:6rem;line-height:1}.sm\\:text-2xl[data-v-693cabb2]{font-size:1.5rem;line-height:2rem}}@media (prefers-color-scheme: dark){.dark\\:bg-black[data-v-693cabb2]{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.dark\\:bg-white\\/10[data-v-693cabb2]{--tw-bg-opacity:.1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.dark\\:text-white[data-v-693cabb2]{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}.spotlight[data-v-693cabb2]{background:linear-gradient(45deg,#00DC82 0%,#36E4DA 50%,#0047E1 100%);opacity:.8;filter:blur(30vh);height:60vh;bottom:-40vh}\n')();
-const _sfc_main$b = {
-  __name: "error-dev",
-  __ssrInlineRender: true,
-  props: {
-    appName: {
-      type: String,
-      default: "Nuxt"
-    },
-    version: {
-      type: String,
-      default: ""
-    },
-    statusCode: {
-      type: String,
-      default: "500"
-    },
-    statusMessage: {
-      type: String,
-      default: "Server error"
-    },
-    description: {
-      type: String,
-      default: "An error occurred in the application and the page could not be served. If you are the application owner, check your server logs for details."
-    },
-    stack: {
-      type: String,
-      default: ""
-    }
-  },
-  setup(__props) {
-    const props = __props;
-    useHead({
-      title: `${props.statusCode} - ${props.statusMessage} | ${props.appName}`,
-      script: [],
-      style: [
-        {
-          children: `*,:before,:after{-webkit-box-sizing:border-box;box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}*{--tw-ring-inset:var(--tw-empty, );--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(14, 165, 233, .5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000}:root{-moz-tab-size:4;-o-tab-size:4;tab-size:4}body{margin:0;font-family:inherit;line-height:inherit}html{-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";line-height:1.5}h1,p,pre{margin:0}h1{font-size:inherit;font-weight:inherit}pre{font-size:1em;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}`
-        }
-      ]
-    });
-    return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "font-sans antialiased bg-white px-10 pt-14 dark:bg-black text-black dark:text-white min-h-screen flex flex-col" }, _attrs))} data-v-693cabb2><div class="fixed left-0 right-0 spotlight" data-v-693cabb2></div><h1 class="text-6xl sm:text-8xl font-medium mb-6" data-v-693cabb2>${ssrInterpolate(__props.statusCode)}</h1><p class="text-xl sm:text-2xl font-light mb-8 leading-tight" data-v-693cabb2>${ssrInterpolate(__props.description)}</p><div class="bg-white rounded-t-md bg-black/5 dark:bg-white/10 flex-1 overflow-y-auto h-auto" data-v-693cabb2><pre class="text-xl font-light leading-tight z-10 p-8" data-v-693cabb2>${__props.stack}</pre></div></div>`);
-    };
-  }
-};
-const _sfc_setup$b = _sfc_main$b.setup;
-_sfc_main$b.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/@nuxt/ui-templates/dist/templates/error-dev.vue");
-  return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
-};
 const _sfc_main$a = {
   __name: "nuxt-error-page",
   __ssrInlineRender: true,
@@ -4832,13 +4782,13 @@ const _sfc_main$a = {
     const stack = void 0;
     const ErrorTemplate = is404 ? Error404 : Error500;
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
+      _push(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(ErrorTemplate), vue_cjs_prod.mergeProps({ statusCode: vue_cjs_prod.unref(statusCode), statusMessage: vue_cjs_prod.unref(statusMessage), description: vue_cjs_prod.unref(description), stack: vue_cjs_prod.unref(stack) }, _attrs), null, _parent));
     };
   }
 };
 const _sfc_setup$a = _sfc_main$a.setup;
 _sfc_main$a.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/nuxt/dist/app/components/nuxt-error-page.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
@@ -4849,20 +4799,20 @@ const _sfc_main$9 = {
     const nuxtApp = useNuxtApp();
     nuxtApp.hooks.callHookWith((hooks) => hooks.map((hook) => hook()), "vue:setup");
     const error = useError();
-    onErrorCaptured((err, target, info) => {
+    vue_cjs_prod.onErrorCaptured((err, target, info) => {
       nuxtApp.hooks.callHook("vue:error", err, target, info).catch((hookError) => console.error("[nuxt] Error in `vue:error` hook", hookError));
       {
         callWithNuxt(nuxtApp, throwError, [err]);
       }
     });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_App = resolveComponent("App");
-      ssrRenderSuspense(_push, {
+      const _component_App = vue_cjs_prod.resolveComponent("App");
+      serverRenderer.exports.ssrRenderSuspense(_push, {
         default: () => {
-          if (unref(error)) {
-            _push(ssrRenderComponent(unref(_sfc_main$a), { error: unref(error) }, null, _parent));
+          if (vue_cjs_prod.unref(error)) {
+            _push(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$a), { error: vue_cjs_prod.unref(error) }, null, _parent));
           } else {
-            _push(ssrRenderComponent(_component_App, null, null, _parent));
+            _push(serverRenderer.exports.ssrRenderComponent(_component_App, null, null, _parent));
           }
         },
         _: 1
@@ -4872,13 +4822,13 @@ const _sfc_main$9 = {
 };
 const _sfc_setup$9 = _sfc_main$9.setup;
 _sfc_main$9.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/nuxt/dist/app/components/nuxt-root.vue");
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
 const layouts = {};
 const defaultLayoutTransition = { name: "layout", mode: "out-in" };
-const __nuxt_component_0 = defineComponent({
+const __nuxt_component_0 = vue_cjs_prod.defineComponent({
   props: {
     name: {
       type: [String, Boolean, Object],
@@ -4889,23 +4839,23 @@ const __nuxt_component_0 = defineComponent({
     const route = useRoute();
     return () => {
       var _a, _b, _c;
-      const layout = (_b = (_a = isRef(props.name) ? props.name.value : props.name) != null ? _a : route.meta.layout) != null ? _b : "default";
+      const layout = (_b = (_a = vue_cjs_prod.isRef(props.name) ? props.name.value : props.name) != null ? _a : route.meta.layout) != null ? _b : "default";
       const hasLayout = layout && layout in layouts;
-      return _wrapIf(Transition, hasLayout && ((_c = route.meta.layoutTransition) != null ? _c : defaultLayoutTransition), _wrapIf(layouts[layout], hasLayout, context.slots)).default();
+      return _wrapIf(vue_cjs_prod.Transition, hasLayout && ((_c = route.meta.layoutTransition) != null ? _c : defaultLayoutTransition), _wrapIf(layouts[layout], hasLayout, context.slots)).default();
     };
   }
 });
 const _sfc_main$8 = {};
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
   const _component_NuxtLayout = __nuxt_component_0;
-  const _component_NuxtPage = resolveComponent("NuxtPage");
-  _push(ssrRenderComponent(_component_NuxtLayout, _attrs, {
-    default: withCtx((_, _push2, _parent2, _scopeId) => {
+  const _component_NuxtPage = vue_cjs_prod.resolveComponent("NuxtPage");
+  _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLayout, _attrs, {
+    default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        _push2(ssrRenderComponent(_component_NuxtPage, null, null, _parent2, _scopeId));
+        _push2(serverRenderer.exports.ssrRenderComponent(_component_NuxtPage, null, null, _parent2, _scopeId));
       } else {
         return [
-          createVNode(_component_NuxtPage)
+          vue_cjs_prod.createVNode(_component_NuxtPage)
         ];
       }
     }),
@@ -4914,7 +4864,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
 }
 const _sfc_setup$8 = _sfc_main$8.setup;
 _sfc_main$8.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/nuxt/dist/pages/runtime/app.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
@@ -4928,7 +4878,7 @@ let entry;
 const plugins = normalizePlugins(_plugins);
 {
   entry = async function createNuxtAppServer(ssrContext) {
-    const vueApp = createApp(_sfc_main$9);
+    const vueApp = vue_cjs_prod.createApp(_sfc_main$9);
     vueApp.component("App", AppComponent);
     const nuxt = createNuxtApp({ vueApp, ssrContext });
     try {
@@ -4942,14 +4892,14 @@ const plugins = normalizePlugins(_plugins);
   };
 }
 const entry$1 = (ctx) => entry(ctx);
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+const _sfc_main$7 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "account",
   __ssrInlineRender: true,
   setup(__props) {
     const logins = useLoginStore();
     let userID;
-    let userData = ref();
-    onMounted(async () => {
+    let userData = vue_cjs_prod.ref();
+    vue_cjs_prod.onMounted(async () => {
       userID = logins.getID;
       try {
         console.log(userID);
@@ -4979,10 +4929,10 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nav_bar = __nuxt_component_0$2;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "account-wrapper" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
-      if (unref(userData)) {
-        _push(`<div class="account-details"><h3>not much to show here</h3><p>phone: ${ssrInterpolate(unref(userData).phone)}</p><p>location: ${ssrInterpolate(unref(userData).location)}</p><button>log out</button></div>`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "account-wrapper" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      if (vue_cjs_prod.unref(userData)) {
+        _push(`<div class="account-details"><h3>not much to show here</h3><p>phone: ${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(userData).phone)}</p><p>location: ${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(userData).location)}</p><button>log out</button></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -4992,7 +4942,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$7 = _sfc_main$7.setup;
 _sfc_main$7.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/account.vue");
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
@@ -5000,7 +4950,7 @@ const account = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   __proto__: null,
   "default": _sfc_main$7
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "checkout",
   __ssrInlineRender: true,
   setup(__props) {
@@ -5012,15 +4962,15 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nav_bar = __nuxt_component_0$2;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checkout-wrapper" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "checkout-wrapper" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
       _push(`</div>`);
     };
   }
 });
 const _sfc_setup$6 = _sfc_main$6.setup;
 _sfc_main$6.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/cart/checkout.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
@@ -5028,13 +4978,13 @@ const checkout = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProp
   __proto__: null,
   "default": _sfc_main$6
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+const _sfc_main$5 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "index",
   __ssrInlineRender: true,
   setup(__props) {
     const logins = useLoginStore();
     const cart = useCartStore();
-    const cartNumber = ref();
+    const cartNumber = vue_cjs_prod.ref();
     cart.$subscribe((state) => {
       cartNumber.value = cart.cart.length;
     });
@@ -5044,10 +4994,10 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: "../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
-    const cartItemsDisplay = ref();
-    const emptyCart = ref(false);
+    const cartItemsDisplay = vue_cjs_prod.ref();
+    const emptyCart = vue_cjs_prod.ref(false);
     let phone;
-    onMounted(async () => {
+    vue_cjs_prod.onMounted(async () => {
       const messageToSend = {
         ids: cart.cart
       };
@@ -5072,8 +5022,8 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         console.log("could get number");
       }
     });
-    const total = ref();
-    const checkout2 = ref();
+    const total = vue_cjs_prod.ref();
+    const checkout2 = vue_cjs_prod.ref();
     const balanceToPay = () => {
       const totalPaid = cartItemsDisplay.value.reduce((accumulator, element) => {
         let total2 = accumulator + element.price;
@@ -5085,15 +5035,15 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     useRouter();
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nav_bar = __nuxt_component_0$2;
-      _push(`<main${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
-      _push(`<div class="top-cart-bar"><h2> cart (<strong>${ssrInterpolate(cartNumber.value)}</strong>) </h2><p>sub total KSH ${ssrInterpolate(checkout2.value)}</p></div>`);
+      _push(`<main${serverRenderer.exports.ssrRenderAttrs(_attrs)}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      _push(`<div class="top-cart-bar"><h2> cart (<strong>${serverRenderer.exports.ssrInterpolate(cartNumber.value)}</strong>) </h2><p>sub total KSH ${serverRenderer.exports.ssrInterpolate(checkout2.value)}</p></div>`);
       if (cartItemsDisplay.value) {
         _push(`<div class="cart"><div class="items"><!--[-->`);
-        ssrRenderList(cartItemsDisplay.value, (item) => {
-          _push(`<div class="single-item"><img${ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${ssrInterpolate(item.price)}</h4><p>${ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img${ssrRenderAttr("src", _imports_0$3)} alt="" srcset=""></div></div>`);
+        serverRenderer.exports.ssrRenderList(cartItemsDisplay.value, (item) => {
+          _push(`<div class="single-item"><img${serverRenderer.exports.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${serverRenderer.exports.ssrInterpolate(item.price)}</h4><p>${serverRenderer.exports.ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${serverRenderer.exports.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$3)} alt="" srcset=""></div></div>`);
         });
-        _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${ssrInterpolate(checkout2.value)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${ssrInterpolate(total.value)}</h4></div><button>proceed to pay</button></div></div>`);
+        _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${serverRenderer.exports.ssrInterpolate(checkout2.value)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${serverRenderer.exports.ssrInterpolate(total.value)}</h4></div><button>proceed to pay</button></div></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -5103,7 +5053,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$5 = _sfc_main$5.setup;
 _sfc_main$5.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/cart/index.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
@@ -5131,19 +5081,19 @@ const _sfc_main$4 = {
       const _component_landing_page = __nuxt_component_1;
       const _component_specials_today = _sfc_main$j;
       const _component_other_meals = __nuxt_component_3;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "home-wrapper" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
-      _push(`<main class="all-wrapper"><div class="left"><img${ssrRenderAttr("src", _imports_0)} alt="random photo" srcset=""><h2>Cooked by kenyans</h2></div><div class="mains">`);
-      _push(ssrRenderComponent(_component_landing_page, null, null, _parent));
-      _push(ssrRenderComponent(_component_specials_today, null, null, _parent));
-      _push(ssrRenderComponent(_component_other_meals, null, null, _parent));
-      _push(`</div><div class="right"><img${ssrRenderAttr("src", _imports_1)} alt="random photo " srcset=""><h2> for kenyans</h2></div></main></div>`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "home-wrapper" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      _push(`<main class="all-wrapper"><div class="left"><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0)} alt="random photo" srcset=""><h2>Cooked by kenyans</h2></div><div class="mains">`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_landing_page, null, null, _parent));
+      _push(serverRenderer.exports.ssrRenderComponent(_component_specials_today, null, null, _parent));
+      _push(serverRenderer.exports.ssrRenderComponent(_component_other_meals, null, null, _parent));
+      _push(`</div><div class="right"><img${serverRenderer.exports.ssrRenderAttr("src", _imports_1)} alt="random photo " srcset=""><h2> for kenyans</h2></div></main></div>`);
     };
   }
 };
 const _sfc_setup$4 = _sfc_main$4.setup;
 _sfc_main$4.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/index/index.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
@@ -5151,7 +5101,7 @@ const index$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   __proto__: null,
   "default": _sfc_main$4
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+const _sfc_main$3 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "login",
   __ssrInlineRender: true,
   setup(__props) {
@@ -5166,28 +5116,28 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: _imports_0$4 }
       ]
     });
-    const phone = ref();
-    const userResponse = ref();
-    const messageResponse = ref();
-    ref();
-    const password = ref();
-    const ifCorrectData = ref(true);
-    const wrongPassword = ref();
-    ref();
-    const ifKeepLogged = ref();
+    const phone = vue_cjs_prod.ref();
+    const userResponse = vue_cjs_prod.ref();
+    const messageResponse = vue_cjs_prod.ref();
+    vue_cjs_prod.ref();
+    const password = vue_cjs_prod.ref();
+    const ifCorrectData = vue_cjs_prod.ref(true);
+    const wrongPassword = vue_cjs_prod.ref();
+    vue_cjs_prod.ref();
+    const ifKeepLogged = vue_cjs_prod.ref();
     return (_ctx, _push, _parent, _attrs) => {
       const _component_navBar = __nuxt_component_0$2;
       const _component_nuxt_link = __nuxt_component_1$1;
-      _push(`<main${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_component_navBar, null, null, _parent));
-      _push(`<div class="login-wrapper"><p class="alert">${ssrInterpolate(messageResponse.value)}</p><img${ssrRenderAttr("src", _imports_0$4)} alt=""><h1>log in</h1><div class="form"><p>${ssrInterpolate(userResponse.value)}</p><p>${ssrInterpolate(wrongPassword.value)}</p><input type="text" placeholder="phone number"${ssrRenderAttr("value", phone.value)}><input type="password" name="" id="" placeholder="password"${ssrRenderAttr("value", password.value)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${ssrIncludeBooleanAttr(Array.isArray(ifKeepLogged.value) ? ssrLooseContain(ifKeepLogged.value, null) : ifKeepLogged.value) ? " checked" : ""}></div><button${ssrIncludeBooleanAttr(ifCorrectData.value) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
-      _push(ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(`<main${serverRenderer.exports.ssrRenderAttrs(_attrs)}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_navBar, null, null, _parent));
+      _push(`<div class="login-wrapper"><p class="alert">${serverRenderer.exports.ssrInterpolate(messageResponse.value)}</p><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$4)} alt=""><h1>log in</h1><div class="form"><p>${serverRenderer.exports.ssrInterpolate(userResponse.value)}</p><p>${serverRenderer.exports.ssrInterpolate(wrongPassword.value)}</p><input type="text" placeholder="phone number"${serverRenderer.exports.ssrRenderAttr("value", phone.value)}><input type="password" name="" id="" placeholder="password"${serverRenderer.exports.ssrRenderAttr("value", password.value)}><div class="keep-logged"><label for="checkbox"> keep me logged in</label><input type="checkbox" id="checkbox"${serverRenderer.exports.ssrIncludeBooleanAttr(Array.isArray(ifKeepLogged.value) ? serverRenderer.exports.ssrLooseContain(ifKeepLogged.value, null) : ifKeepLogged.value) ? " checked" : ""}></div><button${serverRenderer.exports.ssrIncludeBooleanAttr(ifCorrectData.value) ? " disabled" : ""}>login</button><div class="other"><a href="#">forgot your password</a>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nuxt_link, { to: "/signup" }, {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`sign up`);
           } else {
             return [
-              createTextVNode("sign up")
+              vue_cjs_prod.createTextVNode("sign up")
             ];
           }
         }),
@@ -5199,7 +5149,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/login.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
@@ -5207,7 +5157,7 @@ const login = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   __proto__: null,
   "default": _sfc_main$3
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+const _sfc_main$2 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "[filter]",
   __ssrInlineRender: true,
   setup(__props) {
@@ -5225,9 +5175,9 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: "../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
-    const data = ref();
+    const data = vue_cjs_prod.ref();
     let userID;
-    onMounted(async () => {
+    vue_cjs_prod.onMounted(async () => {
       userID = logins.getID;
       const response = await fetch(`http://localhost:8000/filter/${route.params.filter}`);
       data.value = await response.json();
@@ -5248,9 +5198,9 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "all-meals" }, _attrs))}><!--[-->`);
-      ssrRenderList(data.value, (item) => {
-        _push(`<div class="content-wrapper"><img${ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="content"><p>${ssrInterpolate(item.name)}</p><p>ksh ${ssrInterpolate(item.price)}</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "all-meals" }, _attrs))}><!--[-->`);
+      serverRenderer.exports.ssrRenderList(data.value, (item) => {
+        _push(`<div class="content-wrapper"><img${serverRenderer.exports.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="content"><p>${serverRenderer.exports.ssrInterpolate(item.name)}</p><p>ksh ${serverRenderer.exports.ssrInterpolate(item.price)}</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
       });
       _push(`<!--]--></div>`);
     };
@@ -5258,7 +5208,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/menu/index/[filter].vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
@@ -5266,7 +5216,7 @@ const _filter_ = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProp
   __proto__: null,
   "default": _sfc_main$2
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "index",
   __ssrInlineRender: true,
   setup(__props) {
@@ -5281,88 +5231,88 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: _imports_0$1 }
       ]
     });
-    const nav = ref(null);
+    const nav = vue_cjs_prod.ref(null);
     function toggleMenu() {
       nav.value.classList.toggle("height");
     }
     const route = useRoute();
-    const title = ref(route.params.filter);
+    const title = vue_cjs_prod.ref(route.params.filter);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nav_bar = __nuxt_component_0$2;
       const _component_NuxtLink = __nuxt_component_1$1;
-      const _component_NuxtPage = resolveComponent("NuxtPage");
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "everything" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_nav_bar, null, null, _parent));
-      _push(`<div class="arrow-down"><img${ssrRenderAttr("src", _imports_0$1)} alt="" srcset=""><p>${ssrInterpolate(title.value)}s</p></div><div class="navigations">`);
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      const _component_NuxtPage = vue_cjs_prod.resolveComponent("NuxtPage");
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "everything" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+      _push(`<div class="arrow-down"><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$1)} alt="" srcset=""><p>${serverRenderer.exports.ssrInterpolate(title.value)}s</p></div><div class="navigations">`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/menu/main-meal",
         onClick: toggleMenu
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`Main Meals`);
           } else {
             return [
-              createTextVNode("Main Meals")
+              vue_cjs_prod.createTextVNode("Main Meals")
             ];
           }
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/menu/beverage",
         onClick: toggleMenu
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`Bevarages`);
           } else {
             return [
-              createTextVNode("Bevarages")
+              vue_cjs_prod.createTextVNode("Bevarages")
             ];
           }
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/menu/snack",
         onClick: toggleMenu
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`snacks`);
           } else {
             return [
-              createTextVNode("snacks")
+              vue_cjs_prod.createTextVNode("snacks")
             ];
           }
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_component_NuxtLink, {
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
         to: "/menu/salad",
         onClick: toggleMenu
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`Salads`);
           } else {
             return [
-              createTextVNode("Salads")
+              vue_cjs_prod.createTextVNode("Salads")
             ];
           }
         }),
         _: 1
       }, _parent));
       _push(`</div>`);
-      _push(ssrRenderComponent(_component_NuxtPage, null, null, _parent));
+      _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtPage, null, null, _parent));
       _push(`</div>`);
     };
   }
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/menu/index.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
@@ -5370,7 +5320,7 @@ const index = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   __proto__: null,
   "default": _sfc_main$1
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __name: "signup",
   __ssrInlineRender: true,
   setup(__props) {
@@ -5385,25 +5335,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         { rel: "icon", href: _imports_0$4 }
       ]
     });
-    const phone = ref();
-    const password = ref();
-    const passwordRepeat = ref();
-    const messageResponse = ref();
-    const isButtonActive = ref(true);
-    ref();
+    const phone = vue_cjs_prod.ref();
+    const password = vue_cjs_prod.ref();
+    const passwordRepeat = vue_cjs_prod.ref();
+    const messageResponse = vue_cjs_prod.ref();
+    const isButtonActive = vue_cjs_prod.ref(true);
+    vue_cjs_prod.ref();
     return (_ctx, _push, _parent, _attrs) => {
       const _component_navBar = __nuxt_component_0$2;
       const _component_nuxt_link = __nuxt_component_1$1;
-      _push(`<main${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_component_navBar, null, null, _parent));
-      _push(`<div class="signup-wrapper"><p class="alert">${ssrInterpolate(messageResponse.value)}</p><img${ssrRenderAttr("src", _imports_0$4)} alt=""><h1>Sign Up</h1><div class="form"><input type="text" placeholder="phone number"${ssrRenderAttr("value", phone.value)}><input type="password" name="" placeholder="password"${ssrRenderAttr("value", password.value)}><input type="password" name="" placeholder="repeat password"${ssrRenderAttr("value", passwordRepeat.value)}><button${ssrIncludeBooleanAttr(isButtonActive.value) ? " disabled" : ""}>Sign up </button><div class="other">`);
-      _push(ssrRenderComponent(_component_nuxt_link, { to: "/login" }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+      _push(`<main${serverRenderer.exports.ssrRenderAttrs(_attrs)}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_navBar, null, null, _parent));
+      _push(`<div class="signup-wrapper"><p class="alert">${serverRenderer.exports.ssrInterpolate(messageResponse.value)}</p><img${serverRenderer.exports.ssrRenderAttr("src", _imports_0$4)} alt=""><h1>Sign Up</h1><div class="form"><input type="text" placeholder="phone number"${serverRenderer.exports.ssrRenderAttr("value", phone.value)}><input type="password" name="" placeholder="password"${serverRenderer.exports.ssrRenderAttr("value", password.value)}><input type="password" name="" placeholder="repeat password"${serverRenderer.exports.ssrRenderAttr("value", passwordRepeat.value)}><button${serverRenderer.exports.ssrIncludeBooleanAttr(isButtonActive.value) ? " disabled" : ""}>Sign up </button><div class="other">`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_nuxt_link, { to: "/login" }, {
+        default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`log in`);
           } else {
             return [
-              createTextVNode("log in")
+              vue_cjs_prod.createTextVNode("log in")
             ];
           }
         }),
@@ -5415,7 +5365,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/signup.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
@@ -5423,4 +5373,6 @@ const signup = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   "default": _sfc_main
 }, Symbol.toStringTag, { value: "Module" }));
+
 export { entry$1 as default };
+//# sourceMappingURL=server.mjs.map

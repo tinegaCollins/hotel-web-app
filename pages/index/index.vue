@@ -3,7 +3,7 @@
         <nav-bar />
         <main class="all-wrapper">
           <div class="left">
-            <img src="../../assets/icons/photo1.png" alt="random photo" srcset="">
+            <img src="~/assets/icons/photo1.png" alt="random photo" srcset="">
             <h2>Cooked by kenyans</h2>
           </div>
           <div class="mains">
@@ -12,7 +12,7 @@
             <other-meals/>
           </div>
           <div class="right">
-            <img src="../../assets/icons/photo2.png" alt="random photo " srcset="">
+            <img src="~/assets/icons/photo2.png" alt="random photo " srcset="">
             <h2> for kenyans</h2>
           </div>
         </main>
@@ -21,8 +21,8 @@
 
 <script setup>
 
-import '../../assets/styles/global.css'
-
+import '~/assets/styles/global.css'
+import icon from '../../assets/icons/undraw_breakfast_psiw.svg'
 useHead({
   title: 'hotel web app',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
@@ -31,7 +31,7 @@ useHead({
     { name: 'description', content: 'My amazing site.' }
   ],
   link: [
-    { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
+    { rel: 'icon', href: icon}
   ]
 })
 

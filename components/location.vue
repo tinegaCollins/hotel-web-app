@@ -1,9 +1,9 @@
 <template>
     <div class="location">
-        <img src="../assets/icons/location-svgrepo-com.svg" alt="location" srcset="">
+        <img src="~/assets/icons/location-svgrepo-com.svg" alt="location" srcset="">
         <div class="toggle" @click="toggleSearch"> 
             <h5>{{ locationSelected }}</h5>
-            <img ref="arrow" src="../assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
+            <img ref="arrow" src="~/assets/icons/arrow-down-svgrepo-com.svg" alt="" srcset="">
         </div>
     </div>
     <input :class="classSelected" type="text" placeholder="delivering to ...">
@@ -12,8 +12,6 @@
 
 
 <script setup lang="ts">
-import { json } from 'stream/consumers';
-
 const locationSelected = ref<string>();
 const ifLocationAvailable = ref<boolean>();
 const arrow = ref(null);
