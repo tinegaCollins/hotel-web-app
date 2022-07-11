@@ -8,7 +8,7 @@
         </h2>
         <p>sub total KSH {{checkout}}</p>
     </div>
-    <div class="cart" v-if="cartItemsDisplay">
+    <div class="cart" v-if="ifCartEmpty">
         <div class="items">
             <div class="single-item" v-for="item in cartItemsDisplay" :key="item._id">
                 <img :src="item.image" alt="" srcset="">
@@ -42,7 +42,10 @@
             <button @click="pay">proceed to pay</button>
         </div>
     </div>
-
+    <div class="empty-cart" v-else>
+        <h2>your cart is empty</h2>
+        <p>please add some items to your cart</p>
+    </div>
     </main>
 </template>
 
@@ -67,7 +70,7 @@ useHead({
 })
 
 const cartItemsDisplay = ref();
-const emptyCart = ref<boolean>(false);
+const ifCartEmpty = ref<boolean>(false);
 let phone:string;
 onMounted( async ()=>{
     const messageToSend = {
@@ -80,9 +83,10 @@ onMounted( async ()=>{
     })
     const data = await response.json();
     if(data == []){
-        emptyCart.value = true;
+        ifCartEmpty.value = false;
     }else {
         cartItemsDisplay.value = data;
+        ifCartEmpty.value = true;
         balanceToPay()
     }
     cartNumber.value = cart.cart.length
@@ -94,6 +98,7 @@ onMounted( async ()=>{
     }catch {
         console.log('could get number')
     }
+    stateChange();
 })
 const changeQuantity = async (id:string,b:boolean)=>{
     let elementToChange = cartItemsDisplay.value.find((element)=>{

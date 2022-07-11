@@ -3510,7 +3510,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       ]
     });
     const cartItemsDisplay = __vite_ssr_import_1__.ref();
-    const emptyCart = __vite_ssr_import_1__.ref(false);
+    const ifCartEmpty = __vite_ssr_import_1__.ref(false);
     let phone;
     __vite_ssr_import_1__.onMounted(async () => {
       const messageToSend = {
@@ -3523,9 +3523,10 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       });
       const data = await response.json();
       if (data == []) {
-        emptyCart.value = true;
+        ifCartEmpty.value = false;
       } else {
         cartItemsDisplay.value = data;
+        ifCartEmpty.value = true;
         balanceToPay();
       }
       cartNumber.value = cart.cart.length;
@@ -3536,6 +3537,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       } catch {
         console.log("could get number");
       }
+      stateChange();
     });
     const changeQuantity = async (id, b) => {
       let elementToChange = cartItemsDisplay.value.find((element) => {
@@ -3611,7 +3613,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         const data = await response.json();
       }
     };
-    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, emptyCart, phone, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, router, pay };
+    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, ifCartEmpty, phone, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, router, pay };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3627,14 +3629,14 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   _push(`<main${__vite_ssr_import_8__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
   _push(`<div class="top-cart-bar"><h2> cart (<strong>${__vite_ssr_import_8__.ssrInterpolate($setup.cartNumber)}</strong>) </h2><p>sub total KSH ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</p></div>`);
-  if ($setup.cartItemsDisplay) {
+  if ($setup.ifCartEmpty) {
     _push(`<div class="cart"><div class="items"><!--[-->`);
     __vite_ssr_import_8__.ssrRenderList($setup.cartItemsDisplay, (item) => {
       _push(`<div class="single-item"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</h4><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${__vite_ssr_import_8__.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_9__.default)} alt="" srcset=""></div></div>`);
     });
     _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${__vite_ssr_import_8__.ssrInterpolate($setup.total)}</h4></div><button>proceed to pay</button></div></div>`);
   } else {
-    _push(`<!---->`);
+    _push(`<div class="empty-cart"><h2>your cart is empty</h2><p>please add some items to your cart</p></div>`);
   }
   _push(`</main>`);
 }
@@ -5099,7 +5101,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       ]
     });
     const cartItemsDisplay = __vite_ssr_import_1__.ref();
-    const emptyCart = __vite_ssr_import_1__.ref(false);
+    const ifCartEmpty = __vite_ssr_import_1__.ref(false);
     let phone;
     __vite_ssr_import_1__.onMounted(async () => {
       const messageToSend = {
@@ -5112,9 +5114,10 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       });
       const data = await response.json();
       if (data == []) {
-        emptyCart.value = true;
+        ifCartEmpty.value = false;
       } else {
         cartItemsDisplay.value = data;
+        ifCartEmpty.value = true;
         balanceToPay();
       }
       cartNumber.value = cart.cart.length;
@@ -5125,6 +5128,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       } catch {
         console.log("could get number");
       }
+      stateChange();
     });
     const changeQuantity = async (id, b) => {
       let elementToChange = cartItemsDisplay.value.find((element) => {
@@ -5200,7 +5204,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         const data = await response.json();
       }
     };
-    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, emptyCart, phone, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, router, pay };
+    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, ifCartEmpty, phone, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, router, pay };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -5216,14 +5220,14 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   _push(`<main${__vite_ssr_import_8__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
   _push(`<div class="top-cart-bar"><h2> cart (<strong>${__vite_ssr_import_8__.ssrInterpolate($setup.cartNumber)}</strong>) </h2><p>sub total KSH ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</p></div>`);
-  if ($setup.cartItemsDisplay) {
+  if ($setup.ifCartEmpty) {
     _push(`<div class="cart"><div class="items"><!--[-->`);
     __vite_ssr_import_8__.ssrRenderList($setup.cartItemsDisplay, (item) => {
       _push(`<div class="single-item"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</h4><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${__vite_ssr_import_8__.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_9__.default)} alt="" srcset=""></div></div>`);
     });
     _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${__vite_ssr_import_8__.ssrInterpolate($setup.total)}</h4></div><button>proceed to pay</button></div></div>`);
   } else {
-    _push(`<!---->`);
+    _push(`<div class="empty-cart"><h2>your cart is empty</h2><p>please add some items to your cart</p></div>`);
   }
   _push(`</main>`);
 }
