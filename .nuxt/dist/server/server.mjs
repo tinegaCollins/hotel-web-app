@@ -120,6 +120,7 @@ __vite_ssr_exports__.default = (ctx) => entry(ctx);
 // - /components/landing-page.vue ($id_f281e5fb)
 // - /components/specials-today.vue ($id_8de6d258)
 // - /components/other-meals.vue ($id_72602127)
+// - /components/deliver-any.vue ($id_31c6cabb)
 // - /pages/index/index.vue?macro=true ($id_5878fe75)
 // - /pages/login.vue?macro=true ($id_213baa8a)
 // - /pages/menu/index.vue?macro=true ($id_0a7b1a7f)
@@ -3144,10 +3145,12 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_11__.default(_s
 // Request: /stores/useCart.ts
 // Parents: 
 // - /components/nav-bar.vue ($id_12afc13c)
+// - /pages/cart/checkout.vue?macro=true ($id_f03203d7)
 // - /pages/cart/index.vue?macro=true ($id_7c49fc15)
 // - /components/specials-today.vue ($id_8de6d258)
 // - /components/other-meals.vue ($id_72602127)
 // - /pages/menu/index/[filter].vue?macro=true ($id_df565390)
+// - /pages/cart/checkout.vue ($id_541d3871)
 // - /pages/cart/index.vue ($id_3fa45d07)
 // - /pages/menu/index/[filter].vue ($id_8eae100f)
 // Dependencies: 
@@ -3159,7 +3162,8 @@ const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/pinia/dis
 const useCartStore = __vite_ssr_import_0__.defineStore("cart1", {
   state: () => ({
     cart: [],
-    order: []
+    order: [],
+    totalToPay: 0
   }),
   getters: {
     getCartNumber: (state) => state.cart.length
@@ -3218,11 +3222,13 @@ import("file:///home/tinega/Desktop/dont/hotel-web-app-1/node_modules/pinia/dist
 // Parents: 
 // - /components/nav-bar.vue ($id_12afc13c)
 // - /pages/account.vue?macro=true ($id_1aee8f25)
+// - /pages/cart/checkout.vue?macro=true ($id_f03203d7)
 // - /pages/cart/index.vue?macro=true ($id_7c49fc15)
 // - /components/specials-today.vue ($id_8de6d258)
 // - /components/other-meals.vue ($id_72602127)
 // - /pages/menu/index/[filter].vue?macro=true ($id_df565390)
 // - /pages/account.vue ($id_ce2c396d)
+// - /pages/cart/checkout.vue ($id_541d3871)
 // - /pages/cart/index.vue ($id_3fa45d07)
 // - /pages/menu/index/[filter].vue ($id_8eae100f)
 // Dependencies: 
@@ -3263,6 +3269,7 @@ Object.defineProperty(__vite_ssr_exports__, "useLoginStore", { enumerable: true,
 // - /components/landing-page.vue ($id_f281e5fb)
 // - /components/specials-today.vue ($id_8de6d258)
 // - /components/other-meals.vue ($id_72602127)
+// - /components/deliver-any.vue ($id_31c6cabb)
 // - /pages/index/index.vue?macro=true ($id_5878fe75)
 // - /pages/login.vue?macro=true ($id_213baa8a)
 // - /pages/menu/index.vue?macro=true ($id_0a7b1a7f)
@@ -3305,11 +3312,9 @@ import("file:///home/tinega/Desktop/dont/hotel-web-app-1/node_modules/vue/server
 // - /components/nav-bar.vue ($id_12afc13c)
 // - /pages/index/index.vue?macro=true ($id_5878fe75)
 // - /pages/login.vue?macro=true ($id_213baa8a)
-// - /pages/menu/index.vue?macro=true ($id_0a7b1a7f)
 // - /pages/signup.vue?macro=true ($id_ae8d024a)
 // - /pages/index/index.vue ($id_a200782a)
 // - /pages/login.vue ($id_b0922173)
-// - /pages/menu/index.vue ($id_30db1f12)
 // - /pages/signup.vue ($id_31eb92be)
 // Dependencies: 
 
@@ -3354,6 +3359,7 @@ __vite_ssr_exports__.default = "nav svg[data-v-bc67b704]{height:20px}nav[data-v-
 // - /components/landing-page.vue ($id_f281e5fb)
 // - /components/specials-today.vue ($id_8de6d258)
 // - /components/other-meals.vue ($id_72602127)
+// - /components/deliver-any.vue ($id_31c6cabb)
 // - /pages/index/index.vue?macro=true ($id_5878fe75)
 // - /pages/login.vue?macro=true ($id_213baa8a)
 // - /pages/menu/index.vue?macro=true ($id_0a7b1a7f)
@@ -3410,7 +3416,10 @@ __vite_ssr_exports__.default = ".account-details{font-family:var(--title-font);p
 // - /components/nav-bar.vue ($id_12afc13c)
 // - /node_modules/nuxt/dist/head/runtime/index.mjs ($id_b7351483)
 // - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
+// - /stores/useCart.ts ($id_1a94a962)
+// - /stores/useLoginStore.ts ($id_49ef1b29)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /pages/cart/checkout.vue?vue&type=style&index=0&lang.css ($id_a2511ed0)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
 const $id_f03203d7 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
@@ -3420,45 +3429,95 @@ const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/nuxt/dist
 
 const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const _sfc_main = /* @__PURE__ */ __vite_ssr_import_2__.defineComponent({
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/stores/useCart.ts");
+
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/stores/useLoginStore.ts");
+
+const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
   __name: "checkout",
   setup(__props, { expose }) {
     expose();
+    const cart = __vite_ssr_import_4__.useCartStore();
+    const logins = __vite_ssr_import_5__.useLoginStore();
     __vite_ssr_import_1__.useHead({
       title: "check out",
       link: [
         { rel: "icon", href: "../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
-    const __returned__ = {};
+    const phone = __vite_ssr_import_2__.ref();
+    __vite_ssr_import_2__.onMounted(async () => {
+      const res = await fetch(`https://hotelini.herokuapp.com/get-phone/${logins.getID}`);
+      const data = await res.json();
+      phone.value = data.phone;
+    });
+    const totalToPay = __vite_ssr_import_2__.ref();
+    totalToPay.value = cart.totalToPay;
+    const router = useRouter();
+    const pay = async () => {
+      if (phone == void 0) {
+        router.push("/login");
+      } else {
+        const response = await fetch("https://tinypesa.com/api/v1/express/initialize", {
+          method: "POST",
+          headers: {
+            Apikey: "Me3s8tLM8vW",
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `amount=${totalToPay.value}&msisdn=${phone.value}&account_no=200`
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert("request sent to mpesa");
+        }
+      }
+    };
+    const __returned__ = { cart, logins, phone, totalToPay, router, pay };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nav_bar = __vite_ssr_import_0__.default;
-  _push(`<div${__vite_ssr_import_4__.ssrRenderAttrs(__vite_ssr_import_3__.mergeProps({ class: "checkout-wrapper" }, _attrs))}>`);
-  _push(__vite_ssr_import_4__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
-  _push(`</div>`);
+  _push(`<div${__vite_ssr_import_7__.ssrRenderAttrs(__vite_ssr_import_6__.mergeProps({ class: "checkout-wrapper" }, _attrs))}>`);
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+  _push(`<div class="checkout-content"><h3>checkout</h3><p>KSH${__vite_ssr_import_7__.ssrInterpolate($setup.totalToPay)}</p><div class="inut"><label for="phone">enter your mpesa number</label><p>do not enter the pin on your phone</p><p>this is a test project</p><input type="text" name="" id="phone"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}></div><button>pay with mpesa</button></div></div>`);
 }
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/pages/cart/checkout.vue?vue&type=style&index=0&lang.css");
+
+const __vite_ssr_import_9__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_5__.useSSRContext();
+  const ssrContext = __vite_ssr_import_9__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/cart/checkout.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_6__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/cart/checkout.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_10__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/cart/checkout.vue"]]);
 
 const meta = undefined
 Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
+}
+
+
+// --------------------
+// Request: /pages/cart/checkout.vue?vue&type=style&index=0&lang.css
+// Parents: 
+// - /pages/cart/checkout.vue?macro=true ($id_f03203d7)
+// - /pages/cart/checkout.vue ($id_541d3871)
+// Dependencies: 
+
+// --------------------
+const $id_a2511ed0 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = ".checkout-content,.checkout-content .inut{align-items:center;display:flex;flex-direction:column;font-family:var(--title-font);gap:20px;justify-content:center;padding:20px}.checkout-content button,.checkout-content input{border:1px solid var(--main-orange);border-radius:5px;color:var(--text-color);font-family:var(--title-font);font-size:var(--font-size);height:40px;padding:0 10px;width:300px}.checkout-content button{background-color:var(--main-orange);transition:background-color .2s ease-in-out}.checkout-content button:hover{background-color:var(--main-orange-dark);cursor:pointer}";
 }
 
 
@@ -3475,6 +3534,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 // - /stores/useLoginStore.ts ($id_49ef1b29)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
 // - /assets/icons/x-svgrepo-com.svg ($id_9c69f974)
+// - /assets/icons/empty.png ($id_8921eba5)
 // - /pages/cart/index.vue?vue&type=style&index=0&lang.css ($id_b6616365)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
@@ -3509,9 +3569,10 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         { rel: "icon", href: "../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
+    const displayCart = __vite_ssr_import_1__.computed(() => {
+      return cart.cart.length > 0;
+    });
     const cartItemsDisplay = __vite_ssr_import_1__.ref();
-    const ifCartEmpty = __vite_ssr_import_1__.ref(false);
-    let phone;
     __vite_ssr_import_1__.onMounted(async () => {
       const messageToSend = {
         ids: cart.cart
@@ -3523,20 +3584,12 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       });
       const data = await response.json();
       if (data == []) {
-        ifCartEmpty.value = false;
+        cartItemsDisplay.value = false;
       } else {
         cartItemsDisplay.value = data;
-        ifCartEmpty.value = true;
         balanceToPay();
       }
       cartNumber.value = cart.cart.length;
-      try {
-        const phoneResponse = await fetch(`https://hotelini.herokuapp.com/get-phone/${logins.getID}`);
-        const phoneData = await phoneResponse.json();
-        phone = phoneData.phone;
-      } catch {
-        console.log("could get number");
-      }
       stateChange();
     });
     const changeQuantity = async (id, b) => {
@@ -3599,21 +3652,10 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         };
       });
       cart.updateOrder(order);
-      if (phone == void 0) {
-        router.push("/login");
-      } else {
-        const response = await fetch("https://tinypesa.com/api/v1/express/initialize", {
-          method: "POST",
-          headers: {
-            Apikey: "Me3s8tLM8vW",
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: `amount=${total.value}&msisdn=${phone}&account_no=200`
-        });
-        const data = await response.json();
-      }
+      cart.totalToPay = total.value;
+      router.push("/cart/checkout");
     };
-    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, ifCartEmpty, phone, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, router, pay };
+    const __returned__ = { logins, cart, cartNumber, displayCart, cartItemsDisplay, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, router, pay };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3624,35 +3666,37 @@ const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/serve
 
 const __vite_ssr_import_9__ = await __vite_ssr_import__("/assets/icons/x-svgrepo-com.svg");
 
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/assets/icons/empty.png");
+
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nav_bar = __vite_ssr_import_0__.default;
   _push(`<main${__vite_ssr_import_8__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
   _push(`<div class="top-cart-bar"><h2> cart (<strong>${__vite_ssr_import_8__.ssrInterpolate($setup.cartNumber)}</strong>) </h2><p>sub total KSH ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</p></div>`);
-  if ($setup.ifCartEmpty) {
+  if ($setup.displayCart) {
     _push(`<div class="cart"><div class="items"><!--[-->`);
     __vite_ssr_import_8__.ssrRenderList($setup.cartItemsDisplay, (item) => {
       _push(`<div class="single-item"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</h4><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${__vite_ssr_import_8__.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_9__.default)} alt="" srcset=""></div></div>`);
     });
     _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${__vite_ssr_import_8__.ssrInterpolate($setup.total)}</h4></div><button>proceed to pay</button></div></div>`);
   } else {
-    _push(`<div class="empty-cart"><h2>your cart is empty</h2><p>please add some items to your cart</p></div>`);
+    _push(`<div class="empty-cart"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_10__.default)} alt="" srcset=""><h2>your cart is empty</h2><p>please add some items to your cart</p></div>`);
   }
   _push(`</main>`);
 }
-const __vite_ssr_import_10__ = await __vite_ssr_import__("/pages/cart/index.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_11__ = await __vite_ssr_import__("/pages/cart/index.vue?vue&type=style&index=0&lang.css");
 
-const __vite_ssr_import_11__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_12__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_11__.useSSRContext();
+  const ssrContext = __vite_ssr_import_12__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/cart/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_12__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_13__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_12__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/cart/index.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_13__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/cart/index.vue"]]);
 
 const meta = undefined
 Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
@@ -3673,6 +3717,19 @@ __vite_ssr_exports__.default = "/_nuxt/assets/icons/x-svgrepo-com.svg";
 
 
 // --------------------
+// Request: /assets/icons/empty.png
+// Parents: 
+// - /pages/cart/index.vue?macro=true ($id_7c49fc15)
+// - /pages/cart/index.vue ($id_3fa45d07)
+// Dependencies: 
+
+// --------------------
+const $id_8921eba5 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = "/_nuxt/assets/icons/empty.png";
+}
+
+
+// --------------------
 // Request: /pages/cart/index.vue?vue&type=style&index=0&lang.css
 // Parents: 
 // - /pages/cart/index.vue?macro=true ($id_7c49fc15)
@@ -3681,7 +3738,7 @@ __vite_ssr_exports__.default = "/_nuxt/assets/icons/x-svgrepo-com.svg";
 
 // --------------------
 const $id_b6616365 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".top-cart-bar{align-items:center;display:flex;font-family:var(--title-font);justify-content:space-between;margin-top:10px;padding:0 15px}.top-cart-bar p{background-color:var(--carolina-blue);padding:8px}.top-cart-bar h2{margin:15px 0 10px;padding:0 10px}.top-cart-bar h2 strong{color:var(--carolina-blue)}.cart{display:flex;flex-wrap:wrap;font-family:var(--title-font);padding:10px;row-gap:20px}.cart .items{width:100%}.cart .single-item{border:1px solid #000;display:flex;margin-top:10px;padding:.5em;position:relative}.cart .single-item>img{height:80px;-o-object-fit:cover;object-fit:cover;width:80px}.cart .single-item .details{margin-left:10px}.cart .single-item .details .quantity{align-items:center;-moz-column-gap:10px;column-gap:10px;display:flex;font-size:1.5rem;margin-top:15px;width:-webkit-max-content;width:-moz-max-content;width:max-content}.cart .single-item .delete{margin-left:auto}.add:hover,.delete:hover,.minus:hover{cursor:pointer}.checkout{border-top:3px solid var(--main-orange);display:grid;padding:5px;width:100%}.checkout>*{align-items:center;display:flex;justify-content:space-between;padding:10px}.checkout button{background-color:var(--main-orange);border:none;border-radius:5px;color:#fff;margin-left:auto;margin-top:10px;padding:.7em}@media screen and (min-width:768px){.cart{display:grid;grid-template-columns:1fr 1fr}.checkout{border-top:none}}";
+__vite_ssr_exports__.default = ".top-cart-bar{align-items:center;display:flex;font-family:var(--title-font);justify-content:space-between;margin-top:10px;padding:0 15px}.top-cart-bar p{background-color:var(--carolina-blue);padding:8px}.top-cart-bar h2{margin:15px 0 10px;padding:0 10px}.top-cart-bar h2 strong{color:var(--carolina-blue)}.cart{display:flex;flex-wrap:wrap;font-family:var(--title-font);padding:10px;row-gap:20px}.cart .items{width:100%}.cart .single-item{border:1px solid #000;display:flex;margin-top:10px;padding:.5em;position:relative}.cart .single-item>img{height:80px;-o-object-fit:cover;object-fit:cover;width:80px}.cart .single-item .details{margin-left:10px}.cart .single-item .details .quantity{align-items:center;-moz-column-gap:10px;column-gap:10px;display:flex;font-size:1.5rem;margin-top:15px;width:-webkit-max-content;width:-moz-max-content;width:max-content}.cart .single-item .delete{margin-left:auto}.add:hover,.delete:hover,.minus:hover{cursor:pointer}.checkout{border-top:3px solid var(--main-orange);display:grid;padding:5px;width:100%}.checkout>*{align-items:center;display:flex;justify-content:space-between;padding:10px}.checkout button{background-color:var(--main-orange);border:none;border-radius:5px;color:#fff;height:-webkit-max-content;height:-moz-max-content;height:max-content;margin-left:auto;margin-top:10px;padding:.7em}.checkout button:hover{cursor:pointer}@media screen and (min-width:768px){.cart{display:grid;grid-template-columns:1fr 1fr}.checkout{border-top:none}}.empty-cart{align-items:center;display:flex;flex-direction:column;font-family:var(--title-font);gap:40px;justify-content:center}";
 }
 
 
@@ -3694,13 +3751,14 @@ __vite_ssr_exports__.default = ".top-cart-bar{align-items:center;display:flex;fo
 // - /components/landing-page.vue ($id_f281e5fb)
 // - /components/specials-today.vue ($id_8de6d258)
 // - /components/other-meals.vue ($id_72602127)
+// - /components/deliver-any.vue ($id_31c6cabb)
 // - /node_modules/nuxt/dist/head/runtime/index.mjs ($id_b7351483)
 // - /assets/styles/global.css ($id_39795c03)
 // - /assets/icons/undraw_breakfast_psiw.svg ($id_0fb468a0)
 // - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
-// - /assets/icons/photo1.png ($id_84bbe196)
-// - /assets/icons/photo2.png ($id_a1980dd9)
+// - /assets/icons/772592.webp ($id_df22a150)
+// - /assets/icons/photo2.jpg ($id_f1c29957)
 // - /pages/index/index.vue?vue&type=style&index=0&lang.css ($id_64728f64)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
@@ -3713,11 +3771,13 @@ const __vite_ssr_import_2__ = await __vite_ssr_import__("/components/specials-to
 
 const __vite_ssr_import_3__ = await __vite_ssr_import__("/components/other-meals.vue");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/nuxt/dist/head/runtime/index.mjs");
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/components/deliver-any.vue");
 
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/assets/styles/global.css");
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/nuxt/dist/head/runtime/index.mjs");
 
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/assets/icons/undraw_breakfast_psiw.svg");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/assets/styles/global.css");
+
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/assets/icons/undraw_breakfast_psiw.svg");
 
 
 const _sfc_main = {
@@ -3726,7 +3786,7 @@ const _sfc_main = {
   expose();
 
 
-__vite_ssr_import_4__.useHead({
+__vite_ssr_import_5__.useHead({
   title: 'hotel web app',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   charset: 'utf-8',
@@ -3734,24 +3794,24 @@ __vite_ssr_import_4__.useHead({
     { name: 'description', content: 'My amazing site.' }
   ],
   link: [
-    { rel: 'icon', href: __vite_ssr_import_6__.default}
+    { rel: 'icon', href: __vite_ssr_import_7__.default}
   ]
 })
 
 
-const __returned__ = { icon: __vite_ssr_import_6__.default }
+const __returned__ = { icon: __vite_ssr_import_7__.default }
 Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
 return __returned__
 }
 
 }
-const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_9__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
-const __vite_ssr_import_9__ = await __vite_ssr_import__("/assets/icons/photo1.png");
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/assets/icons/772592.webp");
 
-const __vite_ssr_import_10__ = await __vite_ssr_import__("/assets/icons/photo2.png");
+const __vite_ssr_import_11__ = await __vite_ssr_import__("/assets/icons/photo2.jpg");
 
 
 
@@ -3760,30 +3820,33 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_landing_page = __vite_ssr_import_1__.default
   const _component_specials_today = __vite_ssr_import_2__.default
   const _component_other_meals = __vite_ssr_import_3__.default
+  const _component_deliver_any = __vite_ssr_import_4__.default
 
-  _push(`<div${__vite_ssr_import_8__.ssrRenderAttrs(__vite_ssr_import_7__.mergeProps({ class: "home-wrapper" }, _attrs))}>`)
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent))
-  _push(`<main class="all-wrapper"><div class="left"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_9__.default)} alt="random photo" srcset=""><h2>Cooked by kenyans</h2></div><div class="mains">`)
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_landing_page, null, null, _parent))
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_specials_today, null, null, _parent))
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_other_meals, null, null, _parent))
-  _push(`</div><div class="right"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_10__.default)} alt="random photo " srcset=""><h2> for kenyans</h2></div></main></div>`)
+  _push(`<div${__vite_ssr_import_9__.ssrRenderAttrs(__vite_ssr_import_8__.mergeProps({ class: "home-wrapper" }, _attrs))}>`)
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_nav_bar, null, null, _parent))
+  _push(`<main class="all-wrapper"><div class="left"><img${__vite_ssr_import_9__.ssrRenderAttr("src", __vite_ssr_import_10__.default)} alt="random photo" srcset=""><h2>Cooked by kenyans</h2></div><div class="mains">`)
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_landing_page, null, null, _parent))
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_specials_today, null, null, _parent))
+  _push(`</div><div class="right"><img${__vite_ssr_import_9__.ssrRenderAttr("src", __vite_ssr_import_11__.default)} alt="random photo " srcset=""><h2> for kenyans</h2></div></main>`)
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_other_meals, null, null, _parent))
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_deliver_any, null, null, _parent))
+  _push(`</div>`)
 }
 
-const __vite_ssr_import_11__ = await __vite_ssr_import__("/pages/index/index.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_12__ = await __vite_ssr_import__("/pages/index/index.vue?vue&type=style&index=0&lang.css");
 
 
-const __vite_ssr_import_12__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_13__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_12__.useSSRContext()
+  const ssrContext = __vite_ssr_import_13__.useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("pages/index/index.vue")
   return _sfc_setup ? _sfc_setup(props, ctx) : undefined
 }
-const __vite_ssr_import_13__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_14__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_13__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app-1/pages/index/index.vue"]])
+__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_14__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app-1/pages/index/index.vue"]])
 const meta = undefined
 Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
 }
@@ -3865,7 +3928,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
       arrow.value.classList.toggle("up");
     }
     const getLocation = async (id) => {
-      const response = await fetch(`http://localhost:8000/get-location/${id}`);
+      const response = await fetch(`https://hotelini.herokuapp.com/get-location/${id}`);
       const locationData = await response.json();
       locationSelected.value = locationData.location;
     };
@@ -3895,7 +3958,7 @@ const __vite_ssr_import_3__ = await __vite_ssr_import__("/assets/icons/location-
 const __vite_ssr_import_4__ = await __vite_ssr_import__("/assets/icons/arrow-down-svgrepo-com.svg");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[--><div class="location" data-v-c6d09d20><img${__vite_ssr_import_2__.ssrRenderAttr("src", __vite_ssr_import_3__.default)} alt="location" srcset="" data-v-c6d09d20><div class="toggle" data-v-c6d09d20><h5 data-v-c6d09d20>${__vite_ssr_import_2__.ssrInterpolate($setup.locationSelected)}</h5><img${__vite_ssr_import_2__.ssrRenderAttr("src", __vite_ssr_import_4__.default)} alt="" srcset="" data-v-c6d09d20></div></div><input class="${__vite_ssr_import_2__.ssrRenderClass($setup.classSelected)}" type="text" placeholder="delivering to ..." data-v-c6d09d20><!--]-->`);
+  _push(`<!--[--><div class="location" data-v-c6d09d20><img${__vite_ssr_import_2__.ssrRenderAttr("src", __vite_ssr_import_3__.default)} alt="location" srcset="" data-v-c6d09d20><div class="toggle" data-v-c6d09d20><h5 data-v-c6d09d20>${__vite_ssr_import_2__.ssrInterpolate($setup.locationSelected)}</h5><img${__vite_ssr_import_2__.ssrRenderAttr("src", __vite_ssr_import_4__.default)} alt="" srcset="" data-v-c6d09d20></div></div><div class="${__vite_ssr_import_2__.ssrRenderClass([$setup.classSelected, "location-input"])}" data-v-c6d09d20><input type="text" placeholder="delivering to ..." data-v-c6d09d20></div><!--]-->`);
 }
 const __vite_ssr_import_5__ = await __vite_ssr_import__("/components/location.vue?vue&type=style&index=0&scoped=true&lang.css");
 
@@ -3948,7 +4011,7 @@ __vite_ssr_exports__.default = "/_nuxt/assets/icons/arrow-down-svgrepo-com.svg";
 
 // --------------------
 const $id_7a1e1e60 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".location[data-v-c6d09d20]{-moz-column-gap:20px;column-gap:20px;margin-top:30px}.location[data-v-c6d09d20],.location .toggle[data-v-c6d09d20]{align-items:center;display:flex}.location .toggle[data-v-c6d09d20]{-moz-column-gap:10px;column-gap:10px}.location[data-v-c6d09d20]:hover{cursor:pointer}.location img[data-v-c6d09d20]{height:25px;transition:transform .15s cubic-bezier(.39,.575,.565,1);width:25px}.up[data-v-c6d09d20]{transform:rotate(180deg)}input[data-v-c6d09d20]{border:1px solid var(--main-orange);border-radius:5px;font-family:var(--title-font);font-size:1.2rem;font-weight:700;margin-top:20px;padding:7px;width:70%}@media screen and (max-width:768px){input[data-v-c6d09d20]{width:90%}}.show[data-v-c6d09d20]{visibility:visible}.hide[data-v-c6d09d20]{visibility:hidden}";
+__vite_ssr_exports__.default = ".location[data-v-c6d09d20]{-moz-column-gap:20px;column-gap:20px;margin-top:30px}.location[data-v-c6d09d20],.location .toggle[data-v-c6d09d20]{align-items:center;display:flex}.location .toggle[data-v-c6d09d20]{-moz-column-gap:10px;column-gap:10px}.location[data-v-c6d09d20]:hover{cursor:pointer}.location img[data-v-c6d09d20]{height:25px;transition:transform .15s cubic-bezier(.39,.575,.565,1);width:25px}.up[data-v-c6d09d20]{transform:rotate(180deg)}input[data-v-c6d09d20]{border:1px solid var(--main-orange);border-radius:5px;font-family:var(--title-font);font-size:1.2rem;font-weight:700;margin-top:20px;padding:7px;width:70%}@media screen and (max-width:768px){input[data-v-c6d09d20]{width:90%}}.location-input[data-v-c6d09d20]{display:grid;height:0;place-items:center;transition:height .15s cubic-bezier(.39,.575,.565,1);visibility:hidden;width:100%}.show[data-v-c6d09d20]{height:100px;visibility:visible}";
 }
 
 
@@ -4171,7 +4234,58 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_8__.default(_sf
 
 // --------------------
 const $id_bee35f7e = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".other-meals[data-v-551514a8]{font-family:var(--title-font);height:100vh;left:0;padding:20px;position:absolute;width:95vw}.other-meals main[data-v-551514a8]{display:flex;flex-wrap:wrap;padding-top:20px;row-gap:20px}.chefs-special[data-v-551514a8]{align-items:center;border:1px solid #333;border-radius:10px;display:flex;flex-direction:column;gap:20px;padding:6px;position:relative;width:100%}.chefs-special .add-to-cart[data-v-551514a8]{border:1px solid var(--side-orange);font-size:.7rem;padding:10px;transition:all .3s ease-out}.chefs-special .add-to-cart[data-v-551514a8]:hover{background-color:var(--side-orange);color:#fff;cursor:pointer}@media screen and (min-width:520px){.other-meals main[data-v-551514a8]{justify-content:space-around;width:100%}.chefs-special[data-v-551514a8]{width:300px}}.chefs-special img[data-v-551514a8]{border-radius:10%;height:200px;-o-object-fit:cover;object-fit:cover;width:200px}ul[data-v-551514a8]{align-self:flex-start;margin-left:10px;position:relative;width:100%}#chefs-pic[data-v-551514a8]{border-radius:50%;height:40px;-o-object-fit:cover;object-fit:cover;position:absolute;right:10%;top:20%;width:40px}";
+__vite_ssr_exports__.default = ".other-meals[data-v-551514a8]{font-family:var(--title-font);padding:20px}.other-meals main[data-v-551514a8]{display:flex;flex-wrap:wrap;padding-top:20px;row-gap:20px}.chefs-special[data-v-551514a8]{align-items:center;border:1px solid #333;border-radius:10px;display:flex;flex-direction:column;gap:20px;padding:6px;position:relative;width:100%}.chefs-special .add-to-cart[data-v-551514a8]{border:1px solid var(--side-orange);font-size:.7rem;padding:10px;transition:all .3s ease-out}.chefs-special .add-to-cart[data-v-551514a8]:hover{background-color:var(--side-orange);color:#fff;cursor:pointer}@media screen and (min-width:520px){.other-meals[data-v-551514a8]{padding:40px}.other-meals main[data-v-551514a8]{justify-content:space-around;width:100%}.chefs-special[data-v-551514a8]{width:300px}}.chefs-special img[data-v-551514a8]{border-radius:10%;height:240px;-o-object-fit:cover;object-fit:cover;width:240px}ul[data-v-551514a8]{align-self:flex-start;margin-left:10px;position:relative;width:100%}#chefs-pic[data-v-551514a8]{border-radius:50%;height:40px;-o-object-fit:cover;object-fit:cover;position:absolute;right:10%;top:20%;width:40px}";
+}
+
+
+// --------------------
+// Request: /components/deliver-any.vue
+// Parents: 
+// - /pages/index/index.vue?macro=true ($id_5878fe75)
+// - /pages/index/index.vue ($id_a200782a)
+// Dependencies: 
+// - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
+// - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /components/deliver-any.vue?vue&type=style&index=0&lang.css ($id_0d69f667)
+// - /@id/plugin-vue:export-helper ($id_bbb863c1)
+// --------------------
+const $id_31c6cabb = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const _sfc_main = {}
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+
+
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
+  _push(`<section${__vite_ssr_import_1__.ssrRenderAttrs(__vite_ssr_import_0__.mergeProps({ class: "any-where" }, _attrs))}><h3>we deliver to places all around the world</h3><p>@ <a href="">tinega2022</a></p></section>`)
+}
+
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/components/deliver-any.vue?vue&type=style&index=0&lang.css");
+
+
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const _sfc_setup = _sfc_main.setup
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = __vite_ssr_import_3__.useSSRContext()
+  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("components/deliver-any.vue")
+  return _sfc_setup ? _sfc_setup(props, ctx) : undefined
+}
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+
+__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_4__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app-1/components/deliver-any.vue"]]);
+}
+
+
+// --------------------
+// Request: /components/deliver-any.vue?vue&type=style&index=0&lang.css
+// Parents: 
+// - /components/deliver-any.vue ($id_31c6cabb)
+// Dependencies: 
+
+// --------------------
+const $id_0d69f667 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = ".any-where{align-items:center;background-color:var(--main-orange);display:flex;flex-direction:column;font-family:var(--title-font);justify-content:center;padding:20px;row-gap:20px}.any-where a{color:#333;font-size:1.5rem;text-decoration:none}.any-where a:visited{color:#333}";
 }
 
 
@@ -4189,28 +4303,28 @@ __vite_ssr_exports__.default = "@import url(\"https://fonts.googleapis.com/css2?
 
 
 // --------------------
-// Request: /assets/icons/photo1.png
+// Request: /assets/icons/772592.webp
 // Parents: 
 // - /pages/index/index.vue?macro=true ($id_5878fe75)
 // - /pages/index/index.vue ($id_a200782a)
 // Dependencies: 
 
 // --------------------
-const $id_84bbe196 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = "/_nuxt/assets/icons/photo1.png";
+const $id_df22a150 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = "/_nuxt/assets/icons/772592.webp";
 }
 
 
 // --------------------
-// Request: /assets/icons/photo2.png
+// Request: /assets/icons/photo2.jpg
 // Parents: 
 // - /pages/index/index.vue?macro=true ($id_5878fe75)
 // - /pages/index/index.vue ($id_a200782a)
 // Dependencies: 
 
 // --------------------
-const $id_a1980dd9 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = "/_nuxt/assets/icons/photo2.png";
+const $id_f1c29957 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = "/_nuxt/assets/icons/photo2.jpg";
 }
 
 
@@ -4223,7 +4337,7 @@ __vite_ssr_exports__.default = "/_nuxt/assets/icons/photo2.png";
 
 // --------------------
 const $id_64728f64 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".all-wrapper{display:flex;position:relative;width:100%}.left,.right{display:none;position:-webkit-sticky;position:sticky}.left img,.right img{display:none;height:calc(100vh - 80px);-o-object-fit:cover;object-fit:cover;position:relative;width:200px;z-index:-1}.left:before,.right:before{background-color:rgba(0,0,0,.8)}.left:before,.right:before{content:\"\";height:calc(100vh - 80px);left:0;position:absolute;top:0;width:200px;z-index:1}.left:before{background-color:hsla(0,0%,100%,.5)}.right h2{color:var(--main-orange);font-size:2rem;top:10%}.left h2,.right h2{display:none;font-family:var(--title-font);left:50%;position:absolute;transform:translate(-50%,-50%);width:100%;z-index:2}.left h2{color:#333;font-size:2.5rem;top:40%}.mains{padding-top:20px;width:100%}@media screen and (min-width:1024px){.left,.left h2,.left img,.right,.right h2,.right img{display:block}}";
+__vite_ssr_exports__.default = ".all-wrapper{display:flex;position:relative;width:100%}.left,.right{display:none;position:-webkit-sticky;position:sticky}.left img,.right img{display:none;height:calc(100vh - 80px);-o-object-fit:cover;object-fit:cover;position:relative;width:200px;z-index:-1}.left:before,.right:before{background-color:hsla(0,0%,100%,.4);content:\"\";height:calc(100vh - 80px);left:0;position:absolute;top:0;width:200px;z-index:1}.right h2{color:var(--main-orange);font-size:2rem;top:10%}.left h2,.right h2{display:none;font-family:var(--title-font);left:50%;position:absolute;transform:translate(-50%,-50%);width:100%;z-index:2}.left h2{color:#333;font-size:2.5rem;top:40%}.mains{padding-top:20px;width:100%}@media screen and (min-width:1024px){.left,.left h2,.left img,.right,.right h2,.right img{display:block}}::-webkit-scrollbar{border-left:1px solid #e6ecf8;width:6px}::-webkit-scrollbar-thumb{background-color:#d6872c}::-moz-scrollbar{border-left:1px solid #e6ecf8;width:6px}::-moz-scrollbar-thumb{background-color:#d6872c}";
 }
 
 
@@ -4416,7 +4530,6 @@ __vite_ssr_exports__.default = ".login-wrapper,.signup-wrapper{display:grid;font
 // - /node_modules/nuxt/dist/head/runtime/index.mjs ($id_b7351483)
 // - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
 // - /node_modules/nuxt/dist/app/index.mjs ($id_36927477)
-// - /assets/icons/undraw_breakfast_psiw.svg ($id_0fb468a0)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
 // - /assets/icons/arrow-down-svgrepo-com.svg ($id_5f240f89)
 // - /pages/menu/index.vue?vue&type=style&index=0&lang.css ($id_f88acd87)
@@ -4435,8 +4548,6 @@ const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/nuxt/dist
 
 const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/assets/icons/undraw_breakfast_psiw.svg");
-
 const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
   __name: "index",
   setup(__props, { expose }) {
@@ -4449,113 +4560,115 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
         { name: "description", content: "My amazing site." }
       ],
       link: [
-        { rel: "icon", href: __vite_ssr_import_6__.default }
+        { rel: "icon", href: "../../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
     const nav = __vite_ssr_import_3__.ref(null);
+    const innerWrapper = __vite_ssr_import_3__.ref(null);
     function toggleMenu() {
       nav.value.classList.toggle("height");
+      innerWrapper.value.classList.toggle("inner-wrapper-vis");
     }
     function watchTitle() {
       title.value = route.params.filter;
     }
     const route = __vite_ssr_import_4__.useRoute();
     const title = __vite_ssr_import_3__.ref(route.params.filter);
-    const __returned__ = { nav, toggleMenu, watchTitle, route, title };
+    const __returned__ = { nav, innerWrapper, toggleMenu, watchTitle, route, title };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
-const __vite_ssr_import_9__ = await __vite_ssr_import__("/assets/icons/arrow-down-svgrepo-com.svg");
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/assets/icons/arrow-down-svgrepo-com.svg");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nav_bar = __vite_ssr_import_0__.default;
   const _component_NuxtLink = __vite_ssr_import_1__.default;
-  const _component_NuxtPage = __vite_ssr_import_7__.resolveComponent("NuxtPage");
-  _push(`<div${__vite_ssr_import_8__.ssrRenderAttrs(__vite_ssr_import_7__.mergeProps({ class: "everything" }, _attrs))}>`);
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
-  _push(`<div class="arrow-down"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_9__.default)} alt="" srcset=""><p>${__vite_ssr_import_8__.ssrInterpolate($setup.title)}s</p></div><div class="navigations">`);
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtLink, {
+  const _component_NuxtPage = __vite_ssr_import_6__.resolveComponent("NuxtPage");
+  _push(`<div${__vite_ssr_import_7__.ssrRenderAttrs(__vite_ssr_import_6__.mergeProps({ class: "everything" }, _attrs))}>`);
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+  _push(`<div class="arrow-down"><img${__vite_ssr_import_7__.ssrRenderAttr("src", __vite_ssr_import_8__.default)} alt="" srcset=""><p>${__vite_ssr_import_7__.ssrInterpolate($setup.title)}s</p></div><div class="navigations"><div class="inner-wrapper">`);
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtLink, {
     to: "/menu/main-meal",
     onClick: $setup.toggleMenu
   }, {
-    default: __vite_ssr_import_7__.withCtx((_, _push2, _parent2, _scopeId) => {
+    default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(`Main Meals`);
       } else {
         return [
-          __vite_ssr_import_7__.createTextVNode("Main Meals")
+          __vite_ssr_import_6__.createTextVNode("Main Meals")
         ];
       }
     }),
     _: 1
   }, _parent));
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtLink, {
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtLink, {
     to: "/menu/beverage",
     onClick: $setup.toggleMenu
   }, {
-    default: __vite_ssr_import_7__.withCtx((_, _push2, _parent2, _scopeId) => {
+    default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(`Bevarages`);
       } else {
         return [
-          __vite_ssr_import_7__.createTextVNode("Bevarages")
+          __vite_ssr_import_6__.createTextVNode("Bevarages")
         ];
       }
     }),
     _: 1
   }, _parent));
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtLink, {
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtLink, {
     to: "/menu/snack",
     onClick: $setup.toggleMenu
   }, {
-    default: __vite_ssr_import_7__.withCtx((_, _push2, _parent2, _scopeId) => {
+    default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(`snacks`);
       } else {
         return [
-          __vite_ssr_import_7__.createTextVNode("snacks")
+          __vite_ssr_import_6__.createTextVNode("snacks")
         ];
       }
     }),
     _: 1
   }, _parent));
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtLink, {
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtLink, {
     to: "/menu/salad",
     onClick: $setup.toggleMenu
   }, {
-    default: __vite_ssr_import_7__.withCtx((_, _push2, _parent2, _scopeId) => {
+    default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(`Salads`);
       } else {
         return [
-          __vite_ssr_import_7__.createTextVNode("Salads")
+          __vite_ssr_import_6__.createTextVNode("Salads")
         ];
       }
     }),
     _: 1
   }, _parent));
-  _push(`</div>`);
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtPage, null, null, _parent));
+  _push(`</div></div>`);
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtPage, null, null, _parent));
   _push(`</div>`);
 }
-const __vite_ssr_import_10__ = await __vite_ssr_import__("/pages/menu/index.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_9__ = await __vite_ssr_import__("/pages/menu/index.vue?vue&type=style&index=0&lang.css");
 
-const __vite_ssr_import_11__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_11__.useSSRContext();
+  const ssrContext = __vite_ssr_import_10__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/menu/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_12__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_11__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_12__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/menu/index.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_11__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/menu/index.vue"]]);
 
 const meta = undefined
 Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
@@ -4571,7 +4684,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 
 // --------------------
 const $id_f88acd87 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".everything{position:relative}.navigations{background-color:var(--main-orange);display:none;flex-direction:column;height:0;overflow-y:hidden;padding:20px 10px;row-gap:35px;transition:height .5s ease}.height{display:flex;height:100%}.navigations a{color:#333;font-family:var(--title-font);font-size:1.2rem;text-decoration:none}.navigations a:active{color:var(--carolina-blue)}.arrow-down{align-items:center;cursor:pointer;display:flex;font-family:var(--title-font);gap:10px;justify-content:center;margin-top:20px}.arrow-down img{height:30px;margin-left:10px}";
+__vite_ssr_exports__.default = ".everything{position:relative}.navigations{background-color:var(--main-orange);height:0;transition:all .5s ease}.height{height:130px}.inner-wrapper{align-items:flex-start;display:flex;flex-direction:column;justify-content:flex-start;padding:10px 20px;row-gap:10px;transition:all .1s ease;visibility:hidden;z-index:1}.inner-wrapper-vis{visibility:visible}.navigations a{color:#333;font-family:var(--title-font);font-size:1.2rem;text-decoration:none}.navigations a:active{color:var(--carolina-blue)}.arrow-down{align-items:center;cursor:pointer;display:flex;font-family:var(--title-font);gap:10px;justify-content:center;margin-top:20px}.arrow-down img{height:30px;margin-left:10px}";
 }
 
 
@@ -5003,7 +5116,10 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_10__.default(_s
 // - /components/nav-bar.vue ($id_12afc13c)
 // - /node_modules/nuxt/dist/head/runtime/index.mjs ($id_b7351483)
 // - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
+// - /stores/useCart.ts ($id_1a94a962)
+// - /stores/useLoginStore.ts ($id_49ef1b29)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /pages/cart/checkout.vue?vue&type=style&index=0&lang.css ($id_a2511ed0)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
 const $id_541d3871 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
@@ -5013,42 +5129,79 @@ const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/nuxt/dist
 
 const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const _sfc_main = /* @__PURE__ */ __vite_ssr_import_2__.defineComponent({
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/stores/useCart.ts");
+
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/stores/useLoginStore.ts");
+
+const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
   __name: "checkout",
   setup(__props, { expose }) {
     expose();
+    const cart = __vite_ssr_import_4__.useCartStore();
+    const logins = __vite_ssr_import_5__.useLoginStore();
     __vite_ssr_import_1__.useHead({
       title: "check out",
       link: [
         { rel: "icon", href: "../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
-    const __returned__ = {};
+    const phone = __vite_ssr_import_2__.ref();
+    __vite_ssr_import_2__.onMounted(async () => {
+      const res = await fetch(`https://hotelini.herokuapp.com/get-phone/${logins.getID}`);
+      const data = await res.json();
+      phone.value = data.phone;
+    });
+    const totalToPay = __vite_ssr_import_2__.ref();
+    totalToPay.value = cart.totalToPay;
+    const router = useRouter();
+    const pay = async () => {
+      if (phone == void 0) {
+        router.push("/login");
+      } else {
+        const response = await fetch("https://tinypesa.com/api/v1/express/initialize", {
+          method: "POST",
+          headers: {
+            Apikey: "Me3s8tLM8vW",
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `amount=${totalToPay.value}&msisdn=${phone.value}&account_no=200`
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert("request sent to mpesa");
+        }
+      }
+    };
+    const __returned__ = { cart, logins, phone, totalToPay, router, pay };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nav_bar = __vite_ssr_import_0__.default;
-  _push(`<div${__vite_ssr_import_4__.ssrRenderAttrs(__vite_ssr_import_3__.mergeProps({ class: "checkout-wrapper" }, _attrs))}>`);
-  _push(__vite_ssr_import_4__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
-  _push(`</div>`);
+  _push(`<div${__vite_ssr_import_7__.ssrRenderAttrs(__vite_ssr_import_6__.mergeProps({ class: "checkout-wrapper" }, _attrs))}>`);
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+  _push(`<div class="checkout-content"><h3>checkout</h3><p>KSH${__vite_ssr_import_7__.ssrInterpolate($setup.totalToPay)}</p><div class="inut"><label for="phone">enter your mpesa number</label><p>do not enter the pin on your phone</p><p>this is a test project</p><input type="text" name="" id="phone"${__vite_ssr_import_7__.ssrRenderAttr("value", $setup.phone)}></div><button>pay with mpesa</button></div></div>`);
 }
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/pages/cart/checkout.vue?vue&type=style&index=0&lang.css");
+
+const __vite_ssr_import_9__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_5__.useSSRContext();
+  const ssrContext = __vite_ssr_import_9__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/cart/checkout.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_6__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/cart/checkout.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_10__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/cart/checkout.vue"]]);
 ;
 }
 
@@ -5066,6 +5219,7 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_6__.default(_sf
 // - /stores/useLoginStore.ts ($id_49ef1b29)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
 // - /assets/icons/x-svgrepo-com.svg ($id_9c69f974)
+// - /assets/icons/empty.png ($id_8921eba5)
 // - /pages/cart/index.vue?vue&type=style&index=0&lang.css ($id_b6616365)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
@@ -5100,9 +5254,10 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         { rel: "icon", href: "../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
+    const displayCart = __vite_ssr_import_1__.computed(() => {
+      return cart.cart.length > 0;
+    });
     const cartItemsDisplay = __vite_ssr_import_1__.ref();
-    const ifCartEmpty = __vite_ssr_import_1__.ref(false);
-    let phone;
     __vite_ssr_import_1__.onMounted(async () => {
       const messageToSend = {
         ids: cart.cart
@@ -5114,20 +5269,12 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
       });
       const data = await response.json();
       if (data == []) {
-        ifCartEmpty.value = false;
+        cartItemsDisplay.value = false;
       } else {
         cartItemsDisplay.value = data;
-        ifCartEmpty.value = true;
         balanceToPay();
       }
       cartNumber.value = cart.cart.length;
-      try {
-        const phoneResponse = await fetch(`https://hotelini.herokuapp.com/get-phone/${logins.getID}`);
-        const phoneData = await phoneResponse.json();
-        phone = phoneData.phone;
-      } catch {
-        console.log("could get number");
-      }
       stateChange();
     });
     const changeQuantity = async (id, b) => {
@@ -5190,21 +5337,10 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         };
       });
       cart.updateOrder(order);
-      if (phone == void 0) {
-        router.push("/login");
-      } else {
-        const response = await fetch("https://tinypesa.com/api/v1/express/initialize", {
-          method: "POST",
-          headers: {
-            Apikey: "Me3s8tLM8vW",
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: `amount=${total.value}&msisdn=${phone}&account_no=200`
-        });
-        const data = await response.json();
-      }
+      cart.totalToPay = total.value;
+      router.push("/cart/checkout");
     };
-    const __returned__ = { logins, cart, cartNumber, cartItemsDisplay, ifCartEmpty, phone, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, router, pay };
+    const __returned__ = { logins, cart, cartNumber, displayCart, cartItemsDisplay, changeQuantity, total, checkout, balanceToPay, stateChange, removeFromCart, router, pay };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -5215,35 +5351,37 @@ const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/serve
 
 const __vite_ssr_import_9__ = await __vite_ssr_import__("/assets/icons/x-svgrepo-com.svg");
 
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/assets/icons/empty.png");
+
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nav_bar = __vite_ssr_import_0__.default;
   _push(`<main${__vite_ssr_import_8__.ssrRenderAttrs(_attrs)}>`);
   _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
   _push(`<div class="top-cart-bar"><h2> cart (<strong>${__vite_ssr_import_8__.ssrInterpolate($setup.cartNumber)}</strong>) </h2><p>sub total KSH ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</p></div>`);
-  if ($setup.ifCartEmpty) {
+  if ($setup.displayCart) {
     _push(`<div class="cart"><div class="items"><!--[-->`);
     __vite_ssr_import_8__.ssrRenderList($setup.cartItemsDisplay, (item) => {
       _push(`<div class="single-item"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="details"><h4>KSH ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</h4><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><div class="quantity"><p class="add">+</p><h5>${__vite_ssr_import_8__.ssrInterpolate(item.quantity)}</h5><p class="minus">-</p></div></div><div class="delete"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_9__.default)} alt="" srcset=""></div></div>`);
     });
     _push(`<!--]--></div><div class="checkout"><div class="sub"><p>sub total</p><h4>Ksh ${__vite_ssr_import_8__.ssrInterpolate($setup.checkout)}</h4></div><div class="delivery-fee"><p>delivery</p><h4>KSH 300</h4></div><div class="total"><p>total</p><h4>${__vite_ssr_import_8__.ssrInterpolate($setup.total)}</h4></div><button>proceed to pay</button></div></div>`);
   } else {
-    _push(`<div class="empty-cart"><h2>your cart is empty</h2><p>please add some items to your cart</p></div>`);
+    _push(`<div class="empty-cart"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_10__.default)} alt="" srcset=""><h2>your cart is empty</h2><p>please add some items to your cart</p></div>`);
   }
   _push(`</main>`);
 }
-const __vite_ssr_import_10__ = await __vite_ssr_import__("/pages/cart/index.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_11__ = await __vite_ssr_import__("/pages/cart/index.vue?vue&type=style&index=0&lang.css");
 
-const __vite_ssr_import_11__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_12__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_11__.useSSRContext();
+  const ssrContext = __vite_ssr_import_12__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/cart/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_12__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_13__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_12__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/cart/index.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_13__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/cart/index.vue"]]);
 ;
 }
 
@@ -5257,13 +5395,14 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_12__.default(_s
 // - /components/landing-page.vue ($id_f281e5fb)
 // - /components/specials-today.vue ($id_8de6d258)
 // - /components/other-meals.vue ($id_72602127)
+// - /components/deliver-any.vue ($id_31c6cabb)
 // - /node_modules/nuxt/dist/head/runtime/index.mjs ($id_b7351483)
 // - /assets/styles/global.css ($id_39795c03)
 // - /assets/icons/undraw_breakfast_psiw.svg ($id_0fb468a0)
 // - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
-// - /assets/icons/photo1.png ($id_84bbe196)
-// - /assets/icons/photo2.png ($id_a1980dd9)
+// - /assets/icons/772592.webp ($id_df22a150)
+// - /assets/icons/photo2.jpg ($id_f1c29957)
 // - /pages/index/index.vue?vue&type=style&index=0&lang.css ($id_64728f64)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
@@ -5276,11 +5415,13 @@ const __vite_ssr_import_2__ = await __vite_ssr_import__("/components/specials-to
 
 const __vite_ssr_import_3__ = await __vite_ssr_import__("/components/other-meals.vue");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/nuxt/dist/head/runtime/index.mjs");
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/components/deliver-any.vue");
 
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/assets/styles/global.css");
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/nuxt/dist/head/runtime/index.mjs");
 
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/assets/icons/undraw_breakfast_psiw.svg");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/assets/styles/global.css");
+
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/assets/icons/undraw_breakfast_psiw.svg");
 
 
 const _sfc_main = {
@@ -5289,7 +5430,7 @@ const _sfc_main = {
   expose();
 
 
-__vite_ssr_import_4__.useHead({
+__vite_ssr_import_5__.useHead({
   title: 'hotel web app',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   charset: 'utf-8',
@@ -5297,24 +5438,24 @@ __vite_ssr_import_4__.useHead({
     { name: 'description', content: 'My amazing site.' }
   ],
   link: [
-    { rel: 'icon', href: __vite_ssr_import_6__.default}
+    { rel: 'icon', href: __vite_ssr_import_7__.default}
   ]
 })
 
 
-const __returned__ = { icon: __vite_ssr_import_6__.default }
+const __returned__ = { icon: __vite_ssr_import_7__.default }
 Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
 return __returned__
 }
 
 }
-const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_9__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
-const __vite_ssr_import_9__ = await __vite_ssr_import__("/assets/icons/photo1.png");
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/assets/icons/772592.webp");
 
-const __vite_ssr_import_10__ = await __vite_ssr_import__("/assets/icons/photo2.png");
+const __vite_ssr_import_11__ = await __vite_ssr_import__("/assets/icons/photo2.jpg");
 
 
 
@@ -5323,30 +5464,33 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   const _component_landing_page = __vite_ssr_import_1__.default
   const _component_specials_today = __vite_ssr_import_2__.default
   const _component_other_meals = __vite_ssr_import_3__.default
+  const _component_deliver_any = __vite_ssr_import_4__.default
 
-  _push(`<div${__vite_ssr_import_8__.ssrRenderAttrs(__vite_ssr_import_7__.mergeProps({ class: "home-wrapper" }, _attrs))}>`)
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent))
-  _push(`<main class="all-wrapper"><div class="left"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_9__.default)} alt="random photo" srcset=""><h2>Cooked by kenyans</h2></div><div class="mains">`)
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_landing_page, null, null, _parent))
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_specials_today, null, null, _parent))
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_other_meals, null, null, _parent))
-  _push(`</div><div class="right"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_10__.default)} alt="random photo " srcset=""><h2> for kenyans</h2></div></main></div>`)
+  _push(`<div${__vite_ssr_import_9__.ssrRenderAttrs(__vite_ssr_import_8__.mergeProps({ class: "home-wrapper" }, _attrs))}>`)
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_nav_bar, null, null, _parent))
+  _push(`<main class="all-wrapper"><div class="left"><img${__vite_ssr_import_9__.ssrRenderAttr("src", __vite_ssr_import_10__.default)} alt="random photo" srcset=""><h2>Cooked by kenyans</h2></div><div class="mains">`)
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_landing_page, null, null, _parent))
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_specials_today, null, null, _parent))
+  _push(`</div><div class="right"><img${__vite_ssr_import_9__.ssrRenderAttr("src", __vite_ssr_import_11__.default)} alt="random photo " srcset=""><h2> for kenyans</h2></div></main>`)
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_other_meals, null, null, _parent))
+  _push(__vite_ssr_import_9__.ssrRenderComponent(_component_deliver_any, null, null, _parent))
+  _push(`</div>`)
 }
 
-const __vite_ssr_import_11__ = await __vite_ssr_import__("/pages/index/index.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_12__ = await __vite_ssr_import__("/pages/index/index.vue?vue&type=style&index=0&lang.css");
 
 
-const __vite_ssr_import_12__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_13__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_12__.useSSRContext()
+  const ssrContext = __vite_ssr_import_13__.useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("pages/index/index.vue")
   return _sfc_setup ? _sfc_setup(props, ctx) : undefined
 }
-const __vite_ssr_import_13__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_14__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_13__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app-1/pages/index/index.vue"]]);
+__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_14__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"/home/tinega/Desktop/dont/hotel-web-app-1/pages/index/index.vue"]]);
 }
 
 
@@ -5628,7 +5772,6 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_10__.default(_s
 // - /node_modules/nuxt/dist/head/runtime/index.mjs ($id_b7351483)
 // - /node_modules/vue/dist/vue.cjs.js ($id_60f0615f)
 // - /node_modules/nuxt/dist/app/index.mjs ($id_36927477)
-// - /assets/icons/undraw_breakfast_psiw.svg ($id_0fb468a0)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
 // - /assets/icons/arrow-down-svgrepo-com.svg ($id_5f240f89)
 // - /pages/menu/index.vue?vue&type=style&index=0&lang.css ($id_f88acd87)
@@ -5647,8 +5790,6 @@ const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/nuxt/dist
 
 const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/assets/icons/undraw_breakfast_psiw.svg");
-
 const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
   __name: "index",
   setup(__props, { expose }) {
@@ -5661,113 +5802,115 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_5__.defineComponent({
         { name: "description", content: "My amazing site." }
       ],
       link: [
-        { rel: "icon", href: __vite_ssr_import_6__.default }
+        { rel: "icon", href: "../../assets/icons/undraw_breakfast_psiw.svg" }
       ]
     });
     const nav = __vite_ssr_import_3__.ref(null);
+    const innerWrapper = __vite_ssr_import_3__.ref(null);
     function toggleMenu() {
       nav.value.classList.toggle("height");
+      innerWrapper.value.classList.toggle("inner-wrapper-vis");
     }
     function watchTitle() {
       title.value = route.params.filter;
     }
     const route = __vite_ssr_import_4__.useRoute();
     const title = __vite_ssr_import_3__.ref(route.params.filter);
-    const __returned__ = { nav, toggleMenu, watchTitle, route, title };
+    const __returned__ = { nav, innerWrapper, toggleMenu, watchTitle, route, title };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
-const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
-const __vite_ssr_import_9__ = await __vite_ssr_import__("/assets/icons/arrow-down-svgrepo-com.svg");
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/assets/icons/arrow-down-svgrepo-com.svg");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nav_bar = __vite_ssr_import_0__.default;
   const _component_NuxtLink = __vite_ssr_import_1__.default;
-  const _component_NuxtPage = __vite_ssr_import_7__.resolveComponent("NuxtPage");
-  _push(`<div${__vite_ssr_import_8__.ssrRenderAttrs(__vite_ssr_import_7__.mergeProps({ class: "everything" }, _attrs))}>`);
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
-  _push(`<div class="arrow-down"><img${__vite_ssr_import_8__.ssrRenderAttr("src", __vite_ssr_import_9__.default)} alt="" srcset=""><p>${__vite_ssr_import_8__.ssrInterpolate($setup.title)}s</p></div><div class="navigations">`);
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtLink, {
+  const _component_NuxtPage = __vite_ssr_import_6__.resolveComponent("NuxtPage");
+  _push(`<div${__vite_ssr_import_7__.ssrRenderAttrs(__vite_ssr_import_6__.mergeProps({ class: "everything" }, _attrs))}>`);
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_nav_bar, null, null, _parent));
+  _push(`<div class="arrow-down"><img${__vite_ssr_import_7__.ssrRenderAttr("src", __vite_ssr_import_8__.default)} alt="" srcset=""><p>${__vite_ssr_import_7__.ssrInterpolate($setup.title)}s</p></div><div class="navigations"><div class="inner-wrapper">`);
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtLink, {
     to: "/menu/main-meal",
     onClick: $setup.toggleMenu
   }, {
-    default: __vite_ssr_import_7__.withCtx((_, _push2, _parent2, _scopeId) => {
+    default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(`Main Meals`);
       } else {
         return [
-          __vite_ssr_import_7__.createTextVNode("Main Meals")
+          __vite_ssr_import_6__.createTextVNode("Main Meals")
         ];
       }
     }),
     _: 1
   }, _parent));
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtLink, {
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtLink, {
     to: "/menu/beverage",
     onClick: $setup.toggleMenu
   }, {
-    default: __vite_ssr_import_7__.withCtx((_, _push2, _parent2, _scopeId) => {
+    default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(`Bevarages`);
       } else {
         return [
-          __vite_ssr_import_7__.createTextVNode("Bevarages")
+          __vite_ssr_import_6__.createTextVNode("Bevarages")
         ];
       }
     }),
     _: 1
   }, _parent));
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtLink, {
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtLink, {
     to: "/menu/snack",
     onClick: $setup.toggleMenu
   }, {
-    default: __vite_ssr_import_7__.withCtx((_, _push2, _parent2, _scopeId) => {
+    default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(`snacks`);
       } else {
         return [
-          __vite_ssr_import_7__.createTextVNode("snacks")
+          __vite_ssr_import_6__.createTextVNode("snacks")
         ];
       }
     }),
     _: 1
   }, _parent));
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtLink, {
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtLink, {
     to: "/menu/salad",
     onClick: $setup.toggleMenu
   }, {
-    default: __vite_ssr_import_7__.withCtx((_, _push2, _parent2, _scopeId) => {
+    default: __vite_ssr_import_6__.withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(`Salads`);
       } else {
         return [
-          __vite_ssr_import_7__.createTextVNode("Salads")
+          __vite_ssr_import_6__.createTextVNode("Salads")
         ];
       }
     }),
     _: 1
   }, _parent));
-  _push(`</div>`);
-  _push(__vite_ssr_import_8__.ssrRenderComponent(_component_NuxtPage, null, null, _parent));
+  _push(`</div></div>`);
+  _push(__vite_ssr_import_7__.ssrRenderComponent(_component_NuxtPage, null, null, _parent));
   _push(`</div>`);
 }
-const __vite_ssr_import_10__ = await __vite_ssr_import__("/pages/menu/index.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_9__ = await __vite_ssr_import__("/pages/menu/index.vue?vue&type=style&index=0&lang.css");
 
-const __vite_ssr_import_11__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_11__.useSSRContext();
+  const ssrContext = __vite_ssr_import_10__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/menu/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_12__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_11__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_12__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/menu/index.vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_11__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/menu/index.vue"]]);
 ;
 }
 
@@ -6964,8 +7107,10 @@ const __modules__ = {
   "/@id/plugin-vue:export-helper": $id_bbb863c1,
   "/pages/account.vue?vue&type=style&index=0&lang.css": $id_c8cedaf5,
   "/pages/cart/checkout.vue?macro=true": $id_f03203d7,
+  "/pages/cart/checkout.vue?vue&type=style&index=0&lang.css": $id_a2511ed0,
   "/pages/cart/index.vue?macro=true": $id_7c49fc15,
   "/assets/icons/x-svgrepo-com.svg": $id_9c69f974,
+  "/assets/icons/empty.png": $id_8921eba5,
   "/pages/cart/index.vue?vue&type=style&index=0&lang.css": $id_b6616365,
   "/pages/index/index.vue?macro=true": $id_5878fe75,
   "/components/landing-page.vue": $id_f281e5fb,
@@ -6978,9 +7123,11 @@ const __modules__ = {
   "/components/specials-today.vue?vue&type=style&index=0&lang.css": $id_b62ff068,
   "/components/other-meals.vue": $id_72602127,
   "/components/other-meals.vue?vue&type=style&index=0&scoped=true&lang.css": $id_bee35f7e,
+  "/components/deliver-any.vue": $id_31c6cabb,
+  "/components/deliver-any.vue?vue&type=style&index=0&lang.css": $id_0d69f667,
   "/assets/styles/global.css": $id_39795c03,
-  "/assets/icons/photo1.png": $id_84bbe196,
-  "/assets/icons/photo2.png": $id_a1980dd9,
+  "/assets/icons/772592.webp": $id_df22a150,
+  "/assets/icons/photo2.jpg": $id_f1c29957,
   "/pages/index/index.vue?vue&type=style&index=0&lang.css": $id_64728f64,
   "/pages/login.vue?macro=true": $id_213baa8a,
   "/pages/login.vue?vue&type=style&index=0&lang.css": $id_af77e8ef,

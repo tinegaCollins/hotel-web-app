@@ -1,5 +1,3 @@
-const path = require('path');
-
 import { defineNuxtConfig } from 'nuxt'
 
 // 

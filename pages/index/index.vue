@@ -3,19 +3,21 @@
         <nav-bar />
         <main class="all-wrapper">
           <div class="left">
-            <img src="~/assets/icons/photo1.png" alt="random photo" srcset="">
+            <img src="~/assets/icons/772592.webp" alt="random photo" srcset="">
             <h2>Cooked by kenyans</h2>
           </div>
           <div class="mains">
             <landing-page />
             <specials-today/>
-            <other-meals/>
           </div>
           <div class="right">
-            <img src="~/assets/icons/photo2.png" alt="random photo " srcset="">
+            <img src="~/assets/icons/photo2.jpg" alt="random photo " srcset="">
             <h2> for kenyans</h2>
           </div>
         </main>
+        <other-meals/>
+        <deliver-any/>
+
    </div>
 </template>
 
@@ -62,17 +64,7 @@ useHead({
 .left::before, .right::before{
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: calc(100vh - 80px );
-  background-color: rgba(0,0,0,0.8);
-  z-index: 1;
-}
-.left::before{
-  content: '';
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
   top: 0;
   left: 0;
   width: 200px;
@@ -122,4 +114,8 @@ useHead({
     display: block;
   }
 }
+::-webkit-scrollbar{width:6px;border-left:1px solid #E6ECF8;}
+::-webkit-scrollbar-thumb{background-color:#d6872c;}
+::-moz-scrollbar{width:6px;border-left:1px solid #E6ECF8;}
+::-moz-scrollbar-thumb{background-color:#d6872c;}
 </style>

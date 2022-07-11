@@ -8,7 +8,7 @@
         </h2>
         <p>sub total KSH {{checkout}}</p>
     </div>
-    <div class="cart" v-if="ifCartEmpty">
+    <div class="cart" v-if="displayCart">
         <div class="items">
             <div class="single-item" v-for="item in cartItemsDisplay" :key="item._id">
                 <img :src="item.image" alt="" srcset="">
@@ -43,6 +43,7 @@
         </div>
     </div>
     <div class="empty-cart" v-else>
+        <img src="~/assets/icons/empty.png" alt="" srcset="">
         <h2>your cart is empty</h2>
         <p>please add some items to your cart</p>
     </div>
@@ -68,10 +69,10 @@ useHead({
     { rel: 'icon', href: '../assets/icons/undraw_breakfast_psiw.svg' }
   ]
 })
-
+const displayCart = computed(()=>{
+    return cart.cart.length > 0
+})
 const cartItemsDisplay = ref();
-const ifCartEmpty = ref<boolean>(false);
-let phone:string;
 onMounted( async ()=>{
     const messageToSend = {
         ids : cart.cart
@@ -83,21 +84,12 @@ onMounted( async ()=>{
     })
     const data = await response.json();
     if(data == []){
-        ifCartEmpty.value = false;
+        cartItemsDisplay.value = false;
     }else {
         cartItemsDisplay.value = data;
-        ifCartEmpty.value = true;
         balanceToPay()
     }
     cartNumber.value = cart.cart.length
-
-    try{
-        const phoneResponse = await fetch(`https://hotelini.herokuapp.com/get-phone/${logins.getID}`)
-        const phoneData = await phoneResponse.json()
-        phone = phoneData.phone;
-    }catch {
-        console.log('could get number')
-    }
     stateChange();
 })
 const changeQuantity = async (id:string,b:boolean)=>{
@@ -165,19 +157,8 @@ const pay = async ()=>{
         }
     })
     cart.updateOrder(order);
-    if(phone == undefined){
-        router.push('/login');
-    }else{
-        const response = await fetch('https://tinypesa.com/api/v1/express/initialize',{
-            method: 'POST',
-            headers: {
-                Apikey: "Me3s8tLM8vW",
-                "Content-Type": "application/x-www-form-urlencoded",   
-            },
-            body: `amount=${total.value}&msisdn=${phone}&account_no=200`,
-    });
-    const data = await response.json();
-    }
+    cart.totalToPay = total.value;
+    router.push('/cart/checkout');
 }
 </script>
 
@@ -258,9 +239,13 @@ const pay = async ()=>{
     color: #fff;
     border: none;
     padding: .7em;
+    height: max-content;
     border-radius: 5px;
     margin-top: 10px;
     margin-left: auto;
+}
+.checkout button:hover {
+    cursor: pointer;
 }
 @media screen and (min-width: 768px) {
     .cart{
@@ -270,5 +255,13 @@ const pay = async ()=>{
     .checkout {
         border-top: none;
     }
+}
+.empty-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    font-family: var(--title-font);
 }
 </style>

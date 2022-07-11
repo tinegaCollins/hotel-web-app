@@ -3,7 +3,8 @@ import { defineStore } from 'pinia';
 export const useCartStore = defineStore('cart1',{
     state: ()=> ({
         cart: [],
-        order: []
+        order: [],
+        totalToPay: 0
     }),
     getters: {
         getCartNumber: (state)=> state.cart.length,

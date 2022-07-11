@@ -58,10 +58,6 @@ const addToCart = async (id:string)=>{
 
 <style scoped>
 .other-meals {
-    width: 95vw;
-    position: absolute;
-    left: 0;
-    height: 100vh;
     font-family: var(--title-font);
     padding: 20px;
 }
@@ -94,6 +90,9 @@ const addToCart = async (id:string)=>{
     cursor: pointer;
 }
 @media screen and  (min-width: 520px){
+    .other-meals {
+        padding: 40px;
+    }
     .other-meals main{
         width: 100%;
         justify-content: space-around;
@@ -103,8 +102,8 @@ const addToCart = async (id:string)=>{
     }
 }
 .chefs-special img{
-    height: 200px;
-    width: 200px;
+    height: 240px;
+    width: 240px;
     border-radius: 10%;
     object-fit: cover;
 }

@@ -6,17 +6,18 @@
           <p>{{title}}s</p>
         </div>
         <div class="navigations" ref="nav" @click="watchTitle">
-          <NuxtLink to="/menu/main-meal"  @click="toggleMenu">Main Meals</NuxtLink>
-          <NuxtLink to="/menu/beverage"  @click="toggleMenu">Bevarages</NuxtLink>
-          <NuxtLink to="/menu/snack"  @click="toggleMenu">snacks</NuxtLink>
-          <NuxtLink to="/menu/salad"  @click="toggleMenu">Salads</NuxtLink>
+          <div class="inner-wrapper" ref="innerWrapper">
+            <NuxtLink to="/menu/main-meal"  @click="toggleMenu">Main Meals</NuxtLink>
+            <NuxtLink to="/menu/beverage"  @click="toggleMenu">Bevarages</NuxtLink>
+            <NuxtLink to="/menu/snack"  @click="toggleMenu">snacks</NuxtLink>
+            <NuxtLink to="/menu/salad"  @click="toggleMenu">Salads</NuxtLink>
+          </div>
         </div>
         <NuxtPage></NuxtPage>
     </div>
 </template>
 
 <script setup lang="ts">
-import icon from '../../assets/icons/undraw_breakfast_psiw.svg'
 
 useHead({
   title: 'hotel menu',
@@ -26,12 +27,14 @@ useHead({
     { name: 'description', content: 'My amazing site.' }
   ],
   link: [
-    { rel: 'icon', href: icon }
+    { rel: 'icon', href: '../../assets/icons/undraw_breakfast_psiw.svg'}
   ]
 })
 const nav = ref(null);
+const innerWrapper = ref(null);
 function toggleMenu(){
   nav.value.classList.toggle("height");
+  innerWrapper.value.classList.toggle("inner-wrapper-vis");
 }
 function watchTitle(){
   title.value  = route.params.filter;
@@ -47,18 +50,26 @@ const title  = ref(route.params.filter);
   position: relative;
 }
 .navigations {
-  flex-direction: column;
   background-color: var(--main-orange);
-  row-gap: 35px;
-  display: none;
-  padding: 20px 10px;
-  height: 0%;
-  overflow-y: hidden;
-  transition: height 500ms ease;
+  height: 0px;
+  transition: all 500ms ease;
 }
 .height{
-  height: 100%;
+  height: 130px;
+}
+.inner-wrapper {
   display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  visibility: hidden;
+  z-index: 1;
+  padding: 10px 20px;
+  transition: all 100ms ease;
+}
+.inner-wrapper-vis{
+  visibility: visible;
 }
 .navigations a {
   color: #333;
