@@ -33,7 +33,7 @@ const data = ref();
 let userID:string;
 onMounted( async ()=>{
     userID = logins.getID
-    const response = await fetch(`http://localhost:8000/filter/${route.params.filter}`)
+    const response = await fetch(`https://hotelini.herokuapp.com/filter/${route.params.filter}`)
     data.value =await response.json();
     stateChange()
 })
@@ -44,7 +44,7 @@ const stateChange = ()=> {
             id: userID,
             newCart: cart.cart
          }
-         const response = await fetch(`http://localhost:8000/update-cart`,{
+         const response = await fetch(`https://hotelini.herokuapp.com/update-cart`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataToSend)

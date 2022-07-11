@@ -4624,7 +4624,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
     let userID;
     __vite_ssr_import_2__.onMounted(async () => {
       userID = logins.getID;
-      const response = await fetch(`http://localhost:8000/filter/${route.params.filter}`);
+      const response = await fetch(`https://hotelini.herokuapp.com/filter/${route.params.filter}`);
       data.value = await response.json();
       stateChange();
     });
@@ -4634,7 +4634,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
           id: userID,
           newCart: cart.cart
         };
-        const response = await fetch(`http://localhost:8000/update-cart`, {
+        const response = await fetch(`https://hotelini.herokuapp.com/update-cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dataToSend)
@@ -5561,7 +5561,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
     let userID;
     __vite_ssr_import_2__.onMounted(async () => {
       userID = logins.getID;
-      const response = await fetch(`http://localhost:8000/filter/${route.params.filter}`);
+      const response = await fetch(`https://hotelini.herokuapp.com/filter/${route.params.filter}`);
       data.value = await response.json();
       stateChange();
     });
@@ -5571,7 +5571,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
           id: userID,
           newCart: cart.cart
         };
-        const response = await fetch(`http://localhost:8000/update-cart`, {
+        const response = await fetch(`https://hotelini.herokuapp.com/update-cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dataToSend)
