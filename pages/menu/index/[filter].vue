@@ -8,6 +8,27 @@
             </div>
             <div class="add-to-cart" @click="addToCart(item._id)"><p>add to cart</p></div>
         </div>
+        <div class="skeleton" v-if="ifDataFetched">
+                <div class="single-card">
+                    <div class="mover"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover second"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover third"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover fourth"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover fifth"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover six"></div>
+                </div>
+                
+        </div>
     </div>
 </template>
 
@@ -31,10 +52,14 @@ useHead({
 })
 const data = ref();
 let userID:string;
+const ifDataFetched = ref<boolean>(true);
 onMounted( async ()=>{
     userID = logins.getID
     const response = await fetch(`https://hotelini.herokuapp.com/filter/${route.params.filter}`)
     data.value =await response.json();
+    if(data.value){
+        ifDataFetched.value = false
+    }
     stateChange()
 })
 
@@ -57,3 +82,9 @@ const addToCart =async (id:string) => {
     stateChange()
 }
 </script>
+
+<style scoped>
+.skeleton{
+    width: 90vw;
+}
+</style>

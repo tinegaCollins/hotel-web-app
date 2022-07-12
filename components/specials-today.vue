@@ -1,5 +1,5 @@
 <template>
-    <div class="specials-wrapper" v-if="data">
+    <div class="specials-wrapper">
         <h2> specials today</h2>
         <div class="specials-cards">
             <div class="single-card" v-for="item in data" :key="item._id">
@@ -12,23 +12,48 @@
                 <div class="add-to-cart" @click="addToCart(item._id)"><p>add to cart</p></div>
             </div>
         </div>
+        <div class="skeleton" v-if="dataFetched">
+                <div class="single-card">
+                    <div class="mover"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover second"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover third"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover fourth"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover fifth"></div>
+                </div>
+                <div class="single-card">
+                    <div class="mover six"></div>
+                </div>
+                
+        </div>
     </div>
 </template>
 
 
 <script setup lang="ts">
-import { useCartStore } from "../stores/useCart";
+import { useCartStore } from "~~/stores/useCart";
 import { useLoginStore } from "~~/stores/useLoginStore";
 const logins = useLoginStore();
 const main = useCartStore();
 const data = ref();
 let userID:string;
+const dataFetched = ref<boolean>(true);
 onMounted(async ()=>{
    try{
      const resonse = await fetch('https://hotelini.herokuapp.com/specials',{
         method: 'GET'
     })
     data.value =await resonse.json()
+    if(data.value){
+        dataFetched.value = false
+    }
    }
    catch {
     console.log("couldnt get the data");
@@ -116,6 +141,42 @@ const addToCart = (id:string) => {
     justify-content: center;
     row-gap: 5px;
 }
+.skeleton .single-card{
+    height: 90px;
+    padding: 0;
+    border: none;
+    margin: 10px 0;
+}
+.skeleton .single-card .mover{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(254, 153, 0, .2);
+    animation: loader 1200ms infinite backwards;
+    animation-delay: 100ms;
+}
+.skeleton .single-card .second{
+    animation-delay: 200ms;
+}
+.skeleton .single-card .third {
+    animation-delay: 300ms;
+}
+.skeleton .single-card .fourth{
+    animation-delay: 400ms;
+}
+.skeleton .single-card .fifth{
+    animation-delay: 450ms;
+}
+.skeleton .single-card .six{
+    animation-delay: 500ms;
+}
+@keyframes loader {
+    from{
+        width: 0%;
+    }
+    to{
+        width: 100%;
+    }
+}
 @media screen and (min-width: 768px) {
     .specials-cards{
         display: grid;
@@ -127,6 +188,11 @@ const addToCart = (id:string) => {
     }
     .single-card:hover{
         border: 1px solid var(--side-orange);
+    }
+    .skeleton{
+        display: grid;
+        grid-template-columns: auto auto;
+        padding: 20px;
     }
 }
 </style>

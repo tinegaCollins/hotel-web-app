@@ -4057,12 +4057,16 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
     const main = __vite_ssr_import_2__.useCartStore();
     const data = __vite_ssr_import_0__.ref();
     let userID;
+    const dataFetched = __vite_ssr_import_0__.ref(true);
     __vite_ssr_import_0__.onMounted(async () => {
       try {
         const resonse = await fetch("https://hotelini.herokuapp.com/specials", {
           method: "GET"
         });
         data.value = await resonse.json();
+        if (data.value) {
+          dataFetched.value = false;
+        }
       } catch {
         console.log("couldnt get the data");
       }
@@ -4086,7 +4090,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_1__.defineComponent({
     const addToCart = (id) => {
       main.addtoCart(id);
     };
-    const __returned__ = { logins, main, data, userID, stateChange, addToCart };
+    const __returned__ = { logins, main, data, userID, dataFetched, stateChange, addToCart };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -4096,15 +4100,17 @@ const __vite_ssr_import_4__ = await __vite_ssr_import__("/node_modules/vue/dist/
 const __vite_ssr_import_5__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  if ($setup.data) {
-    _push(`<div${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({ class: "specials-wrapper" }, _attrs))}><h2> specials today</h2><div class="specials-cards"><!--[-->`);
-    __vite_ssr_import_5__.ssrRenderList($setup.data, (item) => {
-      _push(`<div class="single-card"><img${__vite_ssr_import_5__.ssrRenderAttr("src", item.image)} alt="food" srcset=""><div class="details"><h3>${__vite_ssr_import_5__.ssrInterpolate(item.name)}</h3><p>By Chef Ali</p><p>${__vite_ssr_import_5__.ssrInterpolate(item.price)} ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
-    });
-    _push(`<!--]--></div></div>`);
+  _push(`<div${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({ class: "specials-wrapper" }, _attrs))}><h2> specials today</h2><div class="specials-cards"><!--[-->`);
+  __vite_ssr_import_5__.ssrRenderList($setup.data, (item) => {
+    _push(`<div class="single-card"><img${__vite_ssr_import_5__.ssrRenderAttr("src", item.image)} alt="food" srcset=""><div class="details"><h3>${__vite_ssr_import_5__.ssrInterpolate(item.name)}</h3><p>By Chef Ali</p><p>${__vite_ssr_import_5__.ssrInterpolate(item.price)} ksh + delivery fee</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
+  });
+  _push(`<!--]--></div>`);
+  if ($setup.dataFetched) {
+    _push(`<div class="skeleton"><div class="single-card"><div class="mover"></div></div><div class="single-card"><div class="mover second"></div></div><div class="single-card"><div class="mover third"></div></div><div class="single-card"><div class="mover fourth"></div></div><div class="single-card"><div class="mover fifth"></div></div><div class="single-card"><div class="mover six"></div></div></div>`);
   } else {
     _push(`<!---->`);
   }
+  _push(`</div>`);
 }
 const __vite_ssr_import_6__ = await __vite_ssr_import__("/components/specials-today.vue?vue&type=style&index=0&lang.css");
 
@@ -4131,7 +4137,7 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_8__.default(_sf
 
 // --------------------
 const $id_b62ff068 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".specials-wrapper{font-family:var(--title-font);margin-top:30px;padding:20px}.specials-wrapper h2{position:relative}.specials-wrapper h2:before{background-color:var(--main-orange);bottom:-5px;content:\"\";height:3px;left:0;position:absolute;transform:translateY(-1px);width:10%}.specials-cards{display:flex;flex-wrap:wrap;gap:30px;margin-top:20px}.single-card{border:1px solid var(--side-orange);border-radius:5px;-moz-column-gap:20px;column-gap:20px;display:flex;flex-wrap:nowrap;padding:8px;position:relative;transition:border .2s cubic-bezier(.23,1,.32,1);width:100%}.single-card .add-to-cart{border:1px solid var(--side-orange);font-size:.7rem;padding:7px;position:absolute;right:10px;top:10px;transition:all .3s ease-out}.single-card .add-to-cart:hover{background-color:var(--side-orange);color:#fff;cursor:pointer}.single-card img{height:120px;-o-object-fit:cover;object-fit:cover;width:120px}.single-card .details{display:flex;flex-direction:column;justify-content:center;row-gap:5px}@media screen and (min-width:768px){.specials-cards{display:grid;grid-template-columns:auto auto;padding:20px}.single-card{border:1px solid transparent}.single-card:hover{border:1px solid var(--side-orange)}}";
+__vite_ssr_exports__.default = ".specials-wrapper{font-family:var(--title-font);margin-top:30px;padding:20px}.specials-wrapper h2{position:relative}.specials-wrapper h2:before{background-color:var(--main-orange);bottom:-5px;content:\"\";height:3px;left:0;position:absolute;transform:translateY(-1px);width:10%}.specials-cards{display:flex;flex-wrap:wrap;gap:30px;margin-top:20px}.single-card{border:1px solid var(--side-orange);border-radius:5px;-moz-column-gap:20px;column-gap:20px;display:flex;flex-wrap:nowrap;padding:8px;position:relative;transition:border .2s cubic-bezier(.23,1,.32,1);width:100%}.single-card .add-to-cart{border:1px solid var(--side-orange);font-size:.7rem;padding:7px;position:absolute;right:10px;top:10px;transition:all .3s ease-out}.single-card .add-to-cart:hover{background-color:var(--side-orange);color:#fff;cursor:pointer}.single-card img{height:120px;-o-object-fit:cover;object-fit:cover;width:120px}.single-card .details{display:flex;flex-direction:column;justify-content:center;row-gap:5px}.skeleton .single-card{border:none;height:90px;margin:10px 0;padding:0}.skeleton .single-card .mover{-webkit-animation:loader 1.2s infinite backwards;animation:loader 1.2s infinite backwards;-webkit-animation-delay:.1s;animation-delay:.1s;background-color:rgba(254,153,0,.2);height:100%;width:100%}.skeleton .single-card .second{-webkit-animation-delay:.2s;animation-delay:.2s}.skeleton .single-card .third{-webkit-animation-delay:.3s;animation-delay:.3s}.skeleton .single-card .fourth{-webkit-animation-delay:.4s;animation-delay:.4s}.skeleton .single-card .fifth{-webkit-animation-delay:.45s;animation-delay:.45s}.skeleton .single-card .six{-webkit-animation-delay:.5s;animation-delay:.5s}@-webkit-keyframes loader{0%{width:0}to{width:100%}}@keyframes loader{0%{width:0}to{width:100%}}@media screen and (min-width:768px){.specials-cards{display:grid;grid-template-columns:auto auto;padding:20px}.single-card{border:1px solid transparent}.single-card:hover{border:1px solid var(--side-orange)}.skeleton{display:grid;grid-template-columns:auto auto;padding:20px}}";
 }
 
 
@@ -4700,6 +4706,7 @@ __vite_ssr_exports__.default = ".everything{position:relative}.navigations{backg
 // - /stores/useCart.ts ($id_1a94a962)
 // - /stores/useLoginStore.ts ($id_49ef1b29)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /pages/menu/index/[filter].vue?vue&type=style&index=0&scoped=true&lang.css ($id_9816e632)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
 const $id_df565390 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
@@ -4737,10 +4744,14 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
     });
     const data = __vite_ssr_import_2__.ref();
     let userID;
+    const ifDataFetched = __vite_ssr_import_2__.ref(true);
     __vite_ssr_import_2__.onMounted(async () => {
       userID = logins.getID;
       const response = await fetch(`https://hotelini.herokuapp.com/filter/${route.params.filter}`);
       data.value = await response.json();
+      if (data.value) {
+        ifDataFetched.value = false;
+      }
       stateChange();
     });
     const stateChange = () => {
@@ -4761,7 +4772,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
       cart.addtoCart(id);
       stateChange();
     };
-    const __returned__ = { logins, cart, route, data, userID, stateChange, addToCart };
+    const __returned__ = { logins, cart, route, data, userID, ifDataFetched, stateChange, addToCart };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -4771,23 +4782,31 @@ const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/
 const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<div${__vite_ssr_import_8__.ssrRenderAttrs(__vite_ssr_import_7__.mergeProps({ class: "all-meals" }, _attrs))}><!--[-->`);
+  _push(`<div${__vite_ssr_import_8__.ssrRenderAttrs(__vite_ssr_import_7__.mergeProps({ class: "all-meals" }, _attrs))} data-v-54d0bc0e><!--[-->`);
   __vite_ssr_import_8__.ssrRenderList($setup.data, (item) => {
-    _push(`<div class="content-wrapper"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="content"><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><p>ksh ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
+    _push(`<div class="content-wrapper" data-v-54d0bc0e><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset="" data-v-54d0bc0e><div class="content" data-v-54d0bc0e><p data-v-54d0bc0e>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><p data-v-54d0bc0e>ksh ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</p></div><div class="add-to-cart" data-v-54d0bc0e><p data-v-54d0bc0e>add to cart</p></div></div>`);
   });
-  _push(`<!--]--></div>`);
+  _push(`<!--]-->`);
+  if ($setup.ifDataFetched) {
+    _push(`<div class="skeleton" data-v-54d0bc0e><div class="single-card" data-v-54d0bc0e><div class="mover" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover second" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover third" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover fourth" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover fifth" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover six" data-v-54d0bc0e></div></div></div>`);
+  } else {
+    _push(`<!---->`);
+  }
+  _push(`</div>`);
 }
-const __vite_ssr_import_9__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_9__ = await __vite_ssr_import__("/pages/menu/index/[filter].vue?vue&type=style&index=0&scoped=true&lang.css");
+
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_9__.useSSRContext();
+  const ssrContext = __vite_ssr_import_10__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/menu/index/[filter].vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_10__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_11__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_10__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/menu/index/[filter].vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_11__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__scopeId", "data-v-54d0bc0e"], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/menu/index/[filter].vue"]]);
 
 const meta = undefined
 Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
@@ -4804,6 +4823,19 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 // --------------------
 const $id_9c00b061 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 __vite_ssr_exports__.default = ".all-meals{font-family:var(--title-font);padding:15px;position:relative}@media screen and (min-width:768px){.all-meals{display:grid;gap:15px;grid-template-columns:1fr 1fr;padding:30px}}.all-meals .content-wrapper{align-items:center;border:2px solid #333;border-radius:10px;display:flex;font-size:1.2rem;justify-content:space-between;margin:8px 0;padding:5px 15px;row-gap:20px}.all-meals .content-wrapper .content{display:grid;gap:10px;margin:0 auto 0 10px}.all-meals .content-wrapper img{border-radius:5px;height:100px;-o-object-fit:cover;object-fit:cover;width:100px}.all-meals a{color:#333;-moz-column-gap:20px;column-gap:20px;display:flex;font-size:1rem;justify-content:space-between;text-decoration:none}.all-meals>p{color:var(--carolina-blue)}.content-wrapper{position:relative}.all-meals .add-to-cart{border:1px solid var(--side-orange);font-size:.7rem;padding:7px;position:absolute;right:10px;top:10px;transition:all .3s ease-out}.all-meals .add-to-cart:hover{background-color:var(--side-orange);color:#fff;cursor:pointer}";
+}
+
+
+// --------------------
+// Request: /pages/menu/index/[filter].vue?vue&type=style&index=0&scoped=true&lang.css
+// Parents: 
+// - /pages/menu/index/[filter].vue?macro=true ($id_df565390)
+// - /pages/menu/index/[filter].vue ($id_8eae100f)
+// Dependencies: 
+
+// --------------------
+const $id_9816e632 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = ".skeleton[data-v-54d0bc0e]{width:90vw}";
 }
 
 
@@ -5670,6 +5702,7 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_12__.default(_s
 // - /stores/useCart.ts ($id_1a94a962)
 // - /stores/useLoginStore.ts ($id_49ef1b29)
 // - /node_modules/vue/server-renderer/index.js ($id_b215fa1c)
+// - /pages/menu/index/[filter].vue?vue&type=style&index=0&scoped=true&lang.css ($id_9816e632)
 // - /@id/plugin-vue:export-helper ($id_bbb863c1)
 // --------------------
 const $id_8eae100f = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
@@ -5707,10 +5740,14 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
     });
     const data = __vite_ssr_import_2__.ref();
     let userID;
+    const ifDataFetched = __vite_ssr_import_2__.ref(true);
     __vite_ssr_import_2__.onMounted(async () => {
       userID = logins.getID;
       const response = await fetch(`https://hotelini.herokuapp.com/filter/${route.params.filter}`);
       data.value = await response.json();
+      if (data.value) {
+        ifDataFetched.value = false;
+      }
       stateChange();
     });
     const stateChange = () => {
@@ -5731,7 +5768,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
       cart.addtoCart(id);
       stateChange();
     };
-    const __returned__ = { logins, cart, route, data, userID, stateChange, addToCart };
+    const __returned__ = { logins, cart, route, data, userID, ifDataFetched, stateChange, addToCart };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -5741,23 +5778,31 @@ const __vite_ssr_import_7__ = await __vite_ssr_import__("/node_modules/vue/dist/
 const __vite_ssr_import_8__ = await __vite_ssr_import__("/node_modules/vue/server-renderer/index.js");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<div${__vite_ssr_import_8__.ssrRenderAttrs(__vite_ssr_import_7__.mergeProps({ class: "all-meals" }, _attrs))}><!--[-->`);
+  _push(`<div${__vite_ssr_import_8__.ssrRenderAttrs(__vite_ssr_import_7__.mergeProps({ class: "all-meals" }, _attrs))} data-v-54d0bc0e><!--[-->`);
   __vite_ssr_import_8__.ssrRenderList($setup.data, (item) => {
-    _push(`<div class="content-wrapper"><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset=""><div class="content"><p>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><p>ksh ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</p></div><div class="add-to-cart"><p>add to cart</p></div></div>`);
+    _push(`<div class="content-wrapper" data-v-54d0bc0e><img${__vite_ssr_import_8__.ssrRenderAttr("src", item.image)} alt="" srcset="" data-v-54d0bc0e><div class="content" data-v-54d0bc0e><p data-v-54d0bc0e>${__vite_ssr_import_8__.ssrInterpolate(item.name)}</p><p data-v-54d0bc0e>ksh ${__vite_ssr_import_8__.ssrInterpolate(item.price)}</p></div><div class="add-to-cart" data-v-54d0bc0e><p data-v-54d0bc0e>add to cart</p></div></div>`);
   });
-  _push(`<!--]--></div>`);
+  _push(`<!--]-->`);
+  if ($setup.ifDataFetched) {
+    _push(`<div class="skeleton" data-v-54d0bc0e><div class="single-card" data-v-54d0bc0e><div class="mover" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover second" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover third" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover fourth" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover fifth" data-v-54d0bc0e></div></div><div class="single-card" data-v-54d0bc0e><div class="mover six" data-v-54d0bc0e></div></div></div>`);
+  } else {
+    _push(`<!---->`);
+  }
+  _push(`</div>`);
 }
-const __vite_ssr_import_9__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
+const __vite_ssr_import_9__ = await __vite_ssr_import__("/pages/menu/index/[filter].vue?vue&type=style&index=0&scoped=true&lang.css");
+
+const __vite_ssr_import_10__ = await __vite_ssr_import__("/node_modules/vue/dist/vue.cjs.js");
 
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_9__.useSSRContext();
+  const ssrContext = __vite_ssr_import_10__.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/menu/index/[filter].vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_ssr_import_10__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
+const __vite_ssr_import_11__ = await __vite_ssr_import__("/@id/plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_10__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/menu/index/[filter].vue"]]);
+__vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_11__.default(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__scopeId", "data-v-54d0bc0e"], ["__file", "/home/tinega/Desktop/dont/hotel-web-app-1/pages/menu/index/[filter].vue"]]);
 ;
 }
 
@@ -7135,6 +7180,7 @@ const __modules__ = {
   "/pages/menu/index.vue?vue&type=style&index=0&lang.css": $id_f88acd87,
   "/pages/menu/index/[filter].vue?macro=true": $id_df565390,
   "/assets/styles/meals.css": $id_9c00b061,
+  "/pages/menu/index/[filter].vue?vue&type=style&index=0&scoped=true&lang.css": $id_9816e632,
   "/pages/signup.vue?macro=true": $id_ae8d024a,
   "/pages/signup.vue?vue&type=style&index=0&lang.css": $id_f2a1f585,
   "/pages/account.vue": $id_ce2c396d,
