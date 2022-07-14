@@ -170,11 +170,14 @@ const addToCart = (id:string) => {
     animation-delay: 500ms;
 }
 @keyframes loader {
-    from{
+    0%{
         width: 0%;
     }
-    to{
+    50%{
         width: 100%;
+    }
+    100%{
+        width: 0%;
     }
 }
 @media screen and (min-width: 768px) {
