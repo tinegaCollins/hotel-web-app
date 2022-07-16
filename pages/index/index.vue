@@ -44,6 +44,7 @@ useHead({
   position: relative;
   width: 100%;
   display: flex;
+  flex-wrap: nowrap;
 }
 .left {
   position: sticky;
