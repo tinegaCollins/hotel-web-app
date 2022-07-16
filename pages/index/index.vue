@@ -96,6 +96,7 @@ useHead({
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+  width: 100%;
 }
 .mains {
   padding-top: 20px;
@@ -115,8 +116,8 @@ useHead({
     display: block;
   }
 }
-::-webkit-scrollbar{width:6px;border-left:1px solid #E6ECF8;}
+/*::-webkit-scrollbar{width:6px;border-left:1px solid #E6ECF8;}
 ::-webkit-scrollbar-thumb{background-color:#d6872c;}
 ::-moz-scrollbar{width:6px;border-left:1px solid #E6ECF8;}
-::-moz-scrollbar-thumb{background-color:#d6872c;}
+::-moz-scrollbar-thumb{background-color:#d6872c;}*/
 </style>
