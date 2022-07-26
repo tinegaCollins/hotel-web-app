@@ -27,7 +27,7 @@ useHead({
     { name: 'description', content: 'My amazing site.' }
   ],
   link: [
-    { rel: 'icon', href: '../../assets/icons/undraw_breakfast_psiw.svg'}
+    { rel: 'icon', href: '~/assets/icons/undraw_breakfast_psiw.svg'}
   ]
 })
 const nav = ref(null);
