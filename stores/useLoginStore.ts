@@ -13,6 +13,9 @@ export const useLoginStore = defineStore('logins',{
         },
         delete(id:string){
             this.userID = ''
+        },
+        add(id:string){
+            this.userID = id
         }
     }
 })
