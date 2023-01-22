@@ -23,7 +23,7 @@
             <div class="p-1 flex justify-center items-center mx-auto flex-col">
               <a href="#">
                 <h5 class="text-lg md:text-xl font-bold tracking-tight text-gray-700">
-                  {{ service.course }}
+                  {{ service.serve }}
                 </h5>
               </a>
               <p class="font-normal text-gray-700 font-serif text-center">
@@ -63,7 +63,7 @@ export default {
     const route = useRoute();
     const Services = ref([
       {
-        course: "230+ Locations",
+        serve: "230+ Locations",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed",
         price: "Ksh 500",
         ratings: "4.5",
@@ -71,7 +71,7 @@ export default {
           "https://treact.owaiskhan.me/static/media/shop-icon.048628c95dd89e631ac8c652d04238fb.svg",
       },
       {
-        course: "Professional Chefs",
+        serve: "Professional Chefs",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed",
         price: "Ksh 500",
         ratings: "4.5",
@@ -79,7 +79,7 @@ export default {
           "https://treact.owaiskhan.me/static/media/chef-icon.866e076bd2347712ef1d5cb77189d5fb.svg",
       },
       {
-        course: "Birthday Catering",
+        serve: "Birthday Catering",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed",
         price: "Ksh 500",
         ratings: "4.5",

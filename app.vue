@@ -1,9 +1,7 @@
 <template>
   <main class="relative">
     <headi />
-    <NuxtLayout>
       <NuxtPage />
-    </NuxtLayout>
   </main>
 </template>
 <script>
