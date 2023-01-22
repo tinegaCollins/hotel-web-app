@@ -1,8 +1,10 @@
 module.exports = {
-	root: false,
+ 
+	root: true,
 	env: {
-		browser: false,
-		node: false,
+		browser: true,
+		node: true,
+ 
 	},
 	parserOptions: {
 		parser: "@babel/eslint-parser",
@@ -18,11 +20,14 @@ module.exports = {
 		"vue/valid-v-slot": [
 			"error",
 			{
-				allowModifiers: false,
+ 
+				allowModifiers: true, 
 			},
 		],
 	},
 	globals: {
-		_: false,
+ 
+		_: true, 
 	},
-};
+}
+
