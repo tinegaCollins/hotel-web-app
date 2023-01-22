@@ -31,7 +31,7 @@
               <div class="flex items-start justify-between">
                 <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
                 <div class="ml-3 flex h-7 items-center">
-                                        <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500" @click="view == false">
+                  <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
                     <span class="sr-only">Close panel</span>
                     <!-- Heroicon name: outline/x-mark -->
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -130,20 +130,8 @@
 
 <script>
 export default {
-data() {
-  return {
-            view: true,
-  }
 
-},
-methods:{
-        close() {
-          this.view=!this.view
-        },
-    
-  }
 }
-
 </script>
 
 <style>
