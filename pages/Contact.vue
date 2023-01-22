@@ -8,7 +8,7 @@ import Horizontal_Nav from '~~/components/Horizontal_Nav.vue';
       <div class="flex flex-col justify-between">
         <div class="space-y-2">
           <h2 class="text-4xl font-bold leading-tight lg:text-5xl">Let's talk!</h2>
-          <div class="">Vivamus in nisl metus? Phasellus.</div>
+          <div class="">Send your message.it's a matter of minutes!.</div>
         </div>
         <img
           src="https://mambaui.com/assets/svg/doodle.svg"
