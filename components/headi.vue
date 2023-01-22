@@ -221,7 +221,7 @@
                 <a
                   v-show="mode"
                   href="/login"
-                  class="block w-full bg-gray-50 dark:bg-slate-700 px-5 py-3 text-center font-medium text-indigo-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-indigo-700 hover:border-b-2 "
+                  class="block w-full  bg-indigo-700 px-5 py-3 text-center font-medium text-indigo-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-indigo-700 hover:border-b-2 "
                   ><span
                     ><font-awesome-icon
                       :icon="['fas', 'right-to-bracket']"
