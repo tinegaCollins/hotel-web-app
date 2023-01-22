@@ -42,7 +42,8 @@
               <button
                 class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-700 px-4 py-1 text-lg font-bold text-white hover:bg-indigo-700 md:py-2 md:px-10 md:text-lg"
               >
-                latest offer
+                <Icon name="ic:baseline-local-offer" class="h-6 w-6" />
+                <span> latest offer</span>
               </button>
             </div>
           </div>
