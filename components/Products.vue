@@ -37,14 +37,14 @@
       </div>
     </div>
     <div
-      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-x-1 md:max-w-7xl max-w-full mx-5 md:mx-auto mt-10 gap-y-1"
+      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-x-2 md:max-w-7xl max-w-full mx-5 md:mx-auto mt-10 gap-y-2"
     >
       <div class="" v-for="dish in fetchedData" :key="dish">
         <div class="">
-          <div class="max-w-xs bg-white">
+          <div class="max-w-xs bg-white  ">
             <a href="#">
-             <div class="card  bg-base-100 shadow-xl image-full">
-                <figure><img src="../assets/images/hamburger2.jpg" alt="Shoes" /></figure>
+             <div class="card  bg-base-100 shadow-xl image-full rounded-none">
+                <figure><img src="../assets/images/hamburger2.jpg" alt="Shoes" class="" /></figure>
                 <div class="card-body">
                
                   <p class=" text-transparent hover:text-white">{{ dish.description }}</p>

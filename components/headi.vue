@@ -57,7 +57,7 @@
                 <div class="hidden md:ml-10 md:block bg-white md:space-x-8 md:pr-4">
                   <a
                     href="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700  hover:border-b-2 hover:border-indigo-700"
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700  hover:border-b-2 hover:border-indigo-700 pb-2"
                     ><span
                       ><Icon name="ion:chatbubbles-outline" class="h-5 w-5"
                     /></span>
@@ -66,7 +66,7 @@
 
                   <nuxt-link
                     to="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2   hover:border-indigo-700"
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2   hover:border-indigo-700 pb-2"
                     ><span
                       ><Icon name="uil:blogger" class="h-5 w-5"
                     /></span>
@@ -74,7 +74,7 @@
                   >
                   <nuxt-link
                     to="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2    hover:border-indigo-700"
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2    hover:border-indigo-700 pb-2"
                     ><span
                       ><Icon name="uil:lock-access" class="h-5 w-5"
                     /></span>
@@ -82,17 +82,17 @@
                   >
 
                   <nuxt-link
-                    to="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2   hover:border-indigo-700"
+                    to="/cart"
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2   hover:border-indigo-700 pb-2"
                     ><span
-                      ><Icon name="uil:pricetag-alt" class="h-5 w-5"
+                      ><Icon name="ion:md-cart" class="h-5 w-5"
                     /></span>
-                    Pricing</nuxt-link
+                    cart</nuxt-link
                   >
 
                   <nuxt-link
                     to="#"
-                    class="font-medium text-indigo-600 hover:text-indigo-700 hover:border-b-2 "
+                    class="font-medium text-indigo-600 hover:text-indigo-700 "
                   >
                     <span
                       ><Icon name="ion:log-in-outline"
@@ -191,13 +191,13 @@
                   >
 
                   <nuxt-link
-                    to="#"
+                    to="/cart"
                     class="block rounded-md px-3 py-2 text-base font-medium text-gray-800  "
                   >
                     <span
-                      ><Icon name="uil:pricetag-alt" class="h-5 w-5"
+                      ><Icon name="ion:md-cart" class="h-5 w-5"
                     /></span>
-                    Pricing</nuxt-link
+                    cart</nuxt-link
                   >
                   <nuxt-link
                     to="#"
