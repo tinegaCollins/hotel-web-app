@@ -1,15 +1,11 @@
 <template>
   <main class="relative">
-    <headi />
-      <NuxtPage />
+    <NuxtPage />
   </main>
 </template>
 <script>
-import headi from "./components/headi.vue";
 export default {
-  components: {
-    headi,
-  },
+  components: {},
 };
 </script>
 <style>

@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Headi />
     <SharedHero />
     <Products />
     <Services />
@@ -13,8 +14,3 @@ export default {};
 </script>
 
 <style></style>
-  
-
-
-
-    

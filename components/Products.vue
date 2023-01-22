@@ -13,7 +13,9 @@
           >
         </span>
       </h1>
-      <div class="flex justify-center items-center flex-row bg-indigo-100 text-slate-800 py-2 px-3">
+      <div
+        class="flex justify-center items-center flex-row bg-indigo-100 text-slate-800 py-2 px-3"
+      >
         <button
           class="bg-transparent px-4 py-2 rounded hover:bg-indigo-700 hover:text-white"
         >
@@ -41,19 +43,26 @@
     >
       <div class="" v-for="dish in fetchedData" :key="dish">
         <div class="">
-          <div class="max-w-xs bg-white  ">
+          <div class="max-w-xs bg-white">
             <a href="#">
-             <div class="card  bg-base-100 shadow-xl image-full rounded-none">
-                <figure><img src="../assets/images/hamburger2.jpg" alt="Shoes" class="" /></figure>
+              <div class="card bg-base-100 shadow-xl image-full rounded-none">
+                <figure>
+                  <img src="../assets/images/hamburger2.jpg" alt="Shoes" class="" />
+                </figure>
                 <div class="card-body">
-               
-                  <p class=" text-transparent hover:text-white">{{ dish.description }}</p>
-                  <div class="card-actions justify-end ">
-                    <button class=" px-6 py-2  text-transparent hover:text-white bg-transparent hover:bg-indigo-700 rounded-2xl  flex justify-start items-center mx-auto flex-row "><Icon name="uil:star" class=" h-5 w-5  pb-1"/><span>{{ dish.ratings }}</span></button>
+                  <p class="text-transparent hover:text-white">{{ dish.description }}</p>
+                  <div class="card-actions justify-end">
+                    <button
+                      class="px-6 py-2 cursor-text text-gray-900 bg-white rounded-2xl flex justify-start items-center mx-auto flex-row"
+                    >
+                      <Icon name="uil:star" class="h-5 w-5 pb-1" /><span>{{
+                        dish.ratings
+                      }}</span>
+                    </button>
                   </div>
                 </div>
               </div>
-                          </a>
+            </a>
             <div class="p-5">
               <a href="#">
                 <h5
@@ -62,19 +71,19 @@
                   {{ dish.dish }}
                 </h5>
               </a>
-           
+
               <span class="flex justify-evenly items-center flex-row px-2 py-2">
-                <p class="font-normal text-gray-700 ">
+                <p class="font-normal text-gray-700">
                   {{ dish.price }}
                 </p>
-               
               </span>
               <a
                 class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 cursor-pointer"
               >
-                buy now
+                <Icon name="uil:shopping-cart-alt" class="h-6 w-7" />
+                <span> Add to cart</span>
                 <svg
-                  class="ml-2 -mr-1 w-4 h-4 "
+                  class="ml-2 -mr-1 w-4 h-4"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,37 +111,43 @@ export default {
     const fetchedData = ref([
       {
         dish: "Fried Chicken",
-        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
+        description:
+          "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         dish: "Fried Chicken",
-        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
+        description:
+          "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         dish: "Fried Chicken",
-        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
+        description:
+          "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         dish: "Fried Chicken",
-        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
+        description:
+          "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         dish: "Fried Chicken",
-        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
+        description:
+          "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         dish: "Fried Chicken",
-        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
+        description:
+          "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },

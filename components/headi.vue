@@ -1,5 +1,4 @@
 <template>
-
   <main>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="relative overflow-hidden m-2 bg-white">
@@ -56,49 +55,38 @@
                   </div>
                 </div>
                 <div class="hidden md:ml-10 md:block bg-white md:space-x-8 md:pr-4">
-                  <a
-                    href="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700  hover:border-b-2 hover:border-indigo-700 pb-2"
-                    ><span
-                      ><Icon name="ion:chatbubbles-outline" class="h-5 w-5"
-                    /></span>
-                    About</a
+                  <Nuxt-Link
+                    to="/Contact"
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 hover:border-indigo-700 pb-2"
+                    ><span><Icon name="ion:chatbubbles-outline" class="h-5 w-5" /></span>
+                    Contact</Nuxt-Link
                   >
 
                   <nuxt-link
                     to="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2   hover:border-indigo-700 pb-2"
-                    ><span
-                      ><Icon name="uil:blogger" class="h-5 w-5"
-                    /></span>
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 hover:border-indigo-700 pb-2"
+                    ><span><Icon name="uil:blogger" class="h-5 w-5" /></span>
                     Blog</nuxt-link
                   >
                   <nuxt-link
                     to="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2    hover:border-indigo-700 pb-2"
-                    ><span
-                      ><Icon name="uil:lock-access" class="h-5 w-5"
-                    /></span>
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 hover:border-indigo-700 pb-2"
+                    ><span><Icon name="uil:lock-access" class="h-5 w-5" /></span>
                     Admin</nuxt-link
                   >
 
                   <nuxt-link
                     to="/cart"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2   hover:border-indigo-700 pb-2"
-                    ><span
-                      ><Icon name="ion:md-cart" class="h-5 w-5"
-                    /></span>
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 hover:border-indigo-700 pb-2"
+                    ><span><Icon name="ion:md-cart" class="h-5 w-5" /></span>
                     cart</nuxt-link
                   >
 
                   <nuxt-link
-                    to="#"
-                    class="font-medium text-indigo-600 hover:text-indigo-700 "
+                    to="/Login"
+                    class="font-medium text-indigo-600 hover:text-indigo-700"
                   >
-                    <span
-                      ><Icon name="ion:log-in-outline"
-                        class="h-5 w-5"
-                    /></span>
+                    <span><Icon name="ion:log-in-outline" class="h-5 w-5" /></span>
                     Log in
                   </nuxt-link>
                 </div>
@@ -119,7 +107,7 @@
               class="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden bg-white"
             >
               <div
-                class="overflow-hidden rounded-lg  bg-white shadow-md ring-1 ring-black ring-opacity-5"
+                class="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5"
               >
                 <div class="flex items-center justify-between px-5 pt-4 pb-2">
                   <div>
@@ -175,52 +163,41 @@
                 <div v-show="mode" class="space-y-1 px-2 pt-2 pb-3">
                   <a
                     href="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium  text-gray-800 "
-                    ><span
-                      ><Icon name="ion:chatbubbles-outline" class="h-5 w-5"
-                    /></span>
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800"
+                    ><span><Icon name="ion:chatbubbles-outline" class="h-5 w-5" /></span>
                     About</a
                   >
 
                   <nuxt-link
                     to="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800 "
-                    ><span
-                      ><Icon name="uil:blogger" class="h-5 w-5"
-                    /></span>
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800"
+                    ><span><Icon name="uil:blogger" class="h-5 w-5" /></span>
                     Blog</nuxt-link
                   >
 
                   <nuxt-link
                     to="/cart"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800  "
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800"
                   >
-                    <span
-                      ><Icon name="ion:md-cart" class="h-5 w-5"
-                    /></span>
+                    <span><Icon name="ion:md-cart" class="h-5 w-5" /></span>
                     cart</nuxt-link
                   >
                   <nuxt-link
-                    to="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800  "
+                    to="/Contact"
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800"
                   >
                     <span
-                      ><font-awesome-icon
-                        :icon="['fas', 'lock']"
-                        class="h-5 w-5 dark:text-gray-800"
+                      ><Icon name="uil:comment-alt-chart-lines" class="h-5 w-5"
                     /></span>
                     Contact Us</nuxt-link
                   >
                 </div>
                 <a
                   v-show="mode"
-                  href="/login"
-                  class="block w-full  bg-indigo-700 px-5 py-3 text-center font-medium text-indigo-100    "
-                  ><span
-                    ><Icon name="ion:log-in-outline"
-                        class="h-5 w-5"
-                    /></span>
-                  Log in</a
+                  href="/Login"
+                  class="block w-full bg-indigo-700 px-5 py-3 text-center font-medium text-indigo-100"
+                  ><span><Icon name="ion:log-in-outline" class="h-5 w-5" /></span> Log
+                  in</a
                 >
               </div>
             </div>
@@ -233,7 +210,7 @@
               <div
                 class="flex justify-center items-center mx-auto flex-col gap-y-7 max-w-xl"
               >
-                <h1 class="flex justify-start items-start flex-col">
+                <h1 class="flex justify-start items-start flex-col left-0">
                   <span class="md:text-5xl text-2xl text-slate-700 font-extrabold"
                     >Delicious & Affordable
                   </span>
@@ -254,14 +231,16 @@
                   <button
                     class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
                   >
-                    Order Now
+                    <Icon name="bx:bxs-purchase-tag-alt" class="h-5 w-5" />
+                    <span> Order Now</span>
                   </button>
                 </div>
                 <div class="mt-3 sm:mt-0 sm:ml-3">
                   <button
                     class="flex w-full items-center justify-center rounded-md border border-transparent bg-transparent px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg"
                   >
-                    Meet the Chefs
+                    <Icon name="ic:round-play-circle-outline" class="h-5 w-5" />
+                    <span> Meet the Chefs</span>
                   </button>
                 </div>
               </div>
@@ -304,7 +283,3 @@ export default {
 </script>
 
 <style></style>
-
-  
-
-
