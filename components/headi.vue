@@ -30,7 +30,7 @@
                     <div class="-mr-2 flex items-center md:hidden">
                       <button
                         type="button"
-                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                         aria-expanded="false"
                       >
                         <span class="sr-only">Open main menu</span>
@@ -133,7 +133,7 @@
                     <!--  //TODO -->
                     <button
                       type="button"
-                      class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                      class="inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                       @click="toggleMode"
                     >
                       <span class="sr-only">Close main menu</span>
@@ -175,7 +175,7 @@
                 <div v-show="mode" class="space-y-1 px-2 pt-2 pb-3">
                   <a
                     href="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300 text-gray-400 hover:bg-gray-50  hover:text-indigo-700 hover:border-b-2 "
+                    class="block rounded-md px-3 py-2 text-base font-medium  text-gray-800 "
                     ><span
                       ><font-awesome-icon
                         :icon="['fas', 'house']"
@@ -186,7 +186,7 @@
 
                   <nuxt-link
                     to="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 dark:text-gray-300 hover:bg-gray-50  hover:text-indigo-700 hover:border-b-2 "
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800 "
                     ><span
                       ><font-awesome-icon
                         :icon="['fas', 'headphones']"
@@ -197,23 +197,23 @@
 
                   <nuxt-link
                     to="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 dark:text-gray-300 hover:bg-gray-50  hover:text-indigo-700 hover:border-b-2 "
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800  "
                   >
                     <span
                       ><font-awesome-icon
                         :icon="['fas', 'tv']"
-                        class="h-5 w-5 dark:text-gray-300"
+                        class="h-5 w-5 text-gray-800"
                     /></span>
                     Pricing</nuxt-link
                   >
                   <nuxt-link
                     to="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 dark:text-gray-300 hover:bg-gray-50  hover:text-indigo-700 hover:border-b-2 "
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-800  "
                   >
                     <span
                       ><font-awesome-icon
                         :icon="['fas', 'lock']"
-                        class="h-5 w-5 dark:text-gray-300"
+                        class="h-5 w-5 dark:text-gray-800"
                     /></span>
                     Contact Us</nuxt-link
                   >
@@ -221,7 +221,7 @@
                 <a
                   v-show="mode"
                   href="/login"
-                  class="block w-full  bg-indigo-700 px-5 py-3 text-center font-medium text-indigo-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-indigo-700 hover:border-b-2 "
+                  class="block w-full  bg-indigo-700 px-5 py-3 text-center font-medium text-indigo-100    "
                   ><span
                     ><font-awesome-icon
                       :icon="['fas', 'right-to-bracket']"

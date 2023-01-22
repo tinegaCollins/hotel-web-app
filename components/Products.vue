@@ -13,7 +13,7 @@
           >
         </span>
       </h1>
-      <div class="flex justify-center items-center flex-row bg-indigo-100 py-2 px-3">
+      <div class="flex justify-center items-center flex-row bg-indigo-100 text-slate-800 py-2 px-3">
         <button
           class="bg-transparent px-4 py-2 rounded hover:bg-indigo-700 hover:text-white"
         >
@@ -48,26 +48,26 @@
             <div class="p-5">
               <a href="#">
                 <h5
-                  class="mb-2 text-lg md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                  class="mb-2 text-lg md:text-2xl font-bold tracking-tight text-gray-900 text-white"
                 >
                   {{ course.course }}
                 </h5>
               </a>
-              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+              <p class="mb-3 font-normal text-gray-700 ">
                 {{ course.description }}
               </p>
               <span class="flex justify-evenly items-center flex-row px-2 py-2">
-                <p class="font-normal text-gray-700 dark:text-gray-400">
+                <p class="font-normal text-gray-700 ">
                   {{ course.price }}
                 </p>
                 <strong>{{ course.ratings }}</strong>
               </span>
               <a
-                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 cursor-pointer"
               >
                 buy now
                 <svg
-                  class="ml-2 -mr-1 w-4 h-4"
+                  class="ml-2 -mr-1 w-4 h-4 "
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
