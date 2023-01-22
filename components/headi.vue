@@ -57,35 +57,35 @@
                 <div class="hidden md:ml-10 md:block bg-white md:space-x-8 md:pr-4">
                   <a
                     href="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 "
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700  hover:border-b-2 hover:border-indigo-700"
                     ><span
-                      ><font-awesome-icon icon="fa-solid fa-house" class="h-5 w-5"
+                      ><Icon name="ion:chatbubbles-outline" class="h-5 w-5"
                     /></span>
                     About</a
                   >
 
                   <nuxt-link
                     to="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 "
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2   hover:border-indigo-700"
                     ><span
-                      ><font-awesome-icon :icon="['fas', 'headphones']" class="h-5 w-5"
+                      ><Icon name="uil:blogger" class="h-5 w-5"
                     /></span>
                     Blog</nuxt-link
                   >
                   <nuxt-link
                     to="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 "
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2    hover:border-indigo-700"
                     ><span
-                      ><font-awesome-icon :icon="['fas', 'lock']" class="h-5 w-5"
+                      ><Icon name="uil:lock-access" class="h-5 w-5"
                     /></span>
                     Admin</nuxt-link
                   >
 
                   <nuxt-link
                     to="#"
-                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 "
+                    class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2   hover:border-indigo-700"
                     ><span
-                      ><font-awesome-icon :icon="['fas', 'tv']" class="h-5 w-5"
+                      ><Icon name="uil:pricetag-alt" class="h-5 w-5"
                     /></span>
                     Pricing</nuxt-link
                   >
@@ -95,8 +95,7 @@
                     class="font-medium text-indigo-600 hover:text-indigo-700 hover:border-b-2 "
                   >
                     <span
-                      ><font-awesome-icon
-                        :icon="['fas', 'right-to-bracket']"
+                      ><Icon name="ion:log-in-outline"
                         class="h-5 w-5"
                     /></span>
                     Log in
@@ -177,9 +176,7 @@
                     href="#"
                     class="block rounded-md px-3 py-2 text-base font-medium  text-gray-800 "
                     ><span
-                      ><font-awesome-icon
-                        :icon="['fas', 'house']"
-                        class="h-5 w-5 dark:text-gray-300"
+                      ><Icon name="ion:chatbubbles-outline" class="h-5 w-5"
                     /></span>
                     About</a
                   >
@@ -188,9 +185,7 @@
                     to="#"
                     class="block rounded-md px-3 py-2 text-base font-medium text-gray-800 "
                     ><span
-                      ><font-awesome-icon
-                        :icon="['fas', 'headphones']"
-                        class="h-5 w-5 dark:text-gray-300"
+                      ><Icon name="uil:blogger" class="h-5 w-5"
                     /></span>
                     Blog</nuxt-link
                   >
@@ -200,9 +195,7 @@
                     class="block rounded-md px-3 py-2 text-base font-medium text-gray-800  "
                   >
                     <span
-                      ><font-awesome-icon
-                        :icon="['fas', 'tv']"
-                        class="h-5 w-5 text-gray-800"
+                      ><Icon name="uil:pricetag-alt" class="h-5 w-5"
                     /></span>
                     Pricing</nuxt-link
                   >
@@ -223,10 +216,9 @@
                   href="/login"
                   class="block w-full  bg-indigo-700 px-5 py-3 text-center font-medium text-indigo-100    "
                   ><span
-                    ><font-awesome-icon
-                      :icon="['fas', 'right-to-bracket']"
-                      class="h-5 w-5"
-                  /></span>
+                    ><Icon name="ion:log-in-outline"
+                        class="h-5 w-5"
+                    /></span>
                   Log in</a
                 >
               </div>

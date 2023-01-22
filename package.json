@@ -22,6 +22,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.7.0",
     "nuxt": "3.0.0-rc.13",
+    "nuxt-icon": "^0.2.6",
     "prettier": "^2.7.1"
   },
   "dependencies": {

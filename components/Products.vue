@@ -39,7 +39,7 @@
     <div
       class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-x-1 md:max-w-7xl max-w-full mx-5 md:mx-auto mt-10 gap-y-1"
     >
-      <div class="" v-for="course in fetchedData" :key="course">
+      <div class="" v-for="dish in fetchedData" :key="dish">
         <div class="">
           <div class="max-w-xs bg-white">
             <a href="#">
@@ -47,9 +47,9 @@
                 <figure><img src="../assets/images/hamburger2.jpg" alt="Shoes" /></figure>
                 <div class="card-body">
                
-                  <p>{{ course.description }}</p>
-                  <div class="card-actions justify-end">
-                    <button class=" px-6 py-2  bg-indigo-700 text-gray-50 rounded-2xl">{{ course.ratings }}</button>
+                  <p class=" text-transparent hover:text-white">{{ dish.description }}</p>
+                  <div class="card-actions justify-end ">
+                    <button class=" px-6 py-2  text-transparent hover:text-white bg-transparent hover:bg-indigo-700 rounded-2xl  flex justify-start items-center mx-auto flex-row "><Icon name="uil:star" class=" h-5 w-5  pb-1"/><span>{{ dish.ratings }}</span></button>
                   </div>
                 </div>
               </div>
@@ -59,13 +59,13 @@
                 <h5
                   class="mb-2 text-lg md:text-2xl font-bold tracking-tight text-gray-900 text-white"
                 >
-                  {{ course.course }}
+                  {{ dish.dish }}
                 </h5>
               </a>
            
               <span class="flex justify-evenly items-center flex-row px-2 py-2">
                 <p class="font-normal text-gray-700 ">
-                  {{ course.price }}
+                  {{ dish.price }}
                 </p>
                
               </span>
@@ -101,37 +101,37 @@ export default {
     const route = useRoute();
     const fetchedData = ref([
       {
-        course: "Fried Chicken",
+        dish: "Fried Chicken",
         description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
-        course: "Fried Chicken",
+        dish: "Fried Chicken",
         description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
-        course: "Fried Chicken",
+        dish: "Fried Chicken",
         description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
-        course: "Fried Chicken",
+        dish: "Fried Chicken",
         description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
-        course: "Fried Chicken",
+        dish: "Fried Chicken",
         description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
-        course: "Fried Chicken",
+        dish: "Fried Chicken",
         description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
