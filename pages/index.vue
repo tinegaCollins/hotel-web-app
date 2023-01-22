@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="animate fade-out transition-opacity duration-500">
     <Headi />
     <SharedHero />
     <Products />
@@ -9,8 +9,6 @@
     <Foot />
   </main>
 </template>
-<script>
-export default {};
-</script>
+<script></script>
 
 <style></style>
