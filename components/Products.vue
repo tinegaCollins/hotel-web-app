@@ -43,8 +43,17 @@
         <div class="">
           <div class="max-w-xs bg-white">
             <a href="#">
-              <img class="object-cover" src="../assets/images/hamburger2.jpg" alt="" />
-            </a>
+             <div class="card  bg-base-100 shadow-xl image-full">
+                <figure><img src="../assets/images/hamburger2.jpg" alt="Shoes" /></figure>
+                <div class="card-body">
+               
+                  <p>{{ course.description }}</p>
+                  <div class="card-actions justify-end">
+                    <button class=" px-6 py-2  bg-indigo-700 text-gray-50 rounded-2xl">{{ course.ratings }}</button>
+                  </div>
+                </div>
+              </div>
+                          </a>
             <div class="p-5">
               <a href="#">
                 <h5
@@ -53,14 +62,12 @@
                   {{ course.course }}
                 </h5>
               </a>
-              <p class="mb-3 font-normal text-gray-700 ">
-                {{ course.description }}
-              </p>
+           
               <span class="flex justify-evenly items-center flex-row px-2 py-2">
                 <p class="font-normal text-gray-700 ">
                   {{ course.price }}
                 </p>
-                <strong>{{ course.ratings }}</strong>
+               
               </span>
               <a
                 class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 cursor-pointer"
@@ -95,37 +102,37 @@ export default {
     const fetchedData = ref([
       {
         course: "Fried Chicken",
-        description: "boiled",
+        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         course: "Fried Chicken",
-        description: "boiled",
+        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         course: "Fried Chicken",
-        description: "boiled",
+        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         course: "Fried Chicken",
-        description: "boiled",
+        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         course: "Fried Chicken",
-        description: "boiled",
+        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
       {
         course: "Fried Chicken",
-        description: "boiled",
+        description: "Crispy, golden-brown fried meat, savory and juicy with a satisfying crunch, perfect for a hearty meal.",
         price: "Ksh 500",
         ratings: "4.5",
       },
