@@ -45,7 +45,7 @@
         </button>
       </div>
     </div>
-    <div data-aos="flip-left">
+    <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
       <span v-show="openStarter"><CategoryStarterProducts :fetchedData="starter" /></span>
       <span v-show="OpenMain"><CategoryMainProducts :fetchedData="main" /></span>
       <span v-show="OpenDessert"><CategoryDessertProducts :fetchedData="dessert" /></span>
