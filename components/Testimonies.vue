@@ -1,6 +1,9 @@
 <template>
   <main class="md:mb-6">
-    <h1 class="flex justify-center items-center flex-row mx-auto my-10">
+    <h1
+      class="flex justify-center items-center flex-row mx-auto my-10"
+      data-aos="fade-right"
+    >
       <span
         class="md:text-5xl text-3xl text-slate-700 font-extrabold flex justify-center items-center"
         ><span class="md:text-5xl text-3xl px-1">Customers </span>
@@ -29,15 +32,13 @@
               <p
                 class="font-normal text-gray-600 font-serif text-center tracking-wide"
                 data-aos="fade-left"
-                data-aos-offset="500"
-                data-aos-duration="500"
               >
                 " {{ testimony.description }}"
               </p>
               <a href="#">
                 <h5
                   class="text-md md:text-lg font-bold tracking-tight text-gray-700"
-                  data-aos="fade-up"
+                  data-aos="fade-down"
                 >
                   {{ testimony.name }}
                 </h5>

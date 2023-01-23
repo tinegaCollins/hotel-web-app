@@ -1,6 +1,9 @@
 <template>
   <div
     class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-x-2 md:max-w-7xl max-w-full mx-5 md:mx-auto mt-10 gap-y-2"
+    data-aos="fade-down"
+    data-aos-easing="linear"
+    data-aos-duration="1500"
   >
     <div class="" v-for="dish in fetchedData" :key="dish">
       <div class="">
@@ -64,7 +67,14 @@
 </template>
 
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 export default {
+  beforeMount() {
+    created: {
+      AOS.init();
+    }
+  },
   props: ["fetchedData"],
 };
 </script>
