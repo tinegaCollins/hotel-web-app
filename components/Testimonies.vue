@@ -17,15 +17,28 @@
           <div
             class="max-w-xs flex bg-transparent justify-center mx-auto items-center flex-col transition-all duration-500 transform hover:scale-105"
           >
-            <a href="#">
+            <a
+              href="#"
+              data-aos="fade-right"
+              data-aos-offset="300"
+              data-aos-easing="ease-in-sine"
+            >
               <img class="object-cover h-20 rounded-full" :src="testimony.src" alt="" />
             </a>
             <div class="p-1 flex justify-center items-center mx-auto flex-col gap-y-2">
-              <p class="font-normal text-gray-600 font-serif text-center tracking-wide">
+              <p
+                class="font-normal text-gray-600 font-serif text-center tracking-wide"
+                data-aos="fade-left"
+                data-aos-offset="500"
+                data-aos-duration="500"
+              >
                 " {{ testimony.description }}"
               </p>
               <a href="#">
-                <h5 class="text-md md:text-lg font-bold tracking-tight text-gray-700">
+                <h5
+                  class="text-md md:text-lg font-bold tracking-tight text-gray-700"
+                  data-aos="fade-up"
+                >
                   {{ testimony.name }}
                 </h5>
               </a>
@@ -37,9 +50,16 @@
   </main>
 </template>
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 export default {
+  beforeMount() {
+    created: {
+      AOS.init();
+    }
+  },
   setup() {
     const route = useRoute();
     const Testimonies = ref([

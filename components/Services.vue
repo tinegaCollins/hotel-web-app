@@ -1,6 +1,9 @@
 <template>
   <main class="">
-    <h1 class="flex justify-center items-center flex-row mx-auto my-10">
+    <h1
+      class="flex justify-center items-center flex-row mx-auto my-10"
+      data-aos="fade-right"
+    >
       <span
         class="md:text-5xl text-3xl text-slate-700 font-extrabold flex justify-center items-center"
         ><span class="md:text-5xl text-3xl px-1">Amazing </span>
@@ -12,7 +15,14 @@
     <div
       class="flex justify-center md:flex-row flex-col items-center gap-x-16 md:max-w-7xl max-w-full mx-5 md:mx-32 mt-10 gap-y-1"
     >
-      <div class="" v-for="service in Services" :key="service">
+      <div
+        class=""
+        v-for="service in Services"
+        :key="service"
+        data-aos="fade-right"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine"
+      >
         <div class="">
           <div
             class="max-w-xs flex bg-transparent justify-center mx-auto items-center flex-col transition-all duration-500 transform hover:scale-105"
@@ -56,9 +66,16 @@
   </main>
 </template>
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 export default {
+  beforeMount() {
+    created: {
+      AOS.init();
+    }
+  },
   setup() {
     const route = useRoute();
     const Services = ref([

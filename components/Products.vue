@@ -3,7 +3,10 @@
 
   <div class="h-auto px-3">
     <!-- end nav -->
-    <div class="flex justify-evenly items-center mx-auto md:flex-row flex-col gap-y-2">
+    <div
+      class="flex justify-evenly items-center mx-auto md:flex-row flex-col gap-y-2"
+      data-aos="zoom-in-up"
+    >
       <h1 class="flex justify-start items-start flex-col">
         <span
           class="md:text-5xl text-4xl text-slate-700 font-extrabold flex justify-center items-center md:flex-row flex-col"
@@ -42,16 +45,25 @@
         </button>
       </div>
     </div>
-    <span v-show="openStarter"><CategoryStarterProducts :fetchedData="starter" /></span>
-    <span v-show="OpenMain"><CategoryMainProducts :fetchedData="main" /></span>
-    <span v-show="OpenDessert"><CategoryDessertProducts :fetchedData="dessert" /></span>
-    <span v-show="OpenSoup"><CategorySoupProducts :fetchedData="soup" /></span>
+    <div data-aos="flip-left">
+      <span v-show="openStarter"><CategoryStarterProducts :fetchedData="starter" /></span>
+      <span v-show="OpenMain"><CategoryMainProducts :fetchedData="main" /></span>
+      <span v-show="OpenDessert"><CategoryDessertProducts :fetchedData="dessert" /></span>
+      <span v-show="OpenSoup"><CategorySoupProducts :fetchedData="soup" /></span>
+    </div>
   </div>
 </template>
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 export default {
+  beforeMount() {
+    created: {
+      AOS.init();
+    }
+  },
   /* 
   1>Defining categories starter,main,soup and dessert 
    2>Assigning categories starter,main,soup and dessert  each products
