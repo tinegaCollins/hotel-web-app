@@ -6,23 +6,25 @@
       <div class="">
         <div class="max-w-xs bg-white">
           <img src="../assets/images/hamburger2.jpg" alt="Shoes" class="" />
+          <!-- Start of dynamic card -->
 
-          <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+          <input type="checkbox" id="my-modal" class="modal-toggle" />
           <div class="modal">
-            <div class="modal-box relative">
-              <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2"
+            <div class="modal-box relative bg-slate-50">
+              <label for="my-modal" class="btn btn-sm btn-circle absolute right-2 top-2"
                 >✕</label
               >
               <button
-                class="px-6 py-2 cursor-text text-gray-900 bg-white rounded-2xl flex justify-start items-center mx-auto flex-row"
+                class="px-6 py-2 cursor-text text-gray-50 bg-indigo-700 rounded-2xl flex justify-start items-center mx-auto flex-row"
               >
                 <Icon name="uil:star" class="h-5 w-5 pb-1" /><span>{{
                   dish.ratings
                 }}</span>
               </button>
-              <p class="py-4">{{ dish.description }}</p>
+              <p class="py-4 text-gray-800 font-serif">{{ dish.description }}</p>
             </div>
           </div>
+          <!-- End of dynamic card -->
 
           <div class="p-5">
             <a href="#">
@@ -46,7 +48,7 @@
                 <span> Add</span>
               </a>
               <label
-                for="my-modal-3"
+                for="my-modal"
                 class="px-6 py-2 cursor-text text-gray-50 bg-indigo-700 rounded-lg cursor-pointer"
               >
                 <Icon name="uil:eye" class="h-5 w-5 pb-1" /><span>View</span>
