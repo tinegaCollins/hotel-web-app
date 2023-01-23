@@ -7,7 +7,7 @@ module.exports = {
 	theme: {
 		extend: {},
 		screens: {
-			xs: "400px",
+			xs: "320px",
 			sm: "640px",
 			md: "768px",
 			lg: "1024px",
@@ -16,5 +16,6 @@ module.exports = {
 		},
 	},
 	darkMode: "class",
-	plugins: [require("@tailwindcss/line-clamp")],
+    // eslint-disable-next-line no-undef
+    plugins: [require("@tailwindcss/line-clamp"), require("daisyui")],
 };
