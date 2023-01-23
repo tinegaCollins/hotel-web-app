@@ -211,11 +211,14 @@
                 class="flex justify-center items-center mx-auto flex-col gap-y-7 max-w-xl"
               >
                 <h1 class="flex justify-start items-start flex-col left-0">
-                  <span class="md:text-5xl text-2xl text-slate-700 font-extrabold"
+                  <span
+                    class="md:text-5xl text-2xl text-slate-700 font-extrabold"
+                    data-aos="fade-down-right"
                     >Delicious & Affordable
                   </span>
                   <span
                     class="bg-indigo-600 italic text-white mt-2 py-1 md:text-5xl text-2xl"
+                    data-aos="fade-down-left"
                     >Meals Near You.</span
                   >
                 </h1>
@@ -232,7 +235,7 @@
                     class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
                   >
                     <Icon name="bx:bxs-purchase-tag-alt" class="h-5 w-5" />
-                    <span> Order Now</span>
+                    <span data-aos="fade-down-right"> Order Now</span>
                   </button>
                 </div>
                 <div class="mt-3 sm:mt-0 sm:ml-3">
@@ -240,7 +243,7 @@
                     class="flex w-full items-center justify-center rounded-md border border-transparent bg-transparent px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg"
                   >
                     <Icon name="ic:round-play-circle-outline" class="h-5 w-5" />
-                    <span> Meet the Chefs</span>
+                    <span data-aos="fade-down-left"> Meet the Chefs</span>
                   </button>
                 </div>
               </div>
@@ -248,7 +251,10 @@
           </main>
         </div>
       </div>
-      <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 rounded-xl">
+      <div
+        class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 rounded-xl"
+        data-aos="fade-up-right"
+      >
         <img
           class="h-56 w-full object-cover sm:h-72 md:h-96 rounded-xl lg:h-full lg:w-full"
           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80"
@@ -256,19 +262,21 @@
         />
       </div>
     </div>
-
-    <!--     <Dropdown1 /> -->
   </main>
 </template>
 
 <script>
-/* import Dropdown1 from "./Dropdown.vue"; */
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default {
-  components: {},
-  mounted() {
-    this.donate = true;
+  beforeMount() {
+    created: {
+      AOS.init();
+    }
   },
+  components: {},
+  mounted() {},
   data() {
     return {
       mode: false,
