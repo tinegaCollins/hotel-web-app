@@ -2,8 +2,8 @@ import presetIcons from '@unocss/preset-icons'
 
 // eslint-disable-next-line no-undef
 export default defineNuxtConfig({
-    css: ["~/assets/css/tailwind.css", "~/assets/css/global.css"],
-    buildModules: ['@nuxtjs/tailwindcss', '@unocss/nuxt', '@nuxtjs/color-mode',"nuxt-icon"],
+    css: ['~/assets/css/tailwind.css', '~/assets/css/global.css'],
+    buildModules: ['@nuxtjs/tailwindcss','nuxt-swiper', '@unocss/nuxt', '@nuxtjs/color-mode',"nuxt-icon"],
     colorMode: {
         classSuffix: '',
     },
