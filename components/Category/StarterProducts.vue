@@ -8,10 +8,10 @@
           <img src="../assets/images/hamburger2.jpg" alt="Shoes" class="" />
           <!-- Start of dynamic card -->
 
-          <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+          <input type="checkbox" id="my-modal-2" class="modal-toggle" />
           <div class="modal">
             <div class="modal-box relative bg-slate-50">
-              <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2"
+              <label for="my-modal-2" class="btn btn-sm btn-circle absolute right-2 top-2"
                 >✕</label
               >
               <button
@@ -42,16 +42,17 @@
             </span>
             <div class="flex justify-center items-center mx-auto gap-x-2">
               <a
-                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none bg-indigo-700 focus:ring-blue-800 cursor-pointer"
+                class="inline-flex items-center py-2 px-2 text-sm font-medium text-center text-white rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none bg-indigo-700 focus:ring-blue-800 cursor-pointer"
               >
                 <Icon name="uil:shopping-cart-alt" class="h-6 w-7" />
                 <span> Add</span>
               </a>
               <label
-                for="my-modal-3"
-                class="px-6 py-2 cursor-text text-gray-50 bg-indigo-700 rounded-lg cursor-pointer"
+                for="my-modal-2"
+                class="text-gray-50 bg-indigo-700 rounded-lg cursor-pointer tooltip inline-flex items-center py-2 px-2 text-sm"
+                data-tip="click view more"
               >
-                <Icon name="uil:eye" class="h-5 w-5 pb-1" /><span>View</span>
+                <Icon name="uil:eye" class="h-6 w-7" /><span>more</span>
               </label>
             </div>
           </div>
