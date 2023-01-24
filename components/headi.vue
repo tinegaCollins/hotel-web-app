@@ -58,7 +58,9 @@
                   <Nuxt-Link
                     to="/Contact"
                     class="font-medium text-gray-500 dark:hover:to-gray-200 hover:text-indigo-700 hover:border-b-2 hover:border-indigo-700 pb-2"
-                    ><span><Icon name="ion:chatbubbles-outline" class="h-5 w-5" /></span>
+                    ><span style="font-family: 'Crimson Pro'"
+                      ><Icon name="ion:chatbubbles-outline" class="h-5 w-5"
+                    /></span>
                     Contact</Nuxt-Link
                   >
 

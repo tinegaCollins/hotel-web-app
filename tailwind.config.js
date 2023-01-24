@@ -5,6 +5,10 @@ const colors = require("tailwindcss/colors");
 module.exports = {
 	content: ["./components/**/*.{js,vue,ts}", "./layouts/**/*.vue", "./pages/**/*.vue", "./plugins/**/*.{js,ts}", "./nuxt.config.{js,ts}"],
 	theme: {
+		fontFamily: {
+			roboto: ['Roboto', 'sans'],
+			source: ['Source Serif Pro', 'serif'],
+		  },
 		extend: {},
 		screens: {
 			xs: "320px",
