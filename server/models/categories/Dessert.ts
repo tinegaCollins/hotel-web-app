@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-// book schema
+//  schema
 const schema: mongoose.Schema = new mongoose.Schema(
 	{
 		name: {
