@@ -15,4 +15,4 @@ export default async (_nitroApp: Nitro) => {
 		.connect("mongodb+srv://franco:franco@cluster0.xgfuv.mongodb.net/?retryWrites=true&w=majority")
 		.then(() => console.log(`Connected to DB`))
 		.catch((e) => console.log(e));
-};
+}
