@@ -58,18 +58,24 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
+import { useStarterProducts } from "~~/composables/Starter_products";
 export default {
-  beforeMount() {
-    created: {
-      AOS.init();
-    }
-  },
-  /* 
-  1>Defining categories starter,main,soup and dessert 
+  /*
+  1>Defining categories starter,main,soup and dessert
    2>Assigning categories starter,main,soup and dessert  each products
    3>Functions toggling starter,main,soup and dessert based on the category selected
   */
   setup() {
+    //Getting all starter products
+    const starterStore = useStarterProducts();
+
+    // Get starter products with async data
+    console.log(
+      starterStore.getAllStarterProducts().then((res) => {
+        console.log(res);
+      })
+    );
+
     const route = useRoute();
     const OpenMain = ref(false);
     let openStarter = ref(true);
@@ -207,6 +213,11 @@ export default {
       OpenDessert,
       show_dessert,
     };
+  },
+  beforeMount() {
+    created: {
+      AOS.init();
+    }
   },
 };
 </script>

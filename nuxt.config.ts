@@ -3,7 +3,7 @@ import presetIcons from '@unocss/preset-icons'
 
 export default defineNuxtConfig({
     css: ['~/assets/css/tailwind.css', '~/assets/css/global.css'],
-    buildModules: ['@nuxtjs/tailwindcss', '@unocss/nuxt', '@nuxtjs/color-mode',"nuxt-icon"],
+    buildModules: ['@nuxtjs/tailwindcss', '@unocss/nuxt','@pinia/nuxt', '@nuxtjs/color-mode',"nuxt-icon"],
 
     head: {
       //...

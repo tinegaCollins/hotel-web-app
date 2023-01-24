@@ -2,5 +2,11 @@
     "css.lint.unknownAtRules": "ignore",
     "vetur.format.defaultFormatter.html": "none",
     "editor.formatOnSave": true,
-    "vue3snippets.enable-compile-vue-file-on-did-save-code": true
+    "vue3snippets.enable-compile-vue-file-on-did-save-code": true,
+    "cSpell.words": [
+        "Idessert",
+        "Imain",
+        "Isoup",
+        "Istarter"
+    ]
 }
