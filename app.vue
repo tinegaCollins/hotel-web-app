@@ -7,7 +7,6 @@
 <style>
 body {
     line-height: 1.5;
-    font-family: 'Mulish', Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
