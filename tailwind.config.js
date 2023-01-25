@@ -5,9 +5,13 @@ const colors = require("tailwindcss/colors");
 module.exports = {
 	content: ["./components/**/*.{js,vue,ts}", "./layouts/**/*.vue", "./pages/**/*.vue", "./plugins/**/*.{js,ts}", "./nuxt.config.{js,ts}"],
 	theme: {
+		fontFamily: {
+			roboto: ['Roboto', 'sans'],
+			source: ['Source Serif Pro', 'serif'],
+		  },
 		extend: {},
 		screens: {
-			xs: "400px",
+			xs: "320px",
 			sm: "640px",
 			md: "768px",
 			lg: "1024px",
@@ -16,5 +20,6 @@ module.exports = {
 		},
 	},
 	darkMode: "class",
-	plugins: [require("@tailwindcss/line-clamp")],
+    // eslint-disable-next-line no-undef
+    plugins: [require("@tailwindcss/line-clamp"), require("daisyui")],
 };
