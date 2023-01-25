@@ -1,9 +1,29 @@
 import presetIcons from '@unocss/preset-icons'
-
 // eslint-disable-next-line no-undef
+
 export default defineNuxtConfig({
     css: ['~/assets/css/tailwind.css', '~/assets/css/global.css'],
-    buildModules: ['@nuxtjs/tailwindcss','nuxt-swiper', '@unocss/nuxt', '@nuxtjs/color-mode',"nuxt-icon"],
+    buildModules: ['@nuxtjs/tailwindcss', '@unocss/nuxt','@pinia/nuxt', '@nuxtjs/color-mode',"nuxt-icon"],
+
+    head: {
+      //...
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Crimson+Pro'
+        }
+      ]
+    },
+  
+
+  // register nitro plugin
+	nitro: {
+        plugins: ['@/server/db/index.ts'],
+	},
+  // server config variable
+	// runtimeConfig: {
+	// 	MONGO_URI: process.env.MONGO_URI,
+	// },
     colorMode: {
         classSuffix: '',
     },

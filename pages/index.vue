@@ -8,7 +8,6 @@
     <Services />
     <AboutUs />
     <Testimonies />
-    <Slider />
     <Foot />
   </main>
 </template>

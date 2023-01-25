@@ -3,7 +3,10 @@
 
   <div class="h-auto px-3">
     <!-- end nav -->
-    <div class="flex justify-evenly items-center mx-auto md:flex-row flex-col gap-y-2">
+    <div
+      class="flex justify-evenly items-center mx-auto md:flex-row flex-col gap-y-2"
+      data-aos="zoom-in-up"
+    >
       <h1 class="flex justify-start items-start flex-col">
         <span
           class="md:text-5xl text-4xl text-slate-700 font-extrabold flex justify-center items-center md:flex-row flex-col"
@@ -42,22 +45,37 @@
         </button>
       </div>
     </div>
-    <span v-show="openStarter"><CategoryStarterProducts :fetchedData="starter" /></span>
-    <span v-show="OpenMain"><CategoryMainProducts :fetchedData="main" /></span>
-    <span v-show="OpenDessert"><CategoryDessertProducts :fetchedData="dessert" /></span>
-    <span v-show="OpenSoup"><CategorySoupProducts :fetchedData="soup" /></span>
+    <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
+      <span v-show="openStarter"><CategoryStarterProducts :fetchedData="starter" /></span>
+      <span v-show="OpenMain"><CategoryMainProducts :fetchedData="main" /></span>
+      <span v-show="OpenDessert"><CategoryDessertProducts :fetchedData="dessert" /></span>
+      <span v-show="OpenSoup"><CategorySoupProducts :fetchedData="soup" /></span>
+    </div>
   </div>
 </template>
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
+import { useStarterProducts } from "~~/composables/Starter_products";
 export default {
-  /* 
-  1>Defining categories starter,main,soup and dessert 
+  /*
+  1>Defining categories starter,main,soup and dessert
    2>Assigning categories starter,main,soup and dessert  each products
    3>Functions toggling starter,main,soup and dessert based on the category selected
   */
   setup() {
+    //Getting all starter products
+    const starterStore = useStarterProducts();
+
+    // Get starter products with async data
+    console.log(
+      starterStore.getAll().then((res) => {
+        console.log(res);
+      })
+    );
+
     const route = useRoute();
     const OpenMain = ref(false);
     let openStarter = ref(true);
@@ -195,6 +213,11 @@ export default {
       OpenDessert,
       show_dessert,
     };
+  },
+  beforeMount() {
+    created: {
+      AOS.init();
+    }
   },
 };
 </script>
